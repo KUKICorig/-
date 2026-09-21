@@ -1,0 +1,36 @@
+{
+  "_meta": {
+    "name": "Кислотомёт",
+    "description": "Плюётся кислотой: цели получают corroded, урон по площади.",
+    "tags": [
+      "weapon",
+      "acid",
+      "corroded",
+      "poison",
+      "кислота"
+    ],
+    "kind": "fragment",
+    "target": "weapons[]"
+  },
+  "name": "mount-weapon",
+  "x": 4,
+  "y": 2,
+  "reload": 32,
+  "rotate": true,
+  "inaccuracy": 3,
+  "bullet": {
+    "type": "BasicBulletType",
+    "damage": 9,
+    "speed": 3.2,
+    "lifetime": 42,
+    "width": 9,
+    "height": 9,
+    "frontColor": "c8ff7a",
+    "backColor": "7fd13a",
+    "status": "corroded",
+    "statusDuration": 240,
+    "splashDamage": 18,
+    "splashDamageRadius": 28,
+    "collidesAir": true
+  }
+}
