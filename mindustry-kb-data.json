@@ -3340,7 +3340,56 @@
       "example": "\"backgroundOffsetY\": 0.1",
       "category": "environment",
       "since": "160.x"
-    }
+    },
+    "onShoot": {
+  "type": "boolean",
+  "desc": "Активировать ли способность только во время стрельбы юнита. Если false — способность работает постоянно, независимо от того, стреляет ли юнит. Используется в StatusFieldAbility и похожих периодических способностях.",
+  "example": "\"onShoot\": false",
+  "category": "ability",
+  "since": "160.x"
+},
+"applyEffect": {
+  "type": "Effect",
+  "desc": "Визуальный эффект, который создаётся в момент применения способности (например, вспышка при наложении статуса). Если указано \"none\", эффект не создаётся.",
+  "example": "\"applyEffect\": \"none\"",
+  "category": "ability",
+  "since": "160.x"
+},
+"activeEffect": {
+  "type": "Effect",
+  "desc": "Визуальный эффект, который постоянно проигрывается, пока способность активна (например, аура вокруг юнита). Если указано \"none\", эффект не создаётся.",
+  "example": "\"activeEffect\": \"none\"",
+  "category": "ability",
+  "since": "160.x"
+},
+"effectX": {
+  "type": "float (Пиксели)",
+  "desc": "Смещение точки создания эффекта способности по оси X относительно центра юнита. Работает в паре с effectY — задаёт точку, к которой привязывается applyEffect и activeEffect.",
+  "example": "\"effectX\": 0",
+  "category": "ability",
+  "since": "160.x"
+},
+"effectY": {
+  "type": "float (Пиксели)",
+  "desc": "Смещение точки создания эффекта способности по оси Y относительно центра юнита. Работает в паре с effectX — задаёт точку, к которой привязывается applyEffect и activeEffect.",
+  "example": "\"effectY\": 0",
+  "category": "ability",
+  "since": "160.x"
+},
+"parentizeEffects": {
+  "type": "boolean",
+  "desc": "Привязывать ли создаваемые эффекты к родительскому юниту. Если true — эффект движется вместе с юнитом и вращается вместе с ним, а не остаётся в точке создания.",
+  "example": "\"parentizeEffects\": false",
+  "category": "ability",
+  "since": "160.x"
+},
+"effectSizeParam": {
+  "type": "boolean",
+  "desc": "Передавать ли размер способности (например, радиус поля) в качестве параметра в создаваемый эффект. Если true — эффект может масштабироваться под размер зоны действия способности.",
+  "example": "\"effectSizeParam\": false",
+  "category": "ability",
+  "since": "160.x"
+}
   },
   "BULLET_TYPES": {
     "BulletType": {
