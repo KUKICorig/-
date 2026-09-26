@@ -1,14 +1,16 @@
 {
   "_meta": {
-    "name": "Mindustry Studio Knowledge Base",
+    "name": "Mindustry Studio",
     "mindustryVersion": "v8 Build 160.5",
     "formatVersion": 2,
     "source": "KUKIC",
     "notes": [
-      "Существующие записи сохранены.",
-      "Добавленные поля помечены since=160.x.",
-      "DB_FIELDS остаётся совместимым с текущим Studio: type/desc/example.",
-      "BULLET_TYPES и STATUS_EFFECTS сохранены без удаления."
+      "Все существующие записи сохранены и расширены",
+      "Добавлены поля из v8 Build 145-160.5",
+      "Новые поля помечены since=160.x",
+      "DB_FIELDS полностью совместим со Studio: type/desc/example",
+      "BULLET_TYPES и STATUS_EFFECTS сохранены и расширены",
+      "Добавлены новые категории: draw, planet, environment, payload, ability"
     ]
   },
   "DB_FIELDS": {
@@ -42,11 +44,6 @@
       "desc": "Запас прочности (очки здоровья) здания или юнита. У стен обычно от 1000 до 8000, у обычных блоков от 150 до 800.",
       "example": "\"health\": 1200"
     },
-        "example": {
-      "type": "system",
-      "desc": "oh-no",
-      "example": "oh-no"
-    },
     "armor": {
       "type": "float",
       "desc": "Поглощение урона, аналогичное броне юнитов, но для блоков.",
@@ -60,7 +57,7 @@
     "requirements": {
       "type": "ItemStack[]",
       "desc": "Стоимость возведения блока игроком или дронами. Список предметов и их количества.",
-      "example": "\"requirements\": [\n  { \"item\": \"copper\", \"amount\": 60 },\n  { \"item\": \"lead\", \"amount\": 40 }\n]"
+      "example": "\"requirements\": [\n { \"item\": \"copper\", \"amount\": 60 },\n { \"item\": \"lead\", \"amount\": 40 }\n]"
     },
     "research": {
       "type": "String",
@@ -213,14 +210,14 @@
       "example": "\"rotateSpeed\": 6.5"
     },
     "ammoTypes": {
-      "type": "ObjectMap<Item, BulletType>",
+      "type": "ObjectMap <Item, BulletType>",
       "desc": "Словарь боеприпасов для ItemTurret или LiquidTurret. Ключ — предмет/жидкость (copper, lead, silicon, pyratite), значение — параметры снаряда.",
-      "example": "\"ammoTypes\": {\n  \"copper\": { \"speed\": 5, \"damage\": 22 }\n}"
+      "example": "\"ammoTypes\": {\n \"copper\": { \"speed\": 5, \"damage\": 22 }\n}"
     },
     "shootType": {
       "type": "BulletType",
       "desc": "Тип снаряда для PowerTurret (лазер, молния, плазма), не требующий предметов.",
-      "example": "\"shootType\": {\n  \"type\": \"LaserBulletType\",\n  \"damage\": 120\n}"
+      "example": "\"shootType\": {\n \"type\": \"LaserBulletType\",\n \"damage\": 120\n}"
     },
     "targetAir": {
       "type": "boolean",
@@ -350,7 +347,7 @@
     "consumes": {
       "type": "Consumers Object",
       "desc": "Потребляемые ресурсы: электроэнергия (power), предметы (items), жидкости (liquids).",
-      "example": "\"consumes\": {\n  \"power\": 2.5,\n  \"items\": { \"items\": [{ \"item\": \"coal\", \"amount\": 1 }] }\n}"
+      "example": "\"consumes\": {\n \"power\": 2.5,\n \"items\": { \"items\": [{ \"item\": \"coal\", \"amount\": 1 }] }\n}"
     },
     "tier": {
       "type": "int (0-7)",
@@ -385,7 +382,7 @@
     "weapons": {
       "type": "Weapon[]",
       "desc": "Список бортового вооружения юнита (координаты ствола x/y, перезарядка reload, тип снаряда bullet).",
-      "example": "\"weapons\": [\n  {\n    \"name\": \"plasma-gun\",\n    \"reload\": 20,\n    \"x\": 6,\n    \"y\": 1,\n    \"bullet\": { \"speed\": 4, \"damage\": 25 }\n  }\n]"
+      "example": "\"weapons\": [\n {\n \"name\": \"plasma-gun\",\n \"reload\": 20,\n \"x\": 6,\n \"y\": 1,\n \"bullet\": { \"speed\": 4, \"damage\": 25 }\n }\n]"
     },
     "color": {
       "type": "Color HEX",
@@ -405,7 +402,7 @@
     "radioactivity": {
       "type": "float (0-2)",
       "desc": "Радиоактивность предмета. Влияет на RTG-генераторы и взрыв.",
-      "example": "\"radioactivity\": 0.6\""
+      "example": "\"radioactivity\": 0.6"
     },
     "charge": {
       "type": "float (0-2)",
@@ -533,7 +530,7 @@
       "example": "\"liquidBoostDirection\": 1"
     },
     "drillMultipliers": {
-      "type": "ObjectMap<Item, float>",
+      "type": "ObjectMap <Item, float>",
       "desc": "Множитель скорости для конкретных предметов. Например: { copper: 1.2, lead: 0.8 }.",
       "example": "\"drillMultipliers\": { \"copper\": 1.2, \"lead\": 0.8 }"
     },
@@ -950,7 +947,7 @@
     "legMoveSpace": {
       "type": "float",
       "desc": "Размах шага ног. Меньше = ноги двигаются меньше.",
-      "example": "\"legMoveSpace\": 1.2\""
+      "example": "\"legMoveSpace\": 1.2"
     },
     "legForwardScl": {
       "type": "float",
@@ -1075,7 +1072,7 @@
     "buildable": {
       "type": "boolean",
       "desc": "Может ли предмет использоваться в строительстве. Если false — сжигается в ядре.",
-      "example": "\"buildable\": false\""
+      "example": "\"buildable\": false"
     },
     "hidden": {
       "type": "boolean",
@@ -1145,7 +1142,7 @@
     "recoilPow": {
       "type": "float",
       "desc": "Степень кривой отдачи. 1.8 — стандарт.",
-      "example": "\"recoilPow\": 1.8\""
+      "example": "\"recoilPow\": 1.8"
     },
     "rotationLimit": {
       "type": "float (Градусы)",
@@ -1452,1772 +1449,2126 @@
     "initialShootSound": {
       "type": "Sound",
       "desc": "Звук первого выстрела в серии (отличается от обычного shootSound). Для оружия с прогревом или зарядкой.",
-      "example": "\"initialShootSound\": \"shootBeamPlasmaSmall\""
+      "example": "\"initialShootSound\": \"shootBeamPlasmaSmall\"",
+      "since": "160.x"
     },
     "shadow": {
       "type": "float (Пиксели)",
       "desc": "Смещение тени ствола оружия относительно его центра. 0 — тень не рисуется.",
-      "example": "\"shadow\": 8.0"
+      "example": "\"shadow\": 8.0",
+      "since": "160.x"
     },
     "weaponHeatColor": {
       "type": "Color HEX",
       "desc": "Цвет нагрева ствола оружия (используется при отрисовке heatRegion).",
-      "example": "\"weaponHeatColor\": \"f9350f\""
+      "example": "\"weaponHeatColor\": \"f9350f\"",
+      "since": "160.x"
     },
     "weaponHeatProgress": {
       "type": "PartProgress",
       "desc": "Функция прогресса для интенсивности heatRegion у оружия. Обычно \"heat\" или \"warmup\".",
-      "example": "\"weaponHeatProgress\": \"warmup\""
+      "example": "\"weaponHeatProgress\": \"warmup\"",
+      "since": "160.x"
     },
     "shootStatusDuration": {
       "type": "float (Тики)",
       "desc": "Длительность статуса shootStatus.",
-      "example": "\"shootStatusDuration\": 120"
+      "example": "\"shootStatusDuration\": 120",
+      "since": "160.x"
     },
     "weaponLoopSound": {
       "type": "Sound",
       "desc": "Циклический звук работы оружия (для непрерывного лазера или огнемёта). Указывается прямо в оружии, если отличается от общего loopSound юнита.",
-      "example": "\"weaponLoopSound\": \"beamPlasma\""
+      "example": "\"weaponLoopSound\": \"beamPlasma\"",
+      "since": "160.x"
     },
     "activeSoundVolume": {
       "type": "float (0-1)",
       "desc": "Громкость циклического звука работы оружия (activeSound).",
-      "example": "\"activeSoundVolume\": 0.8"
+      "example": "\"activeSoundVolume\": 0.8",
+      "since": "160.x"
     },
     "interval": {
       "type": "float (Тики)",
       "desc": "Интервал между срабатываниями (для RepairFieldAbility, StatusFieldAbility).",
-      "example": "\"interval\": 120"
+      "example": "\"interval\": 120",
+      "since": "160.x"
     },
     "percentAmount": {
       "type": "float (0-100)",
       "desc": "Процент здоровья, восстанавливаемый за тик (для RegenAbility).",
-      "example": "\"percentAmount\": 0.02381"
+      "example": "\"percentAmount\": 0.02381",
+      "since": "160.x"
     },
     "maxTargets": {
       "type": "int",
       "desc": "Максимальное количество целей (для EnergyFieldAbility).",
-      "example": "\"maxTargets\": 30"
+      "example": "\"maxTargets\": 30",
+      "since": "160.x"
     },
     "sectors": {
       "type": "int",
       "desc": "Количество секторов (для EnergyFieldAbility).",
-      "example": "\"sectors\": 4"
+      "example": "\"sectors\": 4",
+      "since": "160.x"
     },
     "liquid": {
       "type": "String",
       "desc": "Жидкость, используемая способностью (для LiquidExplodeAbility, LiquidRegenAbility).",
-      "example": "\"liquid\": \"neoplasm\""
+      "example": "\"liquid\": \"neoplasm\"",
+      "since": "160.x"
     },
     "puddleSize": {
       "type": "float",
       "desc": "Размер лужи, оставляемой снарядом LiquidBulletType при попадании (в пикселях). 0 — лужа не создаётся.",
-      "example": "\"puddleSize\": 0"
+      "example": "\"puddleSize\": 0",
+      "since": "160.x"
     },
     "collidesAir": {
       "type": "boolean",
       "desc": "Может ли снаряд сталкиваться с воздушными целями (летающими юнитами).",
-      "example": "\"collidesAir\": true"
+      "example": "\"collidesAir\": true",
+      "since": "160.x"
     },
     "collidesGround": {
       "type": "boolean",
       "desc": "Может ли снаряд сталкиваться с наземными целями (юнитами и постройками).",
-      "example": "\"collidesGround\": true"
+      "example": "\"collidesGround\": true",
+      "since": "160.x"
     },
     "rangeChange": {
       "type": "float (Пиксели)",
       "desc": "Изменение дальности стрельбы, добавляемое к базовой дальности турели для данного типа боеприпаса.",
-      "example": "\"rangeChange\": 20"
+      "example": "\"rangeChange\": 20",
+      "since": "160.x"
     },
     "minRangeChange": {
       "type": "float (Пиксели)",
       "desc": "Изменение минимальной дальности стрельбы для данного типа боеприпаса (для артиллерии).",
-      "example": "\"minRangeChange\": -10"
+      "example": "\"minRangeChange\": -10",
+      "since": "160.x"
     },
     "shootOnDeath": {
       "type": "boolean",
       "desc": "Если true, оружие производит выстрел при гибели владельца (для ракет-камикадзе).",
-      "example": "\"shootOnDeath\": true"
+      "example": "\"shootOnDeath\": true",
+      "since": "160.x"
     },
     "shootOnDeathEffect": {
       "type": "Effect",
       "desc": "Эффект, создаваемый при выстреле на смерть (если shootOnDeath = true).",
-      "example": "\"shootOnDeathEffect\": \"massiveExplosion\""
+      "example": "\"shootOnDeathEffect\": \"massiveExplosion\"",
+      "since": "160.x"
     },
     "continuous": {
       "type": "boolean",
       "desc": "Если true, оружие стреляет непрерывно (лазер, огнемёт) без перезарядки между выстрелами.",
-      "example": "\"continuous\": true"
+      "example": "\"continuous\": true",
+      "since": "160.x"
     },
     "alwaysContinuous": {
       "type": "boolean",
       "desc": "Если true, оружие всегда находится в режиме непрерывной стрельбы (игнорирует перезарядку). Подразумевает continuous = true.",
-      "example": "\"alwaysContinuous\": true"
+      "example": "\"alwaysContinuous\": true",
+      "since": "160.x"
     },
     "minShootVelocity": {
       "type": "float (Единиц/тик)",
       "desc": "Минимальная скорость владельца, необходимая для совершения выстрела (для бомбардировщиков).",
-      "example": "\"minShootVelocity\": 2.0"
+      "example": "\"minShootVelocity\": 2.0",
+      "since": "160.x"
     },
     "autoTarget": {
       "type": "boolean",
       "desc": "Если true, орудие автоматически выбирает цель без участия игрока (для ИИ-юнитов).",
-      "example": "\"autoTarget\": true"
+      "example": "\"autoTarget\": true",
+      "since": "160.x"
     },
     "predictTarget": {
       "type": "boolean",
       "desc": "Если true, орудие предугадывает движение цели для более точной стрельбы.",
-      "example": "\"predictTarget\": true"
+      "example": "\"predictTarget\": true",
+      "since": "160.x"
     },
     "controllable": {
       "type": "boolean",
       "desc": "Может ли орудие управляться игроком (для юнитов). Если false, только ИИ.",
-      "example": "\"controllable\": false"
+      "example": "\"controllable\": false",
+      "since": "160.x"
     },
     "targetInterval": {
       "type": "float (Тики)",
       "desc": "Интервал между попытками найти новую цель, если текущая отсутствует (для autoTarget).",
-      "example": "\"targetInterval\": 40"
+      "example": "\"targetInterval\": 40",
+      "since": "160.x"
     },
     "targetSwitchInterval": {
       "type": "float (Тики)",
       "desc": "Интервал перед переключением на новую цель (для autoTarget).",
-      "example": "\"targetSwitchInterval\": 70"
+      "example": "\"targetSwitchInterval\": 70",
+      "since": "160.x"
     },
     "canBoost": {
       "type": "boolean",
       "desc": "Может ли юнит ускоряться (взлетать/увеличивать скорость) при наличии энергии.",
-      "example": "\"canBoost\": true"
+      "example": "\"canBoost\": true",
+      "since": "160.x"
     },
     "boostMultiplier": {
       "type": "float",
       "desc": "Множитель скорости при бусте (ускорении).",
-      "example": "\"boostMultiplier\": 2.0"
+      "example": "\"boostMultiplier\": 2.0",
+      "since": "160.x"
     },
     "lowAltitude": {
       "type": "boolean",
       "desc": "Если true, летающий юнит летит низко над землёй (не выше построек), что влияет на его видимость и атаку.",
-      "example": "\"lowAltitude\": true"
+      "example": "\"lowAltitude\": true",
+      "since": "160.x"
     },
     "groundLayer": {
       "type": "float",
       "desc": "Слой отрисовки юнита на земле (для Legs и Mech). Обычно 63 (Layer.legUnit).",
-      "example": "\"groundLayer\": 63"
+      "example": "\"groundLayer\": 63",
+      "since": "160.x"
     },
     "legExtension": {
       "type": "float",
       "desc": "Смещение второй части ноги (для Legs), чтобы скрыть стык между сегментами.",
-      "example": "\"legExtension\": -5"
+      "example": "\"legExtension\": -5",
+      "since": "160.x"
     },
     "legMaxLength": {
       "type": "float (0-2)",
       "desc": "Максимальная длина ноги в движении (как доля от legLength). 1.0 = не вытягивается, 1.5 = вытягивается на 50%.",
-      "example": "\"legMaxLength\": 1.2"
+      "example": "\"legMaxLength\": 1.2",
+      "since": "160.x"
     },
     "legMinLength": {
       "type": "float (0-1)",
       "desc": "Минимальная длина ноги в движении (как доля от legLength). 0 = может полностью сжаться, 0.5 = наполовину.",
-      "example": "\"legMinLength\": 0.2"
+      "example": "\"legMinLength\": 0.2",
+      "since": "160.x"
     },
     "legLengthScl": {
       "type": "float (0-1)",
       "desc": "Масштаб длины ног в движении. 0.9 = ноги чуть короче при ходьбе.",
-      "example": "\"legLengthScl\": 0.85"
+      "example": "\"legLengthScl\": 0.85",
+      "since": "160.x"
     },
     "legStraightLength": {
       "type": "float",
       "desc": "Влияет на расстояние от корпуса до ступни для прямых ног.",
-      "example": "\"legStraightLength\": 1.0"
+      "example": "\"legStraightLength\": 1.0",
+      "since": "160.x"
     },
     "fallSpeed": {
       "type": "float (Единиц/тик)",
       "desc": "Скорость падения юнита при разрушении или падении с высоты.",
-      "example": "\"fallSpeed\": 0.018"
+      "example": "\"fallSpeed\": 0.018",
+      "since": "160.x"
     },
     "crashDamageMultiplier": {
       "type": "float",
       "desc": "Множитель урона, наносимого при падении юнита на постройки (для летающих).",
-      "example": "\"crashDamageMultiplier\": 1.5"
+      "example": "\"crashDamageMultiplier\": 1.5",
+      "since": "160.x"
     },
     "researchCostMultiplier": {
       "type": "float",
       "desc": "Множитель стоимости исследования в дереве технологий (1.0 — стандарт, 2.0 — вдвое дороже).",
-      "example": "\"researchCostMultiplier\": 2.0"
+      "example": "\"researchCostMultiplier\": 2.0",
+      "since": "160.x"
     },
     "idleSound": {
       "type": "Sound",
       "desc": "Звук, проигрываемый блоком в состоянии покоя (гул, шум).",
-      "example": "\"idleSound\": \"hum\""
+      "example": "\"idleSound\": \"hum\"",
+      "since": "160.x"
     },
     "idleSoundVolume": {
       "type": "float",
       "desc": "Громкость звука бездействия.",
-      "example": "\"idleSoundVolume\": 0.3"
+      "example": "\"idleSoundVolume\": 0.3",
+      "since": "160.x"
     },
     "ambientSound": {
       "type": "Sound",
       "desc": "Фоновый звук, проигрываемый блоком постоянно (например, шум воды или гул механизмов).",
-      "example": "\"ambientSound\": \"hum\""
+      "example": "\"ambientSound\": \"hum\"",
+      "since": "160.x"
     },
     "shootStatus": {
       "type": "StatusEffect",
       "desc": "Статус, накладываемый на владельца оружия во время стрельбы (например, unmoving для тяжёлых пушек).",
-      "example": "\"shootStatus\": \"unmoving\""
+      "example": "\"shootStatus\": \"unmoving\"",
+      "since": "160.x"
     },
     "absorbLasers": {
       "type": "boolean",
       "desc": "Поглощает ли этот блок лазерные атаки (например, от турели Meltdown).",
-      "example": "\"absorbLasers\": true"
+      "example": "\"absorbLasers\": true",
+      "since": "160.x"
     },
     "albedo": {
       "type": "float",
       "desc": "Отражательная способность блока, влияет на нагрев от лазеров и солнечных лучей.",
-      "example": "\"albedo\": 0.5"
+      "example": "\"albedo\": 0.5",
+      "since": "160.x"
     },
     "allowConfigInventory": {
       "type": "boolean",
       "desc": "Если true, инвентарь здания можно просматривать через конфигурацию.",
-      "example": "\"allowConfigInventory\": true"
+      "example": "\"allowConfigInventory\": true",
+      "since": "160.x"
     },
     "allowDerelictRepair": {
       "type": "boolean",
       "desc": "Если true, этот заброшенный блок можно починить, кликнув по нему.",
-      "example": "\"allowDerelictRepair\": true"
+      "example": "\"allowDerelictRepair\": true",
+      "since": "160.x"
     },
     "allowDiagonal": {
       "type": "boolean",
       "desc": "Если false, диагональная установка (через Ctrl) для этого блока запрещена.",
-      "example": "\"allowDiagonal\": false"
+      "example": "\"allowDiagonal\": false",
+      "since": "160.x"
     },
     "allowRectanglePlacement": {
       "type": "boolean",
       "desc": "Разрешает ли прямоугольную установку блока, в отличие от линейной (для стен).",
-      "example": "\"allowRectanglePlacement\": true"
+      "example": "\"allowRectanglePlacement\": true",
+      "since": "160.x"
     },
     "alwaysReplace": {
       "type": "boolean",
       "desc": "Может ли этот блок быть заменён в любых случаях (даже если блокирует выход).",
-      "example": "\"alwaysReplace\": false"
+      "example": "\"alwaysReplace\": false",
+      "since": "160.x"
     },
     "attacks": {
       "type": "boolean",
       "desc": "Если true, этот блок атакует и считается турелью в индексаторе (для минных полей).",
-      "example": "\"attacks\": true"
+      "example": "\"attacks\": true",
+      "since": "160.x"
     },
     "autoResetEnabled": {
       "type": "boolean",
       "desc": "Автоматически ли сбрасывать статус enabled после того, как логический блок не взаимодействовал с ним некоторое время.",
-      "example": "\"autoResetEnabled\": false"
+      "example": "\"autoResetEnabled\": false",
+      "since": "160.x"
     },
     "bars": {
-      "type": "Map<String, Func<Building, Bar>>",
+      "type": "Map <String, Func <Building, Bar>>",
       "desc": "Карта дополнительных полосок состояния (баров), отображаемых в интерфейсе блока.",
-      "example": "\"bars\": { \"heat\": \"new Bar(...)\" }"
+      "example": "\"bars\": { \"heat\": \"new Bar(...)\" }",
+      "since": "160.x"
     },
     "baseExplosiveness": {
       "type": "float",
       "desc": "Базовая взрывоопасность блока, влияет на урон при разрушении.",
-      "example": "\"baseExplosiveness\": 0.5"
+      "example": "\"baseExplosiveness\": 0.5",
+      "since": "160.x"
     },
     "breakable": {
       "type": "boolean",
       "desc": "Можно ли сломать этот блок правым кликом мыши (в режиме разрушения).",
-      "example": "\"breakable\": true"
+      "example": "\"breakable\": true",
+      "since": "160.x"
     },
     "breakEffect": {
       "type": "Effect",
       "desc": "Эффект, создаваемый при разрушении блока.",
-      "example": "\"breakEffect\": \"breakBlock\""
+      "example": "\"breakEffect\": \"breakBlock\"",
+      "since": "160.x"
     },
     "buildCost": {
       "type": "float",
       "desc": "Время на постройку блока в тиках (устаревшее поле, используйте buildCostMultiplier).",
-      "example": "\"buildCost\": 60.0"
+      "example": "\"buildCost\": 60.0",
+      "since": "160.x"
     },
     "canBeBuiltOn": {
       "type": "boolean",
       "desc": "Можно ли ставить другие блоки поверх этого блока.",
-      "example": "\"canBeBuiltOn\": false"
+      "example": "\"canBeBuiltOn\": false",
+      "since": "160.x"
     },
     "clearOnDoubleTap": {
       "type": "boolean",
       "desc": "Если true, двойной тап по настраиваемому блоку очищает его конфигурацию.",
-      "example": "\"clearOnDoubleTap\": false"
+      "example": "\"clearOnDoubleTap\": false",
+      "since": "160.x"
     },
     "clipSize": {
       "type": "float",
       "desc": "Размер отсечения для рендеринга блока (оптимизация).",
-      "example": "\"clipSize\": 80.0"
+      "example": "\"clipSize\": 80.0",
+      "since": "160.x"
     },
     "commandable": {
       "type": "boolean",
       "desc": "Можно ли выбрать это здание как юнит при отдаче команд (для ядер и фабрик).",
-      "example": "\"commandable\": true"
+      "example": "\"commandable\": true",
+      "since": "160.x"
     },
     "conductivePower": {
       "type": "boolean",
       "desc": "Если true, этот блок может проводить энергию как кабель.",
-      "example": "\"conductivePower\": false"
+      "example": "\"conductivePower\": false",
+      "since": "160.x"
     },
     "connectedPower": {
       "type": "boolean",
       "desc": "Если false, энергоузлы не могут подключаться к этому блоку.",
-      "example": "\"connectedPower\": true"
+      "example": "\"connectedPower\": true",
+      "since": "160.x"
     },
     "consumesPower": {
       "type": "boolean",
       "desc": "Используется некоторыми энергоблоками (узлами) как флаг отсутствия потребления энергии.",
-      "example": "\"consumesPower\": true"
+      "example": "\"consumesPower\": true",
+      "since": "160.x"
     },
     "copyConfig": {
       "type": "boolean",
       "desc": "Разрешать ли копирование конфигурации через среднюю кнопку мыши.",
-      "example": "\"copyConfig\": true"
+      "example": "\"copyConfig\": true",
+      "since": "160.x"
     },
     "deconstructSound": {
       "type": "Sound",
       "desc": "Звук, издаваемый при разборке блока.",
-      "example": "\"deconstructSound\": \"deconstruct\""
+      "example": "\"deconstructSound\": \"deconstruct\"",
+      "since": "160.x"
     },
     "deconstructSoundPitch": {
       "type": "boolean",
       "desc": "Должен ли меняться тон звука при разборке.",
-      "example": "\"deconstructSoundPitch\": true"
+      "example": "\"deconstructSoundPitch\": true",
+      "since": "160.x"
     },
     "depositCooldown": {
       "type": "float",
       "desc": "Задержка (в секундах) между сбросом предметов игроком в этот блок.",
-      "example": "\"depositCooldown\": 2.0"
+      "example": "\"depositCooldown\": 2.0",
+      "since": "160.x"
     },
     "displayFlow": {
       "type": "boolean",
       "desc": "Показывать ли скорость потока в интерфейсе (для конвейеров и труб).",
-      "example": "\"displayFlow\": true"
+      "example": "\"displayFlow\": true",
+      "since": "160.x"
     },
     "drawTeamOverlay": {
       "type": "boolean",
       "desc": "Рисовать ли цветовую подсветку команды на блоке.",
-      "example": "\"drawTeamOverlay\": true"
+      "example": "\"drawTeamOverlay\": true",
+      "since": "160.x"
     },
     "editorConfigurable": {
       "type": "boolean",
       "desc": "Можно ли настраивать блок в редакторе карт.",
-      "example": "\"editorConfigurable\": false"
+      "example": "\"editorConfigurable\": false",
+      "since": "160.x"
     },
     "fogRadius": {
       "type": "float",
       "desc": "Радиус раскрытия тумана войны этим блоком (в тайлах).",
-      "example": "\"fogRadius\": 5.0"
+      "example": "\"fogRadius\": 5.0",
+      "since": "160.x"
     },
     "inEditor": {
       "type": "boolean",
       "desc": "Виден ли блок в редакторе карт.",
-      "example": "\"inEditor\": true"
+      "example": "\"inEditor\": true",
+      "since": "160.x"
     },
     "isDuct": {
       "type": "boolean",
       "desc": "Если true, блок работает как труба и соединяется с бронированными трубами сбоку.",
-      "example": "\"isDuct\": false"
+      "example": "\"isDuct\": false",
+      "since": "160.x"
     },
     "lastConfig": {
       "type": "Object",
       "desc": "Последнее применённое значение конфигурации.",
-      "example": "\"lastConfig\": null"
+      "example": "\"lastConfig\": null",
+      "since": "160.x"
     },
     "noSideBlend": {
       "type": "boolean",
       "desc": "Если true, блок не принимает ввод с боковых сторон (для бронированных конвейеров).",
-      "example": "\"noSideBlend\": false"
+      "example": "\"noSideBlend\": false",
+      "since": "160.x"
     },
     "outputFacing": {
       "type": "boolean",
       "desc": "Если true, блок выводит ресурсы по направлению своего поворота.",
-      "example": "\"outputFacing\": true"
+      "example": "\"outputFacing\": true",
+      "since": "160.x"
     },
     "outputsLiquid": {
       "type": "boolean",
       "desc": "Флаг, указывающий, что блок куда-то выводит жидкость (используется для соединений).",
-      "example": "\"outputsLiquid\": true"
+      "example": "\"outputsLiquid\": true",
+      "since": "160.x"
     },
     "outputsPayload": {
       "type": "boolean",
       "desc": "Если true, блок может выдавать грузы (payloads); влияет на blending.",
-      "example": "\"outputsPayload\": false"
+      "example": "\"outputsPayload\": false",
+      "since": "160.x"
     },
     "outputsPower": {
       "type": "boolean",
       "desc": "Если true, этот блок является генератором и может производить энергию.",
-      "example": "\"outputsPower\": false"
+      "example": "\"outputsPower\": false",
+      "since": "160.x"
     },
     "placeSound": {
       "type": "Sound",
       "desc": "Звук, издаваемый при установке блока.",
-      "example": "\"placeSound\": \"placeBlock\""
+      "example": "\"placeSound\": \"placeBlock\"",
+      "since": "160.x"
     },
     "rotate": {
       "type": "boolean",
       "desc": "Может ли блок поворачиваться (для турелей, конвейеров).",
-      "example": "\"rotate\": true"
+      "example": "\"rotate\": true",
+      "since": "160.x"
     },
     "saveConfig": {
       "type": "boolean",
       "desc": "Сохранять ли последнюю конфигурацию и применять к новым блокам.",
-      "example": "\"saveConfig\": false"
+      "example": "\"saveConfig\": false",
+      "since": "160.x"
     },
     "separateItemCapacity": {
       "type": "boolean",
       "desc": "Если true, вместимость для каждого типа предметов считается отдельно.",
-      "example": "\"separateItemCapacity\": false"
+      "example": "\"separateItemCapacity\": false",
+      "since": "160.x"
     },
     "solidifes": {
       "type": "boolean",
       "desc": "Может ли этот блок БЫТЬ твёрдым (не путать с solid).",
-      "example": "\"solidifes\": false"
+      "example": "\"solidifes\": false",
+      "since": "160.x"
     },
     "teamPassable": {
       "type": "boolean",
       "desc": "Если true, для своей команды блок считается непроходимым.",
-      "example": "\"teamPassable\": false"
+      "example": "\"teamPassable\": false",
+      "since": "160.x"
     },
     "underBullets": {
       "type": "boolean",
       "desc": "Если true, в этот блок нельзя попасть пулями.",
-      "example": "\"underBullets\": false"
+      "example": "\"underBullets\": false",
+      "since": "160.x"
     },
     "unloadable": {
       "type": "boolean",
       "desc": "Могут ли разгрузчики работать с этим блоком.",
-      "example": "\"unloadable\": true"
+      "example": "\"unloadable\": true",
+      "since": "160.x"
     },
     "active": {
       "type": "boolean",
       "desc": "Активна ли способность (для визуальных способностей).",
-      "example": "\"active\": true"
+      "example": "\"active\": true",
+      "since": "160.x"
     },
     "effect": {
       "type": "Effect",
       "desc": "Визуальный эффект способности (для RepairFieldAbility, StatusFieldAbility).",
-      "example": "\"effect\": \"heal\""
+      "example": "\"effect\": \"heal\"",
+      "since": "160.x"
     },
     "healEffect": {
       "type": "Effect",
       "desc": "Эффект исцеления для способностей (например, EnergyFieldAbility).",
-      "example": "\"healEffect\": \"heal\""
+      "example": "\"healEffect\": \"heal\"",
+      "since": "160.x"
     },
     "healPercent": {
       "type": "float",
       "desc": "Процент здоровья, восстанавливаемый снарядом (для лечащих снарядов).",
-      "example": "\"healPercent\": 5.0"
+      "example": "\"healPercent\": 5.0",
+      "since": "160.x"
     },
     "slurpEffect": {
       "type": "Effect",
       "desc": "Эффект поглощения жидкости (для LiquidRegenAbility).",
-      "example": "\"slurpEffect\": \"neoplasmHeal\""
+      "example": "\"slurpEffect\": \"neoplasmHeal\"",
+      "since": "160.x"
     },
     "autoDropBombs": {
       "type": "boolean",
       "desc": "Если true, юнит автоматически сбрасывает бомбы под собой (для бомбардировщиков).",
-      "example": "\"autoDropBombs\": true"
+      "example": "\"autoDropBombs\": true",
+      "since": "160.x"
     },
     "baseRotateSpeed": {
       "type": "float",
       "desc": "Базовая скорость поворота корпуса меха (в градусах/тик).",
-      "example": "\"baseRotateSpeed\": 5.0"
+      "example": "\"baseRotateSpeed\": 5.0",
+      "since": "160.x"
     },
     "buildRange": {
       "type": "float",
       "desc": "Дальность, на которой юнит может строить (в пикселях).",
-      "example": "\"buildRange\": 220.0"
+      "example": "\"buildRange\": 220.0",
+      "since": "160.x"
     },
     "circleTarget": {
       "type": "boolean",
       "desc": "Если true, летающий юнит кружит вокруг цели (для бомбардировщиков).",
-      "example": "\"circleTarget\": true"
+      "example": "\"circleTarget\": true",
+      "since": "160.x"
     },
     "circleTargetRadius": {
       "type": "float",
       "desc": "Радиус кружения вокруг цели (в пикселях).",
-      "example": "\"circleTargetRadius\": 80.0"
+      "example": "\"circleTargetRadius\": 80.0",
+      "since": "160.x"
     },
     "controlSelectGlobal": {
       "type": "boolean",
       "desc": "Выбирается ли юнит глобальной клавишей (Shift+G).",
-      "example": "\"controlSelectGlobal\": false"
+      "example": "\"controlSelectGlobal\": false",
+      "since": "160.x"
     },
     "coreUnitDock": {
       "type": "boolean",
       "desc": "Будет ли этот юнит 'стыковаться' с ядром (исчезать и появляться).",
-      "example": "\"coreUnitDock\": true"
+      "example": "\"coreUnitDock\": true",
+      "since": "160.x"
     },
     "crawlSlowdown": {
       "type": "float",
       "desc": "Замедление при ползании для сегментированных юнитов.",
-      "example": "\"crawlSlowdown\": 0.5"
+      "example": "\"crawlSlowdown\": 0.5",
+      "since": "160.x"
     },
     "crawlSlowdownFrac": {
       "type": "float",
       "desc": "Доля твёрдых блоков, необходимая для замедления.",
-      "example": "\"crawlSlowdownFrac\": 0.55"
+      "example": "\"crawlSlowdownFrac\": 0.55",
+      "since": "160.x"
     },
     "deathExplosionEffect": {
       "type": "Effect",
       "desc": "Эффект взрыва при смерти юнита.",
-      "example": "\"deathExplosionEffect\": \"dynamicExplosion\""
+      "example": "\"deathExplosionEffect\": \"dynamicExplosion\"",
+      "since": "160.x"
     },
     "deathShake": {
       "type": "float",
       "desc": "Тряска экрана при смерти юнита.",
-      "example": "\"deathShake\": -1.0"
+      "example": "\"deathShake\": -1.0",
+      "since": "160.x"
     },
     "deathSoundVolume": {
       "type": "float",
       "desc": "Громкость звука смерти юнита.",
-      "example": "\"deathSoundVolume\": 1.0"
+      "example": "\"deathSoundVolume\": 1.0",
+      "since": "160.x"
     },
     "descentSpeed": {
       "type": "float",
       "desc": "Скорость спуска при бусте (взлёте).",
-      "example": "\"descentSpeed\": 0.08"
+      "example": "\"descentSpeed\": 0.08",
+      "since": "160.x"
     },
     "dpsEstimate": {
       "type": "float",
       "desc": "Очень грубая оценка DPS юнита (инициализируется в init()).",
-      "example": "\"dpsEstimate\": -1.0"
+      "example": "\"dpsEstimate\": -1.0",
+      "since": "160.x"
     },
     "drawBuildBeam": {
       "type": "boolean",
       "desc": "Рисовать ли луч строительства.",
-      "example": "\"drawBuildBeam\": true"
+      "example": "\"drawBuildBeam\": true",
+      "since": "160.x"
     },
     "drawMineBeam": {
       "type": "boolean",
       "desc": "Рисовать ли луч добычи.",
-      "example": "\"drawMineBeam\": true"
+      "example": "\"drawMineBeam\": true",
+      "since": "160.x"
     },
     "drawSoftShadow": {
       "type": "boolean",
       "desc": "Рисовать ли мягкую тень под юнитом.",
-      "example": "\"drawSoftShadow\": true"
+      "example": "\"drawSoftShadow\": true",
+      "since": "160.x"
     },
     "drownTimeMultiplier": {
       "type": "float",
       "desc": "Множитель времени утопления (больше — дольше тонет).",
-      "example": "\"drownTimeMultiplier\": 1.0"
+      "example": "\"drownTimeMultiplier\": 1.0",
+      "since": "160.x"
     },
     "emitWalkEffect": {
       "type": "boolean",
       "desc": "Создавать ли эффект шагов в воде.",
-      "example": "\"emitWalkEffect\": true"
+      "example": "\"emitWalkEffect\": true",
+      "since": "160.x"
     },
     "emitWalkSound": {
       "type": "boolean",
       "desc": "Издавать ли звук шагов в воде.",
-      "example": "\"emitWalkSound\": true"
+      "example": "\"emitWalkSound\": true",
+      "since": "160.x"
     },
     "engineColor": {
       "type": "Color",
       "desc": "Цвет двигателей (переопределяет цвет команды).",
-      "example": "\"engineColor\": \"ff8833\""
+      "example": "\"engineColor\": \"ff8833\"",
+      "since": "160.x"
     },
     "engineColorInner": {
       "type": "Color",
       "desc": "Внутренний цвет двигателей.",
-      "example": "\"engineColorInner\": \"ffffff\""
+      "example": "\"engineColorInner\": \"ffffff\"",
+      "since": "160.x"
     },
     "engineLayer": {
       "type": "float",
       "desc": "Слой отрисовки двигателей.",
-      "example": "\"engineLayer\": -1.0"
+      "example": "\"engineLayer\": -1.0",
+      "since": "160.x"
     },
     "envRequired": {
       "type": "int",
       "desc": "Окружения, которые обязательно нужны юниту (0 = любые).",
-      "example": "\"envRequired\": 0"
+      "example": "\"envRequired\": 0",
+      "since": "160.x"
     },
     "fallEffect": {
       "type": "Effect",
       "desc": "Эффект, испускаемый при падении юнита.",
-      "example": "\"fallEffect\": \"fallSmoke\""
+      "example": "\"fallEffect\": \"fallSmoke\"",
+      "since": "160.x"
     },
     "fallEngineEffect": {
       "type": "Effect",
       "desc": "Эффект двигателя при падении.",
-      "example": "\"fallEngineEffect\": \"fallSmoke\""
+      "example": "\"fallEngineEffect\": \"fallSmoke\"",
+      "since": "160.x"
     },
     "flipBackLegs": {
       "type": "boolean",
       "desc": "Переворачивать ли задние ноги (для Legs).",
-      "example": "\"flipBackLegs\": true"
+      "example": "\"flipBackLegs\": true",
+      "since": "160.x"
     },
     "flipLegSide": {
       "type": "boolean",
       "desc": "Переворачивать ли сторону ног (для Legs).",
-      "example": "\"flipLegSide\": false"
+      "example": "\"flipLegSide\": false",
+      "since": "160.x"
     },
     "floorMultiplier": {
       "type": "float",
       "desc": "Насколько юнит подвержен влиянию местности (1.0 = стандарт).",
-      "example": "\"floorMultiplier\": 1.0"
+      "example": "\"floorMultiplier\": 1.0",
+      "since": "160.x"
     },
     "flowfieldPathType": {
       "type": "int",
       "desc": "ID типа стоимости для поиска пути (для AI).",
-      "example": "\"flowfieldPathType\": -1"
+      "example": "\"flowfieldPathType\": -1",
+      "since": "160.x"
     },
     "flyingLayer": {
       "type": "float",
       "desc": "Слой отрисовки для летающих юнитов. -1 = авто.",
-      "example": "\"flyingLayer\": -1.0"
+      "example": "\"flyingLayer\": -1.0",
+      "since": "160.x"
     },
     "forceMultiTarget": {
       "type": "boolean",
       "desc": "Может ли юнит иметь несколько целей.",
-      "example": "\"forceMultiTarget\": false"
+      "example": "\"forceMultiTarget\": false",
+      "since": "160.x"
     },
     "generateFullIcon": {
       "type": "boolean",
       "desc": "Пропускать ли полную генерацию иконки (для ванильного контента).",
-      "example": "\"generateFullIcon\": true"
+      "example": "\"generateFullIcon\": true",
+      "since": "160.x"
     },
     "healFlash": {
       "type": "boolean",
       "desc": "Вспышка при лечении юнита.",
-      "example": "\"healFlash\": true"
+      "example": "\"healFlash\": true",
+      "since": "160.x"
     },
     "hoverable": {
       "type": "boolean",
       "desc": "Есть ли всплывающая подсказка при наведении на юнит.",
-      "example": "\"hoverable\": true"
+      "example": "\"hoverable\": true",
+      "since": "160.x"
     },
     "isEnemy": {
       "type": "boolean",
       "desc": "Считается ли юнит врагом в волнах (обычно false для поддержки).",
-      "example": "\"isEnemy\": false"
+      "example": "\"isEnemy\": false",
+      "since": "160.x"
     },
     "itemOffsetY": {
       "type": "float",
       "desc": "Визуальное смещение предметов на юните.",
-      "example": "\"itemOffsetY\": 3.0"
+      "example": "\"itemOffsetY\": 3.0",
+      "since": "160.x"
     },
     "legBaseUnder": {
       "type": "boolean",
       "desc": "Рисовать ли основание ноги снизу (для Legs).",
-      "example": "\"legBaseUnder\": false"
+      "example": "\"legBaseUnder\": false",
+      "since": "160.x"
     },
     "legPhysicsLayer": {
       "type": "boolean",
       "desc": "Находится ли шагающий юнит на физическом слое земли.",
-      "example": "\"legPhysicsLayer\": true"
+      "example": "\"legPhysicsLayer\": true",
+      "since": "160.x"
     },
     "lockLegBase": {
       "type": "boolean",
       "desc": "Заблокированы ли ноги на основании (для Legs).",
-      "example": "\"lockLegBase\": false"
+      "example": "\"lockLegBase\": false",
+      "since": "160.x"
     },
     "mechLegColor": {
       "type": "Color",
       "desc": "Цвет ног меха.",
-      "example": "\"mechLegColor\": \"darkMetal\""
+      "example": "\"mechLegColor\": \"darkMetal\"",
+      "since": "160.x"
     },
     "mechStride": {
       "type": "float",
       "desc": "Длина шага меха.",
-      "example": "\"mechStride\": -1.0"
+      "example": "\"mechStride\": -1.0",
+      "since": "160.x"
     },
     "mineHardnessScaling": {
       "type": "boolean",
       "desc": "Зависит ли время добычи от твёрдости руды.",
-      "example": "\"mineHardnessScaling\": true"
+      "example": "\"mineHardnessScaling\": true",
+      "since": "160.x"
     },
     "mineItems": {
-      "type": "Seq<Item>",
+      "type": "Seq <Item>",
       "desc": "Целевые предметы для добычи (MinerAI).",
-      "example": "\"mineItems\": [\"copper\", \"lead\", \"titanium\", \"thorium\"]"
+      "example": "\"mineItems\": [\"copper\", \"lead\", \"titanium\", \"thorium\"]",
+      "since": "160.x"
     },
     "mineSound": {
       "type": "Sound",
       "desc": "Звук добычи руды.",
-      "example": "\"mineSound\": \"loopMineBeam\""
+      "example": "\"mineSound\": \"loopMineBeam\"",
+      "since": "160.x"
     },
     "mineSoundVolume": {
       "type": "float",
       "desc": "Громкость звука добычи.",
-      "example": "\"mineSoundVolume\": 0.6"
+      "example": "\"mineSoundVolume\": 0.6",
+      "since": "160.x"
     },
     "missileAccelTime": {
       "type": "float",
       "desc": "Время разгона ракеты до полной скорости (в тиках).",
-      "example": "\"missileAccelTime\": 0.0"
+      "example": "\"missileAccelTime\": 0.0",
+      "since": "160.x"
     },
     "moveSoundPitchMax": {
       "type": "float",
       "desc": "Максимальная высота тона звука движения.",
-      "example": "\"moveSoundPitchMax\": 1.0"
+      "example": "\"moveSoundPitchMax\": 1.0",
+      "since": "160.x"
     },
     "moveSoundPitchMin": {
       "type": "float",
       "desc": "Минимальная высота тона звука движения.",
-      "example": "\"moveSoundPitchMin\": 1.0"
+      "example": "\"moveSoundPitchMin\": 1.0",
+      "since": "160.x"
     },
     "naval": {
       "type": "boolean",
       "desc": "Флаг водного юнита (не назначать вручную!).",
-      "example": "\"naval\": false"
+      "example": "\"naval\": false",
+      "since": "160.x"
     },
     "pathCostId": {
       "type": "int",
       "desc": "ID для поиска пути (не назначать вручную).",
-      "example": "\"pathCostId\": 0"
+      "example": "\"pathCostId\": 0",
+      "since": "160.x"
     },
     "pickupUnits": {
       "type": "boolean",
       "desc": "Может ли юнит подбирать других юнитов.",
-      "example": "\"pickupUnits\": true"
+      "example": "\"pickupUnits\": true",
+      "since": "160.x"
     },
     "rippleScale": {
       "type": "float",
       "desc": "Масштаб 'ряби' / пыли для шагающих юнитов.",
-      "example": "\"rippleScale\": 1.0"
+      "example": "\"rippleScale\": 1.0",
+      "since": "160.x"
     },
     "riseSpeed": {
       "type": "float",
       "desc": "Скорость подъёма при бусте (взлёте).",
-      "example": "\"riseSpeed\": 0.08"
+      "example": "\"riseSpeed\": 0.08",
+      "since": "160.x"
     },
     "rotateToBuilding": {
       "type": "boolean",
       "desc": "Поворачивается ли юнит к тому, что строит.",
-      "example": "\"rotateToBuilding\": true"
+      "example": "\"rotateToBuilding\": true",
+      "since": "160.x"
     },
     "sample": {
       "type": "Unit",
       "desc": "Образец юнита, которого создаёт этот тип (не назначать).",
-      "example": "\"sample\": null"
+      "example": "\"sample\": null",
+      "since": "160.x"
     },
     "segmentEndUnit": {
       "type": "UnitType",
       "desc": "Юнит в конце сегментов (для сегментированных юнитов).",
-      "example": "\"segmentEndUnit\": null"
+      "example": "\"segmentEndUnit\": null",
+      "since": "160.x"
     },
     "segmentLayerOrder": {
       "type": "boolean",
       "desc": "Порядок слоёв сегментов (true = родитель сверху).",
-      "example": "\"segmentLayerOrder\": true"
+      "example": "\"segmentLayerOrder\": true",
+      "since": "160.x"
     },
     "segmentMaxRot": {
       "type": "float",
       "desc": "Максимальный угол сегментов.",
-      "example": "\"segmentMaxRot\": 30.0"
+      "example": "\"segmentMaxRot\": 30.0",
+      "since": "160.x"
     },
     "segmentPhase": {
       "type": "float",
       "desc": "Смещение фазы сегментов.",
-      "example": "\"segmentPhase\": 5.0"
+      "example": "\"segmentPhase\": 5.0",
+      "since": "160.x"
     },
     "segmentRotSpeed": {
       "type": "float",
       "desc": "Скорость поворота сегментов.",
-      "example": "\"segmentRotSpeed\": 1.0"
+      "example": "\"segmentRotSpeed\": 1.0",
+      "since": "160.x"
     },
     "segmentRotationRange": {
       "type": "float",
       "desc": "Диапазон поворота сегментов.",
-      "example": "\"segmentRotationRange\": 80.0"
+      "example": "\"segmentRotationRange\": 80.0",
+      "since": "160.x"
     },
     "segmentSpacing": {
       "type": "float",
       "desc": "Расстояние между сегментами.",
-      "example": "\"segmentSpacing\": -1.0"
+      "example": "\"segmentSpacing\": -1.0",
+      "since": "160.x"
     },
     "segmentUnit": {
       "type": "UnitType",
       "desc": "Юнит, используемый в сегментах (для сегментированных юнитов).",
-      "example": "\"segmentUnit\": null"
+      "example": "\"segmentUnit\": null",
+      "since": "160.x"
     },
     "segmentUnits": {
       "type": "int",
       "desc": "Количество независимых юнитов в сегментах.",
-      "example": "\"segmentUnits\": 1"
+      "example": "\"segmentUnits\": 1",
+      "since": "160.x"
     },
     "segments": {
       "type": "int",
       "desc": "Количество сегментов для сегментированных юнитов.",
-      "example": "\"segments\": 0"
+      "example": "\"segments\": 0",
+      "since": "160.x"
     },
     "shieldColor": {
       "type": "Color",
       "desc": "Цвет щита юнита (переопределяет цвет команды).",
-      "example": "\"shieldColor\": \"00ffff\""
+      "example": "\"shieldColor\": \"00ffff\"",
+      "since": "160.x"
     },
     "softShadowScl": {
       "type": "float",
       "desc": "Масштаб мягкой тени под юнитом.",
-      "example": "\"softShadowScl\": 1.0"
+      "example": "\"softShadowScl\": 1.0",
+      "since": "160.x"
     },
     "stepSoundPitchRange": {
       "type": "float",
       "desc": "Диапазон высоты тона звука шага.",
-      "example": "\"stepSoundPitchRange\": 0.1"
+      "example": "\"stepSoundPitchRange\": 0.1",
+      "since": "160.x"
     },
     "strafePenalty": {
       "type": "float",
       "desc": "Штраф к скорости при движении в обратном направлении.",
-      "example": "\"strafePenalty\": 0.5"
+      "example": "\"strafePenalty\": 0.5",
+      "since": "160.x"
     },
     "tankMoveSound": {
       "type": "Sound",
       "desc": "Циклический звук движения танка.",
-      "example": "\"tankMoveSound\": \"tankMove\""
+      "example": "\"tankMoveSound\": \"tankMove\"",
+      "since": "160.x"
     },
     "tankMoveVolume": {
       "type": "float",
       "desc": "Громкость звука движения танка.",
-      "example": "\"tankMoveVolume\": 0.5"
+      "example": "\"tankMoveVolume\": 0.5",
+      "since": "160.x"
     },
     "targetUnderBlocks": {
       "type": "boolean",
       "desc": "Целится ли в блоки под собой (например, конвейеры).",
-      "example": "\"targetUnderBlocks\": true"
+      "example": "\"targetUnderBlocks\": true",
+      "since": "160.x"
     },
     "trailScl": {
       "type": "float",
       "desc": "Ширина всех следов (включая водных).",
-      "example": "\"trailScl\": 1.0"
+      "example": "\"trailScl\": 1.0",
+      "since": "160.x"
     },
     "useEngineElevation": {
       "type": "boolean",
       "desc": "Зависит ли размер двигателя от высоты.",
-      "example": "\"useEngineElevation\": true"
+      "example": "\"useEngineElevation\": true",
+      "since": "160.x"
     },
     "vulnerableWithPayloads": {
       "type": "boolean",
       "desc": "Можно ли попасть по юниту, когда он несёт груз.",
-      "example": "\"vulnerableWithPayloads\": false"
+      "example": "\"vulnerableWithPayloads\": false",
+      "since": "160.x"
     },
     "waveTrailX": {
       "type": "float",
       "desc": "Горизонтальное смещение следа для водных юнитов.",
-      "example": "\"waveTrailX\": 4.0"
+      "example": "\"waveTrailX\": 4.0",
+      "since": "160.x"
     },
     "waveTrailY": {
       "type": "float",
       "desc": "Вертикальное смещение следа для водных юнитов.",
-      "example": "\"waveTrailY\": -3.0"
+      "example": "\"waveTrailY\": -3.0",
+      "since": "160.x"
     },
     "wobble": {
       "type": "boolean",
       "desc": "Должен ли летающий юнит покачиваться в полёте.",
-      "example": "\"wobble\": true"
+      "example": "\"wobble\": true",
+      "since": "160.x"
     },
     "wreckHealthMultiplier": {
       "type": "float",
       "desc": "Множитель здоровья обломков (от max health).",
-      "example": "\"wreckHealthMultiplier\": 0.25"
+      "example": "\"wreckHealthMultiplier\": 0.25",
+      "since": "160.x"
     },
     "wreckSoundVolume": {
       "type": "float",
       "desc": "Громкость звука падения обломков.",
-      "example": "\"wreckSoundVolume\": 1.0"
+      "example": "\"wreckSoundVolume\": 1.0",
+      "since": "160.x"
     },
     "frontColor": {
       "type": "Color HEX",
       "desc": "Основной цвет передней части снаряда. Используется для градиентной заливки спрайта.",
-      "example": "\"frontColor\": \"ffaa44\""
+      "example": "\"frontColor\": \"ffaa44\"",
+      "since": "160.x"
     },
     "backColor": {
       "type": "Color HEX",
       "desc": "Основной цвет задней части снаряда. Используется для градиентной заливки спрайта.",
-      "example": "\"backColor\": \"ff6600\""
+      "example": "\"backColor\": \"ff6600\"",
+      "since": "160.x"
     },
     "mixColorFrom": {
       "type": "Color HEX",
       "desc": "Цвет, с которым смешивается основной цвет снаряда в начале его жизни.",
-      "example": "\"mixColorFrom\": \"ffffff\""
+      "example": "\"mixColorFrom\": \"ffffff\"",
+      "since": "160.x"
     },
     "mixColorTo": {
       "type": "Color HEX",
       "desc": "Цвет, с которым смешивается основной цвет снаряда в конце его жизни.",
-      "example": "\"mixColorTo\": \"ff0000\""
+      "example": "\"mixColorTo\": \"ff0000\"",
+      "since": "160.x"
     },
     "hitColor": {
       "type": "Color HEX",
       "desc": "Цвет эффекта попадания снаряда.",
-      "example": "\"hitColor\": \"ffaa44\""
+      "example": "\"hitColor\": \"ffaa44\"",
+      "since": "160.x"
     },
     "fromColor": {
       "type": "Color HEX",
       "desc": "Начальный цвет для ShrapnelBulletType (градиент от начала луча).",
-      "example": "\"fromColor\": \"ffffffff\""
+      "example": "\"fromColor\": \"ffffffff\"",
+      "since": "160.x"
     },
     "toColor": {
       "type": "Color HEX",
       "desc": "Конечный цвет для ShrapnelBulletType (градиент к концу луча).",
-      "example": "\"toColor\": \"a9d8ffff\""
+      "example": "\"toColor\": \"a9d8ffff\"",
+      "since": "160.x"
     },
     "collideFloor": {
       "type": "boolean",
       "desc": "Может ли снаряд сталкиваться с полом (для бомб и артиллерии).",
-      "example": "\"collideFloor\": true"
+      "example": "\"collideFloor\": true",
+      "since": "160.x"
     },
     "collides": {
       "type": "boolean",
       "desc": "Может ли снаряд сталкиваться с целями (общий флаг).",
-      "example": "\"collides\": true"
+      "example": "\"collides\": true",
+      "since": "160.x"
     },
     "collidesTiles": {
       "type": "boolean",
       "desc": "Может ли снаряд сталкиваться с блоками (стенами, постройками).",
-      "example": "\"collidesTiles\": true"
+      "example": "\"collidesTiles\": true",
+      "since": "160.x"
     },
     "collideTerrain": {
       "type": "boolean",
       "desc": "Может ли снаряд сталкиваться с ландшафтом (землёй, водой).",
-      "example": "\"collideTerrain\": false"
+      "example": "\"collideTerrain\": false",
+      "since": "160.x"
     },
     "circleShooter": {
       "type": "boolean",
       "desc": "Если true, снаряд создаётся по кругу вокруг стреляющего (для способностей).",
-      "example": "\"circleShooter\": false"
+      "example": "\"circleShooter\": false",
+      "since": "160.x"
     },
     "circleShooterRadius": {
       "type": "float",
       "desc": "Радиус круга для circleShooter (в пикселях).",
-      "example": "\"circleShooterRadius\": 40.0"
+      "example": "\"circleShooterRadius\": 40.0",
+      "since": "160.x"
     },
     "circleShooterRadiusSmooth": {
       "type": "float",
       "desc": "Сглаженный радиус для circleShooter.",
-      "example": "\"circleShooterRadiusSmooth\": 0.0"
+      "example": "\"circleShooterRadiusSmooth\": 0.0",
+      "since": "160.x"
     },
     "circleShooterRotateSpeed": {
       "type": "float",
       "desc": "Скорость вращения круга для circleShooter (в градусах/тик).",
-      "example": "\"circleShooterRotateSpeed\": 2.0"
+      "example": "\"circleShooterRotateSpeed\": 2.0",
+      "since": "160.x"
     },
     "bulletInterval": {
       "type": "float",
       "desc": "Интервал между созданием интервальных снарядов (intervalBullet).",
-      "example": "\"bulletInterval\": 4.0"
+      "example": "\"bulletInterval\": 4.0",
+      "since": "160.x"
     },
     "intervalBullet": {
       "type": "BulletType",
       "desc": "Снаряд, создаваемый через интервалы во время полёта основного снаряда.",
-      "example": "\"intervalBullet\": { \"type\": \"LightningBulletType\", \"damage\": 5 }"
+      "example": "\"intervalBullet\": { \"type\": \"LightningBulletType\", \"damage\": 5 }",
+      "since": "160.x"
     },
     "weaveRandom": {
       "type": "boolean",
       "desc": "Если true, синусоидальная траектория имеет случайную фазу.",
-      "example": "\"weaveRandom\": false"
+      "example": "\"weaveRandom\": false",
+      "since": "160.x"
     },
     "trailChance": {
       "type": "float",
       "desc": "Шанс создания следа за тик (для экономии производительности).",
-      "example": "\"trailChance\": 10.0"
+      "example": "\"trailChance\": 10.0",
+      "since": "160.x"
     },
     "trailInterp": {
       "type": "Interp",
       "desc": "Интерполяция для размера/прозрачности следа.",
-      "example": "\"trailInterp\": \"slope\""
+      "example": "\"trailInterp\": \"slope\"",
+      "since": "160.x"
     },
     "trailRotation": {
       "type": "boolean",
       "desc": "Вращается ли след вместе со снарядом.",
-      "example": "\"trailRotation\": true"
+      "example": "\"trailRotation\": true",
+      "since": "160.x"
     },
     "trailParam": {
       "type": "float",
       "desc": "Параметр для настройки следа (для TrailEffect).",
-      "example": "\"trailParam\": 0.5"
+      "example": "\"trailParam\": 0.5",
+      "since": "160.x"
     },
     "trailSpread": {
       "type": "float (Градусы)",
       "desc": "Разброс частиц следа (в градусах).",
-      "example": "\"trailSpread\": 12.0"
+      "example": "\"trailSpread\": 12.0",
+      "since": "160.x"
     },
     "drag": {
       "type": "float",
       "desc": "Сопротивление воздуха для снаряда (чем выше, тем быстрее теряет скорость).",
-      "example": "\"drag\": 0.01"
+      "example": "\"drag\": 0.01",
+      "since": "160.x"
     },
     "puddleLiquid": {
       "type": "String",
       "desc": "Жидкость, оставляемая снарядом в виде лужи (для LiquidBulletType).",
-      "example": "\"puddleLiquid\": \"water\""
+      "example": "\"puddleLiquid\": \"water\"",
+      "since": "160.x"
     },
     "puddleAmount": {
       "type": "float",
       "desc": "Количество жидкости в луже.",
-      "example": "\"puddleAmount\": 25.0"
+      "example": "\"puddleAmount\": 25.0",
+      "since": "160.x"
     },
     "puddleRange": {
       "type": "float",
       "desc": "Радиус лужи (в пикселях).",
-      "example": "\"puddleRange\": 60.0"
+      "example": "\"puddleRange\": 60.0",
+      "since": "160.x"
     },
     "healAmount": {
       "type": "float",
       "desc": "Фиксированное количество здоровья, восстанавливаемое снарядом.",
-      "example": "\"healAmount\": 100.0"
+      "example": "\"healAmount\": 100.0",
+      "since": "160.x"
     },
     "collidesTeam": {
       "type": "boolean",
       "desc": "Может ли снаряд сталкиваться с союзными целями (для лечения).",
-      "example": "\"collidesTeam\": true"
+      "example": "\"collidesTeam\": true",
+      "since": "160.x"
     },
     "main": {
       "type": "String",
       "desc": "Полное имя главного Java-класса мода. Используется только для Java-модов.",
-      "example": "\"main\": \"com.example.MyMod\""
+      "example": "\"main\": \"com.example.MyMod\"",
+      "since": "160.x"
     },
     "repo": {
       "type": "String",
       "desc": "Ссылка на репозиторий мода (GitHub). Отображается в менеджере модов.",
-      "example": "\"repo\": \"username/repo\""
+      "example": "\"repo\": \"username/repo\"",
+      "since": "160.x"
     },
     "dependencies": {
       "type": "String[]",
       "desc": "Список ID модов, от которых зависит этот мод.",
-      "example": "\"dependencies\": [\"other-mod\"]"
+      "example": "\"dependencies\": [\"other-mod\"]",
+      "since": "160.x"
     },
     "allowResupply": {
       "type": "boolean",
       "desc": "Могут ли юниты пополнять запасы, забирая предметы из этого блока.",
-      "example": "\"allowResupply\": false"
+      "example": "\"allowResupply\": false",
+      "since": "160.x"
     },
     "alwaysAllowDeposit": {
       "type": "boolean",
       "desc": "Если true, блок не подчиняется правилу onlyDepositCore.",
-      "example": "\"alwaysAllowDeposit\": false"
+      "example": "\"alwaysAllowDeposit\": false",
+      "since": "160.x"
     },
     "acceptsUnitPayloads": {
       "type": "boolean",
       "desc": "Если true, блок может принимать грузы-юниты (для реконструкторов и некоторых фабрик).",
-      "example": "\"acceptsUnitPayloads\": false"
+      "example": "\"acceptsUnitPayloads\": false",
+      "since": "160.x"
     },
     "acceptsPayload": {
       "type": "boolean",
       "desc": "Если true, грузы будут пытаться зайти в этот блок (для приёмников грузов).",
-      "example": "\"acceptsPayload\": false"
+      "example": "\"acceptsPayload\": false",
+      "since": "160.x"
     },
     "acceptsItems": {
       "type": "boolean",
       "desc": "Визуальный флаг для blending некоторых транспортных блоков (указывает, что блок принимает предметы).",
-      "example": "\"acceptsItems\": false"
+      "example": "\"acceptsItems\": false",
+      "since": "160.x"
     },
     "item": {
       "type": "String (ID предмета)",
       "desc": "Идентификатор предмета, используемый в требованиях, выходных данных, боеприпасах и потреблении. Должен соответствовать имени предмета из content/items.",
-      "example": "\"item\": \"copper\""
+      "example": "\"item\": \"copper\"",
+      "since": "160.x"
     },
     "amount": {
       "type": "int",
       "desc": "Количество предметов или жидкости в требованиях, выходных данных, потреблении, осколках и т.д.",
-      "example": "\"amount\": 60"
+      "example": "\"amount\": 60",
+      "since": "160.x"
     },
     "accel": {
       "type": "float",
-      "desc": "Ускорение за кадр (для снарядов) или ускорение как доля от максимальной скорости (для юнитов). Для снарядов — прирост скорости каждый тик. Для юнитов — скорость набора максимальной скорости (0.5 = стандарт).",
-      "example": "\"accel\": 0.0"
+      "desc": "Ускорение за кадр (для снарядов) или ускорение как доля от максимальной скорости (для юнитов). Для снарядов — прирост скорости каждый тик. Для юнитов — скорость набора максимально й скорости (0.5 = стандарт).",
+      "example": "\"accel\": 0.0",
+      "since": "160.x"
     },
     "bullet": {
       "type": "BulletType",
       "desc": "Тип снаряда, используемый оружием. Определяет все параметры выстрела: урон, скорость, время жизни, эффекты и т.д. Может быть встроенным объектом или ссылкой на существующий тип.",
-      "example": "\"bullet\": { \"type\": \"BasicBulletType\", \"damage\": 45, \"speed\": 6.5 }"
+      "example": "\"bullet\": { \"type\": \"BasicBulletType\", \"damage\": 45, \"speed\": 6.5 }",
+      "since": "160.x"
     },
     "displayName": {
       "type": "String",
       "desc": "Отображаемое название мода в меню модов и в списке. Может содержать пробелы и спецсимволы.",
-      "example": "\"displayName\": \"Epic Expansion Mod\""
+      "example": "\"displayName\": \"Epic Expansion Mod\"",
+      "since": "160.x"
     },
     "author": {
       "type": "String",
       "desc": "Имя автора или никнейм создателя мода. Отображается в менеджере модов.",
-      "example": "\"author\": \"Mindustry Fan\""
+      "example": "\"author\": \"Mindustry Fan\"",
+      "since": "160.x"
     },
     "version": {
       "type": "String",
       "desc": "Версия мода в формате X.Y.Z. Используется для отслеживания обновлений.",
-      "example": "\"version\": \"1.0.0\""
+      "example": "\"version\": \"1.0.0\"",
+      "since": "160.x"
     },
     "minGameVersion": {
       "type": "String или int",
       "desc": "Минимальная версия игры, необходимая для работы мода. Обычно указывается номер сборки (например, 146).",
-      "example": "\"minGameVersion\": \"146\""
+      "example": "\"minGameVersion\": \"146\"",
+      "since": "160.x"
     },
     "length": {
       "type": "float (Пиксели)",
       "desc": "Длина лазерного луча (для LaserBulletType, ContinuousLaserBulletType) или длина снаряда (для ShrapnelBulletType). Определяет дальность действия лазера или длину эффекта.",
-      "example": "\"length\": 150.0"
+      "example": "\"length\": 150.0",
+      "since": "160.x"
     },
     "colors": {
       "type": "Color[]",
       "desc": "Массив цветов для градиентной заливки лазерного луча (для LaserBulletType, ContinuousLaserBulletType). Цвета перечисляются от начала луча к концу. Можно использовать 2-4 цвета.",
-      "example": "\"colors\": [\"ff0000\", \"ffff00\", \"00ff00\"]"
+      "example": "\"colors\": [\"ff0000\", \"ffff00\", \"00ff00\"]",
+      "since": "160.x"
     },
     "legGroupSize": {
       "type": "int",
       "desc": "Количество ног, двигающихся синхронно в одной группе (для юнитов типа legs). Значение 1 означает, что каждая нога двигается независимо. Значение 2 — ноги двигаются парами.",
-      "example": "\"legGroupSize\": 2"
+      "example": "\"legGroupSize\": 2",
+      "since": "160.x"
     },
     "legPairOffset": {
       "type": "float",
       "desc": "Смещение фазы движения между парами ног (для юнитов типа legs). Влияет на то, насколько синхронно двигаются передние и задние ноги. 0 — все ноги синхронны, положительное значение создаёт волнообразное движение.",
-      "example": "\"legPairOffset\": 4.0"
+      "example": "\"legPairOffset\": 4.0",
+      "since": "160.x"
     },
     "stepSoundPitch": {
       "type": "float",
       "desc": "Высота тона звука шага юнита (для ног или гусениц). Значение 1.0 — стандартная высота, 0.5 — ниже, 1.5 — выше.",
-      "example": "\"stepSoundPitch\": 0.9"
+      "example": "\"stepSoundPitch\": 0.9",
+      "since": "160.x"
     },
     "lightningSpacing": {
       "type": "float (Пиксели)",
       "desc": "Расстояние между точками создания молний вдоль лазерного луча (для LaserBulletType). Влияет на частоту появления молний при попадании.",
-      "example": "\"lightningSpacing\": 35.0"
+      "example": "\"lightningSpacing\": 35.0",
+      "since": "160.x"
     },
     "lightningDelay": {
       "type": "float (Тики)",
       "desc": "Задержка перед созданием молний после попадания лазера (для LaserBulletType).",
-      "example": "\"lightningDelay\": 1.1"
+      "example": "\"lightningDelay\": 1.1",
+      "since": "160.x"
     },
     "lightningLengthRand": {
       "type": "float (Пиксели)",
       "desc": "Случайное отклонение длины молний (для LaserBulletType). Добавляет вариативность к lightningLength.",
-      "example": "\"lightningLengthRand\": 15.0"
+      "example": "\"lightningLengthRand\": 15.0",
+      "since": "160.x"
     },
     "lightningAngleRand": {
       "type": "float (Градусы)",
       "desc": "Случайное отклонение угла молний (для LaserBulletType). Влияет на разброс молний от точки удара.",
-      "example": "\"lightningAngleRand\": 40.0"
+      "example": "\"lightningAngleRand\": 40.0",
+      "since": "160.x"
     },
     "largeHit": {
       "type": "boolean",
       "desc": "Увеличивает размер эффекта попадания для LaserBulletType. Делает визуальный эффект более масштабным.",
-      "example": "\"largeHit\": true"
+      "example": "\"largeHit\": true",
+      "since": "160.x"
     },
     "sideAngle": {
       "type": "float (Градусы)",
       "desc": "Угол наклона боковых лучей для LaserBulletType. Позволяет создавать лазеры с ответвлениями в стороны.",
-      "example": "\"sideAngle\": 15.0"
+      "example": "\"sideAngle\": 15.0",
+      "since": "160.x"
     },
     "sideWidth": {
       "type": "float (Пиксели)",
       "desc": "Ширина боковых лучей для LaserBulletType.",
-      "example": "\"sideWidth\": 0.0"
+      "example": "\"sideWidth\": 0.0",
+      "since": "160.x"
     },
     "sideLength": {
       "type": "float (Пиксели)",
       "desc": "Длина боковых лучей для LaserBulletType.",
-      "example": "\"sideLength\": 0.0"
+      "example": "\"sideLength\": 0.0",
+      "since": "160.x"
     },
     "x": {
       "type": "float (Пиксели)",
       "desc": "Смещение объекта по горизонтали относительно центра родителя (юнита, блока или оружия). Для оружия — положение ствола по X.",
-      "example": "\"x\": 0.0"
+      "example": "\"x\": 0.0",
+      "since": "160.x"
     },
     "y": {
       "type": "float (Пиксели)",
       "desc": "Смещение объекта по вертикали относительно центра родителя (юнита, блока или оружия). Для оружия — положение ствола по Y.",
-      "example": "\"y\": 0.0"
+      "example": "\"y\": 0.0",
+      "since": "160.x"
     },
     "weaponregion": {
       "type": "String",
       "desc": "Нестандартное поле, которое некоторые моды используют для указания текстуры оружия. В ванильном API используется shootRegion. Добавлено для совместимости.",
-      "example": "\"weaponregion\": \"my-weapon\""
+      "example": "\"weaponregion\": \"my-weapon\"",
+      "since": "160.x"
     },
     "baseJointRegion": {
       "type": "String",
       "desc": "Текстура базового сустава для юнитов типа legs. Используется для отрисовки соединения ног с корпусом.",
-      "example": "\"baseJointRegion\": \"my-unit-base-joint\""
+      "example": "\"baseJointRegion\": \"my-unit-base-joint\"",
+      "since": "160.x"
     },
     "legBaseRegion": {
       "type": "String",
       "desc": "Текстура основания ног для юнитов типа legs. Рисуется под основными ногами.",
-      "example": "\"legBaseRegion\": \"my-unit-leg-base\""
+      "example": "\"legBaseRegion\": \"my-unit-leg-base\"",
+      "since": "160.x"
     },
     "itemCircleRegion": {
       "type": "String",
       "desc": "Текстура кружка, отображаемого под предметами, которые несёт юнит.",
-      "example": "\"itemCircleRegion\": \"ring-item\""
+      "example": "\"itemCircleRegion\": \"ring-item\"",
+      "since": "160.x"
     },
     "mineLaserRegion": {
       "type": "String",
       "desc": "Текстура луча добычи для юнитов и буров.",
-      "example": "\"mineLaserRegion\": \"minelaser\""
+      "example": "\"mineLaserRegion\": \"minelaser\"",
+      "since": "160.x"
     },
     "mineLaserEndRegion": {
       "type": "String",
       "desc": "Текстура конца луча добычи (точка на руде).",
-      "example": "\"mineLaserEndRegion\": \"minelaser-end\""
+      "example": "\"mineLaserEndRegion\": \"minelaser-end\"",
+      "since": "160.x"
     },
     "previewRegion": {
       "type": "String",
       "desc": "Текстура для предпросмотра юнита в меню (если отличается от основной).",
-      "example": "\"previewRegion\": \"my-unit-preview\""
+      "example": "\"previewRegion\": \"my-unit-preview\"",
+      "since": "160.x"
     },
     "segmentCellRegions": {
       "type": "String[]",
       "desc": "Массив текстур ячеек для сегментированных юнитов (каждый сегмент может иметь свою ячейку).",
-      "example": "\"segmentCellRegions\": [\"segment-cell-0\", \"segment-cell-1\"]"
+      "example": "\"segmentCellRegions\": [\"segment-cell-0\", \"segment-cell-1\"]",
+      "since": "160.x"
     },
     "rimRegion": {
       "type": "String",
       "desc": "Текстура обода (края) для буров и некоторых блоков.",
-      "example": "\"rimRegion\": \"my-drill-rim\""
+      "example": "\"rimRegion\": \"my-drill-rim\"",
+      "since": "160.x"
     },
     "rotatorRegion": {
       "type": "String",
       "desc": "Текстура вращающейся части для буров и сборщиков юнитов.",
-      "example": "\"rotatorRegion\": \"my-drill-rotator\""
+      "example": "\"rotatorRegion\": \"my-drill-rotator\"",
+      "since": "160.x"
     },
     "sideRegion1": {
       "type": "String",
       "desc": "Первая боковая текстура для сборщиков юнитов (левая часть).",
-      "example": "\"sideRegion1\": \"my-assembler-side1\""
+      "example": "\"sideRegion1\": \"my-assembler-side1\"",
+      "since": "160.x"
     },
     "sideRegion2": {
       "type": "String",
       "desc": "Вторая боковая текстура для сборщиков юнитов (правая часть).",
-      "example": "\"sideRegion2\": \"my-assembler-side2\""
+      "example": "\"sideRegion2\": \"my-assembler-side2\"",
+      "since": "160.x"
     },
     "botRegion": {
       "type": "String",
       "desc": "Текстура нижней части для некоторых пропов (например, для конвейеров с наклоном).",
-      "example": "\"botRegion\": \"my-conveyor-bot\""
+      "example": "\"botRegion\": \"my-conveyor-bot\"",
+      "since": "160.x"
     },
     "centerRegion": {
       "type": "String",
       "desc": "Текстура центра для некоторых пропов (например, для сортировщиков).",
-      "example": "\"centerRegion\": \"my-sorter-center\""
+      "example": "\"centerRegion\": \"my-sorter-center\"",
+      "since": "160.x"
     },
     "lightningCone": {
       "type": "float (Градусы)",
       "desc": "Угол разлёта молний от точки удара для снарядов и лазеров. Влияет на то, насколько широко расходятся молнии.",
-      "example": "\"lightningCone\": 20.0"
+      "example": "\"lightningCone\": 20.0",
+      "since": "160.x"
     },
     "lightningType": {
       "type": "BulletType",
       "desc": "Тип снаряда, используемый для создания молний (обычно LightningBulletType). Определяет урон, длину, цвет и эффекты молний.",
-      "example": "\"lightningType\": { \"type\": \"LightningBulletType\", \"damage\": 5, \"lightningLength\": 3 }"
+      "example": "\"lightningType\": { \"type\": \"LightningBulletType\", \"damage\": 5, \"lightningLength\": 3 }",
+      "since": "160.x"
     },
     "shrinkX": {
       "type": "float",
       "desc": "Коэффициент сжатия спрайта снаряда по горизонтали в течение его жизни. 0 — полностью сжаться, 1 — без сжатия.",
-      "example": "\"shrinkX\": 0.6"
+      "example": "\"shrinkX\": 0.6",
+      "since": "160.x"
     },
     "shrinkY": {
       "type": "float",
       "desc": "Коэффициент сжатия спрайта снаряда по вертикали в течение его жизни. 0 — полностью сжаться, 1 — без сжатия.",
-      "example": "\"shrinkY\": 0.0"
+      "example": "\"shrinkY\": 0.0",
+      "since": "160.x"
     },
     "waveColor": {
       "type": "Color HEX",
       "desc": "Цвет волны взрыва (для ExplosionEffect). Определяет цвет распространяющейся ударной волны.",
-      "example": "\"waveColor\": \"84f491\""
+      "example": "\"waveColor\": \"84f491\"",
+      "since": "160.x"
     },
     "sparkColor": {
       "type": "Color HEX",
       "desc": "Цвет искр при взрыве или эффекте (для ExplosionEffect, ParticleEffect).",
-      "example": "\"sparkColor\": \"62ae7f\""
+      "example": "\"sparkColor\": \"62ae7f\"",
+      "since": "160.x"
     },
     "smokeColor": {
       "type": "Color HEX",
       "desc": "Цвет дыма при взрыве или эффекте (для ExplosionEffect, ParticleEffect).",
-      "example": "\"smokeColor\": \"1c331c\""
+      "example": "\"smokeColor\": \"1c331c\"",
+      "since": "160.x"
     },
     "waveRad": {
       "type": "float (Пиксели)",
       "desc": "Радиус ударной волны для ExplosionEffect. Определяет, насколько далеко распространяется видимая волна.",
-      "example": "\"waveRad\": 60.0"
+      "example": "\"waveRad\": 60.0",
+      "since": "160.x"
     },
     "waveLife": {
       "type": "float (Тики)",
       "desc": "Время жизни ударной волны для ExplosionEffect. Чем больше, тем дольше видна волна.",
-      "example": "\"waveLife\": 10.0"
+      "example": "\"waveLife\": 10.0",
+      "since": "160.x"
     },
     "sparks": {
       "type": "int",
       "desc": "Количество искр, создаваемых при эффекте (для ExplosionEffect, ParticleEffect).",
-      "example": "\"sparks\": 12"
+      "example": "\"sparks\": 12",
+      "since": "160.x"
     },
     "sparkRad": {
       "type": "float (Пиксели)",
       "desc": "Радиус разлёта искр от центра эффекта (для ExplosionEffect, ParticleEffect).",
-      "example": "\"sparkRad\": 55.0"
+      "example": "\"sparkRad\": 55.0",
+      "since": "160.x"
     },
     "sparkLen": {
       "type": "float (Пиксели)",
       "desc": "Длина линий/следов искр (для ExplosionEffect).",
-      "example": "\"sparkLen\": 5.0"
+      "example": "\"sparkLen\": 5.0",
+      "since": "160.x"
     },
     "smokes": {
       "type": "int",
       "desc": "Количество облачков дыма, создаваемых при эффекте (для ExplosionEffect).",
-      "example": "\"smokes\": 5"
+      "example": "\"smokes\": 5",
+      "since": "160.x"
     },
     "smokeRad": {
       "type": "float (Пиксели)",
       "desc": "Радиус разлёта дыма от центра эффекта (для ExplosionEffect).",
-      "example": "\"smokeRad\": 40.0"
+      "example": "\"smokeRad\": 40.0",
+      "since": "160.x"
     },
     "baseLength": {
       "type": "float (Пиксели)",
       "desc": "Базовая длина для ParticleEffect или других эффектов (влияет на начальный размер частиц).",
-      "example": "\"baseLength\": 2.0"
+      "example": "\"baseLength\": 2.0",
+      "since": "160.x"
     },
     "cone": {
       "type": "float (Градусы)",
       "desc": "Угол разлёта частиц для ParticleEffect. Определяет, насколько широко разлетаются частицы от центра.",
-      "example": "\"cone\": 360.0"
+      "example": "\"cone\": 360.0",
+      "since": "160.x"
     },
     "colorFrom": {
       "type": "Color HEX",
       "desc": "Начальный цвет для градиента частиц (для ParticleEffect). Цвет в начале жизни частицы.",
-      "example": "\"colorFrom\": \"84f491\""
+      "example": "\"colorFrom\": \"84f491\"",
+      "since": "160.x"
     },
     "colorTo": {
       "type": "Color HEX",
       "desc": "Конечный цвет для градиента частиц (для ParticleEffect). Цвет в конце жизни частицы.",
-      "example": "\"colorTo\": \"62ae7f\""
+      "example": "\"colorTo\": \"62ae7f\"",
+      "since": "160.x"
     },
     "sizeFrom": {
       "type": "float (Пиксели)",
       "desc": "Начальный размер частиц (для ParticleEffect). Размер при рождении частицы.",
-      "example": "\"sizeFrom\": 3.0"
+      "example": "\"sizeFrom\": 3.0",
+      "since": "160.x"
     },
     "sizeTo": {
       "type": "float (Пиксели)",
       "desc": "Конечный размер частиц (для ParticleEffect). Размер при исчезновении частицы.",
-      "example": "\"sizeTo\": 0.0"
+      "example": "\"sizeTo\": 0.0",
+      "since": "160.x"
     },
     "particles": {
       "type": "int",
       "desc": "Количество частиц, создаваемых при эффекте (для ParticleEffect).",
-      "example": "\"particles\": 10"
+      "example": "\"particles\": 10",
+      "since": "160.x"
     },
     "scaleLife": {
       "type": "boolean",
       "desc": "Если true, время жизни снаряда масштабируется относительно его дальности до цели. Используется для артиллерии и самонаводящихся ракет.",
-      "example": "\"scaleLife\": true"
+      "example": "\"scaleLife\": true",
+      "since": "160.x"
     },
     "despawnHit": {
       "type": "boolean",
       "desc": "Если true, снаряд наносит урон (или создаёт эффект) при исчезновении (по окончании времени жизни), даже если не попал в цель.",
-      "example": "\"despawnHit\": true"
+      "example": "\"despawnHit\": true",
+      "since": "160.x"
     },
     "keepVelocity": {
       "type": "boolean",
       "desc": "Если true, снаряд сохраняет скорость стреляющего при вылете (для бомб и артиллерии, чтобы не терять инерцию).",
-      "example": "\"keepVelocity\": false"
+      "example": "\"keepVelocity\": false",
+      "since": "160.x"
     },
     "timeIncrease": {
       "type": "float (Тики)",
       "desc": "Увеличение времени действия эффекта (например, для EmpBulletType) за каждую поражённую цель.",
-      "example": "\"timeIncrease\": 4.0"
+      "example": "\"timeIncrease\": 4.0",
+      "since": "160.x"
     },
     "timeDuration": {
       "type": "float (Тики)",
       "desc": "Базовая длительность эффекта (например, для EmpBulletType) при попадании по цели.",
-      "example": "\"timeDuration\": 600.0"
+      "example": "\"timeDuration\": 600.0",
+      "since": "160.x"
     },
     "targetable": {
       "type": "boolean",
       "desc": "Может ли юнит быть выбран в качестве цели для атаки врагами. Если false, юнит игнорируется системой наведения.",
-      "example": "\"targetable\": true"
+      "example": "\"targetable\": true",
+      "since": "160.x"
     },
     "killable": {
       "type": "boolean",
       "desc": "Может ли юнит быть уничтожен. Если false, юнит не может умереть (например, для специальных юнитов).",
-      "example": "\"killable\": true"
+      "example": "\"killable\": true",
+      "since": "160.x"
     },
     "logicControllable": {
       "type": "boolean",
       "desc": "Может ли юнит управляться логическими процессорами. Если false, процессоры не могут им управлять.",
-      "example": "\"logicControllable\": true"
+      "example": "\"logicControllable\": true",
+      "since": "160.x"
     },
     "allowedInPayloads": {
       "type": "boolean",
       "desc": "Может ли юнит быть помещён в грузовой отсек другого юнита или блока.",
-      "example": "\"allowedInPayloads\": true"
+      "example": "\"allowedInPayloads\": true",
+      "since": "160.x"
     },
     "createWreck": {
       "type": "boolean",
       "desc": "Создавать ли обломки при уничтожении юнита.",
-      "example": "\"createWreck\": true"
+      "example": "\"createWreck\": true",
+      "since": "160.x"
     },
     "createScorch": {
       "type": "boolean",
       "desc": "Создавать ли следы гари на земле при уничтожении юнита.",
-      "example": "\"createScorch\": true"
+      "example": "\"createScorch\": true",
+      "since": "160.x"
     },
     "targetFlags": {
       "type": "BlockFlag[]",
       "desc": "Флаги блоков, которые турель будет атаковать в приоритете (работает только если targetGround = true).",
-      "example": "\"targetFlags\": [\"core\", \"generator\"]"
+      "example": "\"targetFlags\": [\"core\", \"generator\"]",
+      "since": "160.x"
     },
     "defaultCommand": {
       "type": "UnitCommand",
       "desc": "Команда, назначаемая юниту по умолчанию при создании (например, move, mine, repair).",
-      "example": "\"defaultCommand\": \"move\""
+      "example": "\"defaultCommand\": \"move\"",
+      "since": "160.x"
     },
     "commands": {
       "type": "UnitCommand[]",
       "desc": "Список доступных команд для RTS-управления юнитом (move, mine, repair, rebuild и т.д.).",
-      "example": "\"commands\": [\"move\", \"mine\", \"repair\"]"
+      "example": "\"commands\": [\"move\", \"mine\", \"repair\"]",
+      "since": "160.x"
     },
     "stances": {
       "type": "UnitStance[]",
       "desc": "Список доступных стоек поведения юнита (например, агрессивная, оборонительная, патруль).",
-      "example": "\"stances\": [\"aggressive\", \"defensive\", \"patrol\"]"
+      "example": "\"stances\": [\"aggressive\", \"defensive\", \"patrol\"]",
+      "since": "160.x"
     },
     "aiController": {
-      "type": "String или Prov<UnitController>",
+      "type": "String или Prov <UnitController>",
       "desc": "Имя или провайдер ИИ-контроллера, используемого по умолчанию (flying, ground, missile и т.д.).",
-      "example": "\"aiController\": \"missile\""
+      "example": "\"aiController\": \"missile\"",
+      "since": "160.x"
     },
     "wreckSound": {
       "type": "Sound",
       "desc": "Звук, проигрываемый при падении обломков юнита.",
-      "example": "\"wreckSound\": \"wreckFall\""
+      "example": "\"wreckSound\": \"wreckFall\"",
+      "since": "160.x"
     },
     "mechLandShake": {
       "type": "float",
       "desc": "Тряска экрана при приземлении меха после прыжка/буста.",
-      "example": "\"mechLandShake\": 4.0"
+      "example": "\"mechLandShake\": 4.0",
+      "since": "160.x"
     },
     "legSplashDamage": {
       "type": "float",
       "desc": "Урон, наносимый по площади при касании ногой земли (для юнитов типа legs).",
-      "example": "\"legSplashDamage\": 32.0"
+      "example": "\"legSplashDamage\": 32.0",
+      "since": "160.x"
     },
     "legSplashRange": {
       "type": "float (Пиксели)",
       "desc": "Радиус действия урона от ног (legSplashDamage).",
-      "example": "\"legSplashRange\": 30.0"
+      "example": "\"legSplashRange\": 30.0",
+      "since": "160.x"
     },
     "hitboxWidth": {
       "type": "float (Пиксели)",
       "desc": "Ширина прямоугольного хитбокса юнита (если не используется squareShape или hitSize).",
-      "example": "\"hitboxWidth\": 24.0"
+      "example": "\"hitboxWidth\": 24.0",
+      "since": "160.x"
     },
     "hitboxHeight": {
       "type": "float (Пиксели)",
       "desc": "Высота прямоугольного хитбокса юнита.",
-      "example": "\"hitboxHeight\": 16.0"
+      "example": "\"hitboxHeight\": 16.0",
+      "since": "160.x"
     },
     "maxRange": {
       "type": "float (Пиксели)",
       "desc": "Максимальная дальность атаки юнита (используется для определения, на каком расстоянии юнит может стрелять).",
-      "example": "\"maxRange\": 240.0"
+      "example": "\"maxRange\": 240.0",
+      "since": "160.x"
     },
     "outputsItems": {
       "type": "boolean",
       "desc": "Указывает, что блок выводит предметы (для логики соединения с другими блоками).",
-      "example": "\"outputsItems\": true"
+      "example": "\"outputsItems\": true",
+      "since": "160.x"
     },
     "displayDamage": {
       "type": "boolean",
       "desc": "Отображать ли урон блока в его интерфейсе (для турелей).",
-      "example": "\"displayDamage\": true"
+      "example": "\"displayDamage\": true",
+      "since": "160.x"
     },
     "ignoreRotation": {
       "type": "boolean",
       "desc": "Если true, орудие игнорирует поворот стреляющего при выстреле. Используется для орудий, которые стреляют строго вперёд независимо от направления корпуса (например, бомбардировщики).",
-      "example": "\"ignoreRotation\": true"
+      "example": "\"ignoreRotation\": true",
+      "since": "160.x"
     },
     "immunities": {
       "type": "StatusEffect[]",
       "desc": "Список статус-эффектов, к которым юнит полностью невосприимчив. Например, burning (горение), melting (плавление), blasted (контузия).",
-      "example": "\"immunities\": [\"burning\", \"melting\"]"
+      "example": "\"immunities\": [\"burning\", \"melting\"]",
+      "since": "160.x"
     },
     "physics": {
       "type": "boolean",
       "desc": "Включена ли физика столкновений для юнита. Если false, юнит проходит сквозь блоки и других юнитов.",
-      "example": "\"physics\": true"
+      "example": "\"physics\": true",
+      "since": "160.x"
     },
     "treadRegion": {
       "type": "String",
       "desc": "Имя текстуры гусениц для юнитов типа tank. Файл должен лежать в sprites/units/ с этим именем.",
-      "example": "\"treadRegion\": \"my-tank-treads\""
+      "example": "\"treadRegion\": \"my-tank-treads\"",
+      "since": "160.x"
     },
     "spawnUnitCount": {
       "type": "int",
       "desc": "Количество юнитов, создаваемых при выстреле снарядом SpawnUnitBulletType.",
-      "example": "\"spawnUnitCount\": 1"
+      "example": "\"spawnUnitCount\": 1",
+      "since": "160.x"
     },
     "spawnUnitRadius": {
       "type": "float (Пиксели)",
       "desc": "Радиус разброса при создании юнитов снарядом SpawnUnitBulletType. 0 = все юниты в одной точке.",
-      "example": "\"spawnUnitRadius\": 0"
+      "example": "\"spawnUnitRadius\": 0",
+      "since": "160.x"
     },
     "items": {
       "type": "ItemStack[] (внутри consumes)",
       "desc": "Список предметов, потребляемых блоком за цикл работы: какой предмет и в каком количестве. Указывается внутри объекта consumes.items.",
-      "example": "\"items\": [{ \"item\": \"coal\", \"amount\": 1 }]"
+      "example": "\"items\": [{ \"item\": \"coal\", \"amount\": 1 }]",
+      "since": "160.x"
     },
     "liquids": {
       "type": "LiquidStack[] (внутри consumes)",
       "desc": "Список жидкостей, потребляемых блоком за тик: какая жидкость и в каком количестве. Указывается внутри объекта consumes.liquids.",
-      "example": "\"liquids\": [{ \"liquid\": \"water\", \"amount\": 0.1 }]"
+      "example": "\"liquids\": [{ \"liquid\": \"water\", \"amount\": 0.1 }]",
+      "since": "160.x"
     },
     "power": {
       "type": "float или PowerConfig (внутри consumes)",
       "desc": "Потребление энергии блоком за тик (простое число), либо объект настройки передачи энергии для узлов/батарей (capacity, connections и т.д.).",
-      "example": "\"power\": 2.5"
+      "example": "\"power\": 2.5",
+      "since": "160.x"
     },
     "displayedSpeed": {
       "type": "int",
       "desc": "Отображаемая скорость конвейера (в предметах/сек) для интерфейса. Не влияет на реальную скорость.",
-      "example": "\"displayedSpeed\": 10"
+      "example": "\"displayedSpeed\": 10",
+      "since": "160.x"
     },
     "basePowerGeneration": {
       "type": "float (Ед/тик)",
       "desc": "Базовая выработка энергии для SolarGenerator. Используется как значение по умолчанию.",
-      "example": "\"basePowerGeneration\": 0.07"
+      "example": "\"basePowerGeneration\": 0.07",
+      "since": "160.x"
     },
     "unit": {
       "type": "String (внутри plans)",
       "desc": "Имя типа юнита, которого строит фабрика (UnitFactory/Reconstructor), указывается внутри одного элемента массива plans.",
-      "example": "\"unit\": \"dagger\""
+      "example": "\"unit\": \"dagger\"",
+      "since": "160.x"
     },
     "time": {
       "type": "float (Тики, внутри plans)",
       "desc": "Время постройки одного юнита из списка plans на фабрике юнитов.",
-      "example": "\"time\": 180"
+      "example": "\"time\": 180",
+      "since": "160.x"
     },
     "mechStepParticles": {
       "type": "boolean",
       "desc": "Создавать ли частицы пыли при шаге юнита типа mech.",
-      "example": "\"mechStepParticles\": true"
+      "example": "\"mechStepParticles\": true",
+      "since": "160.x"
     },
     "mechFrontSway": {
       "type": "float",
       "desc": "Амплитуда наклона корпуса меха вперёд/назад при ходьбе. 0.5 — средняя, 1.9 — максимальная.",
-      "example": "\"mechFrontSway\": 0.5"
+      "example": "\"mechFrontSway\": 0.5",
+      "since": "160.x"
     },
     "mechSideSway": {
       "type": "float",
       "desc": "Амплитуда бокового раскачивания корпуса меха при ходьбе.",
-      "example": "\"mechSideSway\": 0.6"
+      "example": "\"mechSideSway\": 0.6",
+      "since": "160.x"
     },
     "stepShake": {
       "type": "float",
       "desc": "Тряска экрана при каждом шаге юнита. 0 = нет тряски.",
-      "example": "\"stepShake\": 0.15"
+      "example": "\"stepShake\": 0.15",
+      "since": "160.x"
     },
     "drawCell": {
       "type": "boolean",
       "desc": "Рисовать ли индикатор здоровья/энергии (ячейку) над юнитом. По умолчанию true.",
-      "example": "\"drawCell\": true"
+      "example": "\"drawCell\": true",
+      "since": "160.x"
     },
     "drawItems": {
       "type": "boolean",
       "desc": "Отображать ли предметы, которые несёт юнит.",
-      "example": "\"drawItems\": true"
+      "example": "\"drawItems\": true",
+      "since": "160.x"
     },
     "drawShields": {
       "type": "boolean",
       "desc": "Отображать ли щит юнита (если он есть).",
-      "example": "\"drawShields\": true"
+      "example": "\"drawShields\": true",
+      "since": "160.x"
     },
     "drawBody": {
       "type": "boolean",
       "desc": "Отображать ли корпус юнита.",
-      "example": "\"drawBody\": true"
+      "example": "\"drawBody\": true",
+      "since": "160.x"
     },
     "drawMinimap": {
       "type": "boolean",
       "desc": "Отображать ли юнит на миникарте.",
-      "example": "\"drawMinimap\": true"
+      "example": "\"drawMinimap\": true",
+      "since": "160.x"
     },
     "bounded": {
       "type": "boolean",
       "desc": "Ограничивать ли движение юнита границами карты. Если false, юнит может выходить за края.",
-      "example": "\"bounded\": true"
+      "example": "\"bounded\": true",
+      "since": "160.x"
     },
     "sapStrength": {
       "type": "float",
       "desc": "Сила ослабления защиты для SapBulletType. Чем выше, тем сильнее эффект.",
-      "example": "\"sapStrength\": 0.5"
+      "example": "\"sapStrength\": 0.5",
+      "since": "160.x"
     },
     "count": {
       "type": "int",
       "desc": "Количество осколков/элементов для ShrapnelBulletType и MultiBulletType.",
-      "example": "\"count\": 8"
+      "example": "\"count\": 8",
+      "since": "160.x"
     },
     "bullets": {
       "type": "BulletType[]",
       "desc": "Массив дочерних снарядов для MultiBulletType. Все снаряды создаются одновременно при выстреле.",
-      "example": "\"bullets\": [ { \"type\": \"BasicBulletType\", \"damage\": 8 } ]"
+      "example": "\"bullets\": [ { \"type\": \"BasicBulletType\", \"damage\": 8 } ]",
+      "since": "160.x"
     },
     "optimalLifeFract": {
       "type": "float",
       "desc": "Доля времени жизни снаряда, при которой он наносит максимальный урон (для лазеров).",
-      "example": "\"optimalLifeFract\": 0.5"
+      "example": "\"optimalLifeFract\": 0.5",
+      "since": "160.x"
     },
     "lifeScaleRandMin": {
       "type": "float",
       "desc": "Минимальный множитель времени жизни снаряда (случайный разброс).",
-      "example": "\"lifeScaleRandMin\": 1.0"
+      "example": "\"lifeScaleRandMin\": 1.0",
+      "since": "160.x"
     },
     "lifeScaleRandMax": {
       "type": "float",
       "desc": "Максимальный множитель времени жизни снаряда (случайный разброс).",
-      "example": "\"lifeScaleRandMax\": 1.0"
+      "example": "\"lifeScaleRandMax\": 1.0",
+      "since": "160.x"
     },
     "velocityScaleRandMin": {
       "type": "float",
       "desc": "Минимальный множитель скорости снаряда (случайный разброс).",
-      "example": "\"velocityScaleRandMin\": 1.0"
+      "example": "\"velocityScaleRandMin\": 1.0",
+      "since": "160.x"
     },
     "velocityScaleRandMax": {
       "type": "float",
       "desc": "Максимальный множитель скорости снаряда (случайный разброс).",
-      "example": "\"velocityScaleRandMax\": 1.0"
+      "example": "\"velocityScaleRandMax\": 1.0",
+      "since": "160.x"
     },
     "removeAfterPierce": {
       "type": "boolean",
       "desc": "Удалять ли снаряд после превышения лимита пробития (pierceCap).",
-      "example": "\"removeAfterPierce\": true"
+      "example": "\"removeAfterPierce\": true",
+      "since": "160.x"
     },
     "laserAbsorb": {
       "type": "boolean",
       "desc": "Поглощается ли лазер пластиниевыми стенами. Используется для лазерных снарядов.",
-      "example": "\"laserAbsorb\": true"
+      "example": "\"laserAbsorb\": true",
+      "since": "160.x"
     },
     "display": {
       "type": "boolean",
       "desc": "Отображать ли оружие в характеристиках юнита. По умолчанию true.",
-      "example": "\"display\": true"
+      "example": "\"display\": true",
+      "since": "160.x"
     },
     "showStatSprite": {
       "type": "boolean",
       "desc": "Показывать ли спрайт оружия в базе данных игры.",
-      "example": "\"showStatSprite\": true"
+      "example": "\"showStatSprite\": true",
+      "since": "160.x"
     },
     "baseRotation": {
       "type": "float (Градусы)",
       "desc": "Начальный угол поворота оружия, если оно не наводится автоматически.",
-      "example": "\"baseRotation\": 0.0"
+      "example": "\"baseRotation\": 0.0",
+      "since": "160.x"
     },
     "aiControllable": {
       "type": "boolean",
       "desc": "Может ли ИИ управлять этим оружием. Если false, стрельба только вручную.",
-      "example": "\"aiControllable\": true"
+      "example": "\"aiControllable\": true",
+      "since": "160.x"
     },
     "alwaysShooting": {
       "type": "boolean",
       "desc": "Если true, оружие стреляет всегда, независимо от наличия цели.",
-      "example": "\"alwaysShooting\": false"
+      "example": "\"alwaysShooting\": false",
+      "since": "160.x"
     },
     "hitSoundVolume": {
       "type": "float (0-1)",
       "desc": "Громкость звука при попадании снаряда.",
-      "example": "\"hitSoundVolume\": 1.0"
+      "example": "\"hitSoundVolume\": 1.0",
+      "since": "160.x"
     },
     "hitSoundPitch": {
       "type": "float",
       "desc": "Высота тона звука попадания снаряда.",
-      "example": "\"hitSoundPitch\": 1.0"
+      "example": "\"hitSoundPitch\": 1.0",
+      "since": "160.x"
     },
     "hitSoundPitchRange": {
       "type": "float",
       "desc": "Диапазон случайного изменения высоты тона звука попадания.",
-      "example": "\"hitSoundPitchRange\": 0.1"
+      "example": "\"hitSoundPitchRange\": 0.1",
+      "since": "160.x"
     },
     "followAimSpeed": {
       "type": "float",
       "desc": "Скорость следования снаряда за прицелом (для управляемых снарядов).",
-      "example": "\"followAimSpeed\": 5.0"
+      "example": "\"followAimSpeed\": 5.0",
+      "since": "160.x"
     },
     "outlineColor": {
       "type": "Color HEX",
       "desc": "Цвет контура (обводки) юнита. По умолчанию используется тёмно-серый цвет.",
-      "example": "\"outlineColor\": \"252525\""
+      "example": "\"outlineColor\": \"252525\"",
+      "since": "160.x"
     },
     "outlineRadius": {
       "type": "int",
       "desc": "Толщина контура юнита в пикселях. По умолчанию 3.",
-      "example": "\"outlineRadius\": 3"
+      "example": "\"outlineRadius\": 3",
+      "since": "160.x"
     },
     "outlines": {
       "type": "boolean",
       "desc": "Создавать ли контуры для спрайтов этого юнита. По умолчанию true.",
-      "example": "\"outlines\": true"
+      "example": "\"outlines\": true",
+      "since": "160.x"
     },
     "recoils": {
       "type": "int",
       "desc": "Количество дополнительных счётчиков отдачи для оружия (для визуальных частей).",
-      "example": "\"recoils\": -1"
+      "example": "\"recoils\": -1",
+      "since": "160.x"
     },
     "extraVelocity": {
       "type": "float",
       "desc": "Дополнительная скорость снаряда (как доля от базовой).",
-      "example": "\"extraVelocity\": 0.0"
+      "example": "\"extraVelocity\": 0.0",
+      "since": "160.x"
     },
     "hitSizeBlock": {
       "type": "float (Пиксели)",
       "desc": "Размер хитбокса снаряда при столкновении с блоками. Не путать с hitSize у юнита.",
-      "example": "\"hitSizeBlock\": 4.0"
+      "example": "\"hitSizeBlock\": 4.0",
+      "since": "160.x"
     },
     "drawSize": {
       "type": "float",
       "desc": "Размер отсечения для рендеринга снаряда (оптимизация).",
-      "example": "\"drawSize\": 40.0"
+      "example": "\"drawSize\": 40.0",
+      "since": "160.x"
     },
     "angleOffset": {
       "type": "float (Градусы)",
       "desc": "Фиксированное угловое смещение снаряда относительно направления выстрела в момент создания. Используется для веерной стрельбы, отражённых выстрелов и специфических паттернов.",
-      "example": "\"angleOffset\": 0.0"
+      "example": "\"angleOffset\": 0.0",
+      "since": "160.x"
     },
     "randomAngleOffset": {
       "type": "float (Градусы)",
       "desc": "Случайное угловое отклонение снаряда при создании. Добавляется к angleOffset. 0 = без разброса по углу.",
-      "example": "\"randomAngleOffset\": 0.0"
+      "example": "\"randomAngleOffset\": 0.0",
+      "since": "160.x"
     },
     "maxDamageFraction": {
       "type": "float",
       "desc": "Ограничение урона долей от максимального здоровья цели. -1.0 = без ограничения.",
-      "example": "\"maxDamageFraction\": -1.0"
+      "example": "\"maxDamageFraction\": -1.0",
+      "since": "160.x"
     },
     "shieldDamageMultiplier": {
       "type": "float",
       "desc": "Множитель урона по щитам.",
-      "example": "\"shieldDamageMultiplier\": 1.0"
+      "example": "\"shieldDamageMultiplier\": 1.0",
+      "since": "160.x"
     },
     "armorMultiplier": {
       "type": "float",
       "desc": "Множитель брони цели при расчёте урона.",
-      "example": "\"armorMultiplier\": 1.0"
+      "example": "\"armorMultiplier\": 1.0",
+      "since": "160.x"
     },
     "blockArmorMultiplier": {
       "type": "float",
       "desc": "Множитель брони блоков при расчёте урона.",
-      "example": "\"blockArmorMultiplier\": 1.0"
+      "example": "\"blockArmorMultiplier\": 1.0",
+      "since": "160.x"
     },
     "shootPattern": {
       "type": "ShootPattern",
       "desc": "Паттерн стрельбы для конкретного снаряда (переопределяет паттерн оружия).",
-      "example": "\"shootPattern\": null"
+      "example": "\"shootPattern\": null",
+      "since": "160.x"
     },
     "ammoCapacity": {
       "type": "int",
       "desc": "Вместимость боеприпасов (устаревшее поле, не рекомендуется).",
-      "example": "\"ammoCapacity\": 1"
+      "example": "\"ammoCapacity\": 1",
+      "since": "160.x"
     },
     "alwaysCreateOutline": {
       "type": "boolean",
       "desc": "Всегда создавать контур для модового юнита, даже если нет оружия с top = false.",
-      "example": "\"alwaysCreateOutline\": false"
+      "example": "\"alwaysCreateOutline\": false",
+      "since": "160.x"
     },
     "angle": {
       "type": "float (Градусы)",
       "desc": "Угловой поворот элемента относительно его базового направления (0° — вперёд/вправо). Используется в частях отрисовки юнита (DrawPart, RegionPart), во вложениях оружия и в некоторых эффектах для задания фиксированного угла наклона детали. Не путать с полями снаряда angleOffset и randomAngleOffset — те задают отклонение в момент вылета, а angle задаёт постоянный угол самой детали.",
-      "example": "\"angle\": 0.0"
+      "example": "\"angle\": 0.0",
+      "since": "160.x"
     },
     "fragVelocityMax": {
       "type": "float",
       "desc": "Максимальная скорость осколков (доля от скорости снаряда) при взрыве. Работает в паре с fragVelocityMin: разлёт осколков идёт в диапазоне между этими значениями. 1.0 = скорость осколка равна скорости родительского снаряда.",
-      "example": "\"fragVelocityMax\": 1.0"
+      "example": "\"fragVelocityMax\": 1.0",
+      "since": "160.x"
     },
     "spawnTime": {
       "type": "float (Тики)",
@@ -3376,7 +3727,7 @@
     "outlineLayerOffset": {
       "type": "float",
       "desc": "Смещение слоя контура относительно основной части.",
-      "example": "\"outlineLayerOffset\": -0.001\"",
+      "example": "\"outlineLayerOffset\": -0.001",
       "category": "draw",
       "since": "160.x"
     },
@@ -3438,7 +3789,7 @@
     },
     "sectorSize": {
       "type": "int",
-      "desc": "Количество секторов/размер сетки сектора для соответствующих планетных объектов.",
+      "desc": "Количество секторов/размер сетки сектора для соответствующих планетарных объектов.",
       "example": "\"sectorSize\": 0",
       "category": "planet",
       "since": "160.x"
@@ -3519,394 +3870,292 @@
       "category": "Базовый класс",
       "extends": "Content",
       "desc": "Абстрактный родительский класс для всех типов снарядов. Напрямую как значение \"type\" почти не используется — от него наследуются все остальные типы, и любой из них имеет доступ к общим полям: damage, lifetime, speed, hitSize, splashDamage, knockback, statusEffect и т.д.",
-      "example": "\"bullet\": {\n  \"type\": \"BasicBulletType\",\n  \"damage\": 20,\n  \"speed\": 3,\n  \"lifetime\": 50\n}"
+      "example": "\"bullet\": {\n \"type\": \"BasicBulletType\",\n \"damage\": 20,\n \"speed\": 3,\n \"lifetime\": 50\n}"
     },
     "underwater": {
       "type": "boolean",
       "desc": "Снаряд движется под водой. Используется для водных юнитов и торпед.",
-      "example": "\"underwater\": true"
+      "example": "\"underwater\": true",
+      "since": "160.x"
     },
     "hitUnder": {
       "type": "boolean",
       "desc": "Может ли снаряд попадать по целям под землёй (по юнитам, зарывшимся в землю).",
-      "example": "\"hitUnder\": false"
+      "example": "\"hitUnder\": false",
+      "since": "160.x"
     },
     "ignoreSpawnAngle": {
       "type": "boolean",
       "desc": "Игнорировать угол выстрела при создании снаряда. Используется для способностей, стреляющих по кругу.",
-      "example": "\"ignoreSpawnAngle\": false"
-    },
-    "collideFloor": {
-      "type": "boolean",
-      "desc": "Может ли снаряд сталкиваться с полом (для бомб и артиллерии). Уже есть в базе, но уточню: работает только вместе с collideTerrain.",
-      "example": "\"collideFloor\": true"
-    },
-    "hitEffect": {
-      "type": "Effect",
-      "desc": "Визуальный эффект при попадании снаряда во что-либо (юнит, блок, пол). Не путать с despawnEffect — тот срабатывает при исчезновении по таймеру.",
-      "example": "\"hitEffect\": \"blastExplosion\""
+      "example": "\"ignoreSpawnAngle\": false",
+      "since": "160.x"
     },
     "BasicBulletType": {
       "category": "Кинетические",
       "extends": "BulletType",
       "desc": "Основной тип снаряда для большинства турелей и юнитов, стреляющих боеприпасами. Рисует 1-2 спрайта, которые могут вращаться или сжиматься в полёте. Самый распространённый и универсальный тип — хорошая база для собственных модов.",
-      "example": "\"bullet\": {\n  \"type\": \"BasicBulletType\",\n  \"speed\": 4,\n  \"damage\": 35,\n  \"lifetime\": 40,\n  \"width\": 8,\n  \"height\": 10,\n  \"pierce\": false\n}"
+      "example": "\"bullet\": {\n \"type\": \"BasicBulletType\",\n \"speed\": 4,\n \"damage\": 35,\n \"lifetime\": 40,\n \"width\": 8,\n \"height\": 10,\n \"pierce\": false\n}"
     },
     "ArtilleryBulletType": {
       "category": "Взрывные",
       "extends": "BasicBulletType",
       "desc": "Снаряд с навесной (гаубичной) траекторией: летит по дуге к точке прицеливания и взрывается при падении, нанося урон по площади (splashDamage). Хорошо подходит для дальнобойной артиллерии, стреляющей навесом через стены.",
-      "example": "\"bullet\": {\n  \"type\": \"ArtilleryBulletType\",\n  \"speed\": 3,\n  \"damage\": 40,\n  \"splashDamage\": 60,\n  \"splashDamageRadius\": 25,\n  \"lifetime\": 60,\n  \"hitEffect\": \"explosion\"\n}"
+      "example": "\"bullet\": {\n \"type\": \"ArtilleryBulletType\",\n \"speed\": 3,\n \"damage\": 40,\n \"splashDamage\": 60,\n \"splashDamageRadius\": 25,\n \"lifetime\": 60,\n \"hitEffect\": \"explosion\"\n}"
     },
     "BombBulletType": {
       "category": "Взрывные",
       "extends": "BulletType",
       "desc": "Неподвижный, постепенно уменьшающийся снаряд, который не летит горизонтально, а «падает» с высоты (как авиабомба). При достижении времени жизни или земли создаёт взрыв. Используется у летающих юнитов-бомбардировщиков.",
-      "example": "\"bullet\": {\n  \"type\": \"BombBulletType\",\n  \"damage\": 50,\n  \"splashDamage\": 80,\n  \"splashDamageRadius\": 30,\n  \"lifetime\": 30\n}"
+      "example": "\"bullet\": {\n \"type\": \"BombBulletType\",\n \"damage\": 50,\n \"splashDamage\": 80,\n \"splashDamageRadius\": 30,\n \"lifetime\": 30\n}"
     },
     "ContinuousBulletType": {
       "category": "Лучевые",
       "extends": "BulletType",
       "desc": "Базовый непрерывный (линейный) снаряд-луч, который сам себя не отрисовывает — служит основой для других непрерывных типов (лазер, огонь). Урон наносится постоянно, пока цель находится в пределах дальности.",
-      "example": "\"bullet\": {\n  \"type\": \"ContinuousBulletType\",\n  \"damage\": 6,\n  \"length\": 90,\n  \"shootCone\": 15\n}"
+      "example": "\"bullet\": {\n \"type\": \"ContinuousBulletType\",\n \"damage\": 6,\n \"length\": 90,\n \"shootCone\": 15\n}"
     },
     "ContinuousFlameBulletType": {
       "category": "Лучевые",
       "extends": "ContinuousBulletType",
       "desc": "Непрерывный поток пламени (аналог огнемёта). Поджигает всё на своём пути, оставляя горящие тайлы и нанося урон по конусу перед турелью/юнитом.",
-      "example": "\"bullet\": {\n  \"type\": \"ContinuousFlameBulletType\",\n  \"damage\": 8,\n  \"length\": 60,\n  \"incendChance\": 1\n}"
+      "example": "\"bullet\": {\n \"type\": \"ContinuousFlameBulletType\",\n \"damage\": 8,\n \"length\": 60,\n \"incendChance\": 1\n}"
     },
     "ContinuousLaserBulletType": {
       "category": "Лучевые",
       "extends": "ContinuousBulletType",
       "desc": "Непрерывный лазерный луч, который держится на цели, пока турель/юнит стреляет, нанося урон каждый тик. Часто используется для «прожигающих» турелей типа Lancer/Meltdown-подобных конструкций.",
-      "example": "\"bullet\": {\n  \"type\": \"ContinuousLaserBulletType\",\n  \"damage\": 10,\n  \"length\": 110,\n  \"width\": 4\n}"
+      "example": "\"bullet\": {\n \"type\": \"ContinuousLaserBulletType\",\n \"damage\": 10,\n \"length\": 110,\n \"width\": 4\n}"
     },
     "EmpBulletType": {
       "category": "Особые эффекты",
       "extends": "BulletType",
       "desc": "Снаряд электромагнитного импульса (ЭМИ). При взрыве временно отключает щиты и понижает эффективность электроники противника (турели, некоторые юниты) в радиусе действия, вместо/помимо обычного урона.",
-      "example": "\"bullet\": {\n  \"type\": \"EmpBulletType\",\n  \"damage\": 15,\n  \"splashDamageRadius\": 40,\n  \"timeDuration\": 600,\n  \"timeIncrease\": 4\n}"
+      "example": "\"bullet\": {\n \"type\": \"EmpBulletType\",\n \"damage\": 15,\n \"splashDamageRadius\": 40,\n \"timeDuration\": 600,\n \"timeIncrease\": 4\n}"
     },
     "EmptyBulletType": {
       "category": "Служебные",
       "extends": "BulletType",
       "desc": "«Пустой» снаряд без визуального представления и, как правило, без урона. Используется как техническая заглушка — например, чтобы триггернуть эффект (hitEffect) без реального полёта пули.",
-      "example": "\"bullet\": {\n  \"type\": \"EmptyBulletType\",\n  \"lifetime\": 1\n}"
+      "example": "\"bullet\": {\n \"type\": \"EmptyBulletType\",\n \"lifetime\": 1\n}"
     },
     "ExplosionBulletType": {
       "category": "Взрывные",
       "extends": "BulletType",
       "desc": "Невидимый снаряд без полёта: моментально создаёт взрыв в точке появления и исчезает. Удобен как дочерний эффект другого снаряда (например, для кластерного распада ракеты на несколько взрывов).",
-      "example": "\"bullet\": {\n  \"type\": \"ExplosionBulletType\",\n  \"damage\": 30,\n  \"splashDamageRadius\": 20\n}"
+      "example": "\"bullet\": {\n \"type\": \"ExplosionBulletType\",\n \"damage\": 30,\n \"splashDamageRadius\": 20\n}"
     },
     "FireBulletType": {
       "category": "Особые эффекты",
       "extends": "BulletType",
       "desc": "Снаряд, поджигающий территорию или цель попадания — оставляет горящие тайлы, которые продолжают наносить урон со временем. Часто применяется как дочерний/сопутствующий эффект основного снаряда.",
-      "example": "\"bullet\": {\n  \"type\": \"FireBulletType\",\n  \"damage\": 5,\n  \"lifetime\": 20\n}"
+      "example": "\"bullet\": {\n \"type\": \"FireBulletType\",\n \"damage\": 5,\n \"lifetime\": 20\n}"
     },
     "FlakBulletType": {
       "category": "Взрывные",
       "extends": "BulletType",
       "desc": "Зенитный снаряд: взрывается рядом с воздушной целью (не требуя точного попадания), создавая облако осколков. Эффективен именно против летающих юнитов, по наземным целям часто неэффективен.",
-      "example": "\"bullet\": {\n  \"type\": \"FlakBulletType\",\n  \"damage\": 20,\n  \"splashDamageRadius\": 35,\n  \"collidesGround\": false,\n  \"collidesAir\": true\n}"
+      "example": "\"bullet\": {\n \"type\": \"FlakBulletType\",\n \"damage\": 20,\n \"splashDamageRadius\": 35,\n \"collidesGround\": false,\n \"collidesAir\": true\n}"
     },
     "InterceptorBulletType": {
       "category": "Особые эффекты",
       "extends": "BulletType",
       "desc": "Специальный тип, применяемый только с оружием PointDefenseBulletWeapon. Используется юнитами/турелями точечной защиты для перехвата и уничтожения вражеских снарядов и ракет в полёте.",
-      "example": "\"bullet\": {\n  \"type\": \"InterceptorBulletType\",\n  \"damage\": 12,\n  \"speed\": 5,\n  \"lifetime\": 20\n}"
+      "example": "\"bullet\": {\n \"type\": \"InterceptorBulletType\",\n \"damage\": 12,\n \"speed\": 5,\n \"lifetime\": 20\n}"
     },
     "LaserBoltBulletType": {
       "category": "Лучевые",
       "extends": "BasicBulletType",
       "desc": "Снаряд-импульс, летящий как обычная пуля (с полётным временем и скоростью), но визуально отрисованный как лазерный разряд/сгусток энергии, а не как физический болт.",
-      "example": "\"bullet\": {\n  \"type\": \"LaserBoltBulletType\",\n  \"speed\": 6,\n  \"damage\": 18,\n  \"lifetime\": 30\n}"
+      "example": "\"bullet\": {\n \"type\": \"LaserBoltBulletType\",\n \"speed\": 6,\n \"damage\": 18,\n \"lifetime\": 30\n}"
     },
     "LaserBulletType": {
       "category": "Лучевые",
       "extends": "BulletType",
       "desc": "Классический мгновенный лазерный луч от турели/юнита прямо к цели (без времени полёта — попадание происходит в момент выстрела). Часто пробивает несколько целей на одной линии.",
-      "example": "\"bullet\": {\n  \"type\": \"LaserBulletType\",\n  \"damage\": 25,\n  \"length\": 100,\n  \"width\": 6\n}"
+      "example": "\"bullet\": {\n \"type\": \"LaserBulletType\",\n \"damage\": 25,\n \"length\": 100,\n \"width\": 6\n}"
     },
     "LightningBulletType": {
       "category": "Особые эффекты",
       "extends": "BulletType",
       "desc": "Снаряд, создающий цепь молний: при попадании может перескакивать на несколько ближайших целей подряд, нанося урон каждой. Хорошо работает против скоплений мелких юнитов.",
-      "example": "\"bullet\": {\n  \"type\": \"LightningBulletType\",\n  \"damage\": 15,\n  \"lightningLength\": 5,\n  \"lightningDamage\": 10\n}"
+      "example": "\"bullet\": {\n \"type\": \"LightningBulletType\",\n \"damage\": 15,\n \"lightningLength\": 5,\n \"lightningDamage\": 10\n}"
     },
     "LiquidBulletType": {
       "category": "Жидкостные",
       "extends": "BulletType",
       "desc": "Снаряд-«плевок» жидкостью (например, кислотой или шлаком). При попадании может оставлять лужу жидкости на тайлах либо наносить урон/статус-эффект, зависящий от типа жидкости.",
-      "example": "\"bullet\": {\n  \"type\": \"LiquidBulletType\",\n  \"liquid\": \"slag\",\n  \"damage\": 10,\n  \"speed\": 3\n}"
+      "example": "\"bullet\": {\n \"type\": \"LiquidBulletType\",\n \"liquid\": \"slag\",\n \"damage\": 10,\n \"speed\": 3\n}"
     },
     "MassDriverBolt": {
       "category": "Кинетические",
       "extends": "BulletType",
       "desc": "Снаряд массового ускорителя (Mass Driver): летит между связанными driver-турелями, перенося предметы между ними, а при попадании во врага наносит урон по площади. Особый механизм передачи между турелями заложен именно в этом типе.",
-      "example": "\"bullet\": {\n  \"type\": \"MassDriverBolt\",\n  \"damage\": 100,\n  \"splashDamageRadius\": 15,\n  \"speed\": 6,\n  \"lifetime\": 60\n}"
+      "example": "\"bullet\": {\n \"type\": \"MassDriverBolt\",\n \"damage\": 100,\n \"splashDamageRadius\": 15,\n \"speed\": 6,\n \"lifetime\": 60\n}"
     },
     "MissileBulletType": {
       "category": "Ракеты",
       "extends": "BasicBulletType",
       "desc": "Самонаводящаяся ракета: способна поворачивать в полёте, доворачивая на цель (homing/homingPower), обычно взрывается при попадании с уроном по площади. Основа для большинства ракетных турелей и оружия.",
-      "example": "\"bullet\": {\n  \"type\": \"MissileBulletType\",\n  \"speed\": 3.5,\n  \"damage\": 45,\n  \"splashDamage\": 60,\n  \"splashDamageRadius\": 20,\n  \"homingPower\": 0.1,\n  \"lifetime\": 60\n}"
+      "example": "\"bullet\": {\n \"type\": \"MissileBulletType\",\n \"speed\": 3.5,\n \"damage\": 45,\n \"splashDamage\": 60,\n \"splashDamageRadius\": 20,\n \"homingPower\": 0.1,\n \"lifetime\": 60\n}"
     },
     "MultiBulletType": {
       "category": "Служебные",
       "extends": "BulletType",
       "desc": "«Фальшивый» снаряд-контейнер: при выстреле не летит сам, а мгновенно создаёт сразу несколько дочерних снарядов (bullets []) с небольшим случайным разбросом угла — удобен для реализации дробовиков/картечи.",
-      "example": "\"bullet\": {\n  \"type\": \"MultiBulletType\",\n  \"bullets\": [\n    { \"type\": \"BasicBulletType\", \"damage\": 8 }\n  ],\n  \"amount\": 6,\n  \"spread\": 12\n}"
+      "example": "\"bullet\": {\n \"type\": \"MultiBulletType\",\n \"bullets\": [\n { \"type\": \"BasicBulletType\", \"damage\": 8 }\n ],\n \"amount\": 6,\n \"spread\": 12\n}"
     },
     "PointBulletType": {
       "category": "Кинетические",
       "extends": "BulletType",
       "desc": "Снаряд мгновенного действия по прямой линии в точку — попадание происходит без визуального перелёта («хитскан»), но без лазерной отрисовки, в отличие от LaserBulletType/PointLaserBulletType.",
-      "example": "\"bullet\": {\n  \"type\": \"PointBulletType\",\n  \"damage\": 20,\n  \"length\": 80\n}"
+      "example": "\"bullet\": {\n \"type\": \"PointBulletType\",\n \"damage\": 20,\n \"length\": 80\n}"
     },
     "PointLaserBulletType": {
       "category": "Лучевые",
       "extends": "PointBulletType",
       "desc": "Разновидность PointBulletType с лазерной отрисовкой луча — визуально похож на LaserBulletType, но использует механику точечного мгновенного попадания вместо непрерывного удержания цели.",
-      "example": "\"bullet\": {\n  \"type\": \"PointLaserBulletType\",\n  \"damage\": 22,\n  \"length\": 90,\n  \"width\": 5\n}"
+      "example": "\"bullet\": {\n \"type\": \"PointLaserBulletType\",\n \"damage\": 22,\n \"length\": 90,\n \"width\": 5\n}"
     },
     "RailBulletType": {
       "category": "Кинетические",
       "extends": "BulletType",
       "desc": "Снаряд рельсотрона: летит по прямой линии и пробивает сразу несколько целей насквозь (без остановки на первом попадании), нанося урон каждой поражённой цели по пути.",
-      "example": "\"bullet\": {\n  \"type\": \"RailBulletType\",\n  \"damage\": 60,\n  \"length\": 140,\n  \"pierceCap\": 3\n}"
+      "example": "\"bullet\": {\n \"type\": \"RailBulletType\",\n \"damage\": 60,\n \"length\": 140,\n \"pierceCap\": 3\n}"
     },
     "SapBulletType": {
       "category": "Особые эффекты",
       "extends": "BulletType",
       "desc": "Снаряд, создающий временную соединительную линию-луч между стрелком и целью, ослабляющую защиту/броню поражённого объекта. Встречается в основном у некоторых боссов кампании и специального оружия.",
-      "example": "\"bullet\": {\n  \"type\": \"SapBulletType\",\n  \"damage\": 4,\n  \"length\": 100,\n  \"sapStrength\": 0.5\n}"
+      "example": "\"bullet\": {\n \"type\": \"SapBulletType\",\n \"damage\": 4,\n \"length\": 100,\n \"sapStrength\": 0.5\n}"
     },
     "ShrapnelBulletType": {
       "category": "Взрывные",
       "extends": "BulletType",
       "desc": "Невидимый снаряд-осколок без полёта: создаёт облако из нескольких коротких «осколков», разлетающихся из точки взрыва. Часто используется как дочерний эффект основного снаряда для визуальной/дополнительной осколочной атаки.",
-      "example": "\"bullet\": {\n  \"type\": \"ShrapnelBulletType\",\n  \"damage\": 10,\n  \"length\": 30,\n  \"count\": 8\n}"
+      "example": "\"bullet\": {\n \"type\": \"ShrapnelBulletType\",\n \"damage\": 10,\n \"length\": 30,\n \"count\": 8\n}"
     },
     "SpaceLiquidBulletType": {
       "category": "Жидкостные",
       "extends": "LiquidBulletType",
       "desc": "Вариант жидкостного снаряда, адаптированный для условий открытого космоса (используется в космических/орбитальных картах и юнитах), в остальном повторяет механику LiquidBulletType.",
-      "example": "\"bullet\": {\n  \"type\": \"SpaceLiquidBulletType\",\n  \"liquid\": \"slag\",\n  \"damage\": 12,\n  \"speed\": 3.5\n}"
+      "example": "\"bullet\": {\n \"type\": \"SpaceLiquidBulletType\",\n \"liquid\": \"slag\",\n \"damage\": 12,\n \"speed\": 3.5\n}"
     }
   },
   "STATUS_EFFECTS": {
     "none": {
       "category": "Служебные/технические",
       "desc": "Отсутствие какого-либо эффекта — значение по умолчанию для поля \"status\", если снаряд не должен накладывать дебафф/бафф.",
-      "example": "\"bullet\": {\n  \"type\": \"BasicBulletType\",\n  \"damage\": 20,\n  \"status\": \"none\"\n}"
+      "example": "\"bullet\": {\n \"type\": \"BasicBulletType\",\n \"damage\": 20,\n \"status\": \"none\"\n}"
     },
     "burning": {
       "category": "Негативные (через bullet.status)",
       "desc": "Горение. Наносит периодический урон по времени (damage per frame) и поджигает юнита визуально. Тушится водой/жидкостями. Один из самых часто применяемых дебаффов у огненных турелей и юнитов.",
-      "example": "\"bullet\": {\n  \"type\": \"BasicBulletType\",\n  \"damage\": 15,\n  \"status\": \"burning\",\n  \"statusDuration\": 120\n}"
+      "example": "\"bullet\": {\n \"type\": \"BasicBulletType\",\n \"damage\": 15,\n \"status\": \"burning\",\n \"statusDuration\": 120\n}"
     },
     "freezing": {
       "category": "Негативные (через bullet.status)",
       "desc": "Заморозка. Замедляет цель и наносит урон по времени, использует криогенный/ледяной урон. Применяется криотурелями и ледяными снарядами.",
-      "example": "\"bullet\": {\n  \"type\": \"BasicBulletType\",\n  \"damage\": 15,\n  \"status\": \"freezing\",\n  \"statusDuration\": 90\n}"
+      "example": "\"bullet\": {\n \"type\": \"BasicBulletType\",\n \"damage\": 15,\n \"status\": \"freezing\",\n \"statusDuration\": 90\n}"
     },
     "unmoving": {
       "category": "Негативные (через bullet.status)",
       "desc": "Полное обездвиживание — поражённый юнит не может передвигаться, пока действует эффект (скорость сводится к нулю). Не отключает при этом стрельбу.",
-      "example": "\"bullet\": {\n  \"type\": \"BasicBulletType\",\n  \"damage\": 5,\n  \"status\": \"unmoving\",\n  \"statusDuration\": 60\n}"
+      "example": "\"bullet\": {\n \"type\": \"BasicBulletType\",\n \"damage\": 5,\n \"status\": \"unmoving\",\n \"statusDuration\": 60\n}"
     },
     "slow": {
       "category": "Негативные (через bullet.status)",
       "desc": "Замедление скорости передвижения и перезарядки оружия цели. Один из базовых дебаффов для сдерживания вражеских юнитов.",
-      "example": "\"bullet\": {\n  \"type\": \"BasicBulletType\",\n  \"damage\": 10,\n  \"status\": \"slow\",\n  \"statusDuration\": 100\n}"
+      "example": "\"bullet\": {\n \"type\": \"BasicBulletType\",\n \"damage\": 10,\n \"status\": \"slow\",\n \"statusDuration\": 100\n}"
     },
     "fast": {
       "category": "Позитивные (баффы юнитов/блоков)",
       "desc": "Ускорение — бафф, повышающий скорость передвижения юнита. Применяется дружественными эффектами/блоками, а не снарядами по врагу.",
-      "example": "\"bullet\": {\n  \"type\": \"BasicBulletType\",\n  \"damage\": 0,\n  \"status\": \"fast\",\n  \"statusDuration\": 200\n}"
+      "example": "\"bullet\": {\n \"type\": \"BasicBulletType\",\n \"damage\": 0,\n \"status\": \"fast\",\n \"statusDuration\": 200\n}"
     },
     "wet": {
       "category": "Негативные (через bullet.status)",
       "desc": "Мокрый — юнит облит водой/жидкостью. Незначительно снижает скорость, защищает от поджигания (burning), но повышает получаемый урон от электрических эффектов.",
-      "example": "\"bullet\": {\n  \"type\": \"LiquidBulletType\",\n  \"liquid\": \"water\",\n  \"damage\": 5,\n  \"status\": \"wet\"\n}"
+      "example": "\"bullet\": {\n \"type\": \"LiquidBulletType\",\n \"liquid\": \"water\",\n \"damage\": 5,\n \"status\": \"wet\"\n}"
     },
     "muddy": {
       "category": "Негативные (через bullet.status)",
       "desc": "Юнит увяз в грязи — сильное замедление передвижения. Обычно накладывается не снарядами, а самой грязевой поверхностью тайла, но может использоваться и как статус от снаряда.",
-      "example": "\"bullet\": {\n  \"type\": \"LiquidBulletType\",\n  \"liquid\": \"mud\",\n  \"damage\": 3,\n  \"status\": \"muddy\"\n}"
+      "example": "\"bullet\": {\n \"type\": \"LiquidBulletType\",\n \"liquid\": \"mud\",\n \"damage\": 3,\n \"status\": \"muddy\"\n}"
     },
     "melting": {
       "category": "Негативные (через bullet.status)",
       "desc": "Плавление — эффект от контакта со шлаком/лавой. Наносит урон по времени и немного замедляет цель, аналогично горению, но с другой тематикой (жидкий металл).",
-      "example": "\"bullet\": {\n  \"type\": \"LiquidBulletType\",\n  \"liquid\": \"slag\",\n  \"damage\": 10,\n  \"status\": \"melting\",\n  \"statusDuration\": 90\n}"
+      "example": "\"bullet\": {\n \"type\": \"LiquidBulletType\",\n \"liquid\": \"slag\",\n \"damage\": 10,\n \"status\": \"melting\",\n \"statusDuration\": 90\n}"
     },
     "sapped": {
       "category": "Негативные (через bullet.status)",
       "desc": "Ослабление/истощение цели — используется совместно со SapBulletType. Снижает эффективность защиты поражённого юнита, пока действует эффект.",
-      "example": "\"bullet\": {\n  \"type\": \"SapBulletType\",\n  \"damage\": 4,\n  \"status\": \"sapped\",\n  \"statusDuration\": 150\n}"
+      "example": "\"bullet\": {\n \"type\": \"SapBulletType\",\n \"damage\": 4,\n \"status\": \"sapped\",\n \"statusDuration\": 150\n}"
     },
     "tarred": {
       "category": "Негативные (через bullet.status)",
       "desc": "Просмоленный — юнит покрыт смолой (нефтью). Заметно замедляет и делает цель более уязвимой к последующему поджиганию (burning).",
-      "example": "\"bullet\": {\n  \"type\": \"LiquidBulletType\",\n  \"liquid\": \"oil\",\n  \"damage\": 5,\n  \"status\": \"tarred\"\n}"
+      "example": "\"bullet\": {\n \"type\": \"LiquidBulletType\",\n \"liquid\": \"oil\",\n \"damage\": 5,\n \"status\": \"tarred\"\n}"
     },
     "overdrive": {
       "category": "Позитивные (баффы юнитов/блоков)",
       "desc": "Ускорение от купола перегрузки (Overdrive Projector/Dome): повышает скорость, перезарядку и скорость постройки дружественных юнитов/блоков в радиусе действия.",
-      "example": "\"bullet\": {\n  \"type\": \"BasicBulletType\",\n  \"damage\": 0,\n  \"status\": \"overdrive\",\n  \"statusDuration\": 300\n}"
+      "example": "\"bullet\": {\n \"type\": \"BasicBulletType\",\n \"damage\": 0,\n \"status\": \"overdrive\",\n \"statusDuration\": 300\n}"
     },
     "overclock": {
       "category": "Позитивные (баффы юнитов/блоков)",
       "desc": "Разгон — усиление, аналогичное overdrive, применяемое другими источниками (например, некоторыми блоками поддержки или способностями юнитов).",
-      "example": "\"bullet\": {\n  \"type\": \"BasicBulletType\",\n  \"damage\": 0,\n  \"status\": \"overclock\",\n  \"statusDuration\": 300\n}"
+      "example": "\"bullet\": {\n \"type\": \"BasicBulletType\",\n \"damage\": 0,\n \"status\": \"overclock\",\n \"statusDuration\": 300\n}"
     },
     "shielded": {
       "category": "Позитивные (баффы юнитов/блоков)",
       "desc": "Юнит находится под защитой щита — сигнальный статус, показывающий, что цель временно неуязвима или частично защищена от урона щитовым полем.",
-      "example": "\"bullet\": {\n  \"type\": \"BasicBulletType\",\n  \"damage\": 0,\n  \"status\": \"shielded\",\n  \"statusDuration\": 120\n}"
+      "example": "\"bullet\": {\n \"type\": \"BasicBulletType\",\n \"damage\": 0,\n \"status\": \"shielded\",\n \"statusDuration\": 120\n}"
     },
     "shocked": {
       "category": "Негативные (через bullet.status)",
       "desc": "Электрический шок — периодический урон электричеством, эффект часто распространяется между юнитами, стоящими в воде (см. также \"wet\").",
-      "example": "\"bullet\": {\n  \"type\": \"LightningBulletType\",\n  \"damage\": 15,\n  \"status\": \"shocked\",\n  \"statusDuration\": 60\n}"
+      "example": "\"bullet\": {\n \"type\": \"LightningBulletType\",\n \"damage\": 15,\n \"status\": \"shocked\",\n \"statusDuration\": 60\n}"
     },
     "blasted": {
       "category": "Негативные (через bullet.status)",
       "desc": "Состояние после взрыва — цель кратковременно оглушена/дезориентирована ударной волной. Обычно сопутствует крупным взрывным снарядам.",
-      "example": "\"bullet\": {\n  \"type\": \"ExplosionBulletType\",\n  \"damage\": 30,\n  \"status\": \"blasted\",\n  \"statusDuration\": 30\n}"
+      "example": "\"bullet\": {\n \"type\": \"ExplosionBulletType\",\n \"damage\": 30,\n \"status\": \"blasted\",\n \"statusDuration\": 30\n}"
     },
     "corroded": {
       "category": "Негативные (через bullet.status)",
       "desc": "Разъедание кислотой — периодический урон со временем и снижение эффективной защиты цели, пока действует эффект. Тематически связан с кислотными/химическими снарядами.",
-      "example": "\"bullet\": {\n  \"type\": \"LiquidBulletType\",\n  \"liquid\": \"cryofluid\",\n  \"damage\": 8,\n  \"status\": \"corroded\",\n  \"statusDuration\": 120\n}"
+      "example": "\"bullet\": {\n \"type\": \"LiquidBulletType\",\n \"liquid\": \"cryofluid\",\n \"damage\": 8,\n \"status\": \"corroded\",\n \"statusDuration\": 120\n}"
     },
     "boss": {
       "category": "Служебные/технические",
       "desc": "Служебная метка «это босс» — используется для UI-индикаторов (полоса здоровья, иконка) и особой логики кампании, а не как обычный дебафф/бафф с числовыми модификаторами.",
-      "example": "\"unit\": {\n  \"status\": \"boss\"\n}"
+      "example": "\"unit\": {\n \"status\": \"boss\"\n}"
     },
     "sporeSlowed": {
       "category": "Негативные (через bullet.status)",
       "desc": "Замедление спорами — накладывается спороносными растениями/снарядами болотных биомов. Сочетает урон по времени с ощутимым снижением скорости передвижения.",
-      "example": "\"bullet\": {\n  \"type\": \"BasicBulletType\",\n  \"damage\": 6,\n  \"status\": \"sporeSlowed\",\n  \"statusDuration\": 90\n}"
+      "example": "\"bullet\": {\n \"type\": \"BasicBulletType\",\n \"damage\": 6,\n \"status\": \"sporeSlowed\",\n \"statusDuration\": 90\n}"
     },
     "disarmed": {
       "category": "Негативные (через bullet.status)",
       "desc": "Обезоруживание — временно отключает оружие поражённого юнита (стрельба невозможна), при этом сам юнит может продолжать двигаться.",
-      "example": "\"bullet\": {\n  \"type\": \"EmpBulletType\",\n  \"damage\": 10,\n  \"status\": \"disarmed\",\n  \"statusDuration\": 180\n}"
+      "example": "\"bullet\": {\n \"type\": \"EmpBulletType\",\n \"damage\": 10,\n \"status\": \"disarmed\",\n \"statusDuration\": 180\n}"
     },
     "electrified": {
       "category": "Негативные (через bullet.status)",
       "desc": "Наэлектризован — периодический урон электричеством, способный распространяться на другие мокрые (\"wet\") юниты поблизости, вызывая цепную реакцию.",
-      "example": "\"bullet\": {\n  \"type\": \"LightningBulletType\",\n  \"damage\": 12,\n  \"status\": \"electrified\",\n  \"statusDuration\": 60\n}"
+      "example": "\"bullet\": {\n \"type\": \"LightningBulletType\",\n \"damage\": 12,\n \"status\": \"electrified\",\n \"statusDuration\": 60\n}"
     },
     "invincible": {
       "category": "Позитивные (баффы юнитов/блоков)",
       "desc": "Полная неуязвимость к урону на время действия эффекта. Используется в основном в спецсобытиях кампании/сюжетных сценариях, а не как обычный игровой бафф.",
-      "example": "\"bullet\": {\n  \"type\": \"BasicBulletType\",\n  \"damage\": 0,\n  \"status\": \"invincible\",\n  \"statusDuration\": 60\n}"
+      "example": "\"bullet\": {\n \"type\": \"BasicBulletType\",\n \"damage\": 0,\n \"status\": \"invincible\",\n \"statusDuration\": 60\n}"
     },
     "dynamic": {
       "category": "Служебные/технические",
       "desc": "Технический флаг для эффектов с нестандартной (динамической) статистикой, зашитой в код игры. Не предназначен для прямого использования в собственных модах — оставлен для справки.",
       "example": "\"status\": \"dynamic\""
-    },
-    "canDrown": {
-      "type": "boolean",
-      "desc": "Утопает ли юнит в глубокой жидкости. По умолчанию true. Для водных и парящих юнитов часто ставят false.",
-      "example": "\"canDrown\": false"
-    },
-    "useUnitCap": {
-      "type": "boolean",
-      "desc": "Считается ли юнит в общем лимите армии (unit cap). Если false — юнит не занимает слот, но и не управляется приказом.",
-      "example": "\"useUnitCap\": true"
-    },
-    "canHeal": {
-      "type": "boolean",
-      "desc": "Может ли юнит лечить блоки и союзных юнитов (для дронов-строителей и ремонтников).",
-      "example": "\"canHeal\": true"
-    },
-    "singleTarget": {
-      "type": "boolean",
-      "desc": "Если true, все орудия юнита стреляют только по одной цели одновременно, а не по разным.",
-      "example": "\"singleTarget\": true"
-    },
-    "canAttack": {
-      "type": "boolean",
-      "desc": "Может ли юнит атаковать в принципе. Если false — орудия игнорируются, юнит не выбирает боевых целей.",
-      "example": "\"canAttack\": false"
-    },
-    "internal": {
-      "type": "boolean",
-      "desc": "Служебный юнит, не создающий спрайты и не отображаемый в базе. Используется для внутренних механик мода.",
-      "example": "\"internal\": true"
-    },
-    "internalGenerateSprites": {
-      "type": "boolean",
-      "desc": "Генерировать ли спрайты даже для служебного (internal) юнита. Обычно false.",
-      "example": "\"internalGenerateSprites\": false"
-    },
-    "autoFindTarget": {
-      "type": "boolean",
-      "desc": "Автоматически искать цель без участия игрока. Критично для турелей-юнитов и автономных дронов.",
-      "example": "\"autoFindTarget\": true"
-    },
-    "alwaysShootWhenMoving": {
-      "type": "boolean",
-      "desc": "Если true, юнит стреляет на ходу, не требуя остановки для выстрела (для танков и мехов с бортовым оружием).",
-      "example": "\"alwaysShootWhenMoving\": true"
-    },
-    "targetBuildingsMobile": {
-      "type": "boolean",
-      "desc": "Приоритет мобильных целей (постройки) при выборе цели для ИИ.",
-      "example": "\"targetBuildingsMobile\": false"
-    },
-    "boostWhenBuilding": {
-      "type": "boolean",
-      "desc": "Ускоряться (boost) при строительстве. Работает только с canBoost = true.",
-      "example": "\"boostWhenBuilding\": false"
-    },
-    "boostWhenMining": {
-      "type": "boolean",
-      "desc": "Ускоряться (boost) при добыче руды. Работает только с canBoost = true.",
-      "example": "\"boostWhenMining\": false"
-    },
-    "aimDst": {
-      "type": "float (Пиксели)",
-      "desc": "Минимальная дистанция прицеливания от центра юнита до ствола — чтобы орудие не стреляло «в себя» при близкой цели.",
-      "example": "\"aimDst\": 0.0"
-    },
-    "buildBeamOffset": {
-      "type": "float (Пиксели)",
-      "desc": "Смещение точки выхода луча строительства относительно центра юнита.",
-      "example": "\"buildBeamOffset\": 8.0"
-    },
-    "mineBeamOffset": {
-      "type": "float (Пиксели)",
-      "desc": "Смещение точки выхода луча добычи относительно центра юнита.",
-      "example": "\"mineBeamOffset\": 0.0"
-    },
-    "targetPriority": {
-      "type": "float",
-      "desc": "Приоритет юнита как цели для вражеского ИИ и турелей. Чем выше, тем чаще его выбирают целью.",
-      "example": "\"targetPriority\": -2.0"
-    },
-    "shadowElevationScl": {
-      "type": "float",
-      "desc": "Масштаб тени юнита. По умолчанию 1.0.",
-      "example": "\"shadowElevationScl\": 1.0"
-    },
-    "unitLightRadius": {
-      "type": "float (Пиксели)",
-      "desc": "Радиус свечения, испускаемого самим юнитом (не снарядом). Используется для тёмных/светящихся юнитов.",
-      "example": "\"unitLightRadius\": 40.0"
-    },
-    "unitLightOpacity": {
-      "type": "float (0-1)",
-      "desc": "Прозрачность свечения юнита. 0 — свечение отключено, 1 — максимально яркое.",
-      "example": "\"unitLightOpacity\": 0.7"
     }
   }
 }
