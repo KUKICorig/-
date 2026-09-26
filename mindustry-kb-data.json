@@ -62,6 +62,101 @@
       "desc": "Имя родительского узла в дереве исследований.",
       "example": "\"research\": \"copper\""
     },
+    "canDrown": {
+      "type": "boolean",
+      "desc": "Утопает ли юнит в глубокой жидкости. По умолчанию true. Для водных и парящих юнитов часто ставят false.",
+      "example": "\"canDrown\": false"
+    },
+    "useUnitCap": {
+      "type": "boolean",
+      "desc": "Считается ли юнит в общем лимите армии (unit cap). Если false — юнит не занимает слот, но и не управляется приказом.",
+      "example": "\"useUnitCap\": true"
+    },
+    "canHeal": {
+      "type": "boolean",
+      "desc": "Может ли юнит лечить блоки и союзных юнитов (для дронов-строителей и ремонтников).",
+      "example": "\"canHeal\": true"
+    },
+    "singleTarget": {
+      "type": "boolean",
+      "desc": "Если true, все орудия юнита стреляют только по одной цели одновременно, а не по разным.",
+      "example": "\"singleTarget\": true"
+    },
+    "canAttack": {
+      "type": "boolean",
+      "desc": "Может ли юнит атаковать в принципе. Если false — орудия игнорируются, юнит не выбирает боевых целей.",
+      "example": "\"canAttack\": false"
+    },
+    "internal": {
+      "type": "boolean",
+      "desc": "Служебный юнит, не создающий спрайты и не отображаемый в базе. Используется для внутренних механик мода.",
+      "example": "\"internal\": true"
+    },
+    "internalGenerateSprites": {
+      "type": "boolean",
+      "desc": "Генерировать ли спрайты даже для служебного (internal) юнита. Обычно false.",
+      "example": "\"internalGenerateSprites\": false"
+    },
+    "autoFindTarget": {
+      "type": "boolean",
+      "desc": "Автоматически искать цель без участия игрока. Критично для турелей-юнитов и автономных дронов.",
+      "example": "\"autoFindTarget\": true"
+    },
+    "alwaysShootWhenMoving": {
+      "type": "boolean",
+      "desc": "Если true, юнит стреляет на ходу, не требуя остановки для выстрела (для танков и мехов с бортовым оружием).",
+      "example": "\"alwaysShootWhenMoving\": true"
+    },
+    "targetBuildingsMobile": {
+      "type": "boolean",
+      "desc": "Приоритет мобильных целей (постройки) при выборе цели для ИИ.",
+      "example": "\"targetBuildingsMobile\": false"
+    },
+    "boostWhenBuilding": {
+      "type": "boolean",
+      "desc": "Ускоряться (boost) при строительстве. Работает только с canBoost = true.",
+      "example": "\"boostWhenBuilding\": false"
+    },
+    "boostWhenMining": {
+      "type": "boolean",
+      "desc": "Ускоряться (boost) при добыче руды. Работает только с canBoost = true.",
+      "example": "\"boostWhenMining\": false"
+    },
+    "aimDst": {
+      "type": "float (Пиксели)",
+      "desc": "Минимальная дистанция прицеливания от центра юнита до ствола — чтобы орудие не стреляло «в себя» при близкой цели.",
+      "example": "\"aimDst\": 0.0"
+    },
+    "buildBeamOffset": {
+      "type": "float (Пиксели)",
+      "desc": "Смещение точки выхода луча строительства относительно центра юнита.",
+      "example": "\"buildBeamOffset\": 8.0"
+    },
+    "mineBeamOffset": {
+      "type": "float (Пиксели)",
+      "desc": "Смещение точки выхода луча добычи относительно центра юнита.",
+      "example": "\"mineBeamOffset\": 0.0"
+    },
+    "targetPriority": {
+      "type": "float",
+      "desc": "Приоритет юнита как цели для вражеского ИИ и турелей. Чем выше, тем чаще его выбирают целью.",
+      "example": "\"targetPriority\": -2.0"
+    },
+    "shadowElevationScl": {
+      "type": "float",
+      "desc": "Масштаб тени юнита. По умолчанию 1.0.",
+      "example": "\"shadowElevationScl\": 1.0"
+    },
+    "unitLightRadius": {
+      "type": "float (Пиксели)",
+      "desc": "Радиус свечения, испускаемого самим юнитом (не снарядом). Используется для тёмных/светящихся юнитов.",
+      "example": "\"unitLightRadius\": 40.0"
+    },
+    "unitLightOpacity": {
+      "type": "float (0-1)",
+      "desc": "Прозрачность свечения юнита. 0 — свечение отключено, 1 — максимально яркое.",
+      "example": "\"unitLightOpacity\": 0.7"
+    },
     "alwaysUnlocked": {
       "type": "boolean",
       "desc": "Доступен ли предмет с начала кампании без исследования.",
@@ -464,7 +559,7 @@
     },
     "minWarmup": {
       "type": "float (0-1)",
-      "desc": "Минимальный прогревев орудия для выстрела.",
+      "desc": "Минимальный прогрев орудия для первого выстрела. 0.9 — орудие должно почти полностью нагреться, прежде чем стрелять.",
       "example": "\"minWarmup\": 0.9"
     },
     "warmupMaintainTime": {
@@ -474,8 +569,8 @@
     },
     "shootWarmupSpeed": {
       "type": "float",
-      "desc": "Скорость прогрева орудия.",
-      "example": "\"shootWarmupSpeed\": 0.06\""
+      "desc": "Скорость прогрева орудия. Работает в оружии так же, как в bullet. Чем меньше, тем медленнее орудие выходит на полную скорострельность.",
+      "example": "\"shootWarmupSpeed\": 0.06"
     },
     "linearWarmup": {
       "type": "boolean",
@@ -484,7 +579,7 @@
     },
     "cooldownTime": {
       "type": "float (Тики)",
-      "desc": "Время остывания орудия.",
+      "desc": "Время остывания оружия после стрельбы. Влияет на визуальный нагрев и скорость возврата к обычному состоянию.",
       "example": "\"cooldownTime\": 30"
     },
     "shootCone": {
@@ -1342,6 +1437,48 @@
       "desc": "Звук, издаваемый при разрушении блока.",
       "example": "\"breakSound\": \"blockBreak\""
     },
+    "parentizeEffects": {
+      "type": "boolean",
+      "desc": "Привязывать ли создаваемые эффекты к родительскому юниту. Если true — эффект движется вместе с юнитом и вращается вместе с ним, а не остаётся в точке создания.",
+      "example": "\"parentizeEffects\": false",
+      "category": "ability",
+      "since": "160.x"
+    },
+    "initialShootSound": {
+      "type": "Sound",
+      "desc": "Звук первого выстрела в серии (отличается от обычного shootSound). Для оружия с прогревом или зарядкой.",
+      "example": "\"initialShootSound\": \"shootBeamPlasmaSmall\""
+    },
+    "shadow": {
+      "type": "float (Пиксели)",
+      "desc": "Смещение тени ствола оружия относительно его центра. 0 — тень не рисуется.",
+      "example": "\"shadow\": 8.0"
+    },
+    "weaponHeatColor": {
+      "type": "Color HEX",
+      "desc": "Цвет нагрева ствола оружия (используется при отрисовке heatRegion).",
+      "example": "\"weaponHeatColor\": \"f9350f\""
+    },
+    "weaponHeatProgress": {
+      "type": "PartProgress",
+      "desc": "Функция прогресса для интенсивности heatRegion у оружия. Обычно \"heat\" или \"warmup\".",
+      "example": "\"weaponHeatProgress\": \"warmup\""
+    },
+    "shootStatusDuration": {
+      "type": "float (Тики)",
+      "desc": "Длительность статуса shootStatus.",
+      "example": "\"shootStatusDuration\": 120"
+    },
+    "weaponLoopSound": {
+      "type": "Sound",
+      "desc": "Циклический звук работы оружия (для непрерывного лазера или огнемёта). Указывается прямо в оружии, если отличается от общего loopSound юнита.",
+      "example": "\"weaponLoopSound\": \"beamPlasma\""
+    },
+    "activeSoundVolume": {
+      "type": "float (0-1)",
+      "desc": "Громкость циклического звука работы оружия (activeSound).",
+      "example": "\"activeSoundVolume\": 0.8"
+    },
     "interval": {
       "type": "float (Тики)",
       "desc": "Интервал между срабатываниями (для RepairFieldAbility, StatusFieldAbility).",
@@ -1521,11 +1658,6 @@
       "type": "StatusEffect",
       "desc": "Статус, накладываемый на владельца оружия во время стрельбы (например, unmoving для тяжёлых пушек).",
       "example": "\"shootStatus\": \"unmoving\""
-    },
-    "shootStatusDuration": {
-      "type": "float (Тики)",
-      "desc": "Длительность статуса shootStatus.",
-      "example": "\"shootStatusDuration\": 120"
     },
     "absorbLasers": {
       "type": "boolean",
@@ -3110,13 +3242,6 @@
       "category": "ability",
       "since": "160.x"
     },
-    "parentizeEffects": {
-      "type": "boolean",
-      "desc": "Привязывать создаваемый эффект к родительскому юниту.",
-      "example": "\"parentizeEffects\": true",
-      "category": "ability",
-      "since": "160.x"
-    },
     "moveTime": {
       "type": "float (Тики)",
       "desc": "Время перемещения/передачи для payload-конвейерных объектов.",
@@ -3342,54 +3467,47 @@
       "since": "160.x"
     },
     "onShoot": {
-  "type": "boolean",
-  "desc": "Активировать ли способность только во время стрельбы юнита. Если false — способность работает постоянно, независимо от того, стреляет ли юнит. Используется в StatusFieldAbility и похожих периодических способностях.",
-  "example": "\"onShoot\": false",
-  "category": "ability",
-  "since": "160.x"
-},
-"applyEffect": {
-  "type": "Effect",
-  "desc": "Визуальный эффект, который создаётся в момент применения способности (например, вспышка при наложении статуса). Если указано \"none\", эффект не создаётся.",
-  "example": "\"applyEffect\": \"none\"",
-  "category": "ability",
-  "since": "160.x"
-},
-"activeEffect": {
-  "type": "Effect",
-  "desc": "Визуальный эффект, который постоянно проигрывается, пока способность активна (например, аура вокруг юнита). Если указано \"none\", эффект не создаётся.",
-  "example": "\"activeEffect\": \"none\"",
-  "category": "ability",
-  "since": "160.x"
-},
-"effectX": {
-  "type": "float (Пиксели)",
-  "desc": "Смещение точки создания эффекта способности по оси X относительно центра юнита. Работает в паре с effectY — задаёт точку, к которой привязывается applyEffect и activeEffect.",
-  "example": "\"effectX\": 0",
-  "category": "ability",
-  "since": "160.x"
-},
-"effectY": {
-  "type": "float (Пиксели)",
-  "desc": "Смещение точки создания эффекта способности по оси Y относительно центра юнита. Работает в паре с effectX — задаёт точку, к которой привязывается applyEffect и activeEffect.",
-  "example": "\"effectY\": 0",
-  "category": "ability",
-  "since": "160.x"
-},
-"parentizeEffects": {
-  "type": "boolean",
-  "desc": "Привязывать ли создаваемые эффекты к родительскому юниту. Если true — эффект движется вместе с юнитом и вращается вместе с ним, а не остаётся в точке создания.",
-  "example": "\"parentizeEffects\": false",
-  "category": "ability",
-  "since": "160.x"
-},
-"effectSizeParam": {
-  "type": "boolean",
-  "desc": "Передавать ли размер способности (например, радиус поля) в качестве параметра в создаваемый эффект. Если true — эффект может масштабироваться под размер зоны действия способности.",
-  "example": "\"effectSizeParam\": false",
-  "category": "ability",
-  "since": "160.x"
-}
+      "type": "boolean",
+      "desc": "Активировать ли способность только во время стрельбы юнита. Если false — способность работает постоянно, независимо от того, стреляет ли юнит. Используется в StatusFieldAbility и похожих периодических способностях.",
+      "example": "\"onShoot\": false",
+      "category": "ability",
+      "since": "160.x"
+    },
+    "applyEffect": {
+      "type": "Effect",
+      "desc": "Визуальный эффект, который создаётся в момент применения способности (например, вспышка при наложении статуса). Если указано \"none\", эффект не создаётся.",
+      "example": "\"applyEffect\": \"none\"",
+      "category": "ability",
+      "since": "160.x"
+    },
+    "activeEffect": {
+      "type": "Effect",
+      "desc": "Визуальный эффект, который постоянно проигрывается, пока способность активна (например, аура вокруг юнита). Если указано \"none\", эффект не создаётся.",
+      "example": "\"activeEffect\": \"none\"",
+      "category": "ability",
+      "since": "160.x"
+    },
+    "effectX": {
+      "type": "float (Пиксели)",
+      "desc": "Смещение точки создания эффекта способности по оси X относительно центра юнита. Работает в паре с effectY — задаёт точку, к которой привязывается applyEffect и activeEffect.",
+      "example": "\"effectX\": 0",
+      "category": "ability",
+      "since": "160.x"
+    },
+    "effectY": {
+      "type": "float (Пиксели)",
+      "desc": "Смещение точки создания эффекта способности по оси Y относительно центра юнита. Работает в паре с effectX — задаёт точку, к которой привязывается applyEffect и activeEffect.",
+      "example": "\"effectY\": 0",
+      "category": "ability",
+      "since": "160.x"
+    },
+    "effectSizeParam": {
+      "type": "boolean",
+      "desc": "Передавать ли размер способности (например, радиус поля) в качестве параметра в создаваемый эффект. Если true — эффект может масштабироваться под размер зоны действия способности.",
+      "example": "\"effectSizeParam\": false",
+      "category": "ability",
+      "since": "160.x"
+    }
   },
   "BULLET_TYPES": {
     "BulletType": {
@@ -3397,6 +3515,31 @@
       "extends": "Content",
       "desc": "Абстрактный родительский класс для всех типов снарядов. Напрямую как значение \"type\" почти не используется — от него наследуются все остальные типы, и любой из них имеет доступ к общим полям: damage, lifetime, speed, hitSize, splashDamage, knockback, statusEffect и т.д.",
       "example": "\"bullet\": {\n  \"type\": \"BasicBulletType\",\n  \"damage\": 20,\n  \"speed\": 3,\n  \"lifetime\": 50\n}"
+    },
+    "underwater": {
+      "type": "boolean",
+      "desc": "Снаряд движется под водой. Используется для водных юнитов и торпед.",
+      "example": "\"underwater\": true"
+    },
+    "hitUnder": {
+      "type": "boolean",
+      "desc": "Может ли снаряд попадать по целям под землёй (по юнитам, зарывшимся в землю).",
+      "example": "\"hitUnder\": false"
+    },
+    "ignoreSpawnAngle": {
+      "type": "boolean",
+      "desc": "Игнорировать угол выстрела при создании снаряда. Используется для способностей, стреляющих по кругу.",
+      "example": "\"ignoreSpawnAngle\": false"
+    },
+    "collideFloor": {
+      "type": "boolean",
+      "desc": "Может ли снаряд сталкиваться с полом (для бомб и артиллерии). Уже есть в базе, но уточню: работает только вместе с collideTerrain.",
+      "example": "\"collideFloor\": true"
+    },
+    "hitEffect": {
+      "type": "Effect",
+      "desc": "Визуальный эффект при попадании снаряда во что-либо (юнит, блок, пол). Не путать с despawnEffect — тот срабатывает при исчезновении по таймеру.",
+      "example": "\"hitEffect\": \"blastExplosion\""
     },
     "BasicBulletType": {
       "category": "Кинетические",
@@ -3664,6 +3807,101 @@
       "category": "Служебные/технические",
       "desc": "Технический флаг для эффектов с нестандартной (динамической) статистикой, зашитой в код игры. Не предназначен для прямого использования в собственных модах — оставлен для справки.",
       "example": "\"status\": \"dynamic\""
+    },
+    "canDrown": {
+      "type": "boolean",
+      "desc": "Утопает ли юнит в глубокой жидкости. По умолчанию true. Для водных и парящих юнитов часто ставят false.",
+      "example": "\"canDrown\": false"
+    },
+    "useUnitCap": {
+      "type": "boolean",
+      "desc": "Считается ли юнит в общем лимите армии (unit cap). Если false — юнит не занимает слот, но и не управляется приказом.",
+      "example": "\"useUnitCap\": true"
+    },
+    "canHeal": {
+      "type": "boolean",
+      "desc": "Может ли юнит лечить блоки и союзных юнитов (для дронов-строителей и ремонтников).",
+      "example": "\"canHeal\": true"
+    },
+    "singleTarget": {
+      "type": "boolean",
+      "desc": "Если true, все орудия юнита стреляют только по одной цели одновременно, а не по разным.",
+      "example": "\"singleTarget\": true"
+    },
+    "canAttack": {
+      "type": "boolean",
+      "desc": "Может ли юнит атаковать в принципе. Если false — орудия игнорируются, юнит не выбирает боевых целей.",
+      "example": "\"canAttack\": false"
+    },
+    "internal": {
+      "type": "boolean",
+      "desc": "Служебный юнит, не создающий спрайты и не отображаемый в базе. Используется для внутренних механик мода.",
+      "example": "\"internal\": true"
+    },
+    "internalGenerateSprites": {
+      "type": "boolean",
+      "desc": "Генерировать ли спрайты даже для служебного (internal) юнита. Обычно false.",
+      "example": "\"internalGenerateSprites\": false"
+    },
+    "autoFindTarget": {
+      "type": "boolean",
+      "desc": "Автоматически искать цель без участия игрока. Критично для турелей-юнитов и автономных дронов.",
+      "example": "\"autoFindTarget\": true"
+    },
+    "alwaysShootWhenMoving": {
+      "type": "boolean",
+      "desc": "Если true, юнит стреляет на ходу, не требуя остановки для выстрела (для танков и мехов с бортовым оружием).",
+      "example": "\"alwaysShootWhenMoving\": true"
+    },
+    "targetBuildingsMobile": {
+      "type": "boolean",
+      "desc": "Приоритет мобильных целей (постройки) при выборе цели для ИИ.",
+      "example": "\"targetBuildingsMobile\": false"
+    },
+    "boostWhenBuilding": {
+      "type": "boolean",
+      "desc": "Ускоряться (boost) при строительстве. Работает только с canBoost = true.",
+      "example": "\"boostWhenBuilding\": false"
+    },
+    "boostWhenMining": {
+      "type": "boolean",
+      "desc": "Ускоряться (boost) при добыче руды. Работает только с canBoost = true.",
+      "example": "\"boostWhenMining\": false"
+    },
+    "aimDst": {
+      "type": "float (Пиксели)",
+      "desc": "Минимальная дистанция прицеливания от центра юнита до ствола — чтобы орудие не стреляло «в себя» при близкой цели.",
+      "example": "\"aimDst\": 0.0"
+    },
+    "buildBeamOffset": {
+      "type": "float (Пиксели)",
+      "desc": "Смещение точки выхода луча строительства относительно центра юнита.",
+      "example": "\"buildBeamOffset\": 8.0"
+    },
+    "mineBeamOffset": {
+      "type": "float (Пиксели)",
+      "desc": "Смещение точки выхода луча добычи относительно центра юнита.",
+      "example": "\"mineBeamOffset\": 0.0"
+    },
+    "targetPriority": {
+      "type": "float",
+      "desc": "Приоритет юнита как цели для вражеского ИИ и турелей. Чем выше, тем чаще его выбирают целью.",
+      "example": "\"targetPriority\": -2.0"
+    },
+    "shadowElevationScl": {
+      "type": "float",
+      "desc": "Масштаб тени юнита. По умолчанию 1.0.",
+      "example": "\"shadowElevationScl\": 1.0"
+    },
+    "unitLightRadius": {
+      "type": "float (Пиксели)",
+      "desc": "Радиус свечения, испускаемого самим юнитом (не снарядом). Используется для тёмных/светящихся юнитов.",
+      "example": "\"unitLightRadius\": 40.0"
+    },
+    "unitLightOpacity": {
+      "type": "float (0-1)",
+      "desc": "Прозрачность свечения юнита. 0 — свечение отключено, 1 — максимально яркое.",
+      "example": "\"unitLightOpacity\": 0.7"
     }
   }
 }
