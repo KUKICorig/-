@@ -19,6 +19,30 @@
       "desc": "Класс объекта в кодовой базе игры. Для блоков: ItemTurret, PowerTurret, GenericCrafter, Wall, Conveyor, Drill, SolarGenerator. Для юнитов: flying, mech, legs, tank. Для пуль: BasicBulletType, LaserBulletType, MissileBulletType.",
       "example": "\"type\": \"ItemTurret\""
     },
+        "example": {
+      "type": "ohno",
+      "desc": "system поле",
+      "example": "\"ohno\""
+    },
+        "desc": {
+      "type": "ohno",
+      "desc": "system поле описание",
+      "example": "\"ohno\""
+    },
+    "whenShooting": {
+      "type": "boolean",
+      "desc": "Активировать ли дуговой щит только во время стрельбы юнита. Если false — щит работает постоянно. Используется в ShieldArcAbility.",
+      "example": "\"whenShooting\": true",
+      "category": "ability",
+      "since": "160.x"
+    },
+    "drawArc": {
+      "type": "boolean",
+      "desc": "Рисовать ли дуговую линию щита. Если false — щит работает, но визуально не отображается. Используется в ShieldArcAbility.",
+      "example": "\"drawArc\": true",
+      "category": "ability",
+      "since": "160.x"
+    },
     "name": {
       "type": "String (Текст)",
       "desc": "Внутриигровое название объекта. Поддерживает русский язык, цветовые теги Mindustry вида [scarlet], [accent], [white].",
