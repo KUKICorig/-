@@ -19,12 +19,33 @@
       "desc": "Класс объекта в кодовой базе игры. Для блоков: ItemTurret, PowerTurret, GenericCrafter, Wall, Conveyor, Drill, SolarGenerator. Для юнитов: flying, mech, legs, tank. Для пуль: BasicBulletType, LaserBulletType, MissileBulletType.",
       "example": "\"type\": \"ItemTurret\""
     },
-        "example": {
+    "example": {
       "type": "ohno",
       "desc": "system поле",
       "example": "\"ohno\""
     },
-        "desc": {
+    "speedBoost": {
+      "type": "float",
+      "desc": "Множитель скорости, который купол перегрузки даёт блокам в радиусе действия. 1.0 = +0%, 2.5 = +150%, 6.0 = +500%. Используется в OverdriveProjector.",
+      "example": "\"speedBoost\": 6.0",
+      "category": "effect",
+      "since": "160.x"
+    },
+    "speedBoostPhase": {
+      "type": "float",
+      "desc": "Дополнительный множитель скорости, который купол получает при подаче фазового волокна (phase-fabric). Складывается с speedBoost. 0.0 — фазовое волокно не даёт бонуса. Используется в OverdriveProjector.",
+      "example": "\"speedBoostPhase\": 3.0",
+      "category": "effect",
+      "since": "160.x"
+    },
+    "useTime": {
+      "type": "float (Тики)",
+      "desc": "Время, в течение которого эффект ускорения держится на блоке после последнего обновления ауры. 60 тиков = 1 сек. Используется в OverdriveProjector, MendProjector и подобных блоках поддержки.",
+      "example": "\"useTime\": 400",
+      "category": "effect",
+      "since": "160.x"
+    },
+    "desc": {
       "type": "ohno",
       "desc": "system поле описание",
       "example": "\"ohno\""
