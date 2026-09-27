@@ -24,6 +24,20 @@
       "desc": "system поле",
       "example": "\"ohno\""
     },
+    "optional": {
+  "type": "boolean",
+  "desc": "Необязательное потребление. Если true — блок работает и без этого ресурса, но эффективность без него падает. Используется внутри consumes.liquid и consumes.items.",
+  "example": "\"optional\": true",
+  "category": "consumes",
+  "since": "160.x"
+},
+"booster": {
+  "type": "boolean",
+  "desc": "Ресурс работает как усилитель (бустер): блок работает и без него, но с ним получает бонус к эффективности (speedBoostPhase для куполов, множитель добычи для буров и т.д.). Используется внутри consumes.liquid и consumes.items.",
+  "example": "\"booster\": true",
+  "category": "consumes",
+  "since": "160.x"
+},
     "speedBoost": {
       "type": "float",
       "desc": "Множитель скорости, который купол перегрузки даёт блокам в радиусе действия. 1.0 = +0%, 2.5 = +150%, 6.0 = +500%. Используется в OverdriveProjector.",
