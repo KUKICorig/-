@@ -19,25 +19,529 @@
       "desc": "Класс объекта в кодовой базе игры. Для блоков: ItemTurret, PowerTurret, GenericCrafter, Wall, Conveyor, Drill, SolarGenerator. Для юнитов: flying, mech, legs, tank. Для пуль: BasicBulletType, LaserBulletType, MissileBulletType.",
       "example": "\"type\": \"ItemTurret\""
     },
+    "lightColor": {
+      "type": "Color HEX",
+      "desc": "Цвет свечения, испускаемого снарядом в полёте.",
+      "example": "\"lightColor\": \"ff8833\""
+    },
+    "healColor": {
+      "type": "Color HEX",
+      "desc": "Цвет вспышки при лечении юнита. Работает вместе с healFlash = true.",
+      "example": "\"healColor\": \"84f491\"",
+      "category": "unit",
+      "since": "160.x"
+    },
+    "allowChangeCommands": {
+      "type": "boolean",
+      "desc": "Если false — скрывает смену команд в интерфейсе фабрик юнитов. По умолчанию true.",
+      "example": "\"allowChangeCommands\": true",
+      "category": "unit",
+      "since": "160.x"
+    },
+    "pathCost": {
+      "type": "PathCost",
+      "desc": "Функция расчёта стоимости перемещения по тайлу для поиска пути. Обычно null (используется стандартная стоимость).",
+      "example": "\"pathCost\": null",
+      "category": "unit",
+      "since": "160.x"
+    },
+    "aimChangeSpeed": {
+      "type": "float",
+      "desc": "Скорость смены дистанции прицеливания. Используется только с оружием на point laser bullets.",
+      "example": "\"aimChangeSpeed\": 0.5",
+      "category": "weapon",
+      "since": "160.x"
+    },
+    "useAttackRange": {
+      "type": "boolean",
+      "desc": "Если true — оружие используется для расчёта дальности атаки юнита. По умолчанию true.",
+      "example": "\"useAttackRange\": true",
+      "category": "weapon",
+      "since": "160.x"
+    },
+    "yRand": {
+      "type": "float (Пиксели)",
+      "desc": "Случайный разброс точки вылета снаряда по оси Y. Аналог xRand.",
+      "example": "\"yRand\": 2.0",
+      "category": "weapon",
+      "since": "160.x"
+    },
+    "smoothReloadSpeed": {
+      "type": "float",
+      "desc": "Скорость сглаживания перезарядки оружия. Влияет только на визуальные части (например, плавность отката).",
+      "example": "\"smoothReloadSpeed\": 0.15",
+      "category": "weapon",
+      "since": "160.x"
+    },
+    "noAttack": {
+      "type": "boolean",
+      "desc": "Если true — оружие не может атаковать цели. Используется для декоративных стволов.",
+      "example": "\"noAttack\": false",
+      "category": "weapon",
+      "since": "160.x"
+    },
+    "splashDamagePierce": {
+      "type": "boolean",
+      "desc": "Если true — splash-урон снаряда пробивает тайлы (стены, постройки) и наносит урон сквозь них.",
+      "example": "\"splashDamagePierce\": true",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "suppressionRange": {
+      "type": "float (Пиксели)",
+      "desc": "Радиус подавления ремонтных блоков врага. Используется в снарядах Disrupt и подобных.",
+      "example": "\"suppressionRange\": 60.0",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "suppressionDuration": {
+      "type": "float (Тики)",
+      "desc": "Длительность подавления ремонта (в тиках). 60 тиков = 1 сек.",
+      "example": "\"suppressionDuration\": 600.0",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "suppressionEffectChance": {
+      "type": "float",
+      "desc": "Шанс срабатывания эффекта подавления за тик. Масштабируется числом блоков в радиусе.",
+      "example": "\"suppressionEffectChance\": 0.5",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "suppressColor": {
+      "type": "Color HEX",
+      "desc": "Цвет эффекта подавления ремонта.",
+      "example": "\"suppressColor\": \"ffaa00\"",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "rotateSpeed": {
+      "type": "float (Градусов/тик)",
+      "desc": "Скорость поворота башни турели или юнита.",
+      "example": "\"rotateSpeed\": 6.5"
+    },
+    "puddles": {
+      "type": "int",
+      "desc": "Количество отдельных луж, создаваемых снарядом при попадании. Используется в LiquidBulletType.",
+      "example": "\"puddles\": 1",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "displayAmmoMultiplier": {
+      "type": "boolean",
+      "desc": "Показывать ли множитель боеприпаса (ammoMultiplier) в статах оружия. По умолчанию true.",
+      "example": "\"displayAmmoMultiplier\": true",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "statLiquidConsumed": {
+      "type": "float",
+      "desc": "Отображаемое потребление жидкости в статах. Делится на ammoMultiplier для реального значения.",
+      "example": "\"statLiquidConsumed\": 0.0",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "createChance": {
+      "type": "float",
+      "desc": "Шанс создания снаряда при выстреле. 1.0 — снаряд создаётся всегда.",
+      "example": "\"createChance\": 1.0",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "rangeOverride": {
+      "type": "float (Пиксели)",
+      "desc": "Переопределение дальности снаряда. Если > 0 — игнорирует базовую дальность оружия и targeting range.",
+      "example": "\"rangeOverride\": -1.0",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "extraRangeMargin": {
+      "type": "float (Пиксели)",
+      "desc": "Дополнительная дальность сверх targeting range. Используется для снарядов, летящих дальше зоны наведения.",
+      "example": "\"extraRangeMargin\": 0.0",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "lifesteal": {
+      "type": "float (0-1)",
+      "desc": "Доля урона, которая лечит стрелка. 0.1 = 10% урона возвращается в здоровье.",
+      "example": "\"lifesteal\": 0.0",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "makeFire": {
+      "type": "boolean",
+      "desc": "Создавать ли огонь на тайлах при попадании снаряда.",
+      "example": "\"makeFire\": false",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "fragOnHit": {
+      "type": "boolean",
+      "desc": "Создавать ли осколки (fragBullet) при прямом попадании.",
+      "example": "\"fragOnHit\": true",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "fragOnDespawn": {
+      "type": "boolean",
+      "desc": "Создавать ли осколки при исчезновении снаряда по таймеру.",
+      "example": "\"fragOnDespawn\": true",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "fragOnAbsorb": {
+      "type": "boolean",
+      "desc": "Создавать ли осколки при поглощении снаряда щитом.",
+      "example": "\"fragOnAbsorb\": true",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "pierceArmor": {
+      "type": "boolean",
+      "desc": "Если true — урон снаряда игнорирует броню цели.",
+      "example": "\"pierceArmor\": false",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "sticky": {
+      "type": "boolean",
+      "desc": "«Прилипание» снаряда к цели. Используется для бомб и мин.",
+      "example": "\"sticky\": false",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "stickyExtraLifetime": {
+      "type": "float (Тики)",
+      "desc": "Дополнительное время жизни снаряда при прилипании к цели.",
+      "example": "\"stickyExtraLifetime\": 0.0",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "setDefaults": {
+      "type": "boolean",
+      "desc": "Автоматическая установка статусов и despawnHit на основе других полей. По умолчанию true.",
+      "example": "\"setDefaults\": true",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "despawnShake": {
+      "type": "float",
+      "desc": "Тряска экрана при исчезновении снаряда по таймеру.",
+      "example": "\"despawnShake\": 0.0",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "delayFrags": {
+      "type": "boolean",
+      "desc": "Задерживать ли создание осколков на один кадр. Используется для piercing-снарядов, чтобы осколки не появлялись на уже убитой цели.",
+      "example": "\"delayFrags\": false",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "healSound": {
+      "type": "Sound",
+      "desc": "Звук лечения блока. Используется в HealingCraftBulletType и подобных.",
+      "example": "\"healSound\": \"blockHeal\"",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "healSoundVolume": {
+      "type": "float (0-1)",
+      "desc": "Громкость звука лечения блока.",
+      "example": "\"healSoundVolume\": 0.9",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "outputItems": {
+      "type": "ItemStack[]",
+      "desc": "Массив выходных предметов фабрики. Переопределяет outputItem. Позволяет выдавать несколько разных предметов за цикл.",
+      "example": "\"outputItems\": [{ \"item\": \"silicon\", \"amount\": 2 }]",
+      "category": "crafting",
+      "since": "160.x"
+    },
+    "outputLiquids": {
+      "type": "LiquidStack[]",
+      "desc": "Массив выходных жидкостей фабрики. Переопределяет outputLiquid. Позволяет выдавать несколько разных жидкостей за цикл.",
+      "example": "\"outputLiquids\": [{ \"liquid\": \"water\", \"amount\": 0.1 }]",
+      "category": "crafting",
+      "since": "160.x"
+    },
+      "since": {
+      "type": "ohno",
+      "desc": "system",
+      "example": "\ohno\",
+      "category": "system",
+      "since": "160.x"
+    },
+    "liquidOutputDirections": {
+      "type": "int[]",
+      "desc": "Направления вывода жидкости по порядку outputLiquids. -1 = все стороны, 0..3 = конкретная сторона.",
+      "example": "\"liquidOutputDirections\": [-1]",
+      "category": "crafting",
+      "since": "160.x"
+    },
+    "dumpExtraLiquid": {
+      "type": "boolean",
+      "desc": "Сливать ли излишки жидкости из бака при заполнении. По умолчанию true.",
+      "example": "\"dumpExtraLiquid\": true",
+      "category": "crafting",
+      "since": "160.x"
+    },
+    "ignoreLiquidFullness": {
+      "type": "boolean",
+      "desc": "Игнорировать ли заполненность бака. Если true — крафт продолжается даже при полном баке.",
+      "example": "\"ignoreLiquidFullness\": false",
+      "category": "crafting",
+      "since": "160.x"
+    },
+    "updateEffectChance": {
+      "type": "float (0-1)",
+      "desc": "Шанс срабатывания updateEffect за тик. 0.04 = 4% шанс (в среднем раз в 25 тиков).",
+      "example": "\"updateEffectChance\": 0.04",
+      "category": "effect",
+      "since": "160.x"
+    },
+    "updateEffectSpread": {
+      "type": "float (Пиксели)",
+      "desc": "Разброс позиции updateEffect относительно центра блока.",
+      "example": "\"updateEffectSpread\": 4.0",
+      "category": "effect",
+      "since": "160.x"
+    },
+    "warmupSpeed": {
+      "type": "float",
+      "desc": "Скорость прогрева фабрики. Чем меньше, тем дольше выходит на полную эффективность.",
+      "example": "\"warmupSpeed\": 0.019",
+      "category": "crafting",
+      "since": "160.x"
+    },
+    "phaseRangeBoost": {
+      "type": "float (Пиксели)",
+      "desc": "Дополнительный радиус купола при подаче фазового волокна (OverdriveProjector).",
+      "example": "\"phaseRangeBoost\": 20.0",
+      "category": "effect",
+      "since": "160.x"
+    },
+    "hasBoost": {
+      "type": "boolean",
+      "desc": "Есть ли у блока фазовый буст (OverdriveProjector). Если false — phaseRangeBoost и speedBoostPhase игнорируются.",
+      "example": "\"hasBoost\": true",
+      "category": "effect",
+      "since": "160.x"
+    },
+    "baseColor": {
+      "type": "Color HEX",
+      "desc": "Базовый цвет купола перегрузки без фазового буста.",
+      "example": "\"baseColor\": \"feb380ff\"",
+      "category": "draw",
+      "since": "160.x"
+    },
+    "phaseColor": {
+      "type": "Color HEX",
+      "desc": "Цвет купола перегрузки при подаче фазового волокна.",
+      "example": "\"phaseColor\": \"ffd59eff\"",
+      "category": "draw",
+      "since": "160.x"
+    },
+    "angleOffset": {
+      "type": "float (Градусы)",
+      "desc": "Фиксированное угловое смещение снаряда относительно направления выстрела в момент создания. Используется для веерной стрельбы, отражённых выстрелов и специфических паттернов.",
+      "example": "\"angleOffset\": 0.0",
+      "since": "160.x"
+    },
+    "missileUnitMultiplier": {
+      "type": "float",
+      "desc": "Множитель урона по щиту от ракет (ShieldArcAbility).",
+      "example": "\"missileUnitMultiplier\": 1.0",
+      "category": "ability",
+      "since": "160.x"
+    },
+    "deflectSound": {
+      "type": "Sound",
+      "desc": "Звук отражения снаряда дуговым щитом (ShieldArcAbility).",
+      "example": "\"deflectSound\": \"shieldHit\"",
+      "category": "ability",
+      "since": "160.x"
+    },
+    "reflectBuildingDamage": {
+      "type": "float",
+      "desc": "Множитель урона отражённых снарядов по зданиям (ShieldArcAbility).",
+      "example": "\"reflectBuildingDamage\": 1.0",
+      "category": "ability",
+      "since": "160.x"
+    },
+    "reflectVel": {
+      "type": "float",
+      "desc": "Множитель скорости отражённых снарядов (ShieldArcAbility). Отрицательные значения = вогнутая траектория, положительные = выпуклая.",
+      "example": "\"reflectVel\": 1.0",
+      "category": "ability",
+      "since": "160.x"
+    },
+    "reflectTime": {
+      "type": "float",
+      "desc": "Множитель времени жизни отражённых снарядов (ShieldArcAbility).",
+      "example": "\"reflectTime\": 1.0",
+      "category": "ability",
+      "since": "160.x"
+    },
+    "offsetRegion": {
+      "type": "boolean",
+      "desc": "Зависит ли спрайт дугового щита от координат x/y юнита (ShieldArcAbility).",
+      "example": "\"offsetRegion\": false",
+      "category": "ability",
+      "since": "160.x"
+    },
+    "pushUnits": {
+      "type": "boolean",
+      "desc": "Разрешает перемещать юниты этим транспортным блоком.",
+      "example": "\"pushUnits\": true",
+      "category": "payload",
+      "since": "160.x"
+    },
+    "pushDiffLayer": {
+      "type": "boolean",
+      "desc": "Разрешить наземным щитам толкать воздушных юнитов и наоборот (ShieldArcAbility).",
+      "example": "\"pushDiffLayer\": false",
+      "category": "ability",
+      "since": "160.x"
+    },
+    "pushEffect": {
+      "type": "Effect",
+      "desc": "Визуальный эффект отталкивания юнитов дуговым щитом (ShieldArcAbility).",
+      "example": "\"pushEffect\": null",
+      "category": "ability",
+      "since": "160.x"
+    },
+    "reloadMultiplier": {
+      "type": "float",
+      "desc": "Множитель скорости перезарядки для этого типа боеприпаса.",
+      "example": "\"reloadMultiplier\": 0.8"
+    },
+    "buildSpeedMultiplier": {
+      "type": "float",
+      "desc": "Множитель скорости строительства юнита под действием статус-эффекта.",
+      "example": "\"buildSpeedMultiplier\": 1.0",
+      "category": "status",
+      "since": "160.x"
+    },
+    "dragMultiplier": {
+      "type": "float",
+      "desc": "Множитель сопротивления движению юнита под действием статус-эффекта. 0.5 = вдвое меньше сопротивление (легче двигаться).",
+      "example": "\"dragMultiplier\": 1.0",
+      "category": "status",
+      "since": "160.x"
+    },
+    "disarm": {
+      "type": "boolean",
+      "desc": "Отключает ли статус-эффект оружие юнита (стрельба невозможна).",
+      "example": "\"disarm\": false",
+      "category": "status",
+      "since": "160.x"
+    },
+    "intervalDamageTime": {
+      "type": "float (Тики)",
+      "desc": "Интервал между срабатываниями периодического урона статус-эффекта.",
+      "example": "\"intervalDamageTime\": 0.0",
+      "category": "status",
+      "since": "160.x"
+    },
+    "intervalDamage": {
+      "type": "float (Урон)",
+      "desc": "Урон за интервал intervalDamageTime.",
+      "example": "\"intervalDamage\": 0.0",
+      "category": "status",
+      "since": "160.x"
+    },
+    "intervalDamagePierce": {
+      "type": "boolean",
+      "desc": "Пробивает ли периодический урон статус-эффекта броню цели.",
+      "example": "\"intervalDamagePierce\": false",
+      "category": "status",
+      "since": "160.x"
+    },
+    "effectChance": {
+      "type": "float (0-1)",
+      "desc": "Шанс появления эффекта статуса за тик.",
+      "example": "\"effectChance\": 0.15",
+      "category": "status",
+      "since": "160.x"
+    },
+    "parentizeEffect": {
+      "type": "boolean",
+      "desc": "Привязывать ли визуальный эффект статуса к юниту (двигается вместе с ним).",
+      "example": "\"parentizeEffect\": false",
+      "category": "status",
+      "since": "160.x"
+    },
+    "permanent": {
+      "type": "boolean",
+      "desc": "Если true — статус-эффект никогда не исчезает сам по себе.",
+      "example": "\"permanent\": false",
+      "category": "status",
+      "since": "160.x"
+    },
+    "reactive": {
+      "type": "boolean",
+      "desc": "Если true — эффект только реагирует с другими, но не может быть наложен напрямую. Например, blast при контакте с freezing.",
+      "example": "\"reactive\": false",
+      "category": "status",
+      "since": "160.x"
+    },
+    "applyExtend": {
+      "type": "boolean",
+      "desc": "Показывать ли applyEffect даже когда эффект уже есть на цели.",
+      "example": "\"applyExtend\": false",
+      "category": "status",
+      "since": "160.x"
+    },
+    "applyColor": {
+      "type": "Color HEX",
+      "desc": "Цвет эффекта applyEffect у статуса.",
+      "example": "\"applyColor\": \"ffffffff\"",
+      "category": "status",
+      "since": "160.x"
+    },
+    "parentizeApplyEffect": {
+      "type": "boolean",
+      "desc": "Привязывать ли applyEffect к юниту (двигается вместе с ним).",
+      "example": "\"parentizeApplyEffect\": false",
+      "category": "status",
+      "since": "160.x"
+    },
+    "outline": {
+      "type": "boolean",
+      "desc": "Генерировать ли контур (обводку) для спрайта. Для статусов и юнитов. По умолчанию true.",
+      "example": "\"outline\": true",
+      "category": "status",
+      "since": "160.x"
+    },
     "example": {
       "type": "ohno",
       "desc": "system поле",
       "example": "\"ohno\""
     },
+    "updateEffect": {
+      "type": "Effect",
+      "desc": "Визуальный эффект, который проигрывается постоянно во время работы блока (дым, искры, пар). Не путать с craftEffect — тот срабатывает раз за цикл производства. Используется в GenericCrafter, Drill, NuclearReactor и подобных блоках.",
+      "example": "\"updateEffect\": \"producesmoke\"",
+      "category": "effect",
+      "since": "160.x"
+    },
     "optional": {
-  "type": "boolean",
-  "desc": "Необязательное потребление. Если true — блок работает и без этого ресурса, но эффективность без него падает. Используется внутри consumes.liquid и consumes.items.",
-  "example": "\"optional\": true",
-  "category": "consumes",
-  "since": "160.x"
-},
-"booster": {
-  "type": "boolean",
-  "desc": "Ресурс работает как усилитель (бустер): блок работает и без него, но с ним получает бонус к эффективности (speedBoostPhase для куполов, множитель добычи для буров и т.д.). Используется внутри consumes.liquid и consumes.items.",
-  "example": "\"booster\": true",
-  "category": "consumes",
-  "since": "160.x"
-},
+      "type": "boolean",
+      "desc": "Необязательное потребление. Если true — блок работает и без этого ресурса, но эффективность без него падает. Используется внутри consumes.liquid и consumes.items.",
+      "example": "\"optional\": true",
+      "category": "consumes",
+      "since": "160.x"
+    },
+    "booster": {
+      "type": "boolean",
+      "desc": "Ресурс работает как усилитель (бустер): блок работает и без него, но с ним получает бонус к эффективности (speedBoostPhase для куполов, множитель добычи для буров и т.д.). Используется внутри consumes.liquid и consumes.items.",
+      "example": "\"booster\": true",
+      "category": "consumes",
+      "since": "160.x"
+    },
     "speedBoost": {
       "type": "float",
       "desc": "Множитель скорости, который купол перегрузки даёт блокам в радиусе действия. 1.0 = +0%, 2.5 = +150%, 6.0 = +500%. Используется в OverdriveProjector.",
@@ -262,11 +766,6 @@
       "type": "float (Градусы)",
       "desc": "Случайный угол разброса пуль при выстреле. 0 — идеальная снайперская точность.",
       "example": "\"inaccuracy\": 3"
-    },
-    "rotateSpeed": {
-      "type": "float (Градусов/тик)",
-      "desc": "Скорость поворота башни турели или юнита.",
-      "example": "\"rotateSpeed\": 6.5"
     },
     "ammoTypes": {
       "type": "ObjectMap <Item, BulletType>",
@@ -863,11 +1362,6 @@
       "desc": "Радиус свечения снаряда в полёте.",
       "example": "\"lightRadius\": 40"
     },
-    "lightColor": {
-      "type": "Color HEX",
-      "desc": "Цвет свечения, испускаемого снарядом в полёте.",
-      "example": "\"lightColor\": \"ff8833\""
-    },
     "lightOpacity": {
       "type": "float (0-1)",
       "desc": "Прозрачность свечения.",
@@ -912,11 +1406,6 @@
       "type": "float",
       "desc": "Множитель эффективности боеприпаса (не путать с ammoPerShot).",
       "example": "\"ammoMultiplier\": 2"
-    },
-    "reloadMultiplier": {
-      "type": "float",
-      "desc": "Множитель скорости перезарядки для этого типа боеприпаса.",
-      "example": "\"reloadMultiplier\": 0.8"
     },
     "buildVisibility": {
       "type": "BuildVisibility",
@@ -3563,12 +4052,6 @@
       "example": "\"drawSize\": 40.0",
       "since": "160.x"
     },
-    "angleOffset": {
-      "type": "float (Градусы)",
-      "desc": "Фиксированное угловое смещение снаряда относительно направления выстрела в момент создания. Используется для веерной стрельбы, отражённых выстрелов и специфических паттернов.",
-      "example": "\"angleOffset\": 0.0",
-      "since": "160.x"
-    },
     "randomAngleOffset": {
       "type": "float (Градусы)",
       "desc": "Случайное угловое отклонение снаряда при создании. Добавляется к angleOffset. 0 = без разброса по углу.",
@@ -3675,13 +4158,6 @@
       "type": "float",
       "desc": "Максимальное количество payload-объектов, которое может одновременно обрабатывать блок.",
       "example": "\"payloadLimit\": 3",
-      "category": "payload",
-      "since": "160.x"
-    },
-    "pushUnits": {
-      "type": "boolean",
-      "desc": "Разрешает перемещать юниты этим транспортным блоком.",
-      "example": "\"pushUnits\": true",
       "category": "payload",
       "since": "160.x"
     },
