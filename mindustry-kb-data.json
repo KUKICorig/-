@@ -19,6 +19,20 @@
       "desc": "Класс объекта в кодовой базе игры. Для блоков: ItemTurret, PowerTurret, GenericCrafter, Wall, Conveyor, Drill, SolarGenerator. Для юнитов: flying, mech, legs, tank. Для пуль: BasicBulletType, LaserBulletType, MissileBulletType.",
       "example": "\"type\": \"ItemTurret\""
     },
+    "coolant": {
+  "type": "Object (внутри consumes)",
+  "desc": "Охлаждающая жидкость, которую принимает турель для ускорения перезарядки. Указывается внутри объекта consumes. Поддерживает один или несколько охладителей через поле liquids (массив), либо одиночный через liquid. Каждая единица жидкости снижает время перезарядки в зависимости от coolantMultiplier турели.",
+  "example": "\"consumes\": {\n \"coolant\": {\n  \"liquids\": [\n   { \"liquid\": \"water\", \"amount\": 0.1 },\n   { \"liquid\": \"cryofluid\", \"amount\": 0.1 }\n  ]\n }\n}",
+  "category": "consumes",
+  "since": "160.x"
+},
+"coolantMultiplier": {
+  "type": "float",
+  "desc": "Множитель эффективности охлаждающей жидкости. Чем выше, тем сильнее жидкость ускоряет перезарядку турели. Стандартное значение для ванильных турелей — 5. Криофлюид имеет более высокую теплоёмкость, чем вода, поэтому даёт больший баф при том же значении множителя.",
+  "example": "\"coolantMultiplier\": 5",
+  "category": "turret",
+  "since": "160.x"
+},
     "lightColor": {
       "type": "Color HEX",
       "desc": "Цвет свечения, испускаемого снарядом в полёте.",
