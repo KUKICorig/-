@@ -50,6 +50,20 @@
    "category": "turret",
    "since": "160.x"
   },
+"source": {
+  "type": "ShootPattern",
+  "desc": "Исходный (базовый) паттерн стрельбы для ShootMulti. Определяет, что оружие делает перед переходом к паттернам из dest. Пустой объект {} означает, что оружие сразу переходит к dest. Может быть любым другим паттерном: ShootPattern, ShootSpread, ShootAlternate, ShootHelix, ShootSine.",
+  "example": "\"shoot\": {\n  \"type\": \"ShootMulti\",\n  \"source\": { \"type\": \"ShootPattern\", \"shots\": 1 },\n  \"dest\": [ ... ]\n}",
+  "category": "shoot",
+  "since": "146.x"
+},
+"dest": {
+  "type": "ShootPattern[]",
+  "desc": "Массив паттернов стрельбы для ShootMulti. Выполняются последовательно после source. Каждый элемент — отдельный паттерн (ShootPattern, ShootSpread, ShootAlternate, ShootHelix, ShootSine). Позволяет комбинировать разные типы залпов в одной серии: например, сначала веер, потом очередь, потом спираль.",
+  "example": "\"dest\": [\n  { \"type\": \"ShootSpread\", \"shots\": 3, \"spread\": 20 },\n  { \"type\": \"ShootPattern\", \"shots\": 2, \"shotDelay\": 6 }\n]",
+  "category": "shoot",
+  "since": "146.x"
+},
   "lightColor": {
    "type": "Color HEX",
    "desc": "Цвет свечения, испускаемого снарядом в полёте.",
