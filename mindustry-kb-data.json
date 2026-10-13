@@ -35,6 +35,626 @@
     "desc": "Если true, летающий юнит летит низко над землёй (не выше построек), что влияет на его видимость и атаку.",
     "example": "\"lowAltitude\": true"
   },
+      "lowAltitude": {
+        type: "boolean",
+        desc: "Если true, летающий юнит летит низко над землёй (не выше построек), что влияет на его видимость и атаку.",
+        example: '"lowAltitude": true'
+      },
+      "clipSize": {
+        type: "float (Пиксели)",
+        desc: "Размер отсечения для рендеринга юнита (оптимизация). Отрисовывается только то, что попадает в этот радиус вокруг центра.",
+        example: '"clipSize": 520'
+      },
+      "singleTarget": {
+        type: "boolean",
+        desc: "Если true, юнит атакует только одну цель за раз. Если false — может переключаться между несколькими.",
+        example: '"singleTarget": false'
+      },
+      "wobble": {
+        type: "float",
+        desc: "Амплитуда покачивания летающего юнита в полёте. 0 — не качается, 0.05 — заметное покачивание.",
+        example: '"wobble": 0.025'
+      },
+      "knockbackMultiplier": {
+        type: "float (0-1)",
+        desc: "Множитель отбрасывания, применяемый к юниту. 0.35 = юнит отлетает на 35% от обычной силы. 0 = не отбрасывается.",
+        example: '"knockbackMultiplier": 0.35'
+      },
+      "crashDamageMultiplier": {
+        type: "float",
+        desc: "Множитель урона, наносимого при падении юнита на постройки. 4.0 = в 4 раза больше урона при крушении.",
+        example: '"crashDamageMultiplier": 4'
+      },
+      "wreckHealthMultiplier": {
+        type: "float",
+        desc: "Множитель здоровья обломков юнита (от максимального здоровья). 1.5 = обломки имеют 150% от max HP.",
+        example: '"wreckHealthMultiplier": 1.5'
+      },
+      "useUnitCap": {
+        type: "boolean",
+        desc: "Учитывать ли юнит в лимите юнитов на карте. Если false — юнит не занимает слот в unit cap.",
+        example: '"useUnitCap": true'
+      },
+      "healFlash": {
+        type: "boolean",
+        desc: "Вспышка при лечении юнита. Показывает, что юнит восстанавливается.",
+        example: '"healFlash": true'
+      },
+      "canHeal": {
+        type: "boolean",
+        desc: "Может ли юнит лечить союзников. Влияет на работу RepairFieldAbility и подобных.",
+        example: '"canHeal": true'
+      },
+      "drawShields": {
+        type: "boolean",
+        desc: "Отображать ли щит юнита (если он есть). По умолчанию true.",
+        example: '"drawShields": true'
+      },
+      "isEnemy": {
+        type: "boolean",
+        desc: "Считается ли юнит врагом в волнах. Для союзных юнитов — false.",
+        example: '"isEnemy": true'
+      },
+      "lightRadius": {
+        type: "float (Пиксели)",
+        desc: "Радиус свечения, испускаемого юнитом или снарядом.",
+        example: '"lightRadius": 130'
+      },
+      "lightOpacity": {
+        type: "float (0-1)",
+        desc: "Прозрачность свечения. 1 — полностью непрозрачное, 0 — невидимое.",
+        example: '"lightOpacity": 0.6'
+      },
+      "shieldColor": {
+        type: "Color HEX",
+        desc: "Цвет щита юнита. Переопределяет стандартный цвет команды.",
+        example: '"shieldColor": "ff8c1a"'
+      },
+      "healColor": {
+        type: "Color HEX",
+        desc: "Цвет эффекта лечения юнита.",
+        example: '"healColor": "ffd27f"'
+      },
+      "outlineColor": {
+        type: "Color HEX",
+        desc: "Цвет контура (обводки) юнита. По умолчанию тёмно-серый.",
+        example: '"outlineColor": "3b2a26"'
+      },
+      "alwaysCreateOutline": {
+        type: "boolean",
+        desc: "Всегда создавать контур для модового юнита, даже если нет оружия с top = false.",
+        example: '"alwaysCreateOutline": true'
+      },
+      "engineSize": {
+        type: "float (Пиксели)",
+        desc: "Размер пламени двигателя. 0 — двигатель не рисуется процедурно (если заданы engines).",
+        example: '"engineSize": 0'
+      },
+      "engineColor": {
+        type: "Color HEX",
+        desc: "Цвет двигателей. Переопределяет стандартный цвет команды.",
+        example: '"engineColor": "ff9d5c"'
+      },
+      "engineColorInner": {
+        type: "Color HEX",
+        desc: "Внутренний цвет двигателей.",
+        example: '"engineColorInner": "fff6d8"'
+      },
+      "engines": {
+        type: "Engine[]",
+        desc: "Массив процедурных двигателей. Каждый элемент: { x, y, radius, rotation, color }. Используется вместо engineOffset для сложных юнитов.",
+        example: '"engines": [\n  { "x": 0, "y": -27, "radius": 10, "rotation": -90 }\n]'
+      },
+      "loopSound": {
+        type: "Sound",
+        desc: "Циклический звук, проигрываемый юнитом постоянно (для летающих кораблей, огня, механизмов).",
+        example: '"loopSound": "loopFire"'
+      },
+      "loopSoundVolume": {
+        type: "float (0-1)",
+        desc: "Громкость циклического звука юнита.",
+        example: '"loopSoundVolume": 0.26'
+      },
+      "moveSound": {
+        type: "Sound",
+        desc: "Циклический звук движения юнита (для летающих и водных).",
+        example: '"moveSound": "loopThruster"'
+      },
+      "moveSoundVolume": {
+        type: "float (0-1)",
+        desc: "Громкость звука движения.",
+        example: '"moveSoundVolume": 0.38'
+      },
+      "moveSoundPitchMin": {
+        type: "float",
+        desc: "Минимальная высота тона звука движения.",
+        example: '"moveSoundPitchMin": 0.85'
+      },
+      "moveSoundPitchMax": {
+        type: "float",
+        desc: "Максимальная высота тона звука движения.",
+        example: '"moveSoundPitchMax": 1.1'
+      },
+      "deathSound": {
+        type: "Sound",
+        desc: "Звук при уничтожении юнита.",
+        example: '"deathSound": "unitExplode3"'
+      },
+      "deathSoundVolume": {
+        type: "float (0-1)",
+        desc: "Громкость звука смерти юнита.",
+        example: '"deathSoundVolume": 1'
+      },
+      "deathShake": {
+        type: "float",
+        desc: "Тряска экрана при смерти юнита.",
+        example: '"deathShake": 22'
+      },
+      "createWreck": {
+        type: "boolean",
+        desc: "Создавать ли обломки при уничтожении юнита.",
+        example: '"createWreck": true'
+      },
+      "createScorch": {
+        type: "boolean",
+        desc: "Создавать ли следы гари на земле при уничтожении юнита.",
+        example: '"createScorch": true'
+      },
+      "fallEffect": {
+        type: "Effect",
+        desc: "Эффект, испускаемый при падении юнита.",
+        example: '"fallEffect": "fallSmoke"'
+      },
+      "deathExplosionEffect": {
+        type: "Effect",
+        desc: "Эффект взрыва при смерти юнита.",
+        example: '"deathExplosionEffect": "dynamicExplosion"'
+      },
+      "parts": {
+        type: "DrawPart[]",
+        desc: "Массив процедурных частей отрисовки юнита: ShapePart, HaloPart, FlarePart, RegionPart, EffectSpawnerPart. Позволяет собирать визуал без спрайтов.",
+        example: '"parts": [\n  { "type": "ShapePart", "sides": 3, "x": 0, "y": 19, "radius": 7 }\n]'
+      },
+      "abilities": {
+        type: "Ability[]",
+        desc: "Список способностей юнита. Например: ForceFieldAbility (щит), RepairFieldAbility (лечение), RegenAbility (регенерация), MoveEffectAbility, LiquidExplodeAbility, ArmorPlateAbility, EnergyFieldAbility.",
+        example: '"abilities": [ { "type": "ForceFieldAbility", "radius": 140, "max": 5000 } ]'
+      },
+      "targetMissiles": {
+        type: "boolean",
+        desc: "Может ли снаряд или турель атаковать вражеские снаряды в полёте (для ПВО и точечной обороны).",
+        example: '"targetMissiles": false'
+      },
+      "scaledSplashDamage": {
+        type: "boolean",
+        desc: "Если true, сплэш-урон масштабируется в зависимости от расстояния до эпицентра.",
+        example: '"scaledSplashDamage": true'
+      },
+      "collidesTiles": {
+        type: "boolean",
+        desc: "Может ли снаряд сталкиваться с блоками (стенами, постройками).",
+        example: '"collidesTiles": true'
+      },
+      "drawSize": {
+        type: "float (Пиксели)",
+        desc: "Размер отсечения для рендеринга снаряда (оптимизация). У больших снарядов должно быть большим.",
+        example: '"drawSize": 440'
+      },
+      "trailSinMag": {
+        type: "float (Пиксели)",
+        desc: "Амплитуда синусоидального смещения следа снаряда.",
+        example: '"trailSinMag": 2.4'
+      },
+      "trailSinScl": {
+        type: "float",
+        desc: "Частота синусоидального смещения следа снаряда.",
+        example: '"trailSinScl": 4'
+      },
+      "trailInterval": {
+        type: "float (Тики)",
+        desc: "Интервал между появлением частиц следа.",
+        example: '"trailInterval": 3'
+      },
+      "trailSpread": {
+        type: "float (Градусы)",
+        desc: "Разброс частиц следа.",
+        example: '"trailSpread": 25'
+      },
+      "intervalBullet": {
+        type: "BulletType",
+        desc: "Снаряд, создаваемый через интервалы во время полёта основного снаряда.",
+        example: '"intervalBullet": { "type": "LightningBulletType", "damage": 5 }'
+      },
+      "bulletInterval": {
+        type: "float (Тики)",
+        desc: "Интервал между созданием интервальных снарядов (intervalBullet).",
+        example: '"bulletInterval": 7'
+      },
+      "intervalBullets": {
+        type: "int",
+        desc: "Количество интервальных снарядов, создаваемых за один интервал.",
+        example: '"intervalBullets": 2'
+      },
+      "intervalSpread": {
+        type: "float (Градусы)",
+        desc: "Угол разброса интервальных снарядов.",
+        example: '"intervalSpread": 22'
+      },
+      "intervalRandomSpread": {
+        type: "float (Градусы)",
+        desc: "Случайный разброс интервальных снарядов.",
+        example: '"intervalRandomSpread": 140'
+      },
+      "intervalDelay": {
+        type: "float (Тики)",
+        desc: "Задержка перед первым созданием интервального снаряда.",
+        example: '"intervalDelay": 12'
+      },
+      "damageInterval": {
+        type: "float (Тики)",
+        desc: "Интервал между нанесением урона для непрерывных снарядов (Continuous).",
+        example: '"damageInterval": 4'
+      },
+      "divisions": {
+        type: "int",
+        desc: "Количество сегментов для отрисовки непрерывного луча (Continuous).",
+        example: '"divisions": 34'
+      },
+      "optimalLifeFract": {
+        type: "float (0-1)",
+        desc: "Доля времени жизни снаряда, при которой он наносит максимальный урон (для лазеров).",
+        example: '"optimalLifeFract": 0.5'
+      },
+      "drawFlare": {
+        type: "boolean",
+        desc: "Рисовать ли вспышку (flare) для непрерывного луча.",
+        example: '"drawFlare": true'
+      },
+      "flareColor": {
+        type: "Color HEX",
+        desc: "Цвет вспышки непрерывного луча.",
+        example: '"flareColor": "ffd27f"'
+      },
+      "flareWidth": {
+        type: "float (Пиксели)",
+        desc: "Ширина вспышки.",
+        example: '"flareWidth": 7'
+      },
+      "flareLength": {
+        type: "float (Пиксели)",
+        desc: "Длина вспышки.",
+        example: '"flareLength": 62'
+      },
+      "flareInnerScl": {
+        type: "float",
+        desc: "Масштаб внутренней части вспышки.",
+        example: '"flareInnerScl": 0.5'
+      },
+      "flareInnerLenScl": {
+        type: "float",
+        desc: "Масштаб длины внутренней части вспышки.",
+        example: '"flareInnerLenScl": 0.55'
+      },
+      "flareRotSpeed": {
+        type: "float",
+        desc: "Скорость вращения вспышки.",
+        example: '"flareRotSpeed": 2.4'
+      },
+      "rotateFlare": {
+        type: "boolean",
+        desc: "Вращается ли вспышка вместе с лучом.",
+        example: '"rotateFlare": false'
+      },
+      "oscScl": {
+        type: "float",
+        desc: "Частота осцилляции для непрерывного луча.",
+        example: '"oscScl": 1.05'
+      },
+      "oscMag": {
+        type: "float",
+        desc: "Амплитуда осцилляции для непрерывного луча.",
+        example: '"oscMag": 0.05'
+      },
+      "lightStroke": {
+        type: "float (Пиксели)",
+        desc: "Длина свечения для непрерывного луча.",
+        example: '"lightStroke": 70'
+      },
+      "initialShootSound": {
+        type: "Sound",
+        desc: "Звук первого выстрела (для непрерывного оружия). Далее играет shootSound.",
+        example: '"initialShootSound": "shootFlamePlasma"'
+      },
+      "pierceDamageFactor": {
+        type: "float (0-1)",
+        desc: "Множитель урона при пробитии. Каждая следующая цель получает меньше урона.",
+        example: '"pierceDamageFactor": 0.05'
+      },
+      "collideTerrain": {
+        type: "boolean",
+        desc: "Может ли снаряд сталкиваться с ландшафтом (землёй, водой).",
+        example: '"collideTerrain": false'
+      },
+      "absorbable": {
+        type: "boolean",
+        desc: "Может ли снаряд быть поглощён щитами.",
+        example: '"absorbable": false'
+      },
+      "reflectable": {
+        type: "boolean",
+        desc: "Может ли снаряд быть отражён стенами с chanceDeflect.",
+        example: '"reflectable": false'
+      },
+      "hittable": {
+        type: "boolean",
+        desc: "Может ли снаряд быть сбит точечной обороной.",
+        example: '"hittable": false'
+      },
+      "targetable": {
+        type: "boolean",
+        desc: "Может ли юнит быть выбран в качестве цели для атаки врагами.",
+        example: '"targetable": true'
+      },
+      "hitUnder": {
+        type: "boolean",
+        desc: "Может ли снаряд попадать по целям под землёй (по юнитам, зарывшимся в землю).",
+        example: '"hitUnder": false'
+      },
+      "killShooter": {
+        type: "boolean",
+        desc: "Убивает ли снаряд стреляющего. Для оружия со shootOnDeath обязательно false, иначе выстрел не сработает.",
+        example: '"killShooter": false'
+      },
+      "instantDisappear": {
+        type: "boolean",
+        desc: "Мгновенное исчезновение снаряда после попадания.",
+        example: '"instantDisappear": true'
+      },
+      "collides": {
+        type: "boolean",
+        desc: "Может ли снаряд сталкиваться с целями (общий флаг).",
+        example: '"collides": false'
+      },
+      "healPercent": {
+        type: "float (0-100)",
+        desc: "Процент здоровья союзных построек, восстанавливаемый снарядом при смерти (для ExplosionBulletType).",
+        example: '"healPercent": 18'
+      },
+      "healAmount": {
+        type: "float (HP)",
+        desc: "Фиксированное количество здоровья, восстанавливаемое союзным постройкам (для ExplosionBulletType).",
+        example: '"healAmount": 900'
+      },
+      "healSound": {
+        type: "Sound",
+        desc: "Звук при лечении.",
+        example: '"healSound": "healWave"'
+      },
+      "healSoundVolume": {
+        type: "float (0-1)",
+        desc: "Громкость звука лечения.",
+        example: '"healSoundVolume": 0.6'
+      },
+      "healEffect": {
+        type: "Effect",
+        desc: "Визуальный эффект лечения.",
+        example: '"healEffect": "heal"'
+      },
+      "puddles": {
+        type: "int",
+        desc: "Количество луж, создаваемых снарядом при попадании.",
+        example: '"puddles": 9'
+      },
+      "puddleRange": {
+        type: "float (Пиксели)",
+        desc: "Радиус разброса луж от точки попадания.",
+        example: '"puddleRange": 75'
+      },
+      "puddleAmount": {
+        type: "float",
+        desc: "Количество жидкости в каждой луже.",
+        example: '"puddleAmount": 90'
+      },
+      "puddleLiquid": {
+        type: "String",
+        desc: "Жидкость, оставляемая снарядом в виде луж (для LiquidBulletType и некоторых других типов).",
+        example: '"puddleLiquid": "slag"'
+      },
+      "lightningCone": {
+        type: "float (Градусы)",
+        desc: "Угол разлёта молний от точки удара. 360 — во все стороны.",
+        example: '"lightningCone": 360'
+      },
+      "lightningLengthRand": {
+        type: "float (Пиксели)",
+        desc: "Случайное отклонение длины молний.",
+        example: '"lightningLengthRand": 9'
+      },
+      "hitSoundVolume": {
+        type: "float (0-1)",
+        desc: "Громкость звука при попадании снаряда.",
+        example: '"hitSoundVolume": 1'
+      },
+      "hitSoundPitch": {
+        type: "float",
+        desc: "Высота тона звука попадания.",
+        example: '"hitSoundPitch": 1.05'
+      },
+      "shootSoundVolume": {
+        type: "float (0-1)",
+        desc: "Громкость звука выстрела.",
+        example: '"shootSoundVolume": 0.8'
+      },
+      "soundPitchMin": {
+        type: "float",
+        desc: "Минимальная высота тона звука выстрела (рандом).",
+        example: '"soundPitchMin": 0.9'
+      },
+      "soundPitchMax": {
+        type: "float",
+        desc: "Максимальная высота тона звука выстрела (рандом).",
+        example: '"soundPitchMax": 1.15'
+      },
+      "xRand": {
+        type: "float (Пиксели)",
+        desc: "Случайное смещение точки вылета снаряда по X.",
+        example: '"xRand": 3'
+      },
+      "lifeRnd": {
+        type: "float (0-1)",
+        desc: "Случайное отклонение времени жизни снаряда.",
+        example: '"lifeRnd": 0.1'
+      },
+      "ejectEffect": {
+        type: "Effect",
+        desc: "Эффект выброса гильзы/снаряда.",
+        example: '"ejectEffect": "casing3"'
+      },
+      "weaveRandom": {
+        type: "boolean",
+        desc: "Если true, синусоидальная траектория имеет случайную фазу.",
+        example: '"weaveRandom": true'
+      },
+      "weaveScale": {
+        type: "float",
+        desc: "Частота синусоидальной траектории снаряда.",
+        example: '"weaveScale": 6.5'
+      },
+      "weaveMag": {
+        type: "float (Пиксели)",
+        desc: "Амплитуда синусоидальной траектории снаряда.",
+        example: '"weaveMag": 2.8'
+      },
+      "despawnSound": {
+        type: "Sound",
+        desc: "Звук при исчезновении снаряда.",
+        example: '"despawnSound": "explosionArtillery"'
+      },
+      "despawnShake": {
+        type: "float",
+        desc: "Тряска экрана при исчезновении снаряда.",
+        example: '"despawnShake": 8'
+      },
+      "keepVelocity": {
+        type: "boolean",
+        desc: "Сохраняет ли снаряд скорость стреляющего при вылете.",
+        example: '"keepVelocity": false'
+      },
+      "shootOnDeath": {
+        type: "boolean",
+        desc: "Если true, оружие производит выстрел при гибели владельца.",
+        example: '"shootOnDeath": true'
+      },
+      "shootOnDeathEffect": {
+        type: "Effect",
+        desc: "Эффект, создаваемый при выстреле на смерть.",
+        example: '"shootOnDeathEffect": "massiveExplosion"'
+      },
+      "ignoreRotation": {
+        type: "boolean",
+        desc: "Если true, орудие игнорирует поворот стреляющего при выстреле.",
+        example: '"ignoreRotation": true'
+      },
+      "controllable": {
+        type: "boolean",
+        desc: "Может ли оружие управляться игроком. Если false, только ИИ.",
+        example: '"controllable": false'
+      },
+      "aiControllable": {
+        type: "boolean",
+        desc: "Может ли ИИ управлять этим оружием. Если false, стрельба только вручную.",
+        example: '"aiControllable": false'
+      },
+      "alwaysShooting": {
+        type: "boolean",
+        desc: "Если true, оружие стреляет всегда, независимо от наличия цели.",
+        example: '"alwaysShooting": false'
+      },
+      "autoTarget": {
+        type: "boolean",
+        desc: "Если true, орудие автоматически выбирает цель без участия игрока.",
+        example: '"autoTarget": true'
+      },
+      "predictTarget": {
+        type: "boolean",
+        desc: "Если true, орудие предугадывает движение цели для более точной стрельбы.",
+        example: '"predictTarget": true'
+      },
+      "targetInterval": {
+        type: "float (Тики)",
+        desc: "Интервал между попытками найти новую цель, если текущая отсутствует.",
+        example: '"targetInterval": 15'
+      },
+      "targetSwitchInterval": {
+        type: "float (Тики)",
+        desc: "Интервал перед переключением на новую цель.",
+        example: '"targetSwitchInterval": 30'
+      },
+      "rotationLimit": {
+        type: "float (Градусы)",
+        desc: "Ограничение поворота орудия относительно его базового направления (в градусах).",
+        example: '"rotationLimit": 220'
+      },
+      "baseRotation": {
+        type: "float (Градусы)",
+        desc: "Начальный угол поворота оружия, если оно не наводится автоматически.",
+        example: '"baseRotation": 0.0'
+      },
+      "minWarmup": {
+        type: "float (0-1)",
+        desc: "Минимальный прогрев орудия для выстрела. 0.5 = турель должна разогреться на 50%.",
+        example: '"minWarmup": 0'
+      },
+      "cooldownTime": {
+        type: "float (Тики)",
+        desc: "Время остывания орудия после стрельбы.",
+        example: '"cooldownTime": 130'
+      },
+      "continuous": {
+        type: "boolean",
+        desc: "Если true, оружие стреляет непрерывно (лазер, огнемёт) без перезарядки между выстрелами.",
+        example: '"continuous": true'
+      },
+      "alwaysContinuous": {
+        type: "boolean",
+        desc: "Если true, оружие всегда в режиме непрерывной стрельбы (игнорирует перезарядку).",
+        example: '"alwaysContinuous": true'
+      },
+      "initialShootSound": {
+        type: "Sound",
+        desc: "Звук первого выстрела для непрерывного оружия.",
+        example: '"initialShootSound": "shootFlamePlasma"'
+      },
+      "chargeSound": {
+        type: "Sound",
+        desc: "Звук зарядки орудия (при firstShotDelay > 0).",
+        example: '"chargeSound": "chargeCorvus"'
+      },
+      "shootSound": {
+        type: "Sound",
+        desc: "Звук выстрела орудия.",
+        example: '"shootSound": "shootMissileLarge"'
+      },
+      "parentizeEffects": {
+        type: "boolean",
+        desc: "Если true, эффекты оружия привязываются к родительскому юниту (не теряются при повороте).",
+        example: '"parentizeEffects": true'
+      },
+      "shootSpread": {
+        type: "float (Градусы)",
+        desc: "Разброс между снарядами в залпе. Работает в паттернах стрельбы.",
+        example: '"spread": 7'
+      },
+      "shoot": {
+        type: "ShootPattern",
+        desc: "Паттерн стрельбы: ShootPattern (базовый), ShootSpread (веер), ShootAlternate (очередь), ShootHelix (спираль), ShootSine (синус), ShootMulti (комбинированный).",
+        example: '"shoot": { "type": "ShootSpread", "shots": 3, "spread": 7, "shotDelay": 8 }'
+      },
+      "bulletInterval": {
+        type: "float (Тики)",
+        desc: "Интервал между созданием интервальных снарядов (intervalBullet).",
+        example: '"bulletInterval": 5'
+      },
   "clipSize": {
     "type": "float (Пиксели)",
     "desc": "Размер отсечения для рендеринга юнита (оптимизация). Отрисовывается только то, что попадает в этот радиус вокруг центра.",
