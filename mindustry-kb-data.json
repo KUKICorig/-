@@ -10,9 +10,13 @@
       "Новые поля помечены since=160.x",
       "DB_FIELDS полностью совместим со Studio: type/desc/example",
       "BULLET_TYPES и STATUS_EFFECTS сохранены и расширены",
-      "Добавлены новые категории: draw, planet, environment, payload, ability"
+      "Добавлены новые категории: draw, planet, environment, payload, ability",
+      "База пополнена: +735 полей из Anuken/Mindustry@master (проверка 2026-10-17)",
+      "38 корневых записей слиты в DB_FIELDS (корень очищен)",
+      "BULLET_TYPES: удалены 3 некорректных ключа (это были поля, а не классы)",
+      "Поля покрыты для: UnitType, Weapon, BulletType (+все подклассы), Effect, DrawPart, ShootPattern, Ability, StatusEffect, Block (+подклассы)"
     ],
-    "contentVersion": "1.0",
+    "contentVersion": "1.1",
     "contentSource": "Anuken/Mindustry@master",
     "contentSections": [
       "ITEMS",
@@ -21,694 +25,14 @@
       "UNITS"
     ],
     "counts": {
-      "DB_FIELDS": 761,
-      "BULLET_TYPES": 29,
+      "DB_FIELDS": 1534,
+      "BULLET_TYPES": 26,
       "STATUS_EFFECTS": 23,
       "ITEMS": 22,
       "LIQUIDS": 11,
       "BLOCKS": 435,
       "UNITS": 65
     }
-  },
-  "lowAltitude": {
-    "type": "boolean",
-    "desc": "Если true, летающий юнит летит низко над землёй (не выше построек), что влияет на его видимость и атаку.",
-    "example": "\"lowAltitude\": true"
-  },
-  "fragLifeMin": {
-    "type": "float",
-    "desc": "Минимальное время жизни осколков при взрыве снаряда, как доля от базового lifetime. Работает в паре с fragLifeMax. 0.6 = осколок живёт минимум 60% от времени жизни родителя.",
-    "example": "\"fragLifeMin\": 0.6",
-    "category": "bullet",
-    "since": "160.x"
-  },
-  "fragLifeMax": {
-    "type": "float",
-    "desc": "Максимальное время жизни осколков при взрыве снаряда, как доля от базового lifetime. Работает в паре с fragLifeMin.",
-    "example": "\"fragLifeMax\": 1.2",
-    "category": "bullet",
-    "since": "160.x"
-  },
-  "fragRandomSpread": {
-    "type": "float (Градусы)",
-    "desc": "Дополнительный случайный разброс осколков сверх fragSpread. 0 = все осколки в пределах fragSpread, 360 = полный хаос во все стороны.",
-    "example": "\"fragRandomSpread\": 60",
-    "category": "bullet",
-    "since": "160.x"
-  },
-  "interp": {
-    "type": "Interp",
-    "desc": "Кривая интерполяции для эффекта или анимации. Определяет, как значение меняется во времени. Значения: linear, pow2In, pow2Out, pow3In, pow3Out, sineIn, sineOut, slope, bounceOut и другие.",
-    "example": "\"interp\": \"pow2Out\"",
-    "category": "effect",
-    "since": "160.x"
-  },
-  "trailSinMag": {
-    "type": "float (Пиксели)",
-    "desc": "Амплитуда синусоидального смещения следа снаряда.",
-    "example": "\"trailSinMag\": 2.4"
-  },
-  "trailSinScl": {
-    "type": "float",
-    "desc": "Частота синусоидального смещения следа снаряда.",
-    "example": "\"trailSinScl\": 4"
-  },
-  "trailInterval": {
-    "type": "float (Тики)",
-    "desc": "Интервал между появлением частиц следа.",
-    "example": "\"trailInterval\": 3"
-  },
-  "scaledSplashDamage": {
-    "type": "boolean",
-    "desc": "Если true, сплэш-урон масштабируется в зависимости от расстояния до эпицентра.",
-    "example": "\"scaledSplashDamage\": true"
-  },
-  "sprite": {
-    "type": "String",
-    "desc": "Имя текстуры снаряда. Файл должен лежать в sprites/ по соответствующему пути. Если не указан — используется стандартная текстура для типа снаряда.",
-    "example": "\"sprite\": \"missile\"",
-    "category": "bullet",
-    "since": "160.x"
-  },
-  "knockbackMultiplier": {
-    "type": "float (0-1)",
-    "desc": "Множитель отбрасывания, применяемый к юниту. 0.35 = юнит отлетает на 35% от обычной силы. 0 = не отбрасывается.",
-    "example": "\"knockbackMultiplier\": 0.35"
-  },
-  "localizedName": {
-    "type": "String",
-    "desc": "Отображаемое название юнита, блока или предмета в игре. Поддерживает русский язык и цветовые теги Mindustry вида [scarlet], [accent], [white].",
-    "example": "\"localizedName\": \"Шпилька\"",
-    "category": "unit",
-    "since": "160.x"
-  },
-  "spin": {
-    "type": "float",
-    "desc": "Скорость вращения спрайта снаряда вокруг своей оси. 0 = не вращается, 6 = быстрое вращение.",
-    "example": "\"spin\": 6",
-    "category": "bullet",
-    "since": "160.x"
-  },
-  "effects": {
-    "type": "Effect[]",
-    "desc": "Массив вложенных эффектов внутри MultiEffect. Каждый элемент — отдельный эффект (ExplosionEffect, WaveEffect, ParticleEffect и т.д.).",
-    "example": "\"effects\": [ { \"type\": \"WaveEffect\", \"lifetime\": 20 } ]",
-    "category": "effect",
-    "since": "160.x"
-  },
-  "waveStroke": {
-    "type": "float (Пиксели)",
-    "desc": "Толщина обводки волны в WaveEffect или ExplosionEffect. 0 = волна без обводки, 5 = заметная линия.",
-    "example": "\"waveStroke\": 5",
-    "category": "effect",
-    "since": "160.x"
-  },
-  "smokeSize": {
-    "type": "float (Пиксели)",
-    "desc": "Размер частиц дыма в ExplosionEffect. Больше = крупнее облака дыма.",
-    "example": "\"smokeSize\": 4",
-    "category": "effect",
-    "since": "160.x"
-  },
-  "clipSize": {
-    "type": "float (Пиксели)",
-    "desc": "Размер отсечения для рендеринга юнита (оптимизация). Отрисовывается только то, что попадает в этот радиус вокруг центра.",
-    "example": "\"clipSize\": 520"
-  },
-  "singleTarget": {
-    "type": "boolean",
-    "desc": "Если true, юнит атакует только одну цель за раз. Если false — может переключаться между несколькими.",
-    "example": "\"singleTarget\": false"
-  },
-  "wobble": {
-    "type": "float",
-    "desc": "Амплитуда покачивания летающего юнита в полёте. 0 — не качается, 0.05 — заметное покачивание.",
-    "example": "\"wobble\": 0.025"
-  },
-  "crashDamageMultiplier": {
-    "type": "float",
-    "desc": "Множитель урона, наносимого при падении юнита на постройки. 4.0 = в 4 раза больше урона при крушении.",
-    "example": "\"crashDamageMultiplier\": 4"
-  },
-  "wreckHealthMultiplier": {
-    "type": "float",
-    "desc": "Множитель здоровья обломков юнита (от максимального здоровья). 1.5 = обломки имеют 150% от max HP.",
-    "example": "\"wreckHealthMultiplier\": 1.5"
-  },
-  "useUnitCap": {
-    "type": "boolean",
-    "desc": "Учитывать ли юнит в лимите юнитов на карте. Если false — юнит не занимает слот в unit cap.",
-    "example": "\"useUnitCap\": true"
-  },
-  "healFlash": {
-    "type": "boolean",
-    "desc": "Вспышка при лечении юнита. Показывает, что юнит восстанавливается.",
-    "example": "\"healFlash\": true"
-  },
-  "canHeal": {
-    "type": "boolean",
-    "desc": "Может ли юнит лечить союзников. Влияет на работу RepairFieldAbility и подобных.",
-    "example": "\"canHeal\": true"
-  },
-  "drawShields": {
-    "type": "boolean",
-    "desc": "Отображать ли щит юнита (если он есть). По умолчанию true.",
-    "example": "\"drawShields\": true"
-  },
-  "isEnemy": {
-    "type": "boolean",
-    "desc": "Считается ли юнит врагом в волнах. Для союзных юнитов — false.",
-    "example": "\"isEnemy\": true"
-  },
-  "lightRadius": {
-    "type": "float (Пиксели)",
-    "desc": "Радиус свечения, испускаемого юнитом или снарядом.",
-    "example": "\"lightRadius\": 130"
-  },
-  "lightOpacity": {
-    "type": "float (0-1)",
-    "desc": "Прозрачность свечения. 1 — полностью непрозрачное, 0 — невидимое.",
-    "example": "\"lightOpacity\": 0.6"
-  },
-  "shieldColor": {
-    "type": "Color HEX",
-    "desc": "Цвет щита юнита. Переопределяет стандартный цвет команды.",
-    "example": "\"shieldColor\": \"ff8c1a\""
-  },
-  "healColor": {
-    "type": "Color HEX",
-    "desc": "Цвет эффекта лечения юнита.",
-    "example": "\"healColor\": \"ffd27f\""
-  },
-  "outlineColor": {
-    "type": "Color HEX",
-    "desc": "Цвет контура (обводки) юнита. По умолчанию тёмно-серый.",
-    "example": "\"outlineColor\": \"3b2a26\""
-  },
-  "alwaysCreateOutline": {
-    "type": "boolean",
-    "desc": "Всегда создавать контур для модового юнита, даже если нет оружия с top = false.",
-    "example": "\"alwaysCreateOutline\": true"
-  },
-  "engineSize": {
-    "type": "float (Пиксели)",
-    "desc": "Размер пламени двигателя. 0 — двигатель не рисуется процедурно (если заданы engines).",
-    "example": "\"engineSize\": 0"
-  },
-  "engineColor": {
-    "type": "Color HEX",
-    "desc": "Цвет двигателей. Переопределяет стандартный цвет команды.",
-    "example": "\"engineColor\": \"ff9d5c\""
-  },
-  "engineColorInner": {
-    "type": "Color HEX",
-    "desc": "Внутренний цвет двигателей.",
-    "example": "\"engineColorInner\": \"fff6d8\""
-  },
-  "engines": {
-    "type": "Engine[]",
-    "desc": "Массив процедурных двигателей. Каждый элемент: { x, y, radius, rotation, color }. Используется вместо engineOffset для сложных юнитов.",
-    "example": "\"engines\": [\n  { \"x\": 0, \"y\": -27, \"radius\": 10, \"rotation\": -90 }\n]"
-  },
-  "loopSound": {
-    "type": "Sound",
-    "desc": "Циклический звук, проигрываемый юнитом постоянно (для летающих кораблей, огня, механизмов).",
-    "example": "\"loopSound\": \"loopFire\""
-  },
-  "loopSoundVolume": {
-    "type": "float (0-1)",
-    "desc": "Громкость циклического звука юнита.",
-    "example": "\"loopSoundVolume\": 0.26"
-  },
-  "moveSound": {
-    "type": "Sound",
-    "desc": "Циклический звук движения юнита (для летающих и водных).",
-    "example": "\"moveSound\": \"loopThruster\""
-  },
-  "moveSoundVolume": {
-    "type": "float (0-1)",
-    "desc": "Громкость звука движения.",
-    "example": "\"moveSoundVolume\": 0.38"
-  },
-  "moveSoundPitchMin": {
-    "type": "float",
-    "desc": "Минимальная высота тона звука движения.",
-    "example": "\"moveSoundPitchMin\": 0.85"
-  },
-  "moveSoundPitchMax": {
-    "type": "float",
-    "desc": "Максимальная высота тона звука движения.",
-    "example": "\"moveSoundPitchMax\": 1.1"
-  },
-  "deathSound": {
-    "type": "Sound",
-    "desc": "Звук при уничтожении юнита.",
-    "example": "\"deathSound\": \"unitExplode3\""
-  },
-  "deathSoundVolume": {
-    "type": "float (0-1)",
-    "desc": "Громкость звука смерти юнита.",
-    "example": "\"deathSoundVolume\": 1"
-  },
-  "deathShake": {
-    "type": "float",
-    "desc": "Тряска экрана при смерти юнита.",
-    "example": "\"deathShake\": 22"
-  },
-  "createWreck": {
-    "type": "boolean",
-    "desc": "Создавать ли обломки при уничтожении юнита.",
-    "example": "\"createWreck\": true"
-  },
-  "createScorch": {
-    "type": "boolean",
-    "desc": "Создавать ли следы гари на земле при уничтожении юнита.",
-    "example": "\"createScorch\": true"
-  },
-  "fallEffect": {
-    "type": "Effect",
-    "desc": "Эффект, испускаемый при падении юнита.",
-    "example": "\"fallEffect\": \"fallSmoke\""
-  },
-  "deathExplosionEffect": {
-    "type": "Effect",
-    "desc": "Эффект взрыва при смерти юнита.",
-    "example": "\"deathExplosionEffect\": \"dynamicExplosion\""
-  },
-  "parts": {
-    "type": "DrawPart[]",
-    "desc": "Массив процедурных частей отрисовки юнита: ShapePart, HaloPart, FlarePart, RegionPart, EffectSpawnerPart. Позволяет собирать визуал без спрайтов.",
-    "example": "\"parts\": [\n  { \"type\": \"ShapePart\", \"sides\": 3, \"x\": 0, \"y\": 19, \"radius\": 7 }\n]"
-  },
-  "abilities": {
-    "type": "Ability[]",
-    "desc": "Список способностей юнита. Например: ForceFieldAbility (щит), RepairFieldAbility (лечение), RegenAbility (регенерация), MoveEffectAbility, LiquidExplodeAbility, ArmorPlateAbility, EnergyFieldAbility.",
-    "example": "\"abilities\": [ { \"type\": \"ForceFieldAbility\", \"radius\": 140, \"max\": 5000 } ]"
-  },
-  "targetMissiles": {
-    "type": "boolean",
-    "desc": "Может ли снаряд или турель атаковать вражеские снаряды в полёте (для ПВО и точечной обороны).",
-    "example": "\"targetMissiles\": false"
-  },
-  "collidesTiles": {
-    "type": "boolean",
-    "desc": "Может ли снаряд сталкиваться с блоками (стенами, постройками).",
-    "example": "\"collidesTiles\": true"
-  },
-  "drawSize": {
-    "type": "float (Пиксели)",
-    "desc": "Размер отсечения для рендеринга снаряда (оптимизация). У больших снарядов должно быть большим.",
-    "example": "\"drawSize\": 440"
-  },
-  "trailSpread": {
-    "type": "float (Градусы)",
-    "desc": "Разброс частиц следа.",
-    "example": "\"trailSpread\": 25"
-  },
-  "intervalBullet": {
-    "type": "BulletType",
-    "desc": "Снаряд, создаваемый через интервалы во время полёта основного снаряда.",
-    "example": "\"intervalBullet\": { \"type\": \"LightningBulletType\", \"damage\": 5 }"
-  },
-  "bulletInterval": {
-    "type": "float (Тики)",
-    "desc": "Интервал между созданием интервальных снарядов (intervalBullet).",
-    "example": "\"bulletInterval\": 5"
-  },
-  "intervalBullets": {
-    "type": "int",
-    "desc": "Количество интервальных снарядов, создаваемых за один интервал.",
-    "example": "\"intervalBullets\": 2"
-  },
-  "intervalSpread": {
-    "type": "float (Градусы)",
-    "desc": "Угол разброса интервальных снарядов.",
-    "example": "\"intervalSpread\": 22"
-  },
-  "intervalRandomSpread": {
-    "type": "float (Градусы)",
-    "desc": "Случайный разброс интервальных снарядов.",
-    "example": "\"intervalRandomSpread\": 140"
-  },
-  "intervalDelay": {
-    "type": "float (Тики)",
-    "desc": "Задержка перед первым созданием интервального снаряда.",
-    "example": "\"intervalDelay\": 12"
-  },
-  "damageInterval": {
-    "type": "float (Тики)",
-    "desc": "Интервал между нанесением урона для непрерывных снарядов (Continuous).",
-    "example": "\"damageInterval\": 4"
-  },
-  "divisions": {
-    "type": "int",
-    "desc": "Количество сегментов для отрисовки непрерывного луча (Continuous).",
-    "example": "\"divisions\": 34"
-  },
-  "optimalLifeFract": {
-    "type": "float (0-1)",
-    "desc": "Доля времени жизни снаряда, при которой он наносит максимальный урон (для лазеров).",
-    "example": "\"optimalLifeFract\": 0.5"
-  },
-  "drawFlare": {
-    "type": "boolean",
-    "desc": "Рисовать ли вспышку (flare) для непрерывного луча.",
-    "example": "\"drawFlare\": true"
-  },
-  "flareColor": {
-    "type": "Color HEX",
-    "desc": "Цвет вспышки непрерывного луча.",
-    "example": "\"flareColor\": \"ffd27f\""
-  },
-  "flareWidth": {
-    "type": "float (Пиксели)",
-    "desc": "Ширина вспышки.",
-    "example": "\"flareWidth\": 7"
-  },
-  "flareLength": {
-    "type": "float (Пиксели)",
-    "desc": "Длина вспышки.",
-    "example": "\"flareLength\": 62"
-  },
-  "flareInnerScl": {
-    "type": "float",
-    "desc": "Масштаб внутренней части вспышки.",
-    "example": "\"flareInnerScl\": 0.5"
-  },
-  "flareInnerLenScl": {
-    "type": "float",
-    "desc": "Масштаб длины внутренней части вспышки.",
-    "example": "\"flareInnerLenScl\": 0.55"
-  },
-  "flareRotSpeed": {
-    "type": "float",
-    "desc": "Скорость вращения вспышки.",
-    "example": "\"flareRotSpeed\": 2.4"
-  },
-  "rotateFlare": {
-    "type": "boolean",
-    "desc": "Вращается ли вспышка вместе с лучом.",
-    "example": "\"rotateFlare\": false"
-  },
-  "oscScl": {
-    "type": "float",
-    "desc": "Частота осцилляции для непрерывного луча.",
-    "example": "\"oscScl\": 1.05"
-  },
-  "oscMag": {
-    "type": "float",
-    "desc": "Амплитуда осцилляции для непрерывного луча.",
-    "example": "\"oscMag\": 0.05"
-  },
-  "lightStroke": {
-    "type": "float (Пиксели)",
-    "desc": "Длина свечения для непрерывного луча.",
-    "example": "\"lightStroke\": 70"
-  },
-  "initialShootSound": {
-    "type": "Sound",
-    "desc": "Звук первого выстрела для непрерывного оружия.",
-    "example": "\"initialShootSound\": \"shootFlamePlasma\""
-  },
-  "pierceDamageFactor": {
-    "type": "float (0-1)",
-    "desc": "Множитель урона при пробитии. Каждая следующая цель получает меньше урона.",
-    "example": "\"pierceDamageFactor\": 0.05"
-  },
-  "collideTerrain": {
-    "type": "boolean",
-    "desc": "Может ли снаряд сталкиваться с ландшафтом (землёй, водой).",
-    "example": "\"collideTerrain\": false"
-  },
-  "absorbable": {
-    "type": "boolean",
-    "desc": "Может ли снаряд быть поглощён щитами.",
-    "example": "\"absorbable\": false"
-  },
-  "reflectable": {
-    "type": "boolean",
-    "desc": "Может ли снаряд быть отражён стенами с chanceDeflect.",
-    "example": "\"reflectable\": false"
-  },
-  "hittable": {
-    "type": "boolean",
-    "desc": "Может ли снаряд быть сбит точечной обороной.",
-    "example": "\"hittable\": false"
-  },
-  "targetable": {
-    "type": "boolean",
-    "desc": "Может ли юнит быть выбран в качестве цели для атаки врагами.",
-    "example": "\"targetable\": true"
-  },
-  "hitUnder": {
-    "type": "boolean",
-    "desc": "Может ли снаряд попадать по целям под землёй (по юнитам, зарывшимся в землю).",
-    "example": "\"hitUnder\": false"
-  },
-  "killShooter": {
-    "type": "boolean",
-    "desc": "Убивает ли снаряд стреляющего. Для оружия со shootOnDeath обязательно false, иначе выстрел не сработает.",
-    "example": "\"killShooter\": false"
-  },
-  "instantDisappear": {
-    "type": "boolean",
-    "desc": "Мгновенное исчезновение снаряда после попадания.",
-    "example": "\"instantDisappear\": true"
-  },
-  "collides": {
-    "type": "boolean",
-    "desc": "Может ли снаряд сталкиваться с целями (общий флаг).",
-    "example": "\"collides\": false"
-  },
-  "healPercent": {
-    "type": "float (0-100)",
-    "desc": "Процент здоровья союзных построек, восстанавливаемый снарядом при смерти (для ExplosionBulletType).",
-    "example": "\"healPercent\": 18"
-  },
-  "healAmount": {
-    "type": "float (HP)",
-    "desc": "Фиксированное количество здоровья, восстанавливаемое союзным постройкам (для ExplosionBulletType).",
-    "example": "\"healAmount\": 900"
-  },
-  "healSound": {
-    "type": "Sound",
-    "desc": "Звук при лечении.",
-    "example": "\"healSound\": \"healWave\""
-  },
-  "healSoundVolume": {
-    "type": "float (0-1)",
-    "desc": "Громкость звука лечения.",
-    "example": "\"healSoundVolume\": 0.6"
-  },
-  "healEffect": {
-    "type": "Effect",
-    "desc": "Визуальный эффект лечения.",
-    "example": "\"healEffect\": \"heal\""
-  },
-  "puddles": {
-    "type": "int",
-    "desc": "Количество луж, создаваемых снарядом при попадании.",
-    "example": "\"puddles\": 9"
-  },
-  "puddleRange": {
-    "type": "float (Пиксели)",
-    "desc": "Радиус разброса луж от точки попадания.",
-    "example": "\"puddleRange\": 75"
-  },
-  "puddleAmount": {
-    "type": "float",
-    "desc": "Количество жидкости в каждой луже.",
-    "example": "\"puddleAmount\": 90"
-  },
-  "puddleLiquid": {
-    "type": "String",
-    "desc": "Жидкость, оставляемая снарядом в виде луж (для LiquidBulletType и некоторых других типов).",
-    "example": "\"puddleLiquid\": \"slag\""
-  },
-  "lightningCone": {
-    "type": "float (Градусы)",
-    "desc": "Угол разлёта молний от точки удара. 360 — во все стороны.",
-    "example": "\"lightningCone\": 360"
-  },
-  "lightningLengthRand": {
-    "type": "float (Пиксели)",
-    "desc": "Случайное отклонение длины молний.",
-    "example": "\"lightningLengthRand\": 9"
-  },
-  "hitSoundVolume": {
-    "type": "float (0-1)",
-    "desc": "Громкость звука при попадании снаряда.",
-    "example": "\"hitSoundVolume\": 1"
-  },
-  "hitSoundPitch": {
-    "type": "float",
-    "desc": "Высота тона звука попадания.",
-    "example": "\"hitSoundPitch\": 1.05"
-  },
-  "shootSoundVolume": {
-    "type": "float (0-1)",
-    "desc": "Громкость звука выстрела.",
-    "example": "\"shootSoundVolume\": 0.8"
-  },
-  "soundPitchMin": {
-    "type": "float",
-    "desc": "Минимальная высота тона звука выстрела (рандом).",
-    "example": "\"soundPitchMin\": 0.9"
-  },
-  "soundPitchMax": {
-    "type": "float",
-    "desc": "Максимальная высота тона звука выстрела (рандом).",
-    "example": "\"soundPitchMax\": 1.15"
-  },
-  "xRand": {
-    "type": "float (Пиксели)",
-    "desc": "Случайное смещение точки вылета снаряда по X.",
-    "example": "\"xRand\": 3"
-  },
-  "lifeRnd": {
-    "type": "float (0-1)",
-    "desc": "Случайное отклонение времени жизни снаряда.",
-    "example": "\"lifeRnd\": 0.1"
-  },
-  "ejectEffect": {
-    "type": "Effect",
-    "desc": "Эффект выброса гильзы/снаряда.",
-    "example": "\"ejectEffect\": \"casing3\""
-  },
-  "weaveRandom": {
-    "type": "boolean",
-    "desc": "Если true, синусоидальная траектория имеет случайную фазу.",
-    "example": "\"weaveRandom\": true"
-  },
-  "weaveScale": {
-    "type": "float",
-    "desc": "Частота синусоидальной траектории снаряда.",
-    "example": "\"weaveScale\": 6.5"
-  },
-  "weaveMag": {
-    "type": "float (Пиксели)",
-    "desc": "Амплитуда синусоидальной траектории снаряда.",
-    "example": "\"weaveMag\": 2.8"
-  },
-  "despawnSound": {
-    "type": "Sound",
-    "desc": "Звук при исчезновении снаряда.",
-    "example": "\"despawnSound\": \"explosionArtillery\""
-  },
-  "despawnShake": {
-    "type": "float",
-    "desc": "Тряска экрана при исчезновении снаряда.",
-    "example": "\"despawnShake\": 8"
-  },
-  "keepVelocity": {
-    "type": "boolean",
-    "desc": "Сохраняет ли снаряд скорость стреляющего при вылете.",
-    "example": "\"keepVelocity\": false"
-  },
-  "shootOnDeath": {
-    "type": "boolean",
-    "desc": "Если true, оружие производит выстрел при гибели владельца.",
-    "example": "\"shootOnDeath\": true"
-  },
-  "shootOnDeathEffect": {
-    "type": "Effect",
-    "desc": "Эффект, создаваемый при выстреле на смерть.",
-    "example": "\"shootOnDeathEffect\": \"massiveExplosion\""
-  },
-  "ignoreRotation": {
-    "type": "boolean",
-    "desc": "Если true, орудие игнорирует поворот стреляющего при выстреле.",
-    "example": "\"ignoreRotation\": true"
-  },
-  "controllable": {
-    "type": "boolean",
-    "desc": "Может ли оружие управляться игроком. Если false, только ИИ.",
-    "example": "\"controllable\": false"
-  },
-  "aiControllable": {
-    "type": "boolean",
-    "desc": "Может ли ИИ управлять этим оружием. Если false, стрельба только вручную.",
-    "example": "\"aiControllable\": false"
-  },
-  "alwaysShooting": {
-    "type": "boolean",
-    "desc": "Если true, оружие стреляет всегда, независимо от наличия цели.",
-    "example": "\"alwaysShooting\": false"
-  },
-  "autoTarget": {
-    "type": "boolean",
-    "desc": "Если true, орудие автоматически выбирает цель без участия игрока.",
-    "example": "\"autoTarget\": true"
-  },
-  "predictTarget": {
-    "type": "boolean",
-    "desc": "Если true, орудие предугадывает движение цели для более точной стрельбы.",
-    "example": "\"predictTarget\": true"
-  },
-  "targetInterval": {
-    "type": "float (Тики)",
-    "desc": "Интервал между попытками найти новую цель, если текущая отсутствует.",
-    "example": "\"targetInterval\": 15"
-  },
-  "targetSwitchInterval": {
-    "type": "float (Тики)",
-    "desc": "Интервал перед переключением на новую цель.",
-    "example": "\"targetSwitchInterval\": 30"
-  },
-  "rotationLimit": {
-    "type": "float (Градусы)",
-    "desc": "Ограничение поворота орудия относительно его базового направления (в градусах).",
-    "example": "\"rotationLimit\": 220"
-  },
-  "baseRotation": {
-    "type": "float (Градусы)",
-    "desc": "Начальный угол поворота оружия, если оно не наводится автоматически.",
-    "example": "\"baseRotation\": 0.0"
-  },
-  "minWarmup": {
-    "type": "float (0-1)",
-    "desc": "Минимальный прогрев орудия для выстрела. 0.5 = турель должна разогреться на 50%.",
-    "example": "\"minWarmup\": 0"
-  },
-  "cooldownTime": {
-    "type": "float (Тики)",
-    "desc": "Время остывания орудия после стрельбы.",
-    "example": "\"cooldownTime\": 130"
-  },
-  "continuous": {
-    "type": "boolean",
-    "desc": "Если true, оружие стреляет непрерывно (лазер, огнемёт) без перезарядки между выстрелами.",
-    "example": "\"continuous\": true"
-  },
-  "alwaysContinuous": {
-    "type": "boolean",
-    "desc": "Если true, оружие всегда в режиме непрерывной стрельбы (игнорирует перезарядку).",
-    "example": "\"alwaysContinuous\": true"
-  },
-  "chargeSound": {
-    "type": "Sound",
-    "desc": "Звук зарядки орудия (при firstShotDelay > 0).",
-    "example": "\"chargeSound\": \"chargeCorvus\""
-  },
-  "shootSound": {
-    "type": "Sound",
-    "desc": "Звук выстрела орудия.",
-    "example": "\"shootSound\": \"shootMissileLarge\""
-  },
-  "parentizeEffects": {
-    "type": "boolean",
-    "desc": "Если true, эффекты оружия привязываются к родительскому юниту (не теряются при повороте).",
-    "example": "\"parentizeEffects\": true"
-  },
-  "shootSpread": {
-    "type": "float (Градусы)",
-    "desc": "Разброс между снарядами в залпе. Работает в паттернах стрельбы.",
-    "example": "\"spread\": 7"
-  },
-  "shoot": {
-    "type": "ShootPattern",
-    "desc": "Паттерн стрельбы: ShootPattern (базовый), ShootSpread (веер), ShootAlternate (очередь), ShootHelix (спираль), ShootSine (синус), ShootMulti (комбинированный).",
-    "example": "\"shoot\": { \"type\": \"ShootSpread\", \"shots\": 3, \"spread\": 7, \"shotDelay\": 8 }"
   },
   "DB_FIELDS": {
     "type": {
@@ -5109,6 +4433,4157 @@
       "example": "\"effectSizeParam\": false",
       "category": "ability",
       "since": "160.x"
+    },
+    "fragLifeMin": {
+      "type": "float",
+      "desc": "Минимальное время жизни осколков при взрыве снаряда, как доля от базового lifetime. Работает в паре с fragLifeMax. 0.6 = осколок живёт минимум 60% от времени жизни родителя.",
+      "example": "\"fragLifeMin\": 0.6",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "fragLifeMax": {
+      "type": "float",
+      "desc": "Максимальное время жизни осколков при взрыве снаряда, как доля от базового lifetime. Работает в паре с fragLifeMin.",
+      "example": "\"fragLifeMax\": 1.2",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "fragRandomSpread": {
+      "type": "float (Градусы)",
+      "desc": "Дополнительный случайный разброс осколков сверх fragSpread. 0 = все осколки в пределах fragSpread, 360 = полный хаос во все стороны.",
+      "example": "\"fragRandomSpread\": 60",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "interp": {
+      "type": "Interp",
+      "desc": "Кривая интерполяции для эффекта или анимации. Определяет, как значение меняется во времени. Значения: linear, pow2In, pow2Out, pow3In, pow3Out, sineIn, sineOut, slope, bounceOut и другие.",
+      "example": "\"interp\": \"pow2Out\"",
+      "category": "effect",
+      "since": "160.x"
+    },
+    "trailSinMag": {
+      "type": "float (Пиксели)",
+      "desc": "Амплитуда синусоидального смещения следа снаряда.",
+      "example": "\"trailSinMag\": 2.4"
+    },
+    "trailSinScl": {
+      "type": "float",
+      "desc": "Частота синусоидального смещения следа снаряда.",
+      "example": "\"trailSinScl\": 4"
+    },
+    "trailInterval": {
+      "type": "float (Тики)",
+      "desc": "Интервал между появлением частиц следа.",
+      "example": "\"trailInterval\": 3"
+    },
+    "scaledSplashDamage": {
+      "type": "boolean",
+      "desc": "Если true, сплэш-урон масштабируется в зависимости от расстояния до эпицентра.",
+      "example": "\"scaledSplashDamage\": true"
+    },
+    "sprite": {
+      "type": "String",
+      "desc": "Имя текстуры снаряда. Файл должен лежать в sprites/ по соответствующему пути. Если не указан — используется стандартная текстура для типа снаряда.",
+      "example": "\"sprite\": \"missile\"",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "knockbackMultiplier": {
+      "type": "float (0-1)",
+      "desc": "Множитель отбрасывания, применяемый к юниту. 0.35 = юнит отлетает на 35% от обычной силы. 0 = не отбрасывается.",
+      "example": "\"knockbackMultiplier\": 0.35"
+    },
+    "localizedName": {
+      "type": "String",
+      "desc": "Отображаемое название юнита, блока или предмета в игре. Поддерживает русский язык и цветовые теги Mindustry вида [scarlet], [accent], [white].",
+      "example": "\"localizedName\": \"Шпилька\"",
+      "category": "unit",
+      "since": "160.x"
+    },
+    "spin": {
+      "type": "float",
+      "desc": "Скорость вращения спрайта снаряда вокруг своей оси. 0 = не вращается, 6 = быстрое вращение.",
+      "example": "\"spin\": 6",
+      "category": "bullet",
+      "since": "160.x"
+    },
+    "effects": {
+      "type": "Effect[]",
+      "desc": "Массив вложенных эффектов внутри MultiEffect. Каждый элемент — отдельный эффект (ExplosionEffect, WaveEffect, ParticleEffect и т.д.).",
+      "example": "\"effects\": [ { \"type\": \"WaveEffect\", \"lifetime\": 20 } ]",
+      "category": "effect",
+      "since": "160.x"
+    },
+    "waveStroke": {
+      "type": "float (Пиксели)",
+      "desc": "Толщина обводки волны в WaveEffect или ExplosionEffect. 0 = волна без обводки, 5 = заметная линия.",
+      "example": "\"waveStroke\": 5",
+      "category": "effect",
+      "since": "160.x"
+    },
+    "smokeSize": {
+      "type": "float (Пиксели)",
+      "desc": "Размер частиц дыма в ExplosionEffect. Больше = крупнее облака дыма.",
+      "example": "\"smokeSize\": 4",
+      "category": "effect",
+      "since": "160.x"
+    },
+    "engines": {
+      "type": "Engine[]",
+      "desc": "Массив процедурных двигателей. Каждый элемент: { x, y, radius, rotation, color }. Используется вместо engineOffset для сложных юнитов.",
+      "example": "\"engines\": [\n  { \"x\": 0, \"y\": -27, \"radius\": 10, \"rotation\": -90 }\n]"
+    },
+    "parts": {
+      "type": "DrawPart[]",
+      "desc": "Массив процедурных частей отрисовки юнита: ShapePart, HaloPart, FlarePart, RegionPart, EffectSpawnerPart. Позволяет собирать визуал без спрайтов.",
+      "example": "\"parts\": [\n  { \"type\": \"ShapePart\", \"sides\": 3, \"x\": 0, \"y\": 19, \"radius\": 7 }\n]"
+    },
+    "targetMissiles": {
+      "type": "boolean",
+      "desc": "Может ли снаряд или турель атаковать вражеские снаряды в полёте (для ПВО и точечной обороны).",
+      "example": "\"targetMissiles\": false"
+    },
+    "intervalBullets": {
+      "type": "int",
+      "desc": "Количество интервальных снарядов, создаваемых за один интервал.",
+      "example": "\"intervalBullets\": 2"
+    },
+    "intervalSpread": {
+      "type": "float (Градусы)",
+      "desc": "Угол разброса интервальных снарядов.",
+      "example": "\"intervalSpread\": 22"
+    },
+    "intervalRandomSpread": {
+      "type": "float (Градусы)",
+      "desc": "Случайный разброс интервальных снарядов.",
+      "example": "\"intervalRandomSpread\": 140"
+    },
+    "intervalDelay": {
+      "type": "float (Тики)",
+      "desc": "Задержка перед первым созданием интервального снаряда.",
+      "example": "\"intervalDelay\": 12"
+    },
+    "damageInterval": {
+      "type": "float (Тики)",
+      "desc": "Интервал между нанесением урона для непрерывных снарядов (Continuous).",
+      "example": "\"damageInterval\": 4"
+    },
+    "divisions": {
+      "type": "int",
+      "desc": "Количество сегментов для отрисовки непрерывного луча (Continuous).",
+      "example": "\"divisions\": 34"
+    },
+    "drawFlare": {
+      "type": "boolean",
+      "desc": "Рисовать ли вспышку (flare) для непрерывного луча.",
+      "example": "\"drawFlare\": true"
+    },
+    "flareColor": {
+      "type": "Color HEX",
+      "desc": "Цвет вспышки непрерывного луча.",
+      "example": "\"flareColor\": \"ffd27f\""
+    },
+    "flareWidth": {
+      "type": "float (Пиксели)",
+      "desc": "Ширина вспышки.",
+      "example": "\"flareWidth\": 7"
+    },
+    "flareLength": {
+      "type": "float (Пиксели)",
+      "desc": "Длина вспышки.",
+      "example": "\"flareLength\": 62"
+    },
+    "flareInnerScl": {
+      "type": "float",
+      "desc": "Масштаб внутренней части вспышки.",
+      "example": "\"flareInnerScl\": 0.5"
+    },
+    "flareInnerLenScl": {
+      "type": "float",
+      "desc": "Масштаб длины внутренней части вспышки.",
+      "example": "\"flareInnerLenScl\": 0.55"
+    },
+    "flareRotSpeed": {
+      "type": "float",
+      "desc": "Скорость вращения вспышки.",
+      "example": "\"flareRotSpeed\": 2.4"
+    },
+    "rotateFlare": {
+      "type": "boolean",
+      "desc": "Вращается ли вспышка вместе с лучом.",
+      "example": "\"rotateFlare\": false"
+    },
+    "oscScl": {
+      "type": "float",
+      "desc": "Частота осцилляции для непрерывного луча.",
+      "example": "\"oscScl\": 1.05"
+    },
+    "oscMag": {
+      "type": "float",
+      "desc": "Амплитуда осцилляции для непрерывного луча.",
+      "example": "\"oscMag\": 0.05"
+    },
+    "lightStroke": {
+      "type": "float (Пиксели)",
+      "desc": "Длина свечения для непрерывного луча.",
+      "example": "\"lightStroke\": 70"
+    },
+    "hitUnder": {
+      "type": "boolean",
+      "desc": "Может ли снаряд попадать по целям под землёй (по юнитам, зарывшимся в землю).",
+      "example": "\"hitUnder\": false"
+    },
+    "lifeRnd": {
+      "type": "float (0-1)",
+      "desc": "Случайное отклонение времени жизни снаряда.",
+      "example": "\"lifeRnd\": 0.1"
+    },
+    "shootSpread": {
+      "type": "float (Градусы)",
+      "desc": "Разброс между снарядами в залпе. Работает в паттернах стрельбы.",
+      "example": "\"spread\": 7"
+    },
+    "allowLegStep": {
+      "type": "boolean",
+      "desc": "Ноги юнита могут переступать через препятствия (блоки/стены). По умолчанию: false.",
+      "example": "\"allowLegStep\": true",
+      "category": "unit"
+    },
+    "baseLegStraightness": {
+      "type": "float",
+      "desc": "Прямолинейность траектории ног (0 — дуги, 1 — прямые линии; ногоходящие юниты). По умолчанию: 0.",
+      "example": "\"baseLegStraightness\": 0.5",
+      "category": "unit"
+    },
+    "segmentMag": {
+      "type": "float",
+      "desc": "Амплитуда синусоидального смещения между сегментами тела (червеобразные юниты: segment). По умолчанию: 2.",
+      "example": "\"segmentMag\": 2",
+      "category": "unit"
+    },
+    "segmentScl": {
+      "type": "float",
+      "desc": "Частота (масштаб) синусоидального смещения между сегментами тела. По умолчанию: 4.",
+      "example": "\"segmentScl\": 4",
+      "category": "unit"
+    },
+    "crushDamage": {
+      "type": "float",
+      "desc": "Урон, который юнит наносит, раздавливая врагов/объекты движением. По умолчанию: 0.",
+      "example": "\"crushDamage\": 10",
+      "category": "unit"
+    },
+    "flipSprite": {
+      "type": "boolean",
+      "desc": "Отзеркаливать спрайт оружия, когда оно повёрнуто в левую полуплоскость. По умолчанию: false.",
+      "example": "\"flipSprite\": true",
+      "category": "weapon"
+    },
+    "extraLife": {
+      "type": "float",
+      "desc": "Дополнительное время жизни (тики), прибавляемое к lifetime всех снарядов этого оружия. По умолчанию: 0.",
+      "example": "\"extraLife\": 30",
+      "category": "weapon"
+    },
+    "maxShootVelocity": {
+      "type": "float",
+      "desc": "Ограничение скорости носителя, при котором оружие ещё может стрелять; -1 = без ограничения. По умолчанию: -1.",
+      "example": "\"maxShootVelocity\": -1",
+      "category": "weapon"
+    },
+    "otherSide": {
+      "type": "int",
+      "desc": "Индекс парного оружия на другой стороне корпуса (используется для симметричной стрельбы/отрисовки); -1 = нет пары. По умолчанию: -1.",
+      "example": "\"otherSide\": 1",
+      "category": "weapon"
+    },
+    "damageTargetWeight": {
+      "type": "float",
+      "desc": "PointDefenseBulletWeapon: вес приоритета «цель недавно стреляла» при выборе цели. По умолчанию: 10.",
+      "example": "\"damageTargetWeight\": 10",
+      "category": "weapon"
+    },
+    "beamEffect": {
+      "type": "Effect",
+      "desc": "Эффект луча: у PointDefenseWeapon — трассер к сбиваемой цели, у PointLaserBulletType — искры вдоль луча. По умолчанию: Fx.pointBeam.",
+      "example": "\"beamEffect\": \"Fx.pointBeam\"",
+      "category": "weapon"
+    },
+    "targetBuildings": {
+      "type": "boolean",
+      "desc": "Разрешить оружию/лучу целиться в здания. По умолчанию: false.",
+      "example": "\"targetBuildings\": true",
+      "category": "weapon"
+    },
+    "targetUnits": {
+      "type": "boolean",
+      "desc": "Разрешить оружию/лучу целиться в юнитов. По умолчанию: true.",
+      "example": "\"targetUnits\": true",
+      "category": "weapon"
+    },
+    "repairSpeed": {
+      "type": "float",
+      "desc": "RepairBeamWeapon: скорость ремонта в HP/сек. По умолчанию: 0.3.",
+      "example": "\"repairSpeed\": 0.3",
+      "category": "weapon"
+    },
+    "fractionRepairSpeed": {
+      "type": "float",
+      "desc": "RepairBeamWeapon: ремонт пропорционально максимальному HP цели (доля HP в секунду). Складывается с repairSpeed. По умолчанию: 0.",
+      "example": "\"fractionRepairSpeed\": 0.02",
+      "category": "weapon"
+    },
+    "beamWidth": {
+      "type": "float (Пиксели)",
+      "desc": "RepairBeamWeapon: толщина луча ремонта (мировые единицы). По умолчанию: 1.",
+      "example": "\"beamWidth\": 1",
+      "category": "weapon"
+    },
+    "pulseRadius": {
+      "type": "float (Пиксели)",
+      "desc": "RepairBeamWeapon: радиус светящегося импульса в точке ремонта. По умолчанию: 6.",
+      "example": "\"pulseRadius\": 6",
+      "category": "weapon"
+    },
+    "pulseStroke": {
+      "type": "float (Пиксели)",
+      "desc": "RepairBeamWeapon: толщина линии импульса в точке ремонта. По умолчанию: 2.",
+      "example": "\"pulseStroke\": 2",
+      "category": "weapon"
+    },
+    "widthSinMag": {
+      "type": "float",
+      "desc": "RepairBeamWeapon: амплитуда синусоидальной пульсации ширины луча. По умолчанию: 0.",
+      "example": "\"widthSinMag\": 0.3",
+      "category": "weapon"
+    },
+    "widthSinScl": {
+      "type": "float",
+      "desc": "RepairBeamWeapon: частота (масштаб) синусоидальной пульсации ширины луча. По умолчанию: 4.",
+      "example": "\"widthSinScl\": 4",
+      "category": "weapon"
+    },
+    "recentDamageMultiplier": {
+      "type": "float",
+      "desc": "RepairBeamWeapon: приоритет целей, недавно получивших урон (больше = чинит их охотнее). По умолчанию: 0.1.",
+      "example": "\"recentDamageMultiplier\": 0.1",
+      "category": "weapon"
+    },
+    "laserColor": {
+      "type": "Color HEX",
+      "desc": "RepairBeamWeapon: основной цвет луча ремонта. По умолчанию: #98ffa9.",
+      "example": "\"laserColor\": \"#98ffa9\"",
+      "category": "weapon"
+    },
+    "laserTopColor": {
+      "type": "Color HEX",
+      "desc": "RepairBeamWeapon: цвет «сердцевины» (верхней линии) луча ремонта. По умолчанию: Color.white.cpy().",
+      "example": "\"laserTopColor\": \"#ffffff\"",
+      "category": "weapon"
+    },
+    "laserBullet": {
+      "type": "boolean",
+      "desc": "Флаг «это лазер»: влияет на взаимодействие со щитами/отражениями и статистику. По умолчанию: false.",
+      "example": "\"laserBullet\": true",
+      "category": "bullet"
+    },
+    "layer": {
+      "type": "float",
+      "desc": "Слой отрисовки: число или константа (Layer.bullet, Layer.effect, Layer.turret...). Больше = рисуется выше. По умолчанию: Layer.bullet.",
+      "example": "\"layer\": 110",
+      "category": "bullet"
+    },
+    "impact": {
+      "type": "boolean",
+      "desc": "Флаг «ударного» снаряда — усиленные эффекты столкновения.",
+      "example": "\"impact\": true",
+      "category": "bullet"
+    },
+    "unitSort": {
+      "type": "String (UnitSorts)",
+      "desc": "Сортировка целей самонаведения: closest, farthest, strongest, weakest, lowestHp. По умолчанию: UnitSorts.closest.",
+      "example": "\"unitSort\": \"closest\"",
+      "category": "bullet"
+    },
+    "statusChance": {
+      "type": "float",
+      "desc": "Шанс (0-1) наложения статус-эффекта при попадании. По умолчанию: 1.",
+      "example": "\"statusChance\": 0.5",
+      "category": "bullet"
+    },
+    "targetBlocks": {
+      "type": "boolean",
+      "desc": "Снаряд может сталкиваться с блоками (false = пролетает сквозь постройки). По умолчанию: true.",
+      "example": "\"targetBlocks\": false",
+      "category": "bullet"
+    },
+    "scaleKeepVelocity": {
+      "type": "boolean",
+      "desc": "Сохранять скорость снаряда при масштабировании правил (rules unit/velocity). По умолчанию: false.",
+      "example": "\"scaleKeepVelocity\": true",
+      "category": "bullet"
+    },
+    "ignoreSpawnAngle": {
+      "type": "boolean",
+      "desc": "Не наследовать угол стрелявшего при спавне (важно для shootOnDeath и мин: снаряды летят по своему углу). По умолчанию: false.",
+      "example": "\"ignoreSpawnAngle\": true",
+      "category": "bullet"
+    },
+    "fragAngle": {
+      "type": "float (Градусы)",
+      "desc": "Базовый угол разлёта осколков (поворот конуса frag относительно направления снаряда). По умолчанию: 0.",
+      "example": "\"fragAngle\": 90",
+      "category": "bullet"
+    },
+    "fragOffsetMin": {
+      "type": "float",
+      "desc": "Минимальное смещение точки спавна осколков от центра взрыва. По умолчанию: 1.",
+      "example": "\"fragOffsetMin\": 1",
+      "category": "bullet"
+    },
+    "fragOffsetMax": {
+      "type": "float",
+      "desc": "Максимальное смещение точки спавна осколков от центра взрыва. По умолчанию: 7.",
+      "example": "\"fragOffsetMax\": 7",
+      "category": "bullet"
+    },
+    "pierceFragCap": {
+      "type": "int",
+      "desc": "Лимит осколков, создаваемых при пробитиях; -1 = без лимита. По умолчанию: -1.",
+      "example": "\"pierceFragCap\": 4",
+      "category": "bullet"
+    },
+    "intervalAngle": {
+      "type": "float (Градусы)",
+      "desc": "Угол (градусы) конуса, в котором спавнятся interval-снаряды. По умолчанию: 0.",
+      "example": "\"intervalAngle\": 180",
+      "category": "bullet"
+    },
+    "underwater": {
+      "type": "boolean",
+      "desc": "Снаряд летит/поражает под водой (для подводных целей). По умолчанию: false.",
+      "example": "\"underwater\": true",
+      "category": "bullet"
+    },
+    "spawnBullets": {
+      "type": "BulletType[]",
+      "desc": "Список снарядов, выпускаемых при исчезновении этого снаряда (без урона от спавна).",
+      "example": "\"spawnBullets\": [{ \"type\": \"ExplosionBulletType\", \"damage\": 20, \"lifetime\": 1, \"splashDamage\": 100, \"splashDamageRadius\": 30 }]",
+      "category": "bullet"
+    },
+    "showStats": {
+      "type": "boolean",
+      "desc": "Показывать этот снаряд в статистике оружия/турели. По умолчанию: false.",
+      "example": "\"showStats\": true",
+      "category": "bullet"
+    },
+    "spawnBulletRandomSpread": {
+      "type": "float (Градусы)",
+      "desc": "Случайный разброс направления спавна вложенных снарядов spawnBullets (градусы). По умолчанию: 0.",
+      "example": "\"spawnBulletRandomSpread\": 45",
+      "category": "bullet"
+    },
+    "despawnUnitChance": {
+      "type": "float",
+      "desc": "Шанс (0-1) заспавнить despawnUnit при исчезновении снаряда. По умолчанию: 1.",
+      "example": "\"despawnUnitChance\": 1",
+      "category": "bullet"
+    },
+    "despawnUnitCount": {
+      "type": "int",
+      "desc": "Количество юнитов despawnUnit, спавнящихся при исчезновении снаряда. По умолчанию: 1.",
+      "example": "\"despawnUnitCount\": 1",
+      "category": "bullet"
+    },
+    "despawnUnitRadius": {
+      "type": "float (Пиксели)",
+      "desc": "Радиус разлёта (случайное смещение) спавна despawnUnit. По умолчанию: 0.1.",
+      "example": "\"despawnUnitRadius\": 0.1",
+      "category": "bullet"
+    },
+    "faceOutwards": {
+      "type": "boolean",
+      "desc": "SpawnDeathAbility: заспавненные при смерти юниты смотрят наружу от центра. По умолчанию: false.",
+      "example": "\"faceOutwards\": true",
+      "category": "bullet"
+    },
+    "trailMinVelocity": {
+      "type": "float",
+      "desc": "Минимальная скорость снаряда, при которой рисуется/спавнится след. По умолчанию: 0.",
+      "example": "\"trailMinVelocity\": 1",
+      "category": "bullet"
+    },
+    "lightningAngle": {
+      "type": "float (Градусы)",
+      "desc": "Угол (градусы) конуса разрядов lightning относительно направления снаряда. По умолчанию: 0.",
+      "example": "\"lightningAngle\": 90",
+      "category": "bullet"
+    },
+    "trailMult": {
+      "type": "float",
+      "desc": "ArtilleryBulletType: множитель длины/частоты следа. По умолчанию: 1.",
+      "example": "\"trailMult\": 1.5",
+      "category": "bullet"
+    },
+    "trailSize": {
+      "type": "float (Пиксели)",
+      "desc": "ArtilleryBulletType: размер элементов следа. По умолчанию: 4.",
+      "example": "\"trailSize\": 4",
+      "category": "bullet"
+    },
+    "shrinkInterp": {
+      "type": "Interp",
+      "desc": "BasicBulletType: интерполяция уменьшения спрайта за время жизни. По умолчанию: Interp.linear.",
+      "example": "\"shrinkInterp\": \"linear\"",
+      "category": "bullet"
+    },
+    "rotationOffset": {
+      "type": "float (Пиксели)",
+      "desc": "BasicBulletType: поворот спрайта снаряда (градусы) относительно направления полёта. По умолчанию: 0.",
+      "example": "\"rotationOffset\": 90",
+      "category": "bullet"
+    },
+    "backSprite": {
+      "type": "String",
+      "desc": "BasicBulletType: имя дополнительного спрайта «задней» части пули (suffix к имени bullet).",
+      "example": "\"backSprite\": \"back\"",
+      "category": "bullet"
+    },
+    "timescaleDamage": {
+      "type": "boolean",
+      "desc": "ContinuousBulletType: урон масштабируется таймскейлом (правилами скорости игры). По умолчанию: false.",
+      "example": "\"timescaleDamage\": true",
+      "category": "bullet"
+    },
+    "flareLayer": {
+      "type": "float",
+      "desc": "ContinuousFlameBulletType: слой отрисовки «вспышки» у дула. По умолчанию: Layer.bullet - 0.0001f.",
+      "example": "\"flareLayer\": 90",
+      "category": "bullet"
+    },
+    "lengthInterp": {
+      "type": "Interp",
+      "desc": "ContinuousFlameBulletType: интерполяция изменения длины пламени со временем. По умолчанию: Interp.slope.",
+      "example": "\"lengthInterp\": \"slope\"",
+      "category": "bullet"
+    },
+    "lengthWidthPans": {
+      "type": "float[]",
+      "desc": "ContinuousFlameBulletType: массив параметров слоёв пламени — [масштаб длины, масштаб ширины, смещение, ...] на каждый слой.",
+      "example": "\"lengthWidthPans\": [1.12, 1.3, 0.32, 1, 1, 0]",
+      "category": "bullet"
+    },
+    "fadeTime": {
+      "type": "float (Тики)",
+      "desc": "ContinuousLaserBulletType: длительность затухания луча после прекращения стрельбы (тики). По умолчанию: 16.",
+      "example": "\"fadeTime\": 16",
+      "category": "bullet"
+    },
+    "strokeFrom": {
+      "type": "float",
+      "desc": "Начальная толщина (ContinuousLaserBulletType — луча; ParticleEffect — линий частиц). По умолчанию: 2.",
+      "example": "\"strokeFrom\": 2",
+      "category": "bullet"
+    },
+    "strokeTo": {
+      "type": "float",
+      "desc": "Конечная толщина луча/линий (к концу времени жизни). По умолчанию: 0.5.",
+      "example": "\"strokeTo\": 0.5",
+      "category": "bullet"
+    },
+    "pointyScaling": {
+      "type": "float",
+      "desc": "ContinuousLaserBulletType: масштаб «заострения» луча к концу. По умолчанию: 0.75.",
+      "example": "\"pointyScaling\": 0.75",
+      "category": "bullet"
+    },
+    "backLength": {
+      "type": "float (Пиксели)",
+      "desc": "ContinuousLaserBulletType: длина «хвоста» луча позади точки выстрела. По умолчанию: 7.",
+      "example": "\"backLength\": 7",
+      "category": "bullet"
+    },
+    "frontLength": {
+      "type": "float (Пиксели)",
+      "desc": "ContinuousLaserBulletType: длина луча вперёд от точки выстрела. По умолчанию: 35.",
+      "example": "\"frontLength\": 35",
+      "category": "bullet"
+    },
+    "powerDamageScl": {
+      "type": "float",
+      "desc": "EmpBulletType: множитель урона по энергосети за единицу мощности. По умолчанию: 2.",
+      "example": "\"powerDamageScl\": 2",
+      "category": "bullet"
+    },
+    "powerSclDecrease": {
+      "type": "float",
+      "desc": "EmpBulletType: снижение мощности цели при попадании (доля). По умолчанию: 0.2.",
+      "example": "\"powerSclDecrease\": 0.2",
+      "category": "bullet"
+    },
+    "hitPowerEffect": {
+      "type": "Effect",
+      "desc": "EmpBulletType: эффект попадания по энергоблокам. По умолчанию: Fx.hitEmpSpark.",
+      "example": "\"hitPowerEffect\": \"Fx.hitEmpSpark\"",
+      "category": "bullet"
+    },
+    "chainEffect": {
+      "type": "Effect",
+      "desc": "EmpBulletType: эффект цепной дуги между поражёнными целями. По умолчанию: Fx.chainEmp.",
+      "example": "\"chainEffect\": \"Fx.chainEmp\"",
+      "category": "bullet"
+    },
+    "hitUnits": {
+      "type": "boolean",
+      "desc": "EmpBulletType: воздействовать на юнитов (паралич/урон). По умолчанию: true.",
+      "example": "\"hitUnits\": true",
+      "category": "bullet"
+    },
+    "unitDamageScl": {
+      "type": "float",
+      "desc": "EmpBulletType: множитель урона по юнитам. По умолчанию: 0.7.",
+      "example": "\"unitDamageScl\": 0.7",
+      "category": "bullet"
+    },
+    "colorMid": {
+      "type": "Color HEX",
+      "desc": "FireBulletType: средний цвет градиента пламени (между frontColor и backColor). По умолчанию: #d84b20.",
+      "example": "\"colorMid\": \"#ff7b4d\"",
+      "category": "bullet"
+    },
+    "velMin": {
+      "type": "float",
+      "desc": "FireBulletType: минимальная скорость частиц огня. По умолчанию: 0.6.",
+      "example": "\"velMin\": 0.6",
+      "category": "bullet"
+    },
+    "velMax": {
+      "type": "float",
+      "desc": "FireBulletType: максимальная скорость частиц огня. По умолчанию: 2.6.",
+      "example": "\"velMax\": 2.6",
+      "category": "bullet"
+    },
+    "fireTrailChance": {
+      "type": "float",
+      "desc": "FireBulletType: шанс спавна поджигания (fireEffect) вдоль траектории. По умолчанию: 0.04.",
+      "example": "\"fireTrailChance\": 0.04",
+      "category": "bullet"
+    },
+    "trailEffect2": {
+      "type": "Effect",
+      "desc": "FireBulletType: второй (огненный) эффект следа. По умолчанию: Fx.ballfire.",
+      "example": "\"trailEffect2\": \"Fx.ballfire\"",
+      "category": "bullet"
+    },
+    "fireEffectChance": {
+      "type": "float",
+      "desc": "FireBulletType: шанс эффекта пламени (fireEffect) за тик полёта. По умолчанию: 0.1.",
+      "example": "\"fireEffectChance\": 0.1",
+      "category": "bullet"
+    },
+    "fireEffectChance2": {
+      "type": "float",
+      "desc": "FireBulletType: шанс второго эффекта пламени (fireEffect2) за тик полёта. По умолчанию: 0.1.",
+      "example": "\"fireEffectChance2\": 0.1",
+      "category": "bullet"
+    },
+    "explodeRange": {
+      "type": "float (Пиксели)",
+      "desc": "FlakBulletType: радиус самоподрыва рядом с целью. По умолчанию: 30.",
+      "example": "\"explodeRange\": 30",
+      "category": "bullet"
+    },
+    "explodeDelay": {
+      "type": "float (Тики)",
+      "desc": "FlakBulletType: задержка самоподрыва после вхождения в explodeRange (тики). По умолчанию: 5.",
+      "example": "\"explodeDelay\": 5",
+      "category": "bullet"
+    },
+    "flakDelay": {
+      "type": "float (Тики)",
+      "desc": "FlakBulletType: минимальная задержка перед возможностью самоподрыва (тики). По умолчанию: 0.",
+      "example": "\"flakDelay\": 0",
+      "category": "bullet"
+    },
+    "flakInterval": {
+      "type": "float (Тики)",
+      "desc": "FlakBulletType: интервал проверок целей на самоподрыв (тики). По умолчанию: 6.",
+      "example": "\"flakInterval\": 6",
+      "category": "bullet"
+    },
+    "laserEffect": {
+      "type": "Effect",
+      "desc": "LaserBulletType: дополнительный эффект выстрела лазера (дым у дула). По умолчанию: Fx.lancerLaserShootSmoke.",
+      "example": "\"laserEffect\": \"Fx.lancerLaserShootSmoke\"",
+      "category": "bullet"
+    },
+    "lengthFalloff": {
+      "type": "float",
+      "desc": "LaserBulletType: спад длины/урона луча к концу дистанции (доля). По умолчанию: 0.5.",
+      "example": "\"lengthFalloff\": 0.5",
+      "category": "bullet"
+    },
+    "orbSize": {
+      "type": "float (Пиксели)",
+      "desc": "LiquidBulletType: размер «шара» жидкости (мировые единицы). По умолчанию: 3.",
+      "example": "\"orbSize\": 3",
+      "category": "bullet"
+    },
+    "boilTime": {
+      "type": "float (Тики)",
+      "desc": "LiquidBulletType: время «кипения» — испарения снаряда на горячих поверхностях. По умолчанию: 5.",
+      "example": "\"boilTime\": 5",
+      "category": "bullet"
+    },
+    "repeat": {
+      "type": "int",
+      "desc": "MultiBulletType: сколько раз повторяется вложенный залп. По умолчанию: 1.",
+      "example": "\"repeat\": 2",
+      "category": "bullet"
+    },
+    "trailSpacing": {
+      "type": "float (Пиксели)",
+      "desc": "PointBulletType: шаг «точек» следа вдоль трассы. По умолчанию: 10.",
+      "example": "\"trailSpacing\": 10",
+      "category": "bullet"
+    },
+    "beamEffectInterval": {
+      "type": "float (Тики)",
+      "desc": "PointLaserBulletType: интервал (тики) спавна эффектов вдоль луча. По умолчанию: 3.",
+      "example": "\"beamEffectInterval\": 3",
+      "category": "bullet"
+    },
+    "beamEffectSize": {
+      "type": "float (Пиксели)",
+      "desc": "PointLaserBulletType: размер эффектов, спавнящихся вдоль луча. По умолчанию: 3.5.",
+      "example": "\"beamEffectSize\": 3.5",
+      "category": "bullet"
+    },
+    "pierceEffect": {
+      "type": "Effect",
+      "desc": "RailBulletType: эффект каждого пробития. По умолчанию: Fx.hitBulletSmall.",
+      "example": "\"pierceEffect\": \"Fx.hitBulletSmall\"",
+      "category": "bullet"
+    },
+    "pointEffect": {
+      "type": "Effect",
+      "desc": "RailBulletType: точечный эффект вдоль трассы. По умолчанию: Fx.none.",
+      "example": "\"pointEffect\": \"Fx.none\"",
+      "category": "bullet"
+    },
+    "lineEffect": {
+      "type": "Effect",
+      "desc": "RailBulletType: эффект вдоль линии пробития. По умолчанию: Fx.none.",
+      "example": "\"lineEffect\": \"Fx.railHit\"",
+      "category": "bullet"
+    },
+    "endEffect": {
+      "type": "Effect",
+      "desc": "RailBulletType: эффект в конце трассы пробития. По умолчанию: Fx.none.",
+      "example": "\"endEffect\": \"Fx.none\"",
+      "category": "bullet"
+    },
+    "pointEffectSpace": {
+      "type": "float",
+      "desc": "RailBulletType: расстояние между точечными эффектами вдоль трассы. По умолчанию: 20.",
+      "example": "\"pointEffectSpace\": 20",
+      "category": "bullet"
+    },
+    "lengthRand": {
+      "type": "float",
+      "desc": "SapBulletType: случайная добавка к длине «высасывающего» луча. По умолчанию: 0.",
+      "example": "\"lengthRand\": 3",
+      "category": "bullet"
+    },
+    "hitLarge": {
+      "type": "boolean",
+      "desc": "ShrapnelBulletType: использовать крупный (взрывной) эффект попадания. По умолчанию: false.",
+      "example": "\"hitLarge\": true",
+      "category": "bullet"
+    },
+    "serrations": {
+      "type": "int",
+      "desc": "ShrapnelBulletType: количество зубцов шрапнели. По умолчанию: 7.",
+      "example": "\"serrations\": 7",
+      "category": "bullet"
+    },
+    "serrationLenScl": {
+      "type": "float",
+      "desc": "ShrapnelBulletType: масштаб длины зубцов шрапнели. По умолчанию: 10.",
+      "example": "\"serrationLenScl\": 10",
+      "category": "bullet"
+    },
+    "serrationWidth": {
+      "type": "float (Пиксели)",
+      "desc": "ShrapnelBulletType: ширина зубцов шрапнели. По умолчанию: 4.",
+      "example": "\"serrationWidth\": 4",
+      "category": "bullet"
+    },
+    "serrationSpacing": {
+      "type": "float (Пиксели)",
+      "desc": "ShrapnelBulletType: расстояние между зубцами шрапнели. По умолчанию: 8.",
+      "example": "\"serrationSpacing\": 8",
+      "category": "bullet"
+    },
+    "serrationSpaceOffset": {
+      "type": "float (Пиксели)",
+      "desc": "ShrapnelBulletType: отступ зубцов по дистанции. По умолчанию: 80.",
+      "example": "\"serrationSpaceOffset\": 80",
+      "category": "bullet"
+    },
+    "serrationFadeOffset": {
+      "type": "float (Пиксели)",
+      "desc": "ShrapnelBulletType: смещение затухания «зубцов» шрапнели (доля). По умолчанию: 0.5.",
+      "example": "\"serrationFadeOffset\": 0.5",
+      "category": "bullet"
+    },
+    "clip": {
+      "type": "float",
+      "desc": "Радиус обрезки (клипа) эффекта — зона, за пределами которой эффект не рисуется.",
+      "example": "\"clip\": 60",
+      "category": "effect"
+    },
+    "startDelay": {
+      "type": "float (Тики)",
+      "desc": "Задержка начала отрисовки/жизни эффекта (тики).",
+      "example": "\"startDelay\": 5",
+      "category": "effect"
+    },
+    "followParent": {
+      "type": "boolean",
+      "desc": "Эффект следует за позицией родителя (юнита/снаряда), а не остаётся на месте спавна. По умолчанию: true.",
+      "example": "\"followParent\": false",
+      "category": "effect"
+    },
+    "rotWithParent": {
+      "type": "boolean",
+      "desc": "Эффект вращается вместе с родителем (юнитом/снарядом).",
+      "example": "\"rotWithParent\": true",
+      "category": "effect"
+    },
+    "layerDuration": {
+      "type": "float (Тики)",
+      "desc": "Длительность эффекта на своём слое (если отличается от lifetime).",
+      "example": "\"layerDuration\": 40",
+      "category": "effect"
+    },
+    "waveRadBase": {
+      "type": "float",
+      "desc": "ExplosionEffect: базовый радиус ударной волны взрыва. По умолчанию: 2.",
+      "example": "\"waveRadBase\": 2",
+      "category": "effect"
+    },
+    "sparkStroke": {
+      "type": "float (Пиксели)",
+      "desc": "ExplosionEffect: толщина линий «искр» взрыва. По умолчанию: 1.",
+      "example": "\"sparkStroke\": 1",
+      "category": "effect"
+    },
+    "smokeSizeBase": {
+      "type": "float",
+      "desc": "ExplosionEffect: базовый размер частиц дыма взрыва. По умолчанию: 0.5.",
+      "example": "\"smokeSizeBase\": 0.5",
+      "category": "effect"
+    },
+    "noisePath": {
+      "type": "String",
+      "desc": "NoiseEffect: путь к текстуре шума внутри ресурсов игры. По умолчанию: \"sprites/distortAlpha.png\".",
+      "example": "\"noisePath\": \"sprites/distortAlpha.png\"",
+      "category": "effect"
+    },
+    "noiseScl": {
+      "type": "float",
+      "desc": "NoiseEffect: масштаб (период) текстуры шума. По умолчанию: 1000.",
+      "example": "\"noiseScl\": 1000",
+      "category": "effect"
+    },
+    "opacity": {
+      "type": "float",
+      "desc": "NoiseEffect: непрозрачность слоя шума (0-1). По умолчанию: 0.3.",
+      "example": "\"opacity\": 0.3",
+      "category": "effect"
+    },
+    "baseSpeed": {
+      "type": "float",
+      "desc": "NoiseEffect: базовая скорость дрейфа слоя шума. По умолчанию: 0.4.",
+      "example": "\"baseSpeed\": 0.4",
+      "category": "effect"
+    },
+    "intensity": {
+      "type": "float",
+      "desc": "NoiseEffect: интенсивность искажения (силу эффекта). По умолчанию: 1.",
+      "example": "\"intensity\": 1",
+      "category": "effect"
+    },
+    "windX": {
+      "type": "float",
+      "desc": "NoiseEffect: горизонтальный «ветер» (дрейф) слоя шума. По умолчанию: 1.",
+      "example": "\"windX\": 1",
+      "category": "effect"
+    },
+    "windY": {
+      "type": "float",
+      "desc": "NoiseEffect: вертикальный «ветер» (дрейф) слоя шума. По умолчанию: 0.",
+      "example": "\"windY\": 0",
+      "category": "effect"
+    },
+    "layers": {
+      "type": "int",
+      "desc": "NoiseEffect: количество накладываемых слоёв шума. По умолчанию: 4.",
+      "example": "\"layers\": 4",
+      "category": "effect"
+    },
+    "layerSpeedMul": {
+      "type": "float",
+      "desc": "NoiseEffect: множитель скорости дополнительных слоёв (отрицательный = противоположное направление). По умолчанию: -1.3.",
+      "example": "\"layerSpeedMul\": -1.3",
+      "category": "effect"
+    },
+    "layerAlphaMul": {
+      "type": "float",
+      "desc": "NoiseEffect: множитель прозрачности для дополнительных слоёв. По умолчанию: 0.7.",
+      "example": "\"layerAlphaMul\": 0.7",
+      "category": "effect"
+    },
+    "layerSclMul": {
+      "type": "float",
+      "desc": "NoiseEffect: множитель масштаба дополнительных слоёв. По умолчанию: 0.8.",
+      "example": "\"layerSclMul\": 0.8",
+      "category": "effect"
+    },
+    "layerColorMul": {
+      "type": "float",
+      "desc": "NoiseEffect: множитель цвета дополнительных слоёв. По умолчанию: 0.9.",
+      "example": "\"layerColorMul\": 0.9",
+      "category": "effect"
+    },
+    "randLength": {
+      "type": "boolean",
+      "desc": "ParticleEffect: случайная длина вектора движения частиц. По умолчанию: true.",
+      "example": "\"randLength\": true",
+      "category": "effect"
+    },
+    "casingFlip": {
+      "type": "boolean",
+      "desc": "ParticleEffect: случайно переворачивать спрайт («гильзы»).",
+      "example": "\"casingFlip\": true",
+      "category": "effect"
+    },
+    "sizeInterp": {
+      "type": "Interp",
+      "desc": "ParticleEffect: интерполяция изменения размера частиц.",
+      "example": "\"sizeInterp\": \"pow2In\"",
+      "category": "effect"
+    },
+    "colorInterp": {
+      "type": "Interp",
+      "desc": "ParticleEffect: интерполяция изменения цвета частиц за время жизни.",
+      "example": "\"colorInterp\": \"pow2Out\"",
+      "category": "effect"
+    },
+    "offsetX": {
+      "type": "float",
+      "desc": "ParticleEffect: случайное смещение спавна частиц по X.",
+      "example": "\"offsetX\": 2",
+      "category": "effect"
+    },
+    "offsetY": {
+      "type": "float",
+      "desc": "ParticleEffect: случайное смещение спавна частиц по Y.",
+      "example": "\"offsetY\": 2",
+      "category": "effect"
+    },
+    "lightScl": {
+      "type": "float",
+      "desc": "ParticleEffect: масштаб свечения частиц. По умолчанию: 2.",
+      "example": "\"lightScl\": 2",
+      "category": "effect"
+    },
+    "sizeChangeStart": {
+      "type": "float",
+      "desc": "ParticleEffect: доля времени жизни, с которой начинается изменение размера частиц. По умолчанию: 0.",
+      "example": "\"sizeChangeStart\": 0.1",
+      "category": "effect"
+    },
+    "widthChangeStart": {
+      "type": "float",
+      "desc": "ParticleEffect: доля времени жизни, с которой начинается изменение ширины частиц. По умолчанию: 0.",
+      "example": "\"widthChangeStart\": 0.2",
+      "category": "effect"
+    },
+    "heightChangeStart": {
+      "type": "float",
+      "desc": "ParticleEffect: доля времени жизни, с которой начинается изменение высоты частиц. По умолчанию: 0.",
+      "example": "\"heightChangeStart\": 0.2",
+      "category": "effect"
+    },
+    "useRotation": {
+      "type": "boolean",
+      "desc": "ParticleEffect: поворачивать спрайт/линию частицы по вектору её движения. По умолчанию: true.",
+      "example": "\"useRotation\": true",
+      "category": "effect"
+    },
+    "offset": {
+      "type": "float",
+      "desc": "ParticleEffect: смещение спавна частиц вдоль направления эффекта. По умолчанию: 0.",
+      "example": "\"offset\": 3",
+      "category": "effect"
+    },
+    "widthFrom": {
+      "type": "float",
+      "desc": "ParticleEffect: начальная ширина спрайта/линии частицы. По умолчанию: 1.",
+      "example": "\"widthFrom\": 1",
+      "category": "effect"
+    },
+    "widthTo": {
+      "type": "float",
+      "desc": "ParticleEffect: конечная ширина спрайта/линии частицы. По умолчанию: 1.",
+      "example": "\"widthTo\": 0.3",
+      "category": "effect"
+    },
+    "heightFrom": {
+      "type": "float",
+      "desc": "ParticleEffect: начальная высота спрайта частицы. По умолчанию: 1.",
+      "example": "\"heightFrom\": 1",
+      "category": "effect"
+    },
+    "heightTo": {
+      "type": "float",
+      "desc": "ParticleEffect: конечная высота спрайта частицы. По умолчанию: 1.",
+      "example": "\"heightTo\": 0.5",
+      "category": "effect"
+    },
+    "widthInterp": {
+      "type": "Interp",
+      "desc": "ParticleEffect: интерполяция изменения ширины.",
+      "example": "\"widthInterp\": \"linear\"",
+      "category": "effect"
+    },
+    "heightInterp": {
+      "type": "Interp",
+      "desc": "ParticleEffect: интерполяция изменения высоты.",
+      "example": "\"heightInterp\": \"linear\"",
+      "category": "effect"
+    },
+    "line": {
+      "type": "boolean",
+      "desc": "ParticleEffect: рисовать частицы линиями вместо спрайтов.",
+      "example": "\"line\": true",
+      "category": "effect"
+    },
+    "lenFrom": {
+      "type": "float",
+      "desc": "ParticleEffect: начальная длина линий частиц. По умолчанию: 4.",
+      "example": "\"lenFrom\": 4",
+      "category": "effect"
+    },
+    "lenTo": {
+      "type": "float",
+      "desc": "ParticleEffect: конечная длина линий частиц. По умолчанию: 2.",
+      "example": "\"lenTo\": 2",
+      "category": "effect"
+    },
+    "cap": {
+      "type": "boolean",
+      "desc": "ParticleEffect: скруглять концы линий частиц (LineCap). По умолчанию: true.",
+      "example": "\"cap\": true",
+      "category": "effect"
+    },
+    "rotationSpacing": {
+      "type": "float (Пиксели)",
+      "desc": "RadialEffect: угловой шаг расстановки дочерних эффектов (градусы). По умолчанию: 90.",
+      "example": "\"rotationSpacing\": 90",
+      "category": "effect"
+    },
+    "effectRotationOffset": {
+      "type": "float (Пиксели)",
+      "desc": "RadialEffect: начальный угол расстановки дочерних эффектов (градусы). По умолчанию: 0.",
+      "example": "\"effectRotationOffset\": 45",
+      "category": "effect"
+    },
+    "lengthOffset": {
+      "type": "float (Пиксели)",
+      "desc": "RadialEffect: смещение дочерних эффектов вдоль радиуса. По умолчанию: 0.",
+      "example": "\"lengthOffset\": 4",
+      "category": "effect"
+    },
+    "sound": {
+      "type": "Sound",
+      "desc": "Звук, проигрываемый эффектом (SoundEffect) или способностью. По умолчанию: Sounds.none.",
+      "example": "\"sound\": \"shootBig\"",
+      "category": "effect"
+    },
+    "minPitch": {
+      "type": "float",
+      "desc": "SoundEffect: минимальный питч звука. По умолчанию: 0.8.",
+      "example": "\"minPitch\": 0.8",
+      "category": "effect"
+    },
+    "maxPitch": {
+      "type": "float",
+      "desc": "SoundEffect: максимальный питч звука. По умолчанию: 1.2.",
+      "example": "\"maxPitch\": 1.2",
+      "category": "effect"
+    },
+    "minVolume": {
+      "type": "float",
+      "desc": "SoundEffect: минимальная громкость звука. По умолчанию: 1.",
+      "example": "\"minVolume\": 0.7",
+      "category": "effect"
+    },
+    "maxVolume": {
+      "type": "float",
+      "desc": "SoundEffect: максимальная громкость звука. По умолчанию: 1.",
+      "example": "\"maxVolume\": 1",
+      "category": "effect"
+    },
+    "flippable": {
+      "type": "boolean",
+      "desc": "TriangleEffect: случайное отражение треугольников.",
+      "example": "\"flippable\": true",
+      "category": "effect"
+    },
+    "startX": {
+      "type": "float",
+      "desc": "TriangleEffect: X начальной точки луча-треугольника (относительно места эффекта). По умолчанию: 0.",
+      "example": "\"startX\": 0",
+      "category": "effect"
+    },
+    "startY": {
+      "type": "float",
+      "desc": "TriangleEffect: Y начальной точки луча-треугольника. По умолчанию: 0.",
+      "example": "\"startY\": 0",
+      "category": "effect"
+    },
+    "endX": {
+      "type": "float",
+      "desc": "TriangleEffect: X конечной точки луча-треугольника. По умолчанию: 0.",
+      "example": "\"endX\": 20",
+      "category": "effect"
+    },
+    "endY": {
+      "type": "float",
+      "desc": "TriangleEffect: Y конечной точки луча-треугольника. По умолчанию: 0.",
+      "example": "\"endY\": 0",
+      "category": "effect"
+    },
+    "lightOpacityFrom": {
+      "type": "float",
+      "desc": "TriangleEffect: начальная непрозрачность света. По умолчанию: 0.6.",
+      "example": "\"lightOpacityFrom\": 0.6",
+      "category": "effect"
+    },
+    "lightOpacityTo": {
+      "type": "float",
+      "desc": "TriangleEffect: конечная непрозрачность света. По умолчанию: 0.",
+      "example": "\"lightOpacityTo\": 0",
+      "category": "effect"
+    },
+    "lightInterp": {
+      "type": "Interp",
+      "desc": "WaveEffect: интерполяция яркости света волны. По умолчанию: Interp.reverse.",
+      "example": "\"lightInterp\": \"reverse\"",
+      "category": "effect"
+    },
+    "turretShading": {
+      "type": "boolean",
+      "desc": "DrawPart: применять «турельное» затенение (градиент сверху вниз) к части.",
+      "example": "\"turretShading\": true",
+      "category": "draw"
+    },
+    "under": {
+      "type": "boolean",
+      "desc": "DrawPart: рисовать часть ПОД телом юнита/блока. По умолчанию: false.",
+      "example": "\"under\": true",
+      "category": "draw"
+    },
+    "weaponIndex": {
+      "type": "int",
+      "desc": "DrawPart: индекс оружия, чьи параметры (heat/recoil) использует часть. По умолчанию: 0.",
+      "example": "\"weaponIndex\": 0",
+      "category": "draw"
+    },
+    "recoilIndex": {
+      "type": "int",
+      "desc": "DrawPart: индекс оружия, отдачу которого анимирует часть; -1 = своё оружие. По умолчанию: -1.",
+      "example": "\"recoilIndex\": 0",
+      "category": "draw"
+    },
+    "effectRot": {
+      "type": "float",
+      "desc": "EffectSpawnerPart: базовый поворот спавнящегося эффекта (градусы).",
+      "example": "\"effectRot\": 0",
+      "category": "draw"
+    },
+    "effectRandRot": {
+      "type": "float",
+      "desc": "EffectSpawnerPart: случайный доворот спавнящегося эффекта (градусы).",
+      "example": "\"effectRandRot\": 45",
+      "category": "draw"
+    },
+    "effectInterval": {
+      "type": "float (Тики)",
+      "desc": "EffectSpawnerPart: интервал прогресса (0-1), с которым спавнится эффект; 0 = только в конце. По умолчанию: 0.",
+      "example": "\"effectInterval\": 0.1",
+      "category": "draw"
+    },
+    "effectIntervalFrom": {
+      "type": "float",
+      "desc": "EffectSpawnerPart: прогресс, с которого начинается интервальный спавн эффекта.",
+      "example": "\"effectIntervalFrom\": 0.3",
+      "category": "draw"
+    },
+    "effectColor": {
+      "type": "Color HEX",
+      "desc": "EffectSpawnerPart: цвет, передаваемый спавнящемуся эффекту. По умолчанию: Color.white.",
+      "example": "\"effectColor\": \"#98ffa9\"",
+      "category": "draw"
+    },
+    "useProgress": {
+      "type": "boolean",
+      "desc": "EffectSpawnerPart: привязывать спавн эффекта к прогрессу части. По умолчанию: true.",
+      "example": "\"useProgress\": true",
+      "category": "draw"
+    },
+    "debugDraw": {
+      "type": "boolean",
+      "desc": "EffectSpawnerPart: отладочная отрисовка маркеров спавна эффектов. По умолчанию: false.",
+      "example": "\"debugDraw\": false",
+      "category": "draw"
+    },
+    "radiusTo": {
+      "type": "float",
+      "desc": "FlarePart: конечный радиус блика при прогрессе (-1 = без изменения). По умолчанию: -1.",
+      "example": "\"radiusTo\": 12",
+      "category": "draw"
+    },
+    "stroke": {
+      "type": "float",
+      "desc": "FlarePart/HoverPart: толщина линий элемента (блика/колец ховера). По умолчанию: 6.",
+      "example": "\"stroke\": 6",
+      "category": "draw"
+    },
+    "innerScl": {
+      "type": "float",
+      "desc": "FlarePart: масштаб внутренней (яркой) части блика. По умолчанию: 0.5.",
+      "example": "\"innerScl\": 0.5",
+      "category": "draw"
+    },
+    "innerRadScl": {
+      "type": "float",
+      "desc": "FlarePart: масштаб внутреннего радиуса блика. По умолчанию: 0.33.",
+      "example": "\"innerRadScl\": 0.33",
+      "category": "draw"
+    },
+    "rotMove": {
+      "type": "float",
+      "desc": "FlarePart: поворот блика при движении (градусы на единицу прогресса).",
+      "example": "\"rotMove\": 90",
+      "category": "draw"
+    },
+    "spinSpeed": {
+      "type": "float",
+      "desc": "FlarePart: скорость вращения блика (градусы/тик).",
+      "example": "\"spinSpeed\": 2",
+      "category": "draw"
+    },
+    "followRotation": {
+      "type": "boolean",
+      "desc": "FlarePart: блик следует за поворотом оружия/юнита.",
+      "example": "\"followRotation\": true",
+      "category": "draw"
+    },
+    "color1": {
+      "type": "Color HEX",
+      "desc": "FlarePart: внешний цвет блика (внутренний — color2). По умолчанию: #8ca9e8.",
+      "example": "\"color1\": \"#8ca9e8\"",
+      "category": "draw"
+    },
+    "color2": {
+      "type": "Color HEX",
+      "desc": "FlarePart: внутренний цвет блика. По умолчанию: Color.white.",
+      "example": "\"color2\": \"#ffffff\"",
+      "category": "draw"
+    },
+    "hollow": {
+      "type": "boolean",
+      "desc": "ShapePart/HaloPart: рисовать только контур фигуры (без заливки). По умолчанию: false.",
+      "example": "\"hollow\": true",
+      "category": "draw"
+    },
+    "tri": {
+      "type": "boolean",
+      "desc": "HaloPart/ShapePart: рисовать фигуры треугольниками. По умолчанию: false.",
+      "example": "\"tri\": true",
+      "category": "draw"
+    },
+    "shapes": {
+      "type": "int",
+      "desc": "HaloPart: количество фигур в кольце гало. По умолчанию: 3.",
+      "example": "\"shapes\": 4",
+      "category": "draw"
+    },
+    "triLength": {
+      "type": "float (Пиксели)",
+      "desc": "HaloPart: длина треугольников гало. По умолчанию: 1.",
+      "example": "\"triLength\": 1",
+      "category": "draw"
+    },
+    "triLengthTo": {
+      "type": "float",
+      "desc": "HaloPart: конечная длина треугольников при прогрессе (-1 = без изменения). По умолчанию: -1.",
+      "example": "\"triLengthTo\": 2",
+      "category": "draw"
+    },
+    "haloRadius": {
+      "type": "float (Пиксели)",
+      "desc": "HaloPart: радиус кольца «гало» из фигур. По умолчанию: 10.",
+      "example": "\"haloRadius\": 10",
+      "category": "draw"
+    },
+    "haloRadiusTo": {
+      "type": "float",
+      "desc": "HaloPart: конечный радиус гало при прогрессе (-1 = без изменения). По умолчанию: -1.",
+      "example": "\"haloRadiusTo\": 14",
+      "category": "draw"
+    },
+    "shapeRotation": {
+      "type": "float (Градусы)",
+      "desc": "HaloPart: базовый поворот каждой фигуры гало (градусы).",
+      "example": "\"shapeRotation\": 0",
+      "category": "draw"
+    },
+    "shapeMoveRot": {
+      "type": "float",
+      "desc": "HaloPart: поворот фигур гало при движении (градусы).",
+      "example": "\"shapeMoveRot\": 45",
+      "category": "draw"
+    },
+    "haloRotateSpeed": {
+      "type": "float",
+      "desc": "HaloPart: скорость вращения гало (градусы/тик). По умолчанию: 0.",
+      "example": "\"haloRotateSpeed\": 1.2",
+      "category": "draw"
+    },
+    "haloRotation": {
+      "type": "float (Градусы)",
+      "desc": "HaloPart: начальный угол поворота гало (градусы). По умолчанию: 0.",
+      "example": "\"haloRotation\": 0",
+      "category": "draw"
+    },
+    "phase": {
+      "type": "float",
+      "desc": "HoverPart: скорость смены фазы «мерцания» колец. По умолчанию: 50.",
+      "example": "\"phase\": 50",
+      "category": "draw"
+    },
+    "minStroke": {
+      "type": "float (Пиксели)",
+      "desc": "HoverPart: минимальная толщина линий ховера. По умолчанию: 0.12.",
+      "example": "\"minStroke\": 0.12",
+      "category": "draw"
+    },
+    "circles": {
+      "type": "int",
+      "desc": "HoverPart: количество колец «обводки» ховера. По умолчанию: 2.",
+      "example": "\"circles\": 2",
+      "category": "draw"
+    },
+    "suffix": {
+      "type": "String",
+      "desc": "RegionPart: суффикс имени спрайта: region = «имя-родителя» + suffix. По умолчанию: \"\".",
+      "example": "\"suffix\": \"-glow\"",
+      "category": "draw"
+    },
+    "replaceOutline": {
+      "type": "boolean",
+      "desc": "RegionPart: перерисовывать контур части поверх базового (замена outline). По умолчанию: false.",
+      "example": "\"replaceOutline\": true",
+      "category": "draw"
+    },
+    "turretHeatLayer": {
+      "type": "float",
+      "desc": "RegionPart: слой отрисовки heat-версии спрайта турели. По умолчанию: Layer.turretHeat.",
+      "example": "\"turretHeatLayer\": 100",
+      "category": "draw"
+    },
+    "xScl": {
+      "type": "float (Пиксели)",
+      "desc": "RegionPart: масштаб части по X. По умолчанию: 1.",
+      "example": "\"xScl\": 1.2",
+      "category": "draw"
+    },
+    "yScl": {
+      "type": "float (Пиксели)",
+      "desc": "RegionPart: масштаб части по Y. По умолчанию: 1.",
+      "example": "\"yScl\": 1.2",
+      "category": "draw"
+    },
+    "mixColor": {
+      "type": "Color HEX",
+      "desc": "RegionPart: цвет подмешивания (мультипликативная подсветка) к спрайту части.",
+      "example": "\"mixColor\": \"#98ffa9\"",
+      "category": "draw"
+    },
+    "children": {
+      "type": "DrawPart[]",
+      "desc": "Вложенные части (DrawPart[]): наследуют движение и прогресс родителя.",
+      "example": "\"children\": [{ \"type\": \"RegionPart\", \"suffix\": \"-glow\" }]",
+      "category": "draw"
+    },
+    "moves": {
+      "type": "PartMove[]",
+      "desc": "RegionPart: список дополнительных движений PartMove — смещения по параметрам (heat, reload, recoil...).",
+      "example": "\"moves\": [{ \"progress\": \"warmup\", \"y\": -1.5, \"rot\": 10 }]",
+      "category": "draw"
+    },
+    "circle": {
+      "type": "boolean",
+      "desc": "ShapePart: рисовать круг вместо многоугольника. По умолчанию: false.",
+      "example": "\"circle\": true",
+      "category": "draw"
+    },
+    "barrelOffset": {
+      "type": "int",
+      "desc": "ShootAlternate: смещение «текущего» ствола при чередовании (в пикселях спрайта). По умолчанию: 0.",
+      "example": "\"barrelOffset\": 3",
+      "category": "weapon"
+    },
+    "source": {
+      "type": "ShootPattern",
+      "desc": "ShootMulti: базовый шаблон стрельбы, результаты которого передаются в dest.",
+      "example": "\"source\": { \"type\": \"ShootBarrel\" }",
+      "category": "weapon"
+    },
+    "dest": {
+      "type": "ShootPattern[]",
+      "desc": "ShootMulti: массив шаблонов-получателей — каждый выстрел source передаётся во все dest.",
+      "example": "\"dest\": [{ \"type\": \"ShootSpread\", \"shots\": 3 }]",
+      "category": "weapon"
+    },
+    "data": {
+      "type": "float",
+      "desc": "Ability: произвольный числовой параметр, используемый некоторыми типами способностей.",
+      "example": "\"data\": 1",
+      "category": "ability"
+    },
+    "plateSuffix": {
+      "type": "String",
+      "desc": "ArmorPlateAbility: суффикс спрайта бронеплиты. По умолчанию: \"-armor\".",
+      "example": "\"plateSuffix\": \"-armor\"",
+      "category": "ability"
+    },
+    "shineSuffix": {
+      "type": "String",
+      "desc": "ArmorPlateAbility: суффикс спрайта блика плиты. По умолчанию: \"-shine\".",
+      "example": "\"shineSuffix\": \"-shine\"",
+      "category": "ability"
+    },
+    "shineSpeed": {
+      "type": "float",
+      "desc": "ArmorPlateAbility: скорость движения блика плиты. По умолчанию: 1.",
+      "example": "\"shineSpeed\": 1",
+      "category": "ability"
+    },
+    "z": {
+      "type": "float",
+      "desc": "ArmorPlateAbility: высота отрисовки плиты (Z-слой); -1 = автоматически. По умолчанию: -1.",
+      "example": "\"z\": -1",
+      "category": "ability"
+    },
+    "drawPlate": {
+      "type": "boolean",
+      "desc": "ArmorPlateAbility: рисовать спрайт бронеплиты («имя-armor»). По умолчанию: true.",
+      "example": "\"drawPlate\": true",
+      "category": "ability"
+    },
+    "drawShine": {
+      "type": "boolean",
+      "desc": "ArmorPlateAbility: рисовать блик плиты («имя-shine»). По умолчанию: true.",
+      "example": "\"drawShine\": true",
+      "category": "ability"
+    },
+    "healthMultiplier": {
+      "type": "float",
+      "desc": "Множитель максимального здоровья носителя статуса (1 = без изменений). По умолчанию: 0.2.",
+      "example": "\"healthMultiplier\": 0.8",
+      "category": "ability"
+    },
+    "damageEffect": {
+      "type": "Effect",
+      "desc": "EnergyFieldAbility: эффект «удара» поля по цели. По умолчанию: Fx.chainLightning.",
+      "example": "\"damageEffect\": \"Fx.chainLightning\"",
+      "category": "ability"
+    },
+    "hitBuildings": {
+      "type": "boolean",
+      "desc": "EnergyFieldAbility: поле воздействует на здания. По умолчанию: true.",
+      "example": "\"hitBuildings\": true",
+      "category": "ability"
+    },
+    "sameTypeHealMult": {
+      "type": "float",
+      "desc": "EnergyFieldAbility: множитель лечения для юнитов того же типа. По умолчанию: 1.",
+      "example": "\"sameTypeHealMult\": 1.5",
+      "category": "ability"
+    },
+    "displayHeal": {
+      "type": "boolean",
+      "desc": "EnergyFieldAbility: показывать числа/эффекты лечения. По умолчанию: true.",
+      "example": "\"displayHeal\": true",
+      "category": "ability"
+    },
+    "blinkScl": {
+      "type": "float",
+      "desc": "EnergyFieldAbility: период «мигания» поля (циклы). По умолчанию: 20.",
+      "example": "\"blinkScl\": 20",
+      "category": "ability"
+    },
+    "blinkSize": {
+      "type": "float (Пиксели)",
+      "desc": "EnergyFieldAbility: амплитуда «мигания» размера поля (доля). По умолчанию: 0.1.",
+      "example": "\"blinkSize\": 0.1",
+      "category": "ability"
+    },
+    "effectRadius": {
+      "type": "float (Пиксели)",
+      "desc": "EnergyFieldAbility: радиус визуального эффекта поля. По умолчанию: 5.",
+      "example": "\"effectRadius\": 5",
+      "category": "ability"
+    },
+    "sectorRad": {
+      "type": "float",
+      "desc": "EnergyFieldAbility: угловая ширина «сектора» визуала поля (радианы). По умолчанию: 0.14.",
+      "example": "\"sectorRad\": 0.14",
+      "category": "ability"
+    },
+    "useAmmo": {
+      "type": "boolean",
+      "desc": "EnergyFieldAbility: тратить боезапас юнита на выстрелы поля. По умолчанию: true.",
+      "example": "\"useAmmo\": true",
+      "category": "ability"
+    },
+    "radAmountScale": {
+      "type": "float",
+      "desc": "LiquidExplodeAbility: масштаб количества брызг жидкости. По умолчанию: 5.",
+      "example": "\"radAmountScale\": 5",
+      "category": "ability"
+    },
+    "radScale": {
+      "type": "float",
+      "desc": "LiquidExplodeAbility: масштаб радиуса разлёта брызг. По умолчанию: 1.",
+      "example": "\"radScale\": 1",
+      "category": "ability"
+    },
+    "noiseMag": {
+      "type": "float",
+      "desc": "LiquidExplodeAbility: магнитуда шума разлёта брызг. По умолчанию: 6.5.",
+      "example": "\"noiseMag\": 6.5",
+      "category": "ability"
+    },
+    "slurpSpeed": {
+      "type": "float",
+      "desc": "LiquidRegenAbility: скорость потребления жидкости (единиц/тик). По умолчанию: 5.",
+      "example": "\"slurpSpeed\": 5",
+      "category": "ability"
+    },
+    "regenPerSlurp": {
+      "type": "float",
+      "desc": "LiquidRegenAbility: HP, восстанавливаемые за один «глоток» жидкости. По умолчанию: 6.",
+      "example": "\"regenPerSlurp\": 6",
+      "category": "ability"
+    },
+    "slurpEffectChance": {
+      "type": "float",
+      "desc": "LiquidRegenAbility: шанс эффекта «глотка» жидкости. По умолчанию: 0.4.",
+      "example": "\"slurpEffectChance\": 0.4",
+      "category": "ability"
+    },
+    "minVelocity": {
+      "type": "float",
+      "desc": "MoveEffectAbility: минимальная скорость для спавна эффектов следа. По умолчанию: 0.08.",
+      "example": "\"minVelocity\": 0.08",
+      "category": "ability"
+    },
+    "chance": {
+      "type": "float",
+      "desc": "MoveLightningAbility/MoveEffectAbility: шанс срабатывания за тик движения (0-1). По умолчанию: 0.",
+      "example": "\"chance\": 0.15",
+      "category": "ability"
+    },
+    "rangeX": {
+      "type": "float",
+      "desc": "MoveEffectAbility: горизонтальный радиус области спавна эффектов следа.",
+      "example": "\"rangeX\": 4",
+      "category": "ability"
+    },
+    "rangeY": {
+      "type": "float",
+      "desc": "MoveEffectAbility: вертикальный радиус области спавна эффектов следа.",
+      "example": "\"rangeY\": 4",
+      "category": "ability"
+    },
+    "rangeLengthMin": {
+      "type": "float",
+      "desc": "MoveEffectAbility: минимальная длина следа эффекта.",
+      "example": "\"rangeLengthMin\": 2",
+      "category": "ability"
+    },
+    "rangeLengthMax": {
+      "type": "float",
+      "desc": "MoveEffectAbility: максимальная длина следа эффекта (на полной скорости).",
+      "example": "\"rangeLengthMax\": 6",
+      "category": "ability"
+    },
+    "rotateEffect": {
+      "type": "boolean",
+      "desc": "MoveEffectAbility: поворачивать эффект следа по направлению движения. По умолчанию: false.",
+      "example": "\"rotateEffect\": true",
+      "category": "ability"
+    },
+    "effectParam": {
+      "type": "float",
+      "desc": "MoveEffectAbility: размер/сила эффекта следа. По умолчанию: 3.",
+      "example": "\"effectParam\": 3",
+      "category": "ability"
+    },
+    "teamColor": {
+      "type": "boolean",
+      "desc": "MoveEffectAbility: красить эффекты следа в цвет команды. По умолчанию: false.",
+      "example": "\"teamColor\": true",
+      "category": "ability"
+    },
+    "minSpeed": {
+      "type": "float",
+      "desc": "MoveLightningAbility: минимальная скорость движения для срабатывания. По умолчанию: 0.8.",
+      "example": "\"minSpeed\": 0.8",
+      "category": "ability"
+    },
+    "maxSpeed": {
+      "type": "float",
+      "desc": "MoveLightningAbility: максимальная скорость движения для срабатывания. По умолчанию: 1.2.",
+      "example": "\"maxSpeed\": 1.2",
+      "category": "ability"
+    },
+    "bulletAngle": {
+      "type": "float (Градусы)",
+      "desc": "MoveLightningAbility: угол молний относительно направления движения (градусы). По умолчанию: 0.",
+      "example": "\"bulletAngle\": 90",
+      "category": "ability"
+    },
+    "bulletSpread": {
+      "type": "float (Градусы)",
+      "desc": "MoveLightningAbility: разброс углов молний (градусы). По умолчанию: 0.",
+      "example": "\"bulletSpread\": 20",
+      "category": "ability"
+    },
+    "soundVolume": {
+      "type": "float",
+      "desc": "Громкость звука способности. По умолчанию: 0.5.",
+      "example": "\"soundVolume\": 0.5",
+      "category": "ability"
+    },
+    "smartHeal": {
+      "type": "boolean",
+      "desc": "RepairFieldAbility: «умный» режим — лечить постепенно и только повреждённых. По умолчанию: false.",
+      "example": "\"smartHeal\": true",
+      "category": "ability"
+    },
+    "smartHealPercent": {
+      "type": "float",
+      "desc": "RepairFieldAbility: порог здоровья (%) для умного ремонта. По умолчанию: 0.",
+      "example": "\"smartHealPercent\": 0.75",
+      "category": "ability"
+    },
+    "smartHealStrength": {
+      "type": "float",
+      "desc": "RepairFieldAbility: сила умного ремонта (множитель скорости). По умолчанию: 1.",
+      "example": "\"smartHealStrength\": 1",
+      "category": "ability"
+    },
+    "smartDowntime": {
+      "type": "float",
+      "desc": "RepairFieldAbility: пауза «умного» ремонта после восстановления цели (тики). По умолчанию: 480.",
+      "example": "\"smartDowntime\": 480",
+      "category": "ability"
+    },
+    "smartInterval": {
+      "type": "float (Тики)",
+      "desc": "RepairFieldAbility: интервал тиков «умного» лечения. По умолчанию: 20.",
+      "example": "\"smartInterval\": 20",
+      "category": "ability"
+    },
+    "randDesync": {
+      "type": "float",
+      "desc": "RepairFieldAbility: случайная десинхронизация пульсаций поля (-1 = выключена). По умолчанию: -1.",
+      "example": "\"randDesync\": 20",
+      "category": "ability"
+    },
+    "randAmount": {
+      "type": "int",
+      "desc": "SpawnDeathAbility: случайная добавка к количеству спавна юнитов. По умолчанию: 0.",
+      "example": "\"randAmount\": 1",
+      "category": "ability"
+    },
+    "duration": {
+      "type": "float",
+      "desc": "StatusFieldAbility: длительность статуса после выхода юнита из поля (тики). По умолчанию: 60.",
+      "example": "\"duration\": 60",
+      "category": "ability"
+    },
+    "maxDelay": {
+      "type": "float (Тики)",
+      "desc": "SuppressionFieldAbility: максимальная задержка частиц подавления (тики). По умолчанию: 90.",
+      "example": "\"maxDelay\": 90",
+      "category": "ability"
+    },
+    "orbRadius": {
+      "type": "float (Пиксели)",
+      "desc": "SuppressionFieldAbility: радиус сферы подавления (визуал). По умолчанию: 4.1.",
+      "example": "\"orbRadius\": 4.1",
+      "category": "ability"
+    },
+    "orbMidScl": {
+      "type": "float",
+      "desc": "SuppressionFieldAbility: масштаб «средней» части сферы подавления. По умолчанию: 0.33.",
+      "example": "\"orbMidScl\": 0.33",
+      "category": "ability"
+    },
+    "orbSinScl": {
+      "type": "float",
+      "desc": "SuppressionFieldAbility: частота синусоидального дрожания сферы. По умолчанию: 8.",
+      "example": "\"orbSinScl\": 8",
+      "category": "ability"
+    },
+    "orbSinMag": {
+      "type": "float",
+      "desc": "SuppressionFieldAbility: амплитуда синусоидального дрожания сферы. По умолчанию: 1.",
+      "example": "\"orbSinMag\": 1",
+      "category": "ability"
+    },
+    "particleSize": {
+      "type": "float (Пиксели)",
+      "desc": "SuppressionFieldAbility: размер частиц подавления. По умолчанию: 4.",
+      "example": "\"particleSize\": 4",
+      "category": "ability"
+    },
+    "particleLen": {
+      "type": "float",
+      "desc": "SuppressionFieldAbility: длина частиц подавления. По умолчанию: 7.",
+      "example": "\"particleLen\": 7",
+      "category": "ability"
+    },
+    "rotateScl": {
+      "type": "float",
+      "desc": "SuppressionFieldAbility: масштаб вращения сферы подавления. По умолчанию: 3.",
+      "example": "\"rotateScl\": 3",
+      "category": "ability"
+    },
+    "particleLife": {
+      "type": "float",
+      "desc": "SuppressionFieldAbility: время жизни частиц подавления (тики). По умолчанию: 110.",
+      "example": "\"particleLife\": 110",
+      "category": "ability"
+    },
+    "particleInterp": {
+      "type": "Interp",
+      "desc": "SuppressionFieldAbility: интерполяция движения частиц подавления.",
+      "example": "\"particleInterp\": \"circleOut\"",
+      "category": "ability"
+    },
+    "particleColor": {
+      "type": "Color HEX",
+      "desc": "SuppressionFieldAbility: цвет частиц подавления. По умолчанию: #bf6ff0.",
+      "example": "\"particleColor\": \"#bf6ff0\"",
+      "category": "ability"
+    },
+    "applyParticleChance": {
+      "type": "float",
+      "desc": "SuppressionFieldAbility: шанс спавна частиц подавления на поражённом юните. По умолчанию: 13.",
+      "example": "\"applyParticleChance\": 13",
+      "category": "ability"
+    },
+    "damageMultiplier": {
+      "type": "float",
+      "desc": "Множитель урона, который наносит носитель статуса (1 = без изменений). По умолчанию: 1.",
+      "example": "\"damageMultiplier\": 1.2",
+      "category": "status"
+    },
+    "speedMultiplier": {
+      "type": "float",
+      "desc": "Множитель скорости движения носителя (1 = без изменений, <1 — замедление). По умолчанию: 1.",
+      "example": "\"speedMultiplier\": 0.6",
+      "category": "status"
+    },
+    "transitionDamage": {
+      "type": "float",
+      "desc": "Урон при переходе с противоположного статуса (например, огонь → вода). По умолчанию: 0.",
+      "example": "\"transitionDamage\": 20",
+      "category": "status"
+    },
+    "dynamic": {
+      "type": "boolean",
+      "desc": "Динамический статус: его цвет и параметры задаются источником наложения, а не самой настройкой эффекта. По умолчанию: false.",
+      "example": "\"dynamic\": true",
+      "category": "status"
+    },
+    "show": {
+      "type": "boolean",
+      "desc": "Показывать иконку статуса над юнитом. По умолчанию: true.",
+      "example": "\"show\": true",
+      "category": "status"
+    },
+    "affinities": {
+      "type": "StatusEffect[] (имена)",
+      "desc": "Список «дружественных» статусов: при переключении между ними переходный урон не наносится. Задаётся именами эффектов.",
+      "example": "\"affinities\": [\"burning\", \"melting\"]",
+      "category": "status"
+    },
+    "rotateDraw": {
+      "type": "boolean",
+      "desc": "Вращать спрайт при отрисовке (дрели, турели-вентиляторы). По умолчанию: true.",
+      "example": "\"rotateDraw\": true"
+    },
+    "rotateDrawEditor": {
+      "type": "boolean",
+      "desc": "Вращать спрайт в редакторе карт. По умолчанию: true.",
+      "example": "\"rotateDrawEditor\": true"
+    },
+    "visualRotationOffset": {
+      "type": "float (Пиксели)",
+      "desc": "Визуальный поворот спрайта (градусы). По умолчанию: 0.",
+      "example": "\"visualRotationOffset\": 0"
+    },
+    "lockRotation": {
+      "type": "boolean",
+      "desc": "Фиксировать поворот (грузы/платформы). По умолчанию: true.",
+      "example": "\"lockRotation\": true"
+    },
+    "ignoreLineRotation": {
+      "type": "boolean",
+      "desc": "Игнорировать поворот линии связи. По умолчанию: false.",
+      "example": "\"ignoreLineRotation\": false"
+    },
+    "invertFlip": {
+      "type": "boolean",
+      "desc": "Инвертировать переворот спрайта. По умолчанию: false.",
+      "example": "\"invertFlip\": false"
+    },
+    "variants": {
+      "type": "int",
+      "desc": "Количество вариаций спрайта (руды/поверхности). По умолчанию: 0.",
+      "example": "\"variants\": 0"
+    },
+    "drawArrow": {
+      "type": "boolean",
+      "desc": "Рисовать стрелку направления (конвейеры/маршрутизаторы). По умолчанию: true.",
+      "example": "\"drawArrow\": true"
+    },
+    "saveData": {
+      "type": "boolean",
+      "desc": "Сохранять данные блока в сейве (конфиг, буферы).",
+      "example": "\"saveData\": true"
+    },
+    "unitMoveBreakable": {
+      "type": "boolean",
+      "desc": "Наземные юниты могут сломать блок, пройдя через него.",
+      "example": "\"unitMoveBreakable\": true"
+    },
+    "rebuildable": {
+      "type": "boolean",
+      "desc": "Блок автоматически восстанавливается после разрушения. По умолчанию: true.",
+      "example": "\"rebuildable\": true"
+    },
+    "privileged": {
+      "type": "boolean",
+      "desc": "Привилегированный блок (доступ только из кампаний/песочницы). По умолчанию: false.",
+      "example": "\"privileged\": false"
+    },
+    "requiresWater": {
+      "type": "boolean",
+      "desc": "Для установки требуется вода под блоком. По умолчанию: false.",
+      "example": "\"requiresWater\": false"
+    },
+    "placeableLiquid": {
+      "type": "boolean",
+      "desc": "Блок можно ставить на глубокую жидкость. По умолчанию: false.",
+      "example": "\"placeableLiquid\": false"
+    },
+    "placeablePlayer": {
+      "type": "boolean",
+      "desc": "Игрок может размещать блок вручную. По умолчанию: true.",
+      "example": "\"placeablePlayer\": true"
+    },
+    "placeableOn": {
+      "type": "boolean",
+      "desc": "Блок можно ставить на этот блок (foundations/мосты). По умолчанию: true.",
+      "example": "\"placeableOn\": true"
+    },
+    "insulated": {
+      "type": "boolean",
+      "desc": "Изолированный: не проводит энергию/тепло через себя. По умолчанию: false.",
+      "example": "\"insulated\": false"
+    },
+    "squareSprite": {
+      "type": "boolean",
+      "desc": "Считать спрайт квадратным (центрирование при вращении). По умолчанию: true.",
+      "example": "\"squareSprite\": true"
+    },
+    "enableDrawStatus": {
+      "type": "boolean",
+      "desc": "Рисовать статус-индикатор блока. По умолчанию: true.",
+      "example": "\"enableDrawStatus\": true"
+    },
+    "drawDisabled": {
+      "type": "boolean",
+      "desc": "Рисовать блок «отключённым» (перечёркнутым). По умолчанию: true.",
+      "example": "\"drawDisabled\": true"
+    },
+    "noUpdateDisabled": {
+      "type": "boolean",
+      "desc": "Не обновлять блок, когда он отключён. По умолчанию: false.",
+      "example": "\"noUpdateDisabled\": false"
+    },
+    "updateInUnits": {
+      "type": "boolean",
+      "desc": "Блок обновляется внутри юнитов-грузов. По умолчанию: true.",
+      "example": "\"updateInUnits\": true"
+    },
+    "alwaysUpdateInUnits": {
+      "type": "boolean",
+      "desc": "Блок всегда обновляется внутри юнитов-грузов. По умолчанию: false.",
+      "example": "\"alwaysUpdateInUnits\": false"
+    },
+    "canPickup": {
+      "type": "boolean",
+      "desc": "Груз можно поднять юнитом. По умолчанию: true.",
+      "example": "\"canPickup\": true"
+    },
+    "deconstructDropAllLiquid": {
+      "type": "boolean",
+      "desc": "Выливать всю жидкость при деконструкции. По умолчанию: false.",
+      "example": "\"deconstructDropAllLiquid\": false"
+    },
+    "useColor": {
+      "type": "boolean",
+      "desc": "Использовать цвет блока в отрисовке. По умолчанию: true.",
+      "example": "\"useColor\": true"
+    },
+    "itemDrop": {
+      "type": "String (имя: Item)",
+      "desc": "Предмет, выпадающий при добыче (полы/руда).",
+      "example": "\"itemDrop\": \"copper\""
+    },
+    "playerUnmineable": {
+      "type": "boolean",
+      "desc": "Игрок не может добывать это вручную. По умолчанию: false.",
+      "example": "\"playerUnmineable\": false"
+    },
+    "attributes": {
+      "type": "String (имя/объект)",
+      "desc": "Бонусы атрибутов среды от блока: {\"heat\": 0.5, ...}.",
+      "example": "\"attributes\": \"name\""
+    },
+    "scaledHealth": {
+      "type": "float",
+      "desc": "Прочность, масштабируемая размером (грузы/платформы). По умолчанию: -1.",
+      "example": "\"scaledHealth\": -1"
+    },
+    "explosivenessScale": {
+      "type": "float",
+      "desc": "Масштаб взрывоопасности содержимого. По умолчанию: 1.",
+      "example": "\"explosivenessScale\": 1"
+    },
+    "flammabilityScale": {
+      "type": "float",
+      "desc": "Масштаб воспламеняемости содержимого блока. По умолчанию: 1.",
+      "example": "\"flammabilityScale\": 1"
+    },
+    "lightLiquid": {
+      "type": "String (имя: Liquid)",
+      "desc": "Жидкость, при наличии которой блок светится.",
+      "example": "\"lightLiquid\": \"water\""
+    },
+    "sizeOffset": {
+      "type": "int",
+      "desc": "Смещение размера (визуал). По умолчанию: 0.",
+      "example": "\"sizeOffset\": 0"
+    },
+    "lightClipSize": {
+      "type": "float (Пиксели)",
+      "desc": "Размер клипа света.",
+      "example": "\"lightClipSize\": 1"
+    },
+    "placeOverlapRange": {
+      "type": "float (Пиксели)",
+      "desc": "Радиус перекрытия при размещении. По умолчанию: 50.",
+      "example": "\"placeOverlapRange\": 50"
+    },
+    "crushDamageMultiplier": {
+      "type": "float",
+      "desc": "Множитель урона от «раздавливания» (танковые юниты vs блок). По умолчанию: 1.",
+      "example": "\"crushDamageMultiplier\": 1"
+    },
+    "drawCached": {
+      "type": "boolean",
+      "desc": "Кэшируемая отрисовка блока. По умолчанию: false.",
+      "example": "\"drawCached\": false"
+    },
+    "fillsTile": {
+      "type": "boolean",
+      "desc": "Блок заполняет весь тайл (визуал). По умолчанию: true.",
+      "example": "\"fillsTile\": true"
+    },
+    "forceDark": {
+      "type": "boolean",
+      "desc": "Принудительно тёмная отрисовка. По умолчанию: false.",
+      "example": "\"forceDark\": false"
+    },
+    "replaceable": {
+      "type": "boolean",
+      "desc": "Блок можно заменить более крупной версией (стены, конвейеры). По умолчанию: true.",
+      "example": "\"replaceable\": true"
+    },
+    "ignoreResizeConfig": {
+      "type": "boolean",
+      "desc": "Не пересчитывать конфиг при изменении размера.",
+      "example": "\"ignoreResizeConfig\": true"
+    },
+    "diagonalConfigInventory": {
+      "type": "boolean",
+      "desc": "Диагональный конфиг инвентаря. По умолчанию: false.",
+      "example": "\"diagonalConfigInventory\": false"
+    },
+    "selectionRows": {
+      "type": "int",
+      "desc": "Количество строк в меню выбора. По умолчанию: 5.",
+      "example": "\"selectionRows\": 5"
+    },
+    "selectionColumns": {
+      "type": "int",
+      "desc": "Количество колонок в меню выбора блока. По умолчанию: 4.",
+      "example": "\"selectionColumns\": 4"
+    },
+    "delayLandingConfig": {
+      "type": "boolean",
+      "desc": "Задержка конфига высадки.",
+      "example": "\"delayLandingConfig\": true"
+    },
+    "consumesTap": {
+      "type": "boolean",
+      "desc": "Блок реагирует на нажатие (открывает конфиг).",
+      "example": "\"consumesTap\": true"
+    },
+    "sync": {
+      "type": "boolean",
+      "desc": "Синхронизировать состояние блока с сервером (для игроков).",
+      "example": "\"sync\": true"
+    },
+    "conveyorPlacement": {
+      "type": "boolean",
+      "desc": "Правила размещения конвейеров.",
+      "example": "\"conveyorPlacement\": true"
+    },
+    "swapDiagonalPlacement": {
+      "type": "boolean",
+      "desc": "Менять местами диагональную установку.",
+      "example": "\"swapDiagonalPlacement\": true"
+    },
+    "schematicPriority": {
+      "type": "int",
+      "desc": "Приоритет блока при расстановке схем. По умолчанию: 0.",
+      "example": "\"schematicPriority\": 0"
+    },
+    "mapColor": {
+      "type": "Color HEX",
+      "desc": "Цвет блока на миникарте.",
+      "example": "\"mapColor\": \"#ffffff\""
+    },
+    "hasColor": {
+      "type": "boolean",
+      "desc": "У блока есть цветовая настройка. По умолчанию: false.",
+      "example": "\"hasColor\": false"
+    },
+    "suppressable": {
+      "type": "boolean",
+      "desc": "Блок можно подавить полем SuppressionField (турели/генераторы). По умолчанию: false.",
+      "example": "\"suppressable\": false"
+    },
+    "outlineIcon": {
+      "type": "boolean",
+      "desc": "Иконка с контуром (для меню). По умолчанию: false.",
+      "example": "\"outlineIcon\": false"
+    },
+    "outlinedIcon": {
+      "type": "int",
+      "desc": "Индекс контурной иконки. По умолчанию: -1.",
+      "example": "\"outlinedIcon\": -1"
+    },
+    "hasShadow": {
+      "type": "boolean",
+      "desc": "У блока есть тень (спрайт «имя-shadow»). По умолчанию: true.",
+      "example": "\"hasShadow\": true"
+    },
+    "customShadow": {
+      "type": "boolean",
+      "desc": "Использовать собственную тень (спрайт «имя-shadow»). По умолчанию: false.",
+      "example": "\"customShadow\": false"
+    },
+    "placePitchChange": {
+      "type": "boolean",
+      "desc": "Изменение питча звука установки. По умолчанию: true.",
+      "example": "\"placePitchChange\": true"
+    },
+    "breakPitchChange": {
+      "type": "boolean",
+      "desc": "Изменение питча звука поломки. По умолчанию: true.",
+      "example": "\"breakPitchChange\": true"
+    },
+    "destroySound": {
+      "type": "Sound",
+      "desc": "Звук разрушения блока. По умолчанию: Sounds.unset.",
+      "example": "\"destroySound\": \"shootBig\""
+    },
+    "destroySoundVolume": {
+      "type": "float",
+      "desc": "Громкость звука разрушения. По умолчанию: 1.",
+      "example": "\"destroySoundVolume\": 1"
+    },
+    "destroyPitchMin": {
+      "type": "float",
+      "desc": "Минимальный питч звука разрушения. По умолчанию: 1.",
+      "example": "\"destroyPitchMin\": 1"
+    },
+    "destroyPitchMax": {
+      "type": "float",
+      "desc": "Максимальный питч звука разрушения. По умолчанию: 1.",
+      "example": "\"destroyPitchMax\": 1"
+    },
+    "emitLight": {
+      "type": "boolean",
+      "desc": "Блок излучает свет. По умолчанию: false.",
+      "example": "\"emitLight\": false"
+    },
+    "obstructsLight": {
+      "type": "boolean",
+      "desc": "Блок блокирует свет. По умолчанию: true.",
+      "example": "\"obstructsLight\": true"
+    },
+    "buildTime": {
+      "type": "float (Тики)",
+      "desc": "Время постройки юнита/груза (тики). По умолчанию: -1.",
+      "example": "\"buildTime\": -1"
+    },
+    "deconstructThreshold": {
+      "type": "float",
+      "desc": "Порог деконструкции. По умолчанию: 0.",
+      "example": "\"deconstructThreshold\": 0"
+    },
+    "instantDeconstruct": {
+      "type": "boolean",
+      "desc": "Мгновенная деконструкция. По умолчанию: false.",
+      "example": "\"instantDeconstruct\": false"
+    },
+    "instantBuild": {
+      "type": "boolean",
+      "desc": "Мгновенная постройка (creative/core-блоки). По умолчанию: false.",
+      "example": "\"instantBuild\": false"
+    },
+    "ignoreBuildDarkness": {
+      "type": "boolean",
+      "desc": "Игнорировать затемнение при постройке. По умолчанию: false.",
+      "example": "\"ignoreBuildDarkness\": false"
+    },
+    "placeEffect": {
+      "type": "Effect",
+      "desc": "Эффект установки блока. По умолчанию: Fx.placeBlock.",
+      "example": "\"placeEffect\": \"Fx.placeBlock\""
+    },
+    "destroyEffect": {
+      "type": "Effect",
+      "desc": "Эффект разрушения блока. По умолчанию: Fx.dynamicExplosion.",
+      "example": "\"destroyEffect\": \"Fx.dynamicExplosion\""
+    },
+    "researchCostMultipliers": {
+      "type": "ObjectFloatMap<Item>",
+      "desc": "Множители стоимости исследования по каждому ресурсу.",
+      "example": "\"researchCostMultipliers\": null"
+    },
+    "researchCost": {
+      "type": "ItemStack[]",
+      "desc": "Своя стоимость исследования блока (вместо автоматической по требованиям).",
+      "example": "\"researchCost\": [{ \"item\": \"copper\", \"amount\": 50 }, { \"item\": \"lead\", \"amount\": 30 }]"
+    },
+    "forceTeam": {
+      "type": "String (имя: Team)",
+      "desc": "Команда, которой принадлежит блок при установке.",
+      "example": "\"forceTeam\": \"derelict\""
+    },
+    "instantTransfer": {
+      "type": "boolean",
+      "desc": "Мгновенная передача содержимого (без задержки транспорта). По умолчанию: false.",
+      "example": "\"instantTransfer\": false"
+    },
+    "maxConsecutive": {
+      "type": "int",
+      "desc": "Максимум последовательных срабатываний. По умолчанию: 2.",
+      "example": "\"maxConsecutive\": 2"
+    },
+    "quickRotate": {
+      "type": "boolean",
+      "desc": "Блок можно быстро поворачивать при установке (0/180°). По умолчанию: true.",
+      "example": "\"quickRotate\": true"
+    },
+    "selectScroll": {
+      "type": "float",
+      "desc": "Прокрутка в меню выбора (интерфейс).",
+      "example": "\"selectScroll\": 1"
+    },
+    "itemFilter": {
+      "type": "boolean[]",
+      "desc": "Фильтр принимаемых предметов (буры, крафтеры).",
+      "example": "\"itemFilter\": null"
+    },
+    "liquidFilter": {
+      "type": "boolean[]",
+      "desc": "Фильтр принимаемых жидкостей.",
+      "example": "\"liquidFilter\": null"
+    },
+    "hasConsumers": {
+      "type": "boolean",
+      "desc": "У блока есть потребители ресурсов.",
+      "example": "\"hasConsumers\": true"
+    },
+    "dumpTime": {
+      "type": "int",
+      "desc": "Интервал выдачи содержимого (тики). По умолчанию: 5.",
+      "example": "\"dumpTime\": 5"
+    },
+    "launchBlock": {
+      "type": "String (имя: Block)",
+      "desc": "Блок, запускаемый капсулой (LaunchPad). По умолчанию: Blocks.coreNucleus.",
+      "example": "\"launchBlock\": \"conveyor\""
+    },
+    "powerBufferRequirement": {
+      "type": "float",
+      "desc": "Требуемый буфер энергии для включения.",
+      "example": "\"powerBufferRequirement\": 1"
+    },
+    "launchCandidates": {
+      "type": "Planet[]",
+      "desc": "Планеты-кандидаты для запуска (Accelerator).",
+      "example": "\"launchCandidates\": null"
+    },
+    "lightningSound": {
+      "type": "Sound",
+      "desc": "Звук молнии.",
+      "example": "\"lightningSound\": \"shootBig\""
+    },
+    "lightningSoundVolume": {
+      "type": "float",
+      "desc": "Громкость звука молнии. По умолчанию: 0.85.",
+      "example": "\"lightningSoundVolume\": 0.85"
+    },
+    "launchSound": {
+      "type": "Sound",
+      "desc": "Звук запуска. По умолчанию: Sounds.acceleratorLaunch.",
+      "example": "\"launchSound\": \"shootBig\""
+    },
+    "constructSound": {
+      "type": "Sound",
+      "desc": "Звук конструирования (ускоритель/реконструктор). По умолчанию: Sounds.acceleratorConstruct.",
+      "example": "\"constructSound\": \"shootBig\""
+    },
+    "launchDuration": {
+      "type": "float (Тики)",
+      "desc": "Длительность запуска (LaunchPad). По умолчанию: 120.",
+      "example": "\"launchDuration\": 120"
+    },
+    "chargeDuration": {
+      "type": "float (Тики)",
+      "desc": "Длительность фазы заряда (тики). По умолчанию: 220.",
+      "example": "\"chargeDuration\": 220"
+    },
+    "buildDuration": {
+      "type": "float (Тики)",
+      "desc": "Длительность фазы строительства (Accelerator). По умолчанию: 120.",
+      "example": "\"buildDuration\": 120"
+    },
+    "landZoomInterp": {
+      "type": "Interp",
+      "desc": "Интерполяция зума при высадке. По умолчанию: Interp.pow4In.",
+      "example": "\"landZoomInterp\": \"pow4In\""
+    },
+    "chargeZoomInterp": {
+      "type": "Interp",
+      "desc": "Accelerator: интерполяция зума камеры при зарядке. По умолчанию: Interp.pow4In.",
+      "example": "\"chargeZoomInterp\": \"pow4In\""
+    },
+    "landZoomFrom": {
+      "type": "float",
+      "desc": "Зум камеры при высадке (от). По умолчанию: 0.02.",
+      "example": "\"landZoomFrom\": 0.02"
+    },
+    "landZoomTo": {
+      "type": "float",
+      "desc": "Accelerator: конечный зум камеры при высадке на планету. По умолчанию: 4.",
+      "example": "\"landZoomTo\": 4"
+    },
+    "chargeZoomTo": {
+      "type": "float",
+      "desc": "Accelerator: конечный зум камеры при зарядке. По умолчанию: 5.",
+      "example": "\"chargeZoomTo\": 5"
+    },
+    "chargeRings": {
+      "type": "int",
+      "desc": "Accelerator: количество колец заряда. По умолчанию: 4.",
+      "example": "\"chargeRings\": 4"
+    },
+    "ringRadBase": {
+      "type": "float",
+      "desc": "Accelerator: базовый радиус колец заряда. По умолчанию: 60.",
+      "example": "\"ringRadBase\": 60"
+    },
+    "ringRadSpacing": {
+      "type": "float (Пиксели)",
+      "desc": "Accelerator: расстояние между кольцами заряда по радиусу. По умолчанию: 25.",
+      "example": "\"ringRadSpacing\": 25"
+    },
+    "ringRadPow": {
+      "type": "float",
+      "desc": "Accelerator: степень роста радиуса колец заряда. По умолчанию: 1.6.",
+      "example": "\"ringRadPow\": 1.6"
+    },
+    "ringStroke": {
+      "type": "float (Пиксели)",
+      "desc": "Accelerator: толщина колец заряда. По умолчанию: 3.",
+      "example": "\"ringStroke\": 3"
+    },
+    "ringSpeedup": {
+      "type": "float",
+      "desc": "Accelerator: множитель ускорения вращения колец. По умолчанию: 1.4.",
+      "example": "\"ringSpeedup\": 1.4"
+    },
+    "chargeRingMerge": {
+      "type": "float",
+      "desc": "Accelerator: слияние колец заряда (визуал). По умолчанию: 2.",
+      "example": "\"chargeRingMerge\": 2"
+    },
+    "ringArrowRad": {
+      "type": "float",
+      "desc": "Accelerator: радиус стрелок на кольцах заряда. По умолчанию: 3.",
+      "example": "\"ringArrowRad\": 3"
+    },
+    "ringHandleTilt": {
+      "type": "float",
+      "desc": "Accelerator: наклон «ручек» колец заряда. По умолчанию: 0.8.",
+      "example": "\"ringHandleTilt\": 0.8"
+    },
+    "ringHandleLen": {
+      "type": "float",
+      "desc": "Accelerator: длина «ручек» колец заряда. По умолчанию: 30.",
+      "example": "\"ringHandleLen\": 30"
+    },
+    "ringColor": {
+      "type": "Color HEX",
+      "desc": "Accelerator: цвет колец заряда. По умолчанию: #ffd37f.",
+      "example": "\"ringColor\": \"#ffd37f\""
+    },
+    "launchLightning": {
+      "type": "int",
+      "desc": "Молнии при запуске. По умолчанию: 20.",
+      "example": "\"launchLightning\": 20"
+    },
+    "lightningOffset": {
+      "type": "float (Пиксели)",
+      "desc": "Смещение молнии. По умолчанию: 24.",
+      "example": "\"lightningOffset\": 24"
+    },
+    "lightningLengthMin": {
+      "type": "int",
+      "desc": "Минимальная длина молнии. По умолчанию: 5.",
+      "example": "\"lightningLengthMin\": 5"
+    },
+    "lightningLengthMax": {
+      "type": "int",
+      "desc": "Accelerator: максимальная длина молний при запуске. По умолчанию: 25.",
+      "example": "\"lightningLengthMax\": 25"
+    },
+    "lightningLaunchChance": {
+      "type": "float",
+      "desc": "Шанс молнии при запуске. По умолчанию: 0.8.",
+      "example": "\"lightningLaunchChance\": 0.8"
+    },
+    "attribute": {
+      "type": "String (имя/объект)",
+      "desc": "Требуемый атрибут среды (heat, sand, water, spore, oil, scrap...) — буры и AttributeCrafter.",
+      "example": "\"attribute\": \"name\""
+    },
+    "maxBoost": {
+      "type": "float",
+      "desc": "Максимальное ускорение от буст-предметов (множитель). По умолчанию: 1.",
+      "example": "\"maxBoost\": 1"
+    },
+    "minEfficiency": {
+      "type": "float",
+      "desc": "Минимальная эффективность для работы. По умолчанию: -1.",
+      "example": "\"minEfficiency\": -1"
+    },
+    "displayEfficiency": {
+      "type": "boolean",
+      "desc": "Показывать эффективность в интерфейсе. По умолчанию: true.",
+      "example": "\"displayEfficiency\": true"
+    },
+    "displayScaledOutput": {
+      "type": "boolean",
+      "desc": "Показывать масштабированный выход в статистике. По умолчанию: true.",
+      "example": "\"displayScaledOutput\": true"
+    },
+    "scaleLiquidConsumption": {
+      "type": "boolean",
+      "desc": "Масштабировать потребление жидкости от эффективности. По умолчанию: false.",
+      "example": "\"scaleLiquidConsumption\": false"
+    },
+    "outputScale": {
+      "type": "float",
+      "desc": "Масштаб количества продукта. По умолчанию: 0.",
+      "example": "\"outputScale\": 0"
+    },
+    "boostScale": {
+      "type": "float",
+      "desc": "Масштаб ускорения. По умолчанию: 1.",
+      "example": "\"boostScale\": 1"
+    },
+    "checkInterval": {
+      "type": "float (Тики)",
+      "desc": "Интервал проверок (тики). По умолчанию: 20.",
+      "example": "\"checkInterval\": 20"
+    },
+    "openfx": {
+      "type": "Effect",
+      "desc": "AutoDoor: эффект открытия двери. По умолчанию: Fx.dooropen.",
+      "example": "\"openfx\": \"Fx.dooropen\""
+    },
+    "closefx": {
+      "type": "Effect",
+      "desc": "Эффект закрытия (двери/люки). По умолчанию: Fx.doorclose.",
+      "example": "\"closefx\": \"Fx.doorclose\""
+    },
+    "doorSound": {
+      "type": "Sound",
+      "desc": "Звук открытия/закрытия двери. По умолчанию: Sounds.door.",
+      "example": "\"doorSound\": \"shootBig\""
+    },
+    "triggerMargin": {
+      "type": "float (Пиксели)",
+      "desc": "Отступ срабатывания триггера. По умолчанию: 12.",
+      "example": "\"triggerMargin\": 12"
+    },
+    "placeOverlapMargin": {
+      "type": "float (Пиксели)",
+      "desc": "Отступ перекрытия при размещении. По умолчанию: 56.",
+      "example": "\"placeOverlapMargin\": 56"
+    },
+    "fogRadiusMultiplier": {
+      "type": "float",
+      "desc": "Множитель радиуса разведки тумана войны. По умолчанию: 1.",
+      "example": "\"fogRadiusMultiplier\": 1"
+    },
+    "disableOverlapCheck": {
+      "type": "boolean",
+      "desc": "Отключить проверку перекрытия при размещении. По умолчанию: false.",
+      "example": "\"disableOverlapCheck\": false"
+    },
+    "activationTime": {
+      "type": "float (Тики)",
+      "desc": "Время активации блока. По умолчанию: 0.",
+      "example": "\"activationTime\": 0"
+    },
+    "coolEffect": {
+      "type": "Effect",
+      "desc": "Эффект охлаждения (турели). По умолчанию: Fx.fuelburn.",
+      "example": "\"coolEffect\": \"Fx.fuelburn\""
+    },
+    "drawer": {
+      "type": "DrawBlock (объект)",
+      "desc": "Объект отрисовки блока: DrawDefault, DrawGlowRegion, DrawMulti, DrawPistons и т.д.",
+      "example": "\"drawer\": { \"type\": \"DrawDefault\" }"
+    },
+    "emptyLightColor": {
+      "type": "Color HEX",
+      "desc": "Battery: цвет свечения разряженной батареи. По умолчанию: #f8c266.",
+      "example": "\"emptyLightColor\": \"#f8c266\""
+    },
+    "fullLightColor": {
+      "type": "Color HEX",
+      "desc": "Цвет полного свечения. По умолчанию: #fb9567.",
+      "example": "\"fullLightColor\": \"#fb9567\""
+    },
+    "laserWidth": {
+      "type": "float (Пиксели)",
+      "desc": "Толщина лазерного луча связи. По умолчанию: 0.65.",
+      "example": "\"laserWidth\": 0.65"
+    },
+    "optionalBoostIntensity": {
+      "type": "float",
+      "desc": "Ускорение от «опционального» предмета (множитель). По умолчанию: 2.5.",
+      "example": "\"optionalBoostIntensity\": 2.5"
+    },
+    "blockedItem": {
+      "type": "String (имя: Item)",
+      "desc": "Предмет, блокирующий работу (BeamDrill).",
+      "example": "\"blockedItem\": \"copper\""
+    },
+    "glowIntensity": {
+      "type": "float",
+      "desc": "Интенсивность свечения. По умолчанию: 0.2.",
+      "example": "\"glowIntensity\": 0.2"
+    },
+    "pulseIntensity": {
+      "type": "float",
+      "desc": "BeamDrill: интенсивность пульсации луча (визуал). По умолчанию: 0.07.",
+      "example": "\"pulseIntensity\": 0.07"
+    },
+    "glowScl": {
+      "type": "float",
+      "desc": "Масштаб пульсации свечения. По умолчанию: 3.",
+      "example": "\"glowScl\": 3"
+    },
+    "sparkRange": {
+      "type": "float (Пиксели)",
+      "desc": "Дальность искр (визуал). По умолчанию: 10.",
+      "example": "\"sparkRange\": 10"
+    },
+    "sparkLife": {
+      "type": "float",
+      "desc": "Время жизни искр (визуал бурения). По умолчанию: 27.",
+      "example": "\"sparkLife\": 27"
+    },
+    "sparkRecurrence": {
+      "type": "float",
+      "desc": "Частота появления искр (визуал бурения). По умолчанию: 4.",
+      "example": "\"sparkRecurrence\": 4"
+    },
+    "sparkSpread": {
+      "type": "float (Градусы)",
+      "desc": "Разброс искр (визуал бурения). По умолчанию: 45.",
+      "example": "\"sparkSpread\": 45"
+    },
+    "sparkSize": {
+      "type": "float (Пиксели)",
+      "desc": "Размер искр (визуал бурения). По умолчанию: 3.5.",
+      "example": "\"sparkSize\": 3.5"
+    },
+    "boostHeatColor": {
+      "type": "Color HEX",
+      "desc": "Цвет нагрева при ускорении фазой/предметами. По умолчанию: Color.sky.cpy().mul(0.87f).",
+      "example": "\"boostHeatColor\": \"#ffffff\""
+    },
+    "heatPulse": {
+      "type": "float",
+      "desc": "Импульс нагрева (визуал). По умолчанию: 0.3.",
+      "example": "\"heatPulse\": 0.3"
+    },
+    "heatPulseScl": {
+      "type": "float",
+      "desc": "BeamDrill: масштаб теплового пульса (визуал бурения). По умолчанию: 7.",
+      "example": "\"heatPulseScl\": 7"
+    },
+    "laserColor1": {
+      "type": "Color HEX",
+      "desc": "BeamNode: основной цвет луча энергосвязи. По умолчанию: Color.white.",
+      "example": "\"laserColor1\": \"#ffffff\""
+    },
+    "laserColor2": {
+      "type": "Color HEX",
+      "desc": "BeamNode: вторичный цвет луча энергосвязи. По умолчанию: #ffd9c2.",
+      "example": "\"laserColor2\": \"#ffd9c2\""
+    },
+    "pulseScl": {
+      "type": "float",
+      "desc": "Масштаб пульсации. По умолчанию: 7.",
+      "example": "\"pulseScl\": 7"
+    },
+    "pulseMag": {
+      "type": "float",
+      "desc": "BeamNode: амплитуда пульсации луча энергосвязи. По умолчанию: 0.05.",
+      "example": "\"pulseMag\": 0.05"
+    },
+    "heat": {
+      "type": "float",
+      "desc": "Тепловая ёмкость/нагрев блока (тепловая система v7+).",
+      "example": "\"heat\": 1"
+    },
+    "bufferCapacity": {
+      "type": "int",
+      "desc": "Ёмкость внутреннего буфера (предметы/жидкость/энергия). По умолчанию: 50.",
+      "example": "\"bufferCapacity\": 50"
+    },
+    "elevation": {
+      "type": "float",
+      "desc": "Высота блока для тени/отрисовки (летающие блоки). По умолчанию: -1.",
+      "example": "\"elevation\": -1"
+    },
+    "speedCurve": {
+      "type": "Interp",
+      "desc": "Кривая изменения скорости работы (Interp). По умолчанию: Interp.pow2In.",
+      "example": "\"speedCurve\": \"pow2In\""
+    },
+    "invertedTime": {
+      "type": "float (Тики)",
+      "desc": "Инвертированное время анимации. По умолчанию: 200.",
+      "example": "\"invertedTime\": 200"
+    },
+    "arrowSpacing": {
+      "type": "float (Пиксели)",
+      "desc": "Расстояние между стрелками направления. По умолчанию: 4.",
+      "example": "\"arrowSpacing\": 4"
+    },
+    "arrowOffset": {
+      "type": "float (Пиксели)",
+      "desc": "Смещение стрелок-индикаторов (визуал). По умолчанию: 0.",
+      "example": "\"arrowOffset\": 0"
+    },
+    "arrows": {
+      "type": "int",
+      "desc": "Количество стрелок направления. По умолчанию: 3.",
+      "example": "\"arrows\": 3"
+    },
+    "arrowColor": {
+      "type": "Color HEX",
+      "desc": "Цвет стрелок направления. По умолчанию: #feb380.",
+      "example": "\"arrowColor\": \"#feb380\""
+    },
+    "baseArrowColor": {
+      "type": "Color HEX",
+      "desc": "Базовый цвет стрелок-индикаторов. По умолчанию: #6e7080.",
+      "example": "\"baseArrowColor\": \"#6e7080\""
+    },
+    "drillSound": {
+      "type": "Sound",
+      "desc": "Звук бурения (зацикленный). По умолчанию: Sounds.drillImpact.",
+      "example": "\"drillSound\": \"shootBig\""
+    },
+    "drillSoundVolume": {
+      "type": "float",
+      "desc": "Громкость звука бурения. По умолчанию: 0.6.",
+      "example": "\"drillSoundVolume\": 0.6"
+    },
+    "drillSoundPitchRand": {
+      "type": "float",
+      "desc": "Случайность питча звука бурения. По умолчанию: 0.1.",
+      "example": "\"drillSoundPitchRand\": 0.1"
+    },
+    "padding": {
+      "type": "float",
+      "desc": "Внутренний отступ отрисовки (крафтеры с жидкостью). По умолчанию: 0.",
+      "example": "\"padding\": 0"
+    },
+    "canvasSize": {
+      "type": "int",
+      "desc": "Размер «холста» дисплея (пиксели). По умолчанию: 8.",
+      "example": "\"canvasSize\": 8"
+    },
+    "palette": {
+      "type": "int[]",
+      "desc": "Палитра цветов спрайта (генерация).",
+      "example": "\"palette\": null"
+    },
+    "bitsPerPixel": {
+      "type": "int",
+      "desc": "Бит на пиксель (логика/дисплеи).",
+      "example": "\"bitsPerPixel\": 1"
+    },
+    "defaultColor": {
+      "type": "Color HEX",
+      "desc": "Цвет по умолчанию (визуал). По умолчанию: Color.white.",
+      "example": "\"defaultColor\": \"#ffffff\""
+    },
+    "botColor": {
+      "type": "Color HEX",
+      "desc": "Цвет «днища» (визуал турели). По умолчанию: #565656.",
+      "example": "\"botColor\": \"#565656\""
+    },
+    "padCorners": {
+      "type": "boolean",
+      "desc": "Скруглять углы области (визуал). По умолчанию: true.",
+      "example": "\"padCorners\": true"
+    },
+    "leaks": {
+      "type": "boolean",
+      "desc": "Блок «протекает» (жидкость капает при повреждениях). По умолчанию: true.",
+      "example": "\"leaks\": true"
+    },
+    "rotBridgeReplacement": {
+      "type": "String (имя: Block)",
+      "desc": "Conduit: блок-замена для повёрнутого моста.",
+      "example": "\"rotBridgeReplacement\": \"conveyor\""
+    },
+    "filter": {
+      "type": "Block[]",
+      "desc": "Фильтр содержимого (сепаратор/сортировщик).",
+      "example": "\"filter\": null"
+    },
+    "minBlockSize": {
+      "type": "int",
+      "desc": "Минимальный размер принимаемого блока (грузы). По умолчанию: 1.",
+      "example": "\"minBlockSize\": 1"
+    },
+    "maxBlockSize": {
+      "type": "int",
+      "desc": "Максимальный размер принимаемого блока (грузы). По умолчанию: 2.",
+      "example": "\"maxBlockSize\": 2"
+    },
+    "generateEffect": {
+      "type": "Effect",
+      "desc": "Эффект генерации (генераторы энергии). По умолчанию: Fx.none.",
+      "example": "\"generateEffect\": \"Fx.none\""
+    },
+    "consumeEffect": {
+      "type": "Effect",
+      "desc": "Эффект потребления топлива/ресурсов. По умолчанию: Fx.none.",
+      "example": "\"consumeEffect\": \"Fx.none\""
+    },
+    "generateEffectRange": {
+      "type": "float (Пиксели)",
+      "desc": "Радиус спавна эффектов генерации. По умолчанию: 3.",
+      "example": "\"generateEffectRange\": 3"
+    },
+    "baseLightRadius": {
+      "type": "float (Пиксели)",
+      "desc": "Базовый радиус света. По умолчанию: 65.",
+      "example": "\"baseLightRadius\": 65"
+    },
+    "explodeOnFull": {
+      "type": "boolean",
+      "desc": "ConsumeGenerator: взрываться при переполнении буфера. По умолчанию: false.",
+      "example": "\"explodeOnFull\": false"
+    },
+    "itemDurationMultipliers": {
+      "type": "ObjectFloatMap<Item>",
+      "desc": "Множители длительности работы для разных предметов-топлива.",
+      "example": "\"itemDurationMultipliers\": null"
+    },
+    "liquidConsumed": {
+      "type": "float",
+      "desc": "Жидкости потреблено за цикл. По умолчанию: 0.0167.",
+      "example": "\"liquidConsumed\": 0.0167"
+    },
+    "scaleDamageEfficiency": {
+      "type": "boolean",
+      "desc": "Масштабировать урон от эффективности блока. По умолчанию: false.",
+      "example": "\"scaleDamageEfficiency\": false"
+    },
+    "thrusterLength": {
+      "type": "float (Пиксели)",
+      "desc": "Длина трастеров ядра. По умолчанию: 3.5.",
+      "example": "\"thrusterLength\": 3.5"
+    },
+    "thrusterOffset": {
+      "type": "float (Пиксели)",
+      "desc": "Смещение трастеров ядра. По умолчанию: 0.",
+      "example": "\"thrusterOffset\": 0"
+    },
+    "isFirstTier": {
+      "type": "boolean",
+      "desc": "Первый уровень ветки исследований.",
+      "example": "\"isFirstTier\": true"
+    },
+    "allowSpawn": {
+      "type": "boolean",
+      "desc": "CoreBlock: разрешать спавн юнитов у ядра. По умолчанию: true.",
+      "example": "\"allowSpawn\": true"
+    },
+    "requiresCoreZone": {
+      "type": "boolean",
+      "desc": "Для установки требуется зона ядра.",
+      "example": "\"requiresCoreZone\": true"
+    },
+    "incinerateNonBuildable": {
+      "type": "boolean",
+      "desc": "Сжигать предметы, которые нельзя построить. По умолчанию: false.",
+      "example": "\"incinerateNonBuildable\": false"
+    },
+    "landDuration": {
+      "type": "float (Тики)",
+      "desc": "Длительность «высадки» (планетные блоки). По умолчанию: 160.",
+      "example": "\"landDuration\": 160"
+    },
+    "launchSoundVolume": {
+      "type": "float",
+      "desc": "Громкость звука запуска. По умолчанию: 1.",
+      "example": "\"launchSoundVolume\": 1"
+    },
+    "landSoundVolume": {
+      "type": "float",
+      "desc": "Громкость звука высадки. По умолчанию: 1.",
+      "example": "\"landSoundVolume\": 1"
+    },
+    "landSound": {
+      "type": "Sound",
+      "desc": "Звук высадки. По умолчанию: Sounds.coreLand.",
+      "example": "\"landSound\": \"shootBig\""
+    },
+    "launchEffect": {
+      "type": "Effect",
+      "desc": "Эффект запуска (LaunchPad). По умолчанию: Fx.launch.",
+      "example": "\"launchEffect\": \"Fx.launch\""
+    },
+    "captureInvicibility": {
+      "type": "float",
+      "desc": "Неуязвимость ядра после захвата (тики). По умолчанию: 900.",
+      "example": "\"captureInvicibility\": 900"
+    },
+    "liquidPadding": {
+      "type": "float",
+      "desc": "Отступ области жидкости в спрайте. По умолчанию: 1.",
+      "example": "\"liquidPadding\": 1"
+    },
+    "allowCoreUnload": {
+      "type": "boolean",
+      "desc": "Разрешить выгрузку предметов из ядра. По умолчанию: false.",
+      "example": "\"allowCoreUnload\": false"
+    },
+    "drawMineItem": {
+      "type": "boolean",
+      "desc": "Рисовать добываемый предмет (буры). По умолчанию: true.",
+      "example": "\"drawMineItem\": true"
+    },
+    "drillEffect": {
+      "type": "Effect",
+      "desc": "Эффект бурения. По умолчанию: Fx.mine.",
+      "example": "\"drillEffect\": \"Fx.mine\""
+    },
+    "drillEffectRnd": {
+      "type": "float",
+      "desc": "Случайность эффекта бурения (-1 = выкл). По умолчанию: -1.",
+      "example": "\"drillEffectRnd\": -1"
+    },
+    "drillEffectChance": {
+      "type": "float",
+      "desc": "Шанс эффекта бурения за тик. По умолчанию: 0.02.",
+      "example": "\"drillEffectChance\": 0.02"
+    },
+    "drawRim": {
+      "type": "boolean",
+      "desc": "Рисовать ободок (визуал). По умолчанию: false.",
+      "example": "\"drawRim\": false"
+    },
+    "drawSpinSprite": {
+      "type": "boolean",
+      "desc": "Рисовать вращающийся спрайт. По умолчанию: true.",
+      "example": "\"drawSpinSprite\": true"
+    },
+    "armored": {
+      "type": "boolean",
+      "desc": "Бронированный: принимает предметы/жидкость только через «входную» грань (конвейер, мост). По умолчанию: false.",
+      "example": "\"armored\": false"
+    },
+    "transparentColor": {
+      "type": "Color HEX",
+      "desc": "Цвет «прозрачной» части спрайта (жидкости в блоке).",
+      "example": "\"transparentColor\": \"#ffffff\""
+    },
+    "edge": {
+      "type": "String",
+      "desc": "Грань/кромка спрайта (визуал). По умолчанию: \"stone\".",
+      "example": "\"edge\": \"stone\""
+    },
+    "damageTaken": {
+      "type": "float",
+      "desc": "Получаемый блоком урон (множитель). По умолчанию: 0.",
+      "example": "\"damageTaken\": 0"
+    },
+    "drownTime": {
+      "type": "float (Тики)",
+      "desc": "Время «затопления» блока жидкостью до разрушения. По умолчанию: 0.",
+      "example": "\"drownTime\": 0"
+    },
+    "walkEffect": {
+      "type": "Effect",
+      "desc": "Эффект при ходьбе юнита по блоку (полы). По умолчанию: Fx.none.",
+      "example": "\"walkEffect\": \"Fx.none\""
+    },
+    "walkSound": {
+      "type": "Sound",
+      "desc": "Звук шагов по блоку (полы). По умолчанию: Sounds.none.",
+      "example": "\"walkSound\": \"shootBig\""
+    },
+    "walkSoundVolume": {
+      "type": "float",
+      "desc": "Громкость звука шагов. По умолчанию: 0.1.",
+      "example": "\"walkSoundVolume\": 0.1"
+    },
+    "walkSoundPitchMin": {
+      "type": "float",
+      "desc": "Минимальный питч звука шагов. По умолчанию: 0.8.",
+      "example": "\"walkSoundPitchMin\": 0.8"
+    },
+    "walkSoundPitchMax": {
+      "type": "float",
+      "desc": "Максимальный питч звука шагов. По умолчанию: 1.2.",
+      "example": "\"walkSoundPitchMax\": 1.2"
+    },
+    "drownUpdateEffect": {
+      "type": "Effect",
+      "desc": "Эффект при затоплении блока. По умолчанию: Fx.bubble.",
+      "example": "\"drownUpdateEffect\": \"Fx.bubble\""
+    },
+    "liquidDrop": {
+      "type": "String (имя: Liquid)",
+      "desc": "Floor: жидкость, получаемая при «добыче» пола.",
+      "example": "\"liquidDrop\": \"water\""
+    },
+    "liquidMultiplier": {
+      "type": "float",
+      "desc": "Множитель выработки от жидкости. По умолчанию: 1.",
+      "example": "\"liquidMultiplier\": 1"
+    },
+    "isLiquid": {
+      "type": "boolean",
+      "desc": "Блок оперирует жидкостью как основным содержимым.",
+      "example": "\"isLiquid\": true"
+    },
+    "overlayAlpha": {
+      "type": "float",
+      "desc": "Прозрачность оверлея. По умолчанию: 0.65.",
+      "example": "\"overlayAlpha\": 0.65"
+    },
+    "supportsOverlay": {
+      "type": "boolean",
+      "desc": "Поддерживает оверлей-поверхности. По умолчанию: false.",
+      "example": "\"supportsOverlay\": false"
+    },
+    "supportsBeingOverlaid": {
+      "type": "boolean",
+      "desc": "Блок можно перекрывать другим блоком. По умолчанию: true.",
+      "example": "\"supportsBeingOverlaid\": true"
+    },
+    "shallow": {
+      "type": "boolean",
+      "desc": "Блок для мелководья. По умолчанию: false.",
+      "example": "\"shallow\": false"
+    },
+    "oreDefault": {
+      "type": "boolean",
+      "desc": "Базовая скорость добычи руды (буры). По умолчанию: false.",
+      "example": "\"oreDefault\": false"
+    },
+    "oreScale": {
+      "type": "float",
+      "desc": "Масштаб скорости добычи от richness руды. По умолчанию: 24.",
+      "example": "\"oreScale\": 24"
+    },
+    "oreThreshold": {
+      "type": "float",
+      "desc": "Floor: порог богатства руды для работы буров. По умолчанию: 0.828.",
+      "example": "\"oreThreshold\": 0.828"
+    },
+    "wall": {
+      "type": "String (имя: Block)",
+      "desc": "Блок-стена поверх (полы/руда на стенах). По умолчанию: Blocks.air.",
+      "example": "\"wall\": \"conveyor\""
+    },
+    "decoration": {
+      "type": "String (имя: Block)",
+      "desc": "Декоративный блок поверх (полы). По умолчанию: Blocks.air.",
+      "example": "\"decoration\": \"conveyor\""
+    },
+    "canShadow": {
+      "type": "boolean",
+      "desc": "Блок отбрасывает тень. По умолчанию: true.",
+      "example": "\"canShadow\": true"
+    },
+    "forceDrawLight": {
+      "type": "boolean",
+      "desc": "Всегда рисовать свет блока (даже при выключенном освещении карты). По умолчанию: false.",
+      "example": "\"forceDrawLight\": false"
+    },
+    "needsSurface": {
+      "type": "boolean",
+      "desc": "Требуется поверхность (не жидкость) для установки. По умолчанию: true.",
+      "example": "\"needsSurface\": true"
+    },
+    "allowCorePlacement": {
+      "type": "boolean",
+      "desc": "Разрешить размещение рядом с ядром. По умолчанию: false.",
+      "example": "\"allowCorePlacement\": false"
+    },
+    "wallOre": {
+      "type": "boolean",
+      "desc": "Это «настенная» руда (добывается со стен). По умолчанию: false.",
+      "example": "\"wallOre\": false"
+    },
+    "tilingVariants": {
+      "type": "int",
+      "desc": "Варианты тайлинга спрайта. По умолчанию: 0.",
+      "example": "\"tilingVariants\": 0"
+    },
+    "autotile": {
+      "type": "boolean",
+      "desc": "Автоматический тайлинг спрайта. По умолчанию: false.",
+      "example": "\"autotile\": false"
+    },
+    "autotileMidVariants": {
+      "type": "int",
+      "desc": "Варианты средних автотайлов. По умолчанию: 1.",
+      "example": "\"autotileMidVariants\": 1"
+    },
+    "autotileVariants": {
+      "type": "int",
+      "desc": "Варианты автотайлов. По умолчанию: 1.",
+      "example": "\"autotileVariants\": 1"
+    },
+    "drawEdgeIn": {
+      "type": "boolean",
+      "desc": "Рисовать «входную» грань. По умолчанию: true.",
+      "example": "\"drawEdgeIn\": true"
+    },
+    "drawEdgeOut": {
+      "type": "boolean",
+      "desc": "Рисовать «выходную» грань. По умолчанию: true.",
+      "example": "\"drawEdgeOut\": true"
+    },
+    "phaseUseTime": {
+      "type": "float (Тики)",
+      "desc": "Время расхода фазовой ткани на ускорение. По умолчанию: 350.",
+      "example": "\"phaseUseTime\": 350"
+    },
+    "phaseRadiusBoost": {
+      "type": "float",
+      "desc": "Прибавка к радиусу от фазовой ткани. По умолчанию: 80.",
+      "example": "\"phaseRadiusBoost\": 80"
+    },
+    "phaseShieldBoost": {
+      "type": "float",
+      "desc": "Прибавка к прочности щита от фазовой ткани. По умолчанию: 400.",
+      "example": "\"phaseShieldBoost\": 400"
+    },
+    "shieldRotation": {
+      "type": "float (Градусы)",
+      "desc": "Угол поворота щита (визуал). По умолчанию: 0.",
+      "example": "\"shieldRotation\": 0"
+    },
+    "cooldownNormal": {
+      "type": "float (Тики)",
+      "desc": "Время охлаждения в обычном режиме (тики). По умолчанию: 1.75.",
+      "example": "\"cooldownNormal\": 1.75"
+    },
+    "cooldownLiquid": {
+      "type": "float (Тики)",
+      "desc": "Время охлаждения с хладагентом (тики). По умолчанию: 1.5.",
+      "example": "\"cooldownLiquid\": 1.5"
+    },
+    "cooldownBrokenBase": {
+      "type": "float (Тики)",
+      "desc": "Базовое время «остывания» после поломки/разряда. По умолчанию: 0.35.",
+      "example": "\"cooldownBrokenBase\": 0.35"
+    },
+    "coolantConsumption": {
+      "type": "float",
+      "desc": "Базовый расход хладажента (жидкость/сек). По умолчанию: 0.1.",
+      "example": "\"coolantConsumption\": 0.1"
+    },
+    "consumeCoolant": {
+      "type": "boolean",
+      "desc": "Требовать хладагент для стрельбы (турель). По умолчанию: true.",
+      "example": "\"consumeCoolant\": true"
+    },
+    "absorbEffect": {
+      "type": "Effect",
+      "desc": "ForceProjector: эффект поглощения удара щитом. По умолчанию: Fx.absorb.",
+      "example": "\"absorbEffect\": \"Fx.absorb\""
+    },
+    "shieldBreakEffect": {
+      "type": "Effect",
+      "desc": "ForceProjector: эффект пробития/разрыва щита. По умолчанию: Fx.shieldBreak.",
+      "example": "\"shieldBreakEffect\": \"Fx.shieldBreak\""
+    },
+    "forceShrinkEffect": {
+      "type": "Effect",
+      "desc": "Эффект принудительного сжатия щита. По умолчанию: Fx.forceShrink.",
+      "example": "\"forceShrinkEffect\": \"Fx.forceShrink\""
+    },
+    "itemUseTime": {
+      "type": "float (Тики)",
+      "desc": "Время расхода предмета-ускорителя (тики). По умолчанию: 100.",
+      "example": "\"itemUseTime\": 100"
+    },
+    "legacyReadWarmup": {
+      "type": "boolean",
+      "desc": "Читать прогрев из старых сейвов (совместимость). По умолчанию: false.",
+      "example": "\"legacyReadWarmup\": false"
+    },
+    "visualMaxHeat": {
+      "type": "float",
+      "desc": "Визуальный предел нагрева (цвет свечения). По умолчанию: 15.",
+      "example": "\"visualMaxHeat\": 15"
+    },
+    "splitHeat": {
+      "type": "boolean",
+      "desc": "Разделять тепло по граням. По умолчанию: false.",
+      "example": "\"splitHeat\": false"
+    },
+    "overheatScale": {
+      "type": "float",
+      "desc": "Множитель перегрева (реакторы). По умолчанию: 1.",
+      "example": "\"overheatScale\": 1"
+    },
+    "maxEfficiency": {
+      "type": "float",
+      "desc": "Предел эффективности производства (множитель). По умолчанию: 4.",
+      "example": "\"maxEfficiency\": 4"
+    },
+    "heatOutput": {
+      "type": "float",
+      "desc": "Выход тепла при полной эффективности (тепловые блоки). По умолчанию: 10.",
+      "example": "\"heatOutput\": 10"
+    },
+    "warmupRate": {
+      "type": "float",
+      "desc": "Скорость набора прогрева (warmup). По умолчанию: 0.15.",
+      "example": "\"warmupRate\": 0.15"
+    },
+    "flameColor": {
+      "type": "Color HEX",
+      "desc": "Цвет пламени. По умолчанию: #ffad9d.",
+      "example": "\"flameColor\": \"#ffad9d\""
+    },
+    "transportTime": {
+      "type": "float (Тики)",
+      "desc": "Конвейер: время транспортировки предмета через тайл (тики).",
+      "example": "\"transportTime\": 1"
+    },
+    "fadeIn": {
+      "type": "boolean",
+      "desc": "Длительность появления (визуал). По умолчанию: true.",
+      "example": "\"fadeIn\": true"
+    },
+    "moveArrows": {
+      "type": "boolean",
+      "desc": "Двигать стрелки направления (анимация). По умолчанию: true.",
+      "example": "\"moveArrows\": true"
+    },
+    "pulse": {
+      "type": "boolean",
+      "desc": "ForceProjector: рисовать пульсацию щита. По умолчанию: false.",
+      "example": "\"pulse\": false"
+    },
+    "linkSameType": {
+      "type": "boolean",
+      "desc": "Связывать только с блоками того же типа. По умолчанию: true.",
+      "example": "\"linkSameType\": true"
+    },
+    "arrowPeriod": {
+      "type": "float",
+      "desc": "Период анимации стрелок-индикаторов. По умолчанию: 0.4.",
+      "example": "\"arrowPeriod\": 0.4"
+    },
+    "arrowTimeScl": {
+      "type": "float",
+      "desc": "Масштаб времени анимации стрелок. По умолчанию: 6.2.",
+      "example": "\"arrowTimeScl\": 6.2"
+    },
+    "bridgeWidth": {
+      "type": "float (Пиксели)",
+      "desc": "Ширина луча моста. По умолчанию: 6.5.",
+      "example": "\"bridgeWidth\": 6.5"
+    },
+    "noAcceptDisabled": {
+      "type": "boolean",
+      "desc": "Не принимать содержимое, когда блок отключён. По умолчанию: false.",
+      "example": "\"noAcceptDisabled\": false"
+    },
+    "itemsPerSecond": {
+      "type": "int",
+      "desc": "Предметов в секунду (пропускная способность). По умолчанию: 100.",
+      "example": "\"itemsPerSecond\": 100"
+    },
+    "capacity": {
+      "type": "int",
+      "desc": "Вместимость хранилища блока (предметы/жидкость/энергия). По умолчанию: 6.",
+      "example": "\"capacity\": 6"
+    },
+    "arrivalDuration": {
+      "type": "float (Тики)",
+      "desc": "Длительность «прибытия» (планетные блоки). По умолчанию: 150.",
+      "example": "\"arrivalDuration\": 150"
+    },
+    "consumeLiquidAmount": {
+      "type": "float",
+      "desc": "Количество жидкости, потребляемое за такт/выстрел. По умолчанию: 100.",
+      "example": "\"consumeLiquidAmount\": 100"
+    },
+    "landEffect": {
+      "type": "Effect",
+      "desc": "Эффект высадки. По умолчанию: Fx.podLandShockwave.",
+      "example": "\"landEffect\": \"Fx.podLandShockwave\""
+    },
+    "coolingEffect": {
+      "type": "Effect",
+      "desc": "Визуальный эффект охлаждения (пузырьки хладажента). По умолчанию: Fx.none.",
+      "example": "\"coolingEffect\": \"Fx.none\""
+    },
+    "coolingEffectChance": {
+      "type": "float",
+      "desc": "Шанс спавна эффекта охлаждения за тик. По умолчанию: 0.2.",
+      "example": "\"coolingEffectChance\": 0.2"
+    },
+    "liquidPad": {
+      "type": "float (Пиксели)",
+      "desc": "Отступ области жидкости в спрайте. По умолчанию: 2.",
+      "example": "\"liquidPad\": 2"
+    },
+    "bottomColor": {
+      "type": "Color HEX",
+      "desc": "Цвет нижней части (визуал). По умолчанию: Pal.darkerMetal.",
+      "example": "\"bottomColor\": \"#ffffff\""
+    },
+    "firingMoveFract": {
+      "type": "float",
+      "desc": "Доля скорости движения, сохраняемая при стрельбе (0 = стоит на месте). По умолчанию: 0.25.",
+      "example": "\"firingMoveFract\": 0.25"
+    },
+    "shootDuration": {
+      "type": "float (Тики)",
+      "desc": "Длительность непрерывной стрельбы (FlakBullet/турели). По умолчанию: 100.",
+      "example": "\"shootDuration\": 100"
+    },
+    "launchTime": {
+      "type": "float (Тики)",
+      "desc": "Интервал запусков (LaunchPad). По умолчанию: 1.",
+      "example": "\"launchTime\": 1"
+    },
+    "launchSoundPitchRand": {
+      "type": "float",
+      "desc": "Случайность питча звука запуска. По умолчанию: 0.1.",
+      "example": "\"launchSoundPitchRand\": 0.1"
+    },
+    "acceptMultipleItems": {
+      "type": "boolean",
+      "desc": "Принимать несколько разных предметов одновременно (крафтер). По умолчанию: false.",
+      "example": "\"acceptMultipleItems\": false"
+    },
+    "lightStep": {
+      "type": "float",
+      "desc": "LaunchPad: шаг ступеней подсветки. По умолчанию: 1.",
+      "example": "\"lightStep\": 1"
+    },
+    "lightSteps": {
+      "type": "int",
+      "desc": "LaunchPad: количество ступеней подсветки. По умолчанию: 3.",
+      "example": "\"lightSteps\": 3"
+    },
+    "drawLiquid": {
+      "type": "String (имя: Liquid)",
+      "desc": "Жидкость для отрисовки в блоке.",
+      "example": "\"drawLiquid\": \"water\""
+    },
+    "replacement": {
+      "type": "String (имя: Block)",
+      "desc": "Блок-замена (чем заменяется при апгрейде). По умолчанию: Blocks.air.",
+      "example": "\"replacement\": \"conveyor\""
+    },
+    "brightness": {
+      "type": "float",
+      "desc": "Яркость свечения. По умолчанию: 0.9.",
+      "example": "\"brightness\": 0.9"
+    },
+    "extinguish": {
+      "type": "boolean",
+      "desc": "Блок тушит огонь на своём тайле. По умолчанию: true.",
+      "example": "\"extinguish\": true"
+    },
+    "maxInstructionScale": {
+      "type": "int",
+      "desc": "Максимальный масштаб инструкций (логика). По умолчанию: 5.",
+      "example": "\"maxInstructionScale\": 5"
+    },
+    "instructionsPerTick": {
+      "type": "int",
+      "desc": "Инструкций логического процессора за тик. По умолчанию: 1.",
+      "example": "\"instructionsPerTick\": 1"
+    },
+    "maxInstructionsPerTick": {
+      "type": "int",
+      "desc": "Максимум инструкций процессора за тик. По умолчанию: 40.",
+      "example": "\"maxInstructionsPerTick\": 40"
+    },
+    "maxSides": {
+      "type": "int",
+      "desc": "Максимальное количество сторон соединения. По умолчанию: 25.",
+      "example": "\"maxSides\": 25"
+    },
+    "displaySize": {
+      "type": "int",
+      "desc": "Размер отображения (дисплеи). По умолчанию: 64.",
+      "example": "\"displaySize\": 64"
+    },
+    "scaleFactor": {
+      "type": "float",
+      "desc": "Масштаб-фактор (визуал). По умолчанию: 1.",
+      "example": "\"scaleFactor\": 1"
+    },
+    "backgroundColor": {
+      "type": "Color HEX",
+      "desc": "Фоновый цвет (визуал). По умолчанию: Pal.darkerMetal.",
+      "example": "\"backgroundColor\": \"#ffffff\""
+    },
+    "glowMag": {
+      "type": "float",
+      "desc": "Магнитуда пульсации свечения. По умолчанию: 0.6.",
+      "example": "\"glowMag\": 0.6"
+    },
+    "translation": {
+      "type": "float",
+      "desc": "Смещение тела (масс-драйвер/визуал). По умолчанию: 7.",
+      "example": "\"translation\": 7"
+    },
+    "minDistribute": {
+      "type": "int",
+      "desc": "Минимум для распределения. По умолчанию: 10.",
+      "example": "\"minDistribute\": 10"
+    },
+    "bulletSpeed": {
+      "type": "float",
+      "desc": "Скорость снаряда встроенного оружия турели. По умолчанию: 5.5.",
+      "example": "\"bulletSpeed\": 5.5"
+    },
+    "bulletLifetime": {
+      "type": "float (Тики)",
+      "desc": "Время жизни снаряда встроенного оружия турели (тики). По умолчанию: 200.",
+      "example": "\"bulletLifetime\": 200"
+    },
+    "receiveEffect": {
+      "type": "Effect",
+      "desc": "Эффект получения (масс-драйвер). По умолчанию: Fx.mineBig.",
+      "example": "\"receiveEffect\": \"Fx.mineBig\""
+    },
+    "receiveSound": {
+      "type": "Sound",
+      "desc": "Звук получения. По умолчанию: Sounds.massdriverReceive.",
+      "example": "\"receiveSound\": \"shootBig\""
+    },
+    "phaseBoost": {
+      "type": "float",
+      "desc": "MendProjector: прибавка к радиусу ремонта от фазовой ткани. По умолчанию: 12.",
+      "example": "\"phaseBoost\": 12"
+    },
+    "mendSound": {
+      "type": "Sound",
+      "desc": "Звук ремонта (RepairPoint). По умолчанию: Sounds.healWave.",
+      "example": "\"mendSound\": \"shootBig\""
+    },
+    "mendSoundVolume": {
+      "type": "float",
+      "desc": "Громкость звука ремонта. По умолчанию: 0.5.",
+      "example": "\"mendSoundVolume\": 0.5"
+    },
+    "maxTextLength": {
+      "type": "int",
+      "desc": "Максимальная длина текста (сообщения). По умолчанию: 400.",
+      "example": "\"maxTextLength\": 400"
+    },
+    "maxNewlines": {
+      "type": "int",
+      "desc": "Максимум переносов строк (сообщения). По умолчанию: 24.",
+      "example": "\"maxNewlines\": 24"
+    },
+    "coolColor": {
+      "type": "Color HEX",
+      "desc": "Цвет охлаждаемой фазы (реакторы).",
+      "example": "\"coolColor\": \"#ffffff\""
+    },
+    "hotColor": {
+      "type": "Color HEX",
+      "desc": "Цвет горячей фазы (визуал реакторов). По умолчанию: #ff9575a3.",
+      "example": "\"hotColor\": \"#ff9575a3\""
+    },
+    "heating": {
+      "type": "float",
+      "desc": "Нагрев блока при работе. По умолчанию: 0.01.",
+      "example": "\"heating\": 0.01"
+    },
+    "heatWarmupRate": {
+      "type": "float",
+      "desc": "Скорость прогрева блока. По умолчанию: 1.",
+      "example": "\"heatWarmupRate\": 1"
+    },
+    "heatConsumeRate": {
+      "type": "float",
+      "desc": "Скорость потребления тепла (тепловые крафтеры). По умолчанию: 10.",
+      "example": "\"heatConsumeRate\": 10"
+    },
+    "ambientCooldownTime": {
+      "type": "float (Тики)",
+      "desc": "Время остывания фонового эффекта (реакторы). По умолчанию: 1200.",
+      "example": "\"ambientCooldownTime\": 1200"
+    },
+    "smokeThreshold": {
+      "type": "float",
+      "desc": "Порог нагрева для дыма реактора. По умолчанию: 0.3.",
+      "example": "\"smokeThreshold\": 0.3"
+    },
+    "flashThreshold": {
+      "type": "float",
+      "desc": "Порог нагрева для эффекта «вспышки» реактора. По умолчанию: 0.46.",
+      "example": "\"flashThreshold\": 0.46"
+    },
+    "coolantPower": {
+      "type": "float",
+      "desc": "NuclearReactor: эффективность хладажента (влияние на выработку энергии). По умолчанию: 0.5.",
+      "example": "\"coolantPower\": 0.5"
+    },
+    "fuelItem": {
+      "type": "String (имя: Item)",
+      "desc": "ConsumeGenerator: предмет-топливо. По умолчанию: Items.thorium.",
+      "example": "\"fuelItem\": \"copper\""
+    },
+    "invert": {
+      "type": "boolean",
+      "desc": "Инвертировать логику (сортировщик/фильтр). По умолчанию: false.",
+      "example": "\"invert\": false"
+    },
+    "payloadSpeed": {
+      "type": "float",
+      "desc": "Скорость движения грузов (тайлы/сек). По умолчанию: 0.7.",
+      "example": "\"payloadSpeed\": 0.7"
+    },
+    "payloadRotateSpeed": {
+      "type": "float",
+      "desc": "PayloadBlock: скорость поворота принятого груза (градусы/тик). По умолчанию: 3.",
+      "example": "\"payloadRotateSpeed\": 3"
+    },
+    "regionSuffix": {
+      "type": "String",
+      "desc": "Суффикс регионов спрайтов блока. По умолчанию: \"\".",
+      "example": "\"regionSuffix\": \"\""
+    },
+    "maxPayloadSize": {
+      "type": "float (Пиксели)",
+      "desc": "Максимальный размер принимаемого груза (тайлы). По умолчанию: 4.",
+      "example": "\"maxPayloadSize\": 4"
+    },
+    "deconstructSpeed": {
+      "type": "float",
+      "desc": "Множитель скорости деконструкции блока. По умолчанию: 2.5.",
+      "example": "\"deconstructSpeed\": 2.5"
+    },
+    "dumpRate": {
+      "type": "int",
+      "desc": "Количество выдач предметов за такт. По умолчанию: 4.",
+      "example": "\"dumpRate\": 4"
+    },
+    "itemBuffer": {
+      "type": "int",
+      "desc": "Буфер предметов. По умолчанию: 0.",
+      "example": "\"itemBuffer\": 0"
+    },
+    "loadTime": {
+      "type": "float (Тики)",
+      "desc": "Время загрузки (нагрева) блока. По умолчанию: 2.",
+      "example": "\"loadTime\": 2"
+    },
+    "itemsLoaded": {
+      "type": "int",
+      "desc": "Предметы загружены при старте. По умолчанию: 8.",
+      "example": "\"itemsLoaded\": 8"
+    },
+    "liquidsLoaded": {
+      "type": "float",
+      "desc": "Жидкости загружены при старте. По умолчанию: 40.",
+      "example": "\"liquidsLoaded\": 40"
+    },
+    "maxPowerConsumption": {
+      "type": "float",
+      "desc": "Максимальное потребление энергии. По умолчанию: 40.",
+      "example": "\"maxPowerConsumption\": 40"
+    },
+    "loadPowerDynamic": {
+      "type": "boolean",
+      "desc": "Потребление энергии зависит от загрузки/эффективности. По умолчанию: true.",
+      "example": "\"loadPowerDynamic\": true"
+    },
+    "chargeTime": {
+      "type": "float (Тики)",
+      "desc": "Время заряда выстрела (тики). По умолчанию: 100.",
+      "example": "\"chargeTime\": 100"
+    },
+    "grabWidth": {
+      "type": "float (Пиксели)",
+      "desc": "Ширина захвата грузов (манипуляторы). По умолчанию: 8.",
+      "example": "\"grabWidth\": 8"
+    },
+    "grabHeight": {
+      "type": "float",
+      "desc": "PayloadMassDriver: высота «захвата» груза при запуске. По умолчанию: 2.75.",
+      "example": "\"grabHeight\": 2.75"
+    },
+    "transferEffect": {
+      "type": "Effect",
+      "desc": "Эффект передачи содержимого.",
+      "example": "\"transferEffect\": \"Fx.hitBulletSmall\""
+    },
+    "offloadSpeed": {
+      "type": "int",
+      "desc": "Скорость разгрузки предметов. По умолчанию: 4.",
+      "example": "\"offloadSpeed\": 4"
+    },
+    "maxPowerUnload": {
+      "type": "float",
+      "desc": "Максимальная отдача энергии из буфера. По умолчанию: 80.",
+      "example": "\"maxPowerUnload\": 80"
+    },
+    "incinerateEffect": {
+      "type": "Effect",
+      "desc": "Эффект сжигания предметов. По умолчанию: Fx.blastExplosion.",
+      "example": "\"incinerateEffect\": \"Fx.blastExplosion\""
+    },
+    "incinerateSound": {
+      "type": "Sound",
+      "desc": "Звук сжигания предметов. По умолчанию: Sounds.unitExplode1.",
+      "example": "\"incinerateSound\": \"shootBig\""
+    },
+    "retargetTime": {
+      "type": "float (Тики)",
+      "desc": "Интервал пересмотра цели (тики). По умолчанию: 5.",
+      "example": "\"retargetTime\": 5"
+    },
+    "bulletDamage": {
+      "type": "float",
+      "desc": "Урон снаряда встроенного оружия турели. По умолчанию: 10.",
+      "example": "\"bulletDamage\": 10"
+    },
+    "shootLength": {
+      "type": "float (Пиксели)",
+      "desc": "Длина от дула до точки спавна снаряда. По умолчанию: 3.",
+      "example": "\"shootLength\": 3"
+    },
+    "generationType": {
+      "type": "String (имя/объект)",
+      "desc": "Тип генерации (генераторы/руды).",
+      "example": "\"generationType\": \"name\""
+    },
+    "explosionRadius": {
+      "type": "int",
+      "desc": "Радиус взрыва при разрушении блока. По умолчанию: 12.",
+      "example": "\"explosionRadius\": 12"
+    },
+    "explosionDamage": {
+      "type": "int",
+      "desc": "Урон взрыва при разрушении блока. По умолчанию: 0.",
+      "example": "\"explosionDamage\": 0"
+    },
+    "explodeEffect": {
+      "type": "Effect",
+      "desc": "Эффект взрыва (накопитель/реактор). По умолчанию: Fx.none.",
+      "example": "\"explodeEffect\": \"Fx.none\""
+    },
+    "explodeSound": {
+      "type": "Sound",
+      "desc": "Звук взрыва блока. По умолчанию: Sounds.none.",
+      "example": "\"explodeSound\": \"shootBig\""
+    },
+    "explosionPuddles": {
+      "type": "int",
+      "desc": "Количество луж жидкости при взрыве. По умолчанию: 10.",
+      "example": "\"explosionPuddles\": 10"
+    },
+    "explosionPuddleRange": {
+      "type": "float (Пиксели)",
+      "desc": "Радиус разлёта луж при взрыве.",
+      "example": "\"explosionPuddleRange\": 1"
+    },
+    "explosionPuddleAmount": {
+      "type": "float",
+      "desc": "Объём каждой лужи при взрыве. По умолчанию: 100.",
+      "example": "\"explosionPuddleAmount\": 100"
+    },
+    "explosionPuddleLiquid": {
+      "type": "String (имя: Liquid)",
+      "desc": "Жидкость луж, разливающихся при взрыве генератора.",
+      "example": "\"explosionPuddleLiquid\": \"water\""
+    },
+    "explosionMinWarmup": {
+      "type": "float",
+      "desc": "Минимальный прогрев для взрыва реактора. По умолчанию: 0.",
+      "example": "\"explosionMinWarmup\": 0"
+    },
+    "explosionShake": {
+      "type": "float",
+      "desc": "Тряска экрана при взрыве. По умолчанию: 0.",
+      "example": "\"explosionShake\": 0"
+    },
+    "explosionShakeDuration": {
+      "type": "float (Тики)",
+      "desc": "Длительность тряски экрана от взрыва (тики). По умолчанию: 6.",
+      "example": "\"explosionShakeDuration\": 6"
+    },
+    "explosionBreaksProps": {
+      "type": "boolean",
+      "desc": "Взрыв ломает пропсы (декорации). По умолчанию: true.",
+      "example": "\"explosionBreaksProps\": true"
+    },
+    "explosionScorchSize": {
+      "type": "int",
+      "desc": "Размер «подпалины» от взрыва. По умолчанию: 0.",
+      "example": "\"explosionScorchSize\": 0"
+    },
+    "explosionIgnitionChance": {
+      "type": "float",
+      "desc": "Шанс воспламенения от взрыва. По умолчанию: 0.",
+      "example": "\"explosionIgnitionChance\": 0"
+    },
+    "explosionScaleIgnitionChance": {
+      "type": "boolean",
+      "desc": "Масштабировать шанс воспламенения взрыва. По умолчанию: true.",
+      "example": "\"explosionScaleIgnitionChance\": true"
+    },
+    "explosionSpeed": {
+      "type": "float",
+      "desc": "Скорость разлёта взрыва. По умолчанию: 0.4.",
+      "example": "\"explosionSpeed\": 0.4"
+    },
+    "explosionFireballs": {
+      "type": "int",
+      "desc": "Количество «фаерболов» взрыва. По умолчанию: 0.",
+      "example": "\"explosionFireballs\": 0"
+    },
+    "laserRange": {
+      "type": "float (Пиксели)",
+      "desc": "Дальность лазерной связи (тайлы). По умолчанию: 6.",
+      "example": "\"laserRange\": 6"
+    },
+    "maxNodes": {
+      "type": "int",
+      "desc": "Максимальное количество связей. По умолчанию: 3.",
+      "example": "\"maxNodes\": 3"
+    },
+    "autolink": {
+      "type": "boolean",
+      "desc": "Автоматическая связь (энергоузлы/конвейеры). По умолчанию: true.",
+      "example": "\"autolink\": true"
+    },
+    "drawRange": {
+      "type": "boolean",
+      "desc": "Рисовать радиус связи при настройке. По умолчанию: true.",
+      "example": "\"drawRange\": true"
+    },
+    "sameBlockConnection": {
+      "type": "boolean",
+      "desc": "Связывать только с такими же блоками. По умолчанию: false.",
+      "example": "\"sameBlockConnection\": false"
+    },
+    "laserScale": {
+      "type": "float",
+      "desc": "PowerNode: масштаб толщины луча энергосвязи. По умолчанию: 0.25.",
+      "example": "\"laserScale\": 0.25"
+    },
+    "useLod": {
+      "type": "boolean",
+      "desc": "Использовать LOD (упрощение отрисовки на дистанции). По умолчанию: true.",
+      "example": "\"useLod\": true"
+    },
+    "powerLayer": {
+      "type": "float",
+      "desc": "Слой отрисовки энергосвязей. По умолчанию: Layer.power.",
+      "example": "\"powerLayer\": 1"
+    },
+    "pumpAmount": {
+      "type": "float",
+      "desc": "Насос: количество жидкости за такт. По умолчанию: 0.2.",
+      "example": "\"pumpAmount\": 0.2"
+    },
+    "consumeTime": {
+      "type": "float (Тики)",
+      "desc": "Время потребления ресурсов на цикл крафта. По умолчанию: 300.",
+      "example": "\"consumeTime\": 300"
+    },
+    "discoveryTime": {
+      "type": "float (Тики)",
+      "desc": "Время «обнаружения» (исследования). По умолчанию: 600.",
+      "example": "\"discoveryTime\": 600"
+    },
+    "constructTime": {
+      "type": "float (Тики)",
+      "desc": "Время конструирования (реконструктор). По умолчанию: 120.",
+      "example": "\"constructTime\": 120"
+    },
+    "upgrades": {
+      "type": "UnitType[][]",
+      "desc": "Reconstructor: пары апгрейдов юнитов [[\"from\", \"to\"], ...].",
+      "example": "\"upgrades\": null"
+    },
+    "capacities": {
+      "type": "int[]",
+      "desc": "Ёмкости по размерам юнитов (реконструктор).",
+      "example": "\"capacities\": null"
+    },
+    "createSound": {
+      "type": "Sound",
+      "desc": "Звук создания содержимого. По умолчанию: Sounds.unitCreate.",
+      "example": "\"createSound\": \"shootBig\""
+    },
+    "createSoundVolume": {
+      "type": "float",
+      "desc": "Громкость звука создания. По умолчанию: 1.",
+      "example": "\"createSoundVolume\": 1"
+    },
+    "showAllCommands": {
+      "type": "boolean",
+      "desc": "Показывать все команды юнитов в меню. По умолчанию: true.",
+      "example": "\"showAllCommands\": true"
+    },
+    "optionalMultiplier": {
+      "type": "float",
+      "desc": "Множитель скорости от опционального предмета. По умолчанию: 2.",
+      "example": "\"optionalMultiplier\": 2"
+    },
+    "optionalUseTime": {
+      "type": "float (Тики)",
+      "desc": "Время расхода опционального предмета-ускорителя. По умолчанию: 480.",
+      "example": "\"optionalUseTime\": 480"
+    },
+    "circleColor": {
+      "type": "Color HEX",
+      "desc": "Цвет круга-индикатора ремонта. По умолчанию: #98ffa9.",
+      "example": "\"circleColor\": \"#98ffa9\""
+    },
+    "circleSpeed": {
+      "type": "float",
+      "desc": "Скорость вращения круга-индикатора. По умолчанию: 120.",
+      "example": "\"circleSpeed\": 120"
+    },
+    "circleStroke": {
+      "type": "float (Пиксели)",
+      "desc": "Толщина круга-индикатора (RepairTower). По умолчанию: 3.",
+      "example": "\"circleStroke\": 3"
+    },
+    "squareRad": {
+      "type": "float",
+      "desc": "Радиус вращающегося квадрата (RepairTower). По умолчанию: 3.",
+      "example": "\"squareRad\": 3"
+    },
+    "squareSpinScl": {
+      "type": "float",
+      "desc": "Масштаб скорости вращения квадрата (RepairTower). По умолчанию: 0.8.",
+      "example": "\"squareSpinScl\": 0.8"
+    },
+    "repairRadius": {
+      "type": "float (Пиксели)",
+      "desc": "RepairPoint/RepairTurret: радиус ремонта. По умолчанию: 50.",
+      "example": "\"repairRadius\": 50"
+    },
+    "powerUse": {
+      "type": "float",
+      "desc": "Потребление энергии (ед/тик).",
+      "example": "\"powerUse\": 1"
+    },
+    "acceptCoolant": {
+      "type": "boolean",
+      "desc": "Принимать хладагент (вода/криожидкость) для ускорения работы. По умолчанию: false.",
+      "example": "\"acceptCoolant\": false"
+    },
+    "coolantUse": {
+      "type": "float",
+      "desc": "Расход хладажента при работе (жидкость/сек). По умолчанию: 0.5.",
+      "example": "\"coolantUse\": 0.5"
+    },
+    "lobesMin": {
+      "type": "int",
+      "desc": "Минимум «лепестков» визуала (генераторы). По умолчанию: 7.",
+      "example": "\"lobesMin\": 7"
+    },
+    "lobesMax": {
+      "type": "int",
+      "desc": "SeaBush: максимальное количество «лепестков» куста. По умолчанию: 7.",
+      "example": "\"lobesMax\": 7"
+    },
+    "botAngle": {
+      "type": "float (Градусы)",
+      "desc": "Угол «днища» (визуал турели). По умолчанию: 60.",
+      "example": "\"botAngle\": 60"
+    },
+    "origin": {
+      "type": "float",
+      "desc": "Начальная точка отрисовки. По умолчанию: 0.1.",
+      "example": "\"origin\": 0.1"
+    },
+    "sclMin": {
+      "type": "float",
+      "desc": "Минимальный масштаб анимации. По умолчанию: 30.",
+      "example": "\"sclMin\": 30"
+    },
+    "sclMax": {
+      "type": "float",
+      "desc": "Максимальный масштаб анимации. По умолчанию: 50.",
+      "example": "\"sclMax\": 50"
+    },
+    "magMin": {
+      "type": "float",
+      "desc": "SeaBush: минимальная амплитуда покачивания. По умолчанию: 5.",
+      "example": "\"magMin\": 5"
+    },
+    "magMax": {
+      "type": "float",
+      "desc": "SeaBush: максимальная амплитуда покачивания. По умолчанию: 15.",
+      "example": "\"magMax\": 15"
+    },
+    "timeRange": {
+      "type": "float (Пиксели)",
+      "desc": "Диапазон времени анимации (пропсы/кусты). По умолчанию: 40.",
+      "example": "\"timeRange\": 40"
+    },
+    "results": {
+      "type": "ItemStack[]",
+      "desc": "Результаты крафта (список предметов).",
+      "example": "\"results\": null"
+    },
+    "liquidBase": {
+      "type": "String (имя/объект)",
+      "desc": "ShallowLiquid: базовый пол жидкости (глубокая версия).",
+      "example": "\"liquidBase\": \"name\""
+    },
+    "floorBase": {
+      "type": "String (имя/объект)",
+      "desc": "ShallowLiquid: базовый пол под жидкостью.",
+      "example": "\"floorBase\": \"name\""
+    },
+    "liquidOpacity": {
+      "type": "float",
+      "desc": "Непрозрачность жидкости в блоке. По умолчанию: 0.35.",
+      "example": "\"liquidOpacity\": 0.35"
+    },
+    "breakCooldown": {
+      "type": "float (Тики)",
+      "desc": "Время до возможности повторного включения. По умолчанию: 600.",
+      "example": "\"breakCooldown\": 600"
+    },
+    "regenSpeed": {
+      "type": "float",
+      "desc": "Скорость регенерации щита. По умолчанию: 2.",
+      "example": "\"regenSpeed\": 2"
+    },
+    "tileDamage": {
+      "type": "float",
+      "desc": "Урон по тайлам (снаряды/юниты). По умолчанию: 5.",
+      "example": "\"tileDamage\": 5"
+    },
+    "tendrils": {
+      "type": "int",
+      "desc": "Количество «усиков» (визуал жидкости/бури). По умолчанию: 6.",
+      "example": "\"tendrils\": 6"
+    },
+    "teamAlpha": {
+      "type": "float",
+      "desc": "Прозрачность окраски команды. По умолчанию: 0.3.",
+      "example": "\"teamAlpha\": 0.3"
+    },
+    "falloffCount": {
+      "type": "float",
+      "desc": "Количество точек спада (визуал лучей). По умолчанию: 20.",
+      "example": "\"falloffCount\": 20"
+    },
+    "shapeColor": {
+      "type": "Color HEX",
+      "desc": "Цвет фигуры (визуал). По умолчанию: #f29c83.",
+      "example": "\"shapeColor\": \"#f29c83\""
+    },
+    "cooldownMultiplier": {
+      "type": "float (Тики)",
+      "desc": "Множитель времени охлаждения. По умолчанию: 1.",
+      "example": "\"cooldownMultiplier\": 1"
+    },
+    "waveEffect": {
+      "type": "Effect",
+      "desc": "ShockwaveTower: эффект ударной волны. По умолчанию: Fx.pointShockwave.",
+      "example": "\"waveEffect\": \"Fx.pointShockwave\""
+    },
+    "shapeRotateSpeed": {
+      "type": "float",
+      "desc": "Скорость вращения фигуры (визуал). По умолчанию: 1.",
+      "example": "\"shapeRotateSpeed\": 1"
+    },
+    "shapeRadius": {
+      "type": "float (Пиксели)",
+      "desc": "Радиус фигуры (визуал). По умолчанию: 6.",
+      "example": "\"shapeRadius\": 6"
+    },
+    "shapeSides": {
+      "type": "int",
+      "desc": "Количество сторон фигуры (визуал). По умолчанию: 4.",
+      "example": "\"shapeSides\": 4"
+    },
+    "result": {
+      "type": "String (имя: Block)",
+      "desc": "Результат крафта (один предмет). По умолчанию: Blocks.router.",
+      "example": "\"result\": \"conveyor\""
+    },
+    "outputRouter": {
+      "type": "boolean",
+      "desc": "Маршрутизировать выход (несколько выходов). По умолчанию: true.",
+      "example": "\"outputRouter\": true"
+    },
+    "recharge": {
+      "type": "float",
+      "desc": "Время перезарядки щита/поля. По умолчанию: 2.",
+      "example": "\"recharge\": 2"
+    },
+    "loadEffect": {
+      "type": "Effect",
+      "desc": "Эффект загрузки. По умолчанию: Fx.conveyorPoof.",
+      "example": "\"loadEffect\": \"Fx.conveyorPoof\""
+    },
+    "unloadEffect": {
+      "type": "Effect",
+      "desc": "Эффект выгрузки предметов. По умолчанию: Fx.conveyorPoof.",
+      "example": "\"unloadEffect\": \"Fx.conveyorPoof\""
+    },
+    "parent": {
+      "type": "String (имя: Block)",
+      "desc": "Родительский блок/контент (исследования). По умолчанию: Blocks.air.",
+      "example": "\"parent\": \"conveyor\""
+    },
+    "effectSpacing": {
+      "type": "float (Пиксели)",
+      "desc": "Шаг спавна рабочих эффектов (тики/пиксели). По умолчанию: 15.",
+      "example": "\"effectSpacing\": 15"
+    },
+    "coreMerge": {
+      "type": "boolean",
+      "desc": "Слияние грузов с ядром. По умолчанию: true.",
+      "example": "\"coreMerge\": true"
+    },
+    "clickSound": {
+      "type": "Sound",
+      "desc": "Звук переключения/нажатия блока. По умолчанию: Sounds.click.",
+      "example": "\"clickSound\": \"shootBig\""
+    },
+    "shadowOffset": {
+      "type": "float (Пиксели)",
+      "desc": "Смещение тени. По умолчанию: -3.",
+      "example": "\"shadowOffset\": -3"
+    },
+    "shadowLayer": {
+      "type": "float",
+      "desc": "Слой отрисовки тени. По умолчанию: Layer.power - 1.",
+      "example": "\"shadowLayer\": 1"
+    },
+    "rotationRand": {
+      "type": "float",
+      "desc": "Случайный поворот спрайта (руды/декор). По умолчанию: 20.",
+      "example": "\"rotationRand\": 20"
+    },
+    "shadowAlpha": {
+      "type": "float",
+      "desc": "Прозрачность тени. По умолчанию: 0.6.",
+      "example": "\"shadowAlpha\": 0.6"
+    },
+    "pullScale": {
+      "type": "float",
+      "desc": "Масштаб «тяги» (притяжение предметов/юнитов). По умолчанию: 0.33.",
+      "example": "\"pullScale\": 0.33"
+    },
+    "emptyStr": {
+      "type": "String",
+      "desc": "Строка «пусто» (интерфейс). По умолчанию: \"---\".",
+      "example": "\"emptyStr\": \"---\""
+    },
+    "displayEfficiencyScale": {
+      "type": "float",
+      "desc": "Масштаб отображения эффективности. По умолчанию: 1.",
+      "example": "\"displayEfficiencyScale\": 1"
+    },
+    "maxDisplayDimensions": {
+      "type": "int",
+      "desc": "Максимальные размеры дисплея. По умолчанию: 16.",
+      "example": "\"maxDisplayDimensions\": 16"
+    },
+    "frameSize": {
+      "type": "int",
+      "desc": "Размер кадра анимации. По умолчанию: 6.",
+      "example": "\"frameSize\": 6"
+    },
+    "maxSize": {
+      "type": "int",
+      "desc": "Максимальный размер (визуал/грузы). По умолчанию: 3.",
+      "example": "\"maxSize\": 3"
+    },
+    "force": {
+      "type": "float",
+      "desc": "Сила воздействия (толчок). По умолчанию: 0.3.",
+      "example": "\"force\": 0.3"
+    },
+    "scaledForce": {
+      "type": "float",
+      "desc": "Сила тяги, масштабируемая размером (тракторный луч). По умолчанию: 0.",
+      "example": "\"scaledForce\": 0"
+    },
+    "newTargetInterval": {
+      "type": "float (Тики)",
+      "desc": "Интервал выбора новой цели (тики). По умолчанию: -1.",
+      "example": "\"newTargetInterval\": -1"
+    },
+    "consumeAmmoOnce": {
+      "type": "boolean",
+      "desc": "Тратить боезапас один раз за залп, а не на каждый ствол. По умолчанию: true.",
+      "example": "\"consumeAmmoOnce\": true"
+    },
+    "scaleLifetimeOffset": {
+      "type": "float (Пиксели)",
+      "desc": "Смещение времени жизни визуала. По умолчанию: 0.",
+      "example": "\"scaleLifetimeOffset\": 0"
+    },
+    "drawMinRange": {
+      "type": "boolean",
+      "desc": "Рисовать минимальную дальность (турели).",
+      "example": "\"drawMinRange\": true"
+    },
+    "accurateDelay": {
+      "type": "boolean",
+      "desc": "Точно отсчитывать задержки выстрелов (турели с ShootBarrel). По умолчанию: true.",
+      "example": "\"accurateDelay\": true"
+    },
+    "moveWhileCharging": {
+      "type": "boolean",
+      "desc": "Разрешить движение во время заряда (турели). По умолчанию: true.",
+      "example": "\"moveWhileCharging\": true"
+    },
+    "reloadWhileCharging": {
+      "type": "boolean",
+      "desc": "Продолжать перезарядку во время заряда. По умолчанию: true.",
+      "example": "\"reloadWhileCharging\": true"
+    },
+    "areaSize": {
+      "type": "int",
+      "desc": "Размер рабочей области (юнит-ассемблер). По умолчанию: 11.",
+      "example": "\"areaSize\": 11"
+    },
+    "droneType": {
+      "type": "String (имя: UnitType)",
+      "desc": "UnitAssembler: тип юнита-дрона, помогающего строить.",
+      "example": "\"droneType\": \"dagger\""
+    },
+    "dronesCreated": {
+      "type": "int",
+      "desc": "UnitAssembler: количество создаваемых дронов. По умолчанию: 4.",
+      "example": "\"dronesCreated\": 4"
+    },
+    "droneConstructTime": {
+      "type": "float (Тики)",
+      "desc": "UnitAssembler: время постройки дрона-помощника. По умолчанию: 240.",
+      "example": "\"droneConstructTime\": 240"
+    },
+    "unitBuildTime": {
+      "type": "float (Тики)",
+      "desc": "Множитель/время постройки юнитов (фабрики). По умолчанию: 480.",
+      "example": "\"unitBuildTime\": 480"
+    },
+    "polyStroke": {
+      "type": "float (Пиксели)",
+      "desc": "Толщина полигона. По умолчанию: 1.8.",
+      "example": "\"polyStroke\": 1.8"
+    },
+    "polyRadius": {
+      "type": "float (Пиксели)",
+      "desc": "UnitCargoLoader: радиус полигона-индикатора (визуал). По умолчанию: 8.",
+      "example": "\"polyRadius\": 8"
+    },
+    "polySides": {
+      "type": "int",
+      "desc": "Количество сторон полигона. По умолчанию: 6.",
+      "example": "\"polySides\": 6"
+    },
+    "polyRotateSpeed": {
+      "type": "float",
+      "desc": "Скорость вращения полигона. По умолчанию: 1.",
+      "example": "\"polyRotateSpeed\": 1"
+    },
+    "polyColor": {
+      "type": "Color HEX",
+      "desc": "Цвет полигона (визуал). По умолчанию: #ffd37f.",
+      "example": "\"polyColor\": \"#ffd37f\""
+    },
+    "staleTimeDuration": {
+      "type": "float (Тики)",
+      "desc": "Время до «протухания» состояния (грузы). По умолчанию: 360.",
+      "example": "\"staleTimeDuration\": 360"
+    },
+    "maxHeat": {
+      "type": "float",
+      "desc": "Максимальный нагрев до остановки/взрыва. По умолчанию: 100.",
+      "example": "\"maxHeat\": 100"
+    },
+    "unstableSpeed": {
+      "type": "float",
+      "desc": "Скорость «нестабильной» фазы (реакторы). По умолчанию: 0.0056.",
+      "example": "\"unstableSpeed\": 0.0056"
+    },
+    "flashAlpha": {
+      "type": "float",
+      "desc": "VariableReactor: прозрачность вспышки корпуса. По умолчанию: 0.4.",
+      "example": "\"flashAlpha\": 0.4"
+    },
+    "flashSpeed": {
+      "type": "float",
+      "desc": "VariableReactor: скорость пульсации вспышки. По умолчанию: 7.",
+      "example": "\"flashSpeed\": 7"
+    },
+    "flashColor1": {
+      "type": "Color HEX",
+      "desc": "Цвет вспышки (альтернативный). По умолчанию: Color.red.",
+      "example": "\"flashColor1\": \"#ffffff\""
+    },
+    "flashColor2": {
+      "type": "Color HEX",
+      "desc": "VariableReactor: второй цвет вспышки корпуса. По умолчанию: #89e8b6.",
+      "example": "\"flashColor2\": \"#89e8b6\""
+    },
+    "flashColor": {
+      "type": "Color HEX",
+      "desc": "Цвет вспышки. По умолчанию: Color.white.",
+      "example": "\"flashColor\": \"#ffffff\""
+    },
+    "output": {
+      "type": "String (имя: Item)",
+      "desc": "Выход продукта крафта (предмет/жидкость). По умолчанию: Items.sand.",
+      "example": "\"output\": \"copper\""
+    },
+    "boostItemUseTime": {
+      "type": "float (Тики)",
+      "desc": "Время расхода буст-предмета. По умолчанию: 120.",
+      "example": "\"boostItemUseTime\": 120"
+    },
+    "itemBoostIntensity": {
+      "type": "float",
+      "desc": "Интенсивность ускорения фазовым/буст-предметом (множитель скорости). По умолчанию: 1.6.",
+      "example": "\"itemBoostIntensity\": 1.6"
+    },
+    "hasLiquidBooster": {
+      "type": "boolean",
+      "desc": "Есть жидкостное ускорение.",
+      "example": "\"hasLiquidBooster\": true"
+    },
+    "wscl": {
+      "type": "float",
+      "desc": "WobbleProp: масштаб скорости покачивания. По умолчанию: 25.",
+      "example": "\"wscl\": 25"
+    },
+    "wmag": {
+      "type": "float",
+      "desc": "WobbleProp: магнитуда покачивания пропса. По умолчанию: 0.4.",
+      "example": "\"wmag\": 0.4"
+    },
+    "wtscl": {
+      "type": "float",
+      "desc": "WobbleProp: масштаб времени покачивания. По умолчанию: 1.",
+      "example": "\"wtscl\": 1"
+    },
+    "wmag2": {
+      "type": "float",
+      "desc": "WobbleProp: вторая магнитуда покачивания. По умолчанию: 1.",
+      "example": "\"wmag2\": 1"
     }
   },
   "BULLET_TYPES": {
@@ -5117,24 +8592,6 @@
       "extends": "Content",
       "desc": "Абстрактный родительский класс для всех типов снарядов. Напрямую как значение \"type\" почти не используется — от него наследуются все остальные типы, и любой из них имеет доступ к общим полям: damage, lifetime, speed, hitSize, splashDamage, knockback, statusEffect и т.д.",
       "example": "\"bullet\": {\n \"type\": \"BasicBulletType\",\n \"damage\": 20,\n \"speed\": 3,\n \"lifetime\": 50\n}"
-    },
-    "underwater": {
-      "type": "boolean",
-      "desc": "Снаряд движется под водой. Используется для водных юнитов и торпед.",
-      "example": "\"underwater\": true",
-      "since": "160.x"
-    },
-    "hitUnder": {
-      "type": "boolean",
-      "desc": "Может ли снаряд попадать по целям под землёй (по юнитам, зарывшимся в землю).",
-      "example": "\"hitUnder\": false",
-      "since": "160.x"
-    },
-    "ignoreSpawnAngle": {
-      "type": "boolean",
-      "desc": "Игнорировать угол выстрела при создании снаряда. Используется для способностей, стреляющих по кругу.",
-      "example": "\"ignoreSpawnAngle\": false",
-      "since": "160.x"
     },
     "BasicBulletType": {
       "category": "Кинетические",
