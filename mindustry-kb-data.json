@@ -19200,7 +19200,7 @@
       "example": "\"type\": \"UnitType\"",
       "exampleUnit": "{\n  \"type\": \"UnitType\"\n}"
     }
-  }
+  },
 
  "BLOCK_TYPES": {
   "Conveyor": {
