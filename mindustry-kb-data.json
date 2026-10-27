@@ -19201,4 +19201,2561 @@
       "exampleUnit": "{\n  \"type\": \"UnitType\"\n}"
     }
   }
+
+ "BLOCK_TYPES": {
+  "Conveyor": {
+   "group": "distribution",
+   "desc": "Конвейер: перемещает предметы в одну сторону. Базовый элемент предметной логистики."
+  },
+  "ArmoredConveyor": {
+   "group": "distribution",
+   "desc": "Бронированный конвейер: не принимает ввод с боков и сам не отдаёт вбок; проводит энергию (conductivePower)."
+  },
+  "StackConveyor": {
+   "group": "distribution",
+   "desc": "Пакетный конвейер: перемещает целые пачки предметов (работает в паре со stack-роутером/разгрузчиком)."
+  },
+  "Junction": {
+   "group": "distribution",
+   "desc": "Перекрёсток: скрещивает два перпендикулярных потока предметов, не смешивая их."
+  },
+  "Router": {
+   "group": "distribution",
+   "desc": "Маршрутизатор: равномерно распределяет предметы по трём направлениям."
+  },
+  "StackRouter": {
+   "group": "distribution",
+   "desc": "Пакетный маршрутизатор: маршрутизирует целые пачки предметов."
+  },
+  "Sorter": {
+   "group": "distribution",
+   "desc": "Сортировщик: пропускает вперёд только выбранный предмет, остальное — в стороны."
+  },
+  "OverflowGate": {
+   "group": "distribution",
+   "desc": "Избыточный затвор: пускает предметы прямо, пока возможно; излишки — в стороны. invert: true превращает в недостаточный затвор."
+  },
+  "ItemBridge": {
+   "group": "distribution",
+   "desc": "Предметный мост: передаёт предметы парному мосту через препятствие (range — дальность в тайлах)."
+  },
+  "BufferedItemBridge": {
+   "group": "distribution",
+   "desc": "Мост с буфером: накапливает предметы и быстрее стартует, чем обычный мост."
+  },
+  "DirectionBridge": {
+   "group": "distribution",
+   "desc": "Направленный мост: односторонняя передача предметов/сыпучих грузов через пропуск."
+  },
+  "DirectionLiquidBridge": {
+   "group": "liquid",
+   "desc": "Направленный жидкостный мост: односторонняя передача жидкости."
+  },
+  "MassDriver": {
+   "group": "distribution",
+   "desc": "Масс-драйвер: выстреливает пачки предметов в парный драйвер на большой дистанции."
+  },
+  "Duct": {
+   "group": "distribution",
+   "desc": "Жёлоб (duct): закрытый предметный канал (Эрекир), не принимает ввод с боков."
+  },
+  "DuctBridge": {
+   "group": "distribution",
+   "desc": "Мост жёлобов: передаёт предметы из жёлоба в жёлоб через препятствие."
+  },
+  "DuctJunction": {
+   "group": "distribution",
+   "desc": "Перекрёсток жёлобов: скрещивает два потока жёлобов."
+  },
+  "DuctRouter": {
+   "group": "distribution",
+   "desc": "Маршрутизатор жёлобов: распределяет поток жёлоба по трём направлениям."
+  },
+  "OverflowDuct": {
+   "group": "distribution",
+   "desc": "Избыточный затвор жёлобов: аналог OverflowGate для жёлобов."
+  },
+  "DirectionalUnloader": {
+   "group": "distribution",
+   "desc": "Направленный разгрузчик: перемещает выбранный предмет между двумя соседними блоками в указанном направлении."
+  },
+  "Wall": {
+   "group": "defense",
+   "desc": "Стена: базовое оборонительное сооружение. Разновидности — медная, каменная, титановая, пластановая (insulated, absorbLasers), фазовая (chanceDeflect), кинетическая."
+  },
+  "ShieldWall": {
+   "group": "defense",
+   "desc": "Экранированная стена: регенерирует щит при подаче энергии (shieldHealth, regenSpeed, breakCooldown); проводит энергию (conductivePower)."
+  },
+  "Door": {
+   "group": "defense",
+   "desc": "Дверь: стена, которая открывается для союзных юнитов."
+  },
+  "AutoDoor": {
+   "group": "defense",
+   "desc": "Автоматическая дверь: открывается при приближении союзных юнитов (без энергии)."
+  },
+  "ForceProjector": {
+   "group": "defense",
+   "desc": "Силовой проектор: создаёт купольный щит, поглощающий снаряды (требует энергию; фаза усиливает)."
+  },
+  "MendProjector": {
+   "group": "defense",
+   "desc": "Ремонтный проектор: периодически чинит блоки в радиусе (range, healPercent? reload); фаза усиливает."
+  },
+  "RegenProjector": {
+   "group": "defense",
+   "desc": "Проектор регенерации: медленно восстанавливает блоки в радиусе (Эрекир)."
+  },
+  "OverdriveProjector": {
+   "group": "defense",
+   "desc": "Ускоритель: ускоряет работу блоков в радиусе (speedBoost, range; купол — больше и мощнее)."
+  },
+  "ShockMine": {
+   "group": "defense",
+   "desc": "Шоковая мина: скрытая мина, бьёт дугами по наступившему врагу."
+  },
+  "BuildTurret": {
+   "group": "defense",
+   "desc": "Строительная турель: строит и ремонтирует сооружения по плану (управляется процессором/игроком)."
+  },
+  "Radar": {
+   "group": "defense",
+   "desc": "Радар: обнаруживает врагов в большом радиусе и делится данными (v8)."
+  },
+  "BaseShield": {
+   "group": "defense",
+   "desc": "Генератор щита базы: кампанийный купол над базой."
+  },
+  "ShockwaveTower": {
+   "group": "defense",
+   "desc": "Ударно-волновая башня: уничтожает подлетающие снаряды в радиусе (v8)."
+  },
+  "TargetDummy": {
+   "group": "defense",
+   "desc": "Мишень: тренировочная цель для проверки оружия (кампания/песочница)."
+  },
+  "Thruster": {
+   "group": "defense",
+   "desc": "Маневровый двигатель: декоративный/кампанийный элемент корабля."
+  },
+  "ExplosionShield": {
+   "group": "defense",
+   "desc": "Взрывозащитный экран: гасит взрывы (кампания)."
+  },
+  "ItemTurret": {
+   "group": "turret",
+   "desc": "Предметная турель: стреляет, используя предметы как патроны (ammoTypes: предмет -> снаряд)."
+  },
+  "PowerTurret": {
+   "group": "turret",
+   "desc": "Энергетическая турель: стреляет, потребляя только энергию (shootType + useAmmo: false)."
+  },
+  "LiquidTurret": {
+   "group": "turret",
+   "desc": "Жидкостная турель: патроны — жидкости (ammoTypes: жидкость -> снаряд)."
+  },
+  "ContinuousTurret": {
+   "group": "turret",
+   "desc": "Турель непрерывного огня: лучи/пламя без перезарядки между выстрелами (shootType, shootWarmup)."
+  },
+  "ContinuousLiquidTurret": {
+   "group": "turret",
+   "desc": "Непрерывная жидкостная турель (v8)."
+  },
+  "LaserTurret": {
+   "group": "turret",
+   "desc": "Лазерная турель: копит заряд и бьёт мощным лазером (v8)."
+  },
+  "PointDefenseTurret": {
+   "group": "turret",
+   "desc": "Точечная оборона: сбивает подлетающие снаряды (bulletDamage, shootLength)."
+  },
+  "TractorBeamTurret": {
+   "group": "turret",
+   "desc": "Тракторный луч: притягивает и удерживает цель, нанося урон без боеприпасов."
+  },
+  "PayloadAmmoTurret": {
+   "group": "turret",
+   "desc": "Турель на payload-боеприпасах: стреляет загруженными блоками-заготовками."
+  },
+  "Conduit": {
+   "group": "liquid",
+   "desc": "Труба: перемещает жидкость в одну сторону."
+  },
+  "ArmoredConduit": {
+   "group": "liquid",
+   "desc": "Бронированная труба: не принимает ввод с боков."
+  },
+  "LiquidRouter": {
+   "group": "liquid",
+   "desc": "Жидкостный маршрутизатор: распределяет жидкость, имеет небольшой буфер (liquidCapacity)."
+  },
+  "LiquidJunction": {
+   "group": "liquid",
+   "desc": "Жидкостный перекрёсток: скрещивает два потока жидкости."
+  },
+  "LiquidBridge": {
+   "group": "liquid",
+   "desc": "Жидкостный мост: передаёт жидкость парному мосту через препятствие."
+  },
+  "Pump": {
+   "group": "liquid",
+   "desc": "Насос: качает жидкость из жидкостной плитки (требует энергию; размер/скорость задаются полями)."
+  },
+  "SolidPump": {
+   "group": "liquid",
+   "desc": "Насос твёрдой поверхности: извлекает жидкость из тайлов по атрибуту карты (например, нефтекачалка)."
+  },
+  "Fracker": {
+   "group": "liquid",
+   "desc": "Нефтяная вышка (fracker): добывает нефть из-под твёрдой поверхности; вода ускоряет работу."
+  },
+  "PowerNode": {
+   "group": "power",
+   "desc": "Энергоузел: соединяет блоки в общую сеть энергосвязями (laserRange, maxNodes)."
+  },
+  "LongPowerNode": {
+   "group": "power",
+   "desc": "Кинетическая башня (surge tower): узел большой дальности с малым числом связей."
+  },
+  "BeamNode": {
+   "group": "power",
+   "desc": "Лучевой узел: передача энергии короткими лучами по прямой/цепочке (Эрекир)."
+  },
+  "PowerDiode": {
+   "group": "power",
+   "desc": "Энергодиод: пропускает энергию только в одну сторону (v8)."
+  },
+  "Battery": {
+   "group": "power",
+   "desc": "Аккумулятор: накапливает энергию и сглаживает пики потребления (consumes.powerBuffered)."
+  },
+  "SolarGenerator": {
+   "group": "power",
+   "desc": "Солнечная панель: производит энергию днём (powerProduction)."
+  },
+  "ThermalGenerator": {
+   "group": "power",
+   "desc": "Термогенератор: производит энергию на горячих тайлах (атрибут heat)."
+  },
+  "ConsumeGenerator": {
+   "group": "power",
+   "desc": "Топливный генератор: сжигает предметы и/или жидкость (combustion, steam, turbine). Поля: powerProduction, itemDuration, consumes."
+  },
+  "HeaterGenerator": {
+   "group": "power",
+   "desc": "Теплогенератор (v8): производит энергию и тепло одновременно."
+  },
+  "ImpactReactor": {
+   "group": "power",
+   "desc": "Импульсный реактор: высокая выработка; нужна вода и энергия для запуска (itemDuration? explode on loss)."
+  },
+  "NuclearReactor": {
+   "group": "power",
+   "desc": "Ториевый реактор: мощная энергия; без охлаждения взрывается (heating, explosionRadius)."
+  },
+  "VariableReactor": {
+   "group": "power",
+   "desc": "Вариабельный реактор (v8): выработка зависит от подводимого тепла."
+  },
+  "LightBlock": {
+   "group": "power",
+   "desc": "Светильник: освещает область (brightness, radius; кампания/декор)."
+  },
+  "GenericCrafter": {
+   "group": "production",
+   "desc": "Универсальный крафтер: recipe из consumes в outputItem/outputLiquid (craftTime, craftEffect)."
+  },
+  "AttributeCrafter": {
+   "group": "production",
+   "desc": "Крафтер по атрибуту: эффективность зависит от тайла (attribute, maxBoost; например, экстрактор воды/культиватор)."
+  },
+  "HeatCrafter": {
+   "group": "production",
+   "desc": "Тепловой крафтер: для работы нужно подведённое тепло (heatRequirement, maxEfficiency)."
+  },
+  "WallCrafter": {
+   "group": "production",
+   "desc": "Настенный крафтер: добывает ресурс из стен (v8)."
+  },
+  "Drill": {
+   "group": "production",
+   "desc": "Механический бур: добывает руду с тайлов месторождения (tier, drillTime; жидкость ускоряет)."
+  },
+  "BurstDrill": {
+   "group": "production",
+   "desc": "Импульсный бур: копит и выдаёт пачку предметов за цикл (Эрекир)."
+  },
+  "BeamDrill": {
+   "group": "production",
+   "desc": "Лучевой бур: добывает лучом без визуальных предметов (Эрекир; требует энергию)."
+  },
+  "Separator": {
+   "group": "production",
+   "desc": "Сепаратор: выделяет материалы из жидкости (results: список item:шанс; consumes liquid)."
+  },
+  "Incinerator": {
+   "group": "production",
+   "desc": "Мусоросжигатель: уничтожает поступающие предметы/жидкость (требует энергию)."
+  },
+  "ItemIncinerator": {
+   "group": "production",
+   "desc": "Предметный сжигатель: упрощённый уничтожитель предметов."
+  },
+  "SingleBlockProducer": {
+   "group": "production",
+   "desc": "Производитель блоков (внутренний базовый класс для payload-производства)."
+  },
+  "CoreBlock": {
+   "group": "storage",
+   "desc": "Ядро: база команды, хранилище ресурсов и точка респауна юнитов (unitType, itemCapacity)."
+  },
+  "StorageBlock": {
+   "group": "storage",
+   "desc": "Склад: дополнительная ёмкость хранения рядом с ядром."
+  },
+  "Unloader": {
+   "group": "storage",
+   "desc": "Разгрузчик: выгружает выбранный предмет из соседних блоков (speed; itemFilter)."
+  },
+  "UnitFactory": {
+   "group": "units",
+   "desc": "Фабрика юнитов: строит юнитов по планам из предметов (plans: список {unit, time, requirements})."
+  },
+  "Reconstructor": {
+   "group": "units",
+   "desc": "Реконструктор: улучшает входящего юнита до следующего уровня (upgrades: пары [из, в]; конструкты)."
+  },
+  "UnitAssembler": {
+   "group": "units",
+   "desc": "Сборщик юнитов: собирает крупные юниты из payload-модулей (Эрекир; plans, drones)."
+  },
+  "UnitAssemblerModule": {
+   "group": "units",
+   "desc": "Модуль сборщика: встраивается в сборщик, повышая его уровень (tier)."
+  },
+  "RepairTurret": {
+   "group": "repair",
+   "desc": "Ремонтная турель: чинит союзных юнитов в радиусе (repairSpeed, range)."
+  },
+  "RepairTower": {
+   "group": "units",
+   "desc": "Ремонтная башня: чинит юнитов и восстанавливает щиты (Эрекир)."
+  },
+  "UnitCargoLoader": {
+   "group": "units",
+   "desc": "Погрузчик грузов: загружает предметы в транспортных юнитов."
+  },
+  "UnitCargoUnloadPoint": {
+   "group": "units",
+   "desc": "Точка выгрузки: принимает груз от транспортных юнитов."
+  },
+  "LogicBlock": {
+   "group": "logic",
+   "desc": "Процессор: исполняет программу логики (instructionsPerTick, maxInstructionsPerTick)."
+  },
+  "MemoryBlock": {
+   "group": "logic",
+   "desc": "Ячейка памяти: хранит числа, доступна процессорам (memoryCapacity)."
+  },
+  "MessageBlock": {
+   "group": "logic",
+   "desc": "Сообщение: текстовый блок для надписей (maxTextLength)."
+  },
+  "SwitchBlock": {
+   "group": "logic",
+   "desc": "Переключатель: бинарный флаг для логики."
+  },
+  "CanvasBlock": {
+   "group": "logic",
+   "desc": "Холст: пиксельный рисунок по палитре (canvasSize, palette)."
+  },
+  "LogicDisplay": {
+   "group": "logic",
+   "desc": "Дисплей: экран для графики, управляемый процессором (displaySize)."
+  },
+  "TileableLogicDisplay": {
+   "group": "logic",
+   "desc": "Мозаичный дисплей: несколько дисплеев стыкуются в один большой экран."
+  },
+  "PayloadConveyor": {
+   "group": "payloads",
+   "desc": "Грузовой конвейер: перемещает блоки/юнитов как payload."
+  },
+  "PayloadRouter": {
+   "group": "payloads",
+   "desc": "Грузовой маршрутизатор: распределяет payload по трём направлениям (фильтр по типу)."
+  },
+  "Constructor": {
+   "group": "payloads",
+   "desc": "Конструктор: строит блоки из предметов как payload (sizeLimit, buildTime, конструкты)."
+  },
+  "BlockProducer": {
+   "group": "payloads",
+   "desc": "Производитель блоков: выдаёт готовый блок-payload (песочница/кампания)."
+  },
+  "PayloadDeconstructor": {
+   "group": "payloads",
+   "desc": "Деконструктор: разбирает payload обратно в ресурсы."
+  },
+  "PayloadLoader": {
+   "group": "payloads",
+   "desc": "Загрузчик: загружает предметы в блоки/юнитов-payload."
+  },
+  "PayloadUnloader": {
+   "group": "payloads",
+   "desc": "Выгрузчик: выгружает предметы из payload."
+  },
+  "PayloadSource": {
+   "group": "payloads",
+   "desc": "Источник payload (песочница): бесконечно выдаёт выбранные блоки/юнитов."
+  },
+  "PayloadVoid": {
+   "group": "payloads",
+   "desc": "Уничтожитель payload (песочница)."
+  },
+  "PayloadMassDriver": {
+   "group": "payloads",
+   "desc": "Грузовой масс-драйвер: перебрасывает крупный payload на дистанцию."
+  },
+  "HeatConductor": {
+   "group": "heat",
+   "desc": "Теплопровод: передаёт тепло между блоками тепловой сети (Эрекир)."
+  },
+  "HeatProducer": {
+   "group": "heat",
+   "desc": "Источник тепла (базовый класс): производит тепло для тепловой сети."
+  },
+  "HeatConsumer": {
+   "group": "heat",
+   "desc": "Потребитель тепла (базовый класс): требует тепло для работы."
+  },
+  "ItemSource": {
+   "group": "sandbox",
+   "desc": "Источник предметов (песочница): бесконечные предметы."
+  },
+  "ItemVoid": {
+   "group": "sandbox",
+   "desc": "Поглотитель предметов (песочница)."
+  },
+  "LiquidSource": {
+   "group": "sandbox",
+   "desc": "Источник жидкости (песочница)."
+  },
+  "LiquidVoid": {
+   "group": "sandbox",
+   "desc": "Поглотитель жидкости (песочница)."
+  },
+  "PowerSource": {
+   "group": "sandbox",
+   "desc": "Источник энергии (песочница): бесконечная энергия (powerProduction)."
+  },
+  "PowerVoid": {
+   "group": "sandbox",
+   "desc": "Поглотитель энергии (песочница)."
+  },
+  "Accelerator": {
+   "group": "campaign",
+   "desc": "Ускоритель запуска: кампанийная постройка для межпланетного запуска."
+  },
+  "LandingPad": {
+   "group": "campaign",
+   "desc": "Посадочная платформа: принимает грузы/капсулы (кампания)."
+  },
+  "LaunchPad": {
+   "group": "campaign",
+   "desc": "Пусковая площадка: запускает грузы в другие сектора (legacy-кампания)."
+  },
+  "Floor": {
+   "group": "environment",
+   "desc": "Пол: базовое напольное покрытие карты."
+  },
+  "OverlayFloor": {
+   "group": "environment",
+   "desc": "Наложение на пол: декоративный оверлей тайла."
+  },
+  "ShallowLiquid": {
+   "group": "environment",
+   "desc": "Мелкая жидкость: плитка воды/шлака, по которой можно ходить."
+  },
+  "OreBlock": {
+   "group": "environment",
+   "desc": "Рудное наложение: руда поверх пола (для буров и карт)."
+  },
+  "RemoveOre": {
+   "group": "environment",
+   "desc": "Удаление руды: служебный блок редактора карт."
+  },
+  "StaticWall": {
+   "group": "environment",
+   "desc": "Статическая стена: непроходимая стена рельефа карты."
+  },
+  "RemoveWall": {
+   "group": "environment",
+   "desc": "Удаление стены: служебный блок редактора карт."
+  },
+  "TreeBlock": {
+   "group": "environment",
+   "desc": "Дерево/крупная декорация: блокирует движение и снаряды."
+  },
+  "Prop": {
+   "group": "environment",
+   "desc": "Декорация: разрушаемый маленький объект (крямбл-трава, кристаллы)."
+  },
+  "SpawnBlock": {
+   "group": "environment",
+   "desc": "Точка спауна: место появления врагов на карте."
+  },
+  "SteamVent": {
+   "group": "environment",
+   "desc": "Паровой вентиль: декоративный гейзер пара (параметры цвета)."
+  },
+  "Cliff": {
+   "group": "environment",
+   "desc": "Скала: рельефный уступ карты (высота/цвет)."
+  }
+ },
+ "UNIT_TYPES": {
+  "flying": {
+   "desc": "Летающий юнит: свободный полёт над любой местностью. Entity: UnitEntity. Поля: engineOffset, engineSize, faceTarget."
+  },
+  "mech": {
+   "desc": "Шагоход: двуногий юнит, ходит по земле, не перелетает пропасти. Entity: MechUnit. Поля: mechStride, canBoost."
+  },
+  "legs": {
+   "desc": "Многоножка: ходит на N ногах, перешагивает препятствия. Поля: legCount, legLength, legSpeed, legForwardScl."
+  },
+  "naval": {
+   "desc": "Корабль: движение только по воде. Поля: drag, bobbing (водная физика)."
+  },
+  "tank": {
+   "desc": "Танк: гусеничный ход (treadFrames, treadSpeed), прочный корпус, медленный поворот."
+  },
+  "missile": {
+   "desc": "Ракета: короткоживущий управляемый юнит-снаряд (homing, lifetime; TimedKillUnit)."
+  },
+  "hover": {
+   "desc": "Ховеркрафт: низколетящий юнит, игнорирует часть наземных препятствий (ElevationMoveUnit)."
+  },
+  "tether": {
+   "desc": "Привязной: юнит, привязанный к родительскому зданию (BuildingTetherPayloadUnit)."
+  },
+  "crawl": {
+   "desc": "Ползун: многосегментный гигант, проламывает препятствия (v8; segmentCount, segmentMag)."
+  },
+  "payload": {
+   "desc": "Транспорт: несёт внутри блоки и юнитов (payloadCapacity, buildRange)."
+  }
+ },
+ "ABILITIES": {
+  "ForceFieldAbility": {
+   "desc": "Персональный силовой щит: поглощает урон до max HP, регенерирует regen/сек, после пробоя уходит в cooldown.",
+   "fields": "radius (визуальный радиус), max (HP щита), regen (HP/сек), cooldown (тики простоя), sides (число граней формы), rotation.",
+   "skeleton": {
+    "type": "ForceFieldAbility",
+    "radius": 60,
+    "max": 200,
+    "regen": 0.5,
+    "cooldown": 300,
+    "sides": 6
+   }
+  },
+  "ShieldArcAbility": {
+   "desc": "Дуговой щит: фронтальный сектор, блокирующий снаряды (мехи v8). Отражает урон при reflectBuildingDamage.",
+   "fields": "radius, angle (градусы сектора), angleOffset, width (толщина дуги), max, regen, cooldown, whenShooting (активен только при стрельбе), chanceDeflect.",
+   "skeleton": {
+    "type": "ShieldArcAbility",
+    "radius": 60,
+    "angle": 80,
+    "width": 6,
+    "max": 200,
+    "regen": 0.5,
+    "cooldown": 300,
+    "whenShooting": true
+   }
+  },
+  "RepairFieldAbility": {
+   "desc": "Ремонтное поле: периодически лечит союзные блоки в радиусе.",
+   "fields": "range, amount (HP за импульс), healPercent (% HP), reload (интервал, тики), maxTargets, sameTypeHealMult, healEffect, activeEffect.",
+   "skeleton": {
+    "type": "RepairFieldAbility",
+    "range": 60,
+    "amount": 20,
+    "reload": 100
+   }
+  },
+  "ShieldRegenFieldAbility": {
+   "desc": "Поле регенерации щитов: восстанавливает щиты (не HP) союзников в радиусе.",
+   "fields": "range, amount, max, reload, applyEffect, activeEffect.",
+   "skeleton": {
+    "type": "ShieldRegenFieldAbility",
+    "range": 60,
+    "amount": 1,
+    "max": 100,
+    "reload": 100
+   }
+  },
+  "StatusFieldAbility": {
+   "desc": "Статусное поле: периодически накладывает статус-эффект на союзников в радиусе (ускоритель) или на врагов.",
+   "fields": "effect (имя статус-эффекта), duration (тики), reload, range, onShoot (только при стрельбе), color, activeEffect.",
+   "skeleton": {
+    "type": "StatusFieldAbility",
+    "effect": "overclock",
+    "duration": 60,
+    "reload": 100,
+    "range": 20
+   }
+  },
+  "EnergyFieldAbility": {
+   "desc": "Энергетическое поле: бьёт током врагов (урон + статус) и лечит союзников в радиусе.",
+   "fields": "damage, reload, range, maxTargets, healPercent, sameTypeHealMult, status, statusDuration, targetGround/targetAir, hitBuildings/hitUnits, color.",
+   "skeleton": {
+    "type": "EnergyFieldAbility",
+    "damage": 10,
+    "reload": 100,
+    "range": 60,
+    "maxTargets": 25,
+    "healPercent": 3,
+    "status": "electrified",
+    "statusDuration": 360
+   }
+  },
+  "UnitSpawnAbility": {
+   "desc": "Спаунер юнитов: периодически создаёт юнита-спутника.",
+   "fields": "unit (имя типа юнита), spawnTime (тики между спаунами), spawnX/spawnY, spawnEffect.",
+   "skeleton": {
+    "type": "UnitSpawnAbility",
+    "unit": "flare",
+    "spawnTime": 600
+   }
+  },
+  "SpawnDeathAbility": {
+   "desc": "Посмертный спаун: создаёт юнитов при гибели носителя.",
+   "fields": "unit (имя типа), amount, randAmount (случайный довесок), spread (разброс), faceOutwards.",
+   "skeleton": {
+    "type": "SpawnDeathAbility",
+    "unit": "dagger",
+    "amount": 1,
+    "spread": 8
+   }
+  },
+  "RegenAbility": {
+   "desc": "Пассивная регенерация HP.",
+   "fields": "amount (HP/сек), percentAmount (% макс. HP/сек).",
+   "skeleton": {
+    "type": "RegenAbility",
+    "amount": 0.5
+   }
+  },
+  "LiquidRegenAbility": {
+   "desc": "Регенерация при погружении в жидкость (неоплазмовые юниты): лечится и поглощает жидкость.",
+   "fields": "slurpSpeed, regenPerSlurp, slurpEffectChance, slurpEffect.",
+   "skeleton": {
+    "type": "LiquidRegenAbility",
+    "slurpSpeed": 5,
+    "regenPerSlurp": 6
+   }
+  },
+  "LiquidExplodeAbility": {
+   "desc": "Взрыв при контакте с жидкостью (например, неоплазма + вода).",
+   "fields": "amount (мощность взрыва), radAmountScale, radScale, noiseMag, noiseScl.",
+   "skeleton": {
+    "type": "LiquidExplodeAbility",
+    "amount": 120
+   }
+  },
+  "MoveEffectAbility": {
+   "desc": "Эффекты при движении: трейл, дым, искры за юнитом.",
+   "fields": "effect (имя Fx), interval (тики), chance, minVelocity, amount, color, teamColor, rotateEffect, x/y, rangeX/rangeY.",
+   "skeleton": {
+    "type": "MoveEffectAbility",
+    "effect": "missileTrail",
+    "interval": 3,
+    "minVelocity": 0.08
+   }
+  },
+  "MoveLightningAbility": {
+   "desc": "Молнии при движении (стиль Pulsar/Quasar): с шансом бьёт дугами по ближайшим врагам.",
+   "fields": "damage, chance (0-1), length (длина молнии), minSpeed, maxSpeed, color, bulletAngle, bulletSpread, shootEffect.",
+   "skeleton": {
+    "type": "MoveLightningAbility",
+    "damage": 35,
+    "chance": 0.15,
+    "length": 12,
+    "minSpeed": 0.8,
+    "maxSpeed": 1.2
+   }
+  },
+  "ArmorPlateAbility": {
+   "desc": "Бронеплита (v8): модифицирует здоровье юнита и рисует спрайты брони/блика (plateSuffix/shineSuffix).",
+   "fields": "healthMultiplier, plateSuffix (-armor), shineSuffix (-shine), shineSpeed, drawPlate, drawShine, z.",
+   "skeleton": {
+    "type": "ArmorPlateAbility",
+    "healthMultiplier": 0.2
+   }
+  },
+  "SuppressionFieldAbility": {
+   "desc": "Поле подавления (v8): периодически подавляет регенерацию/ремонт врагов в радиусе.",
+   "fields": "range, reload, maxDelay, color, particles, orbRadius.",
+   "skeleton": {
+    "type": "SuppressionFieldAbility",
+    "range": 200,
+    "reload": 90
+   }
+  }
+ },
+ "DRAW_PARTS": {
+  "RegionPart": {
+   "desc": "Спрайтовая часть: рисует область текстуры (регион блока/юнита с suffix). Поддерживает движение и рост по прогрессу, нагрев, режимы смешивания и вложенные части (children).",
+   "fields": "Текстура: suffix (напр. \"-glow\") или name. Геометрия: x, y, rotation, originX/originY, xScl/yScl. Анимация: moveX/moveY/moveRot, growX/growY, progress, growProgress. Цвет: color, colorTo, mixColor, mixColorTo. Нагрев: heatColor, heatLight, heatProgress. Прочее: mirror, outline, drawRegion, blending, layer, layerOffset, children.",
+   "skeleton": {
+    "type": "RegionPart",
+    "suffix": "-glow",
+    "progress": "warmup",
+    "color": "ffffff88",
+    "colorTo": "ffffff00",
+    "blending": "additive"
+   }
+  },
+  "FlarePart": {
+   "desc": "Световая звезда (блик): N треугольных лучей из одной точки — свечение двигателей, вспышки заряда, энергетические блики.",
+   "fields": "sides (число лучей, по умолч. 4); radius / radiusTo (длина лучей); stroke (ширина); innerScl, innerRadScl (внутренний блик); color1 (внешний, по умолч. #8ca9e8), color2 (внутренний, белый); rotation, rotMove, spinSpeed; followRotation; x, y; progress; layer.",
+   "skeleton": {
+    "type": "FlarePart",
+    "sides": 4,
+    "radius": 60,
+    "stroke": 8,
+    "color1": "8ca9e8",
+    "color2": "ffffff",
+    "progress": "warmup"
+   }
+  },
+  "ShapePart": {
+   "desc": "Геометрическая фигура: залитый или контурный многоугольник (либо круг). Базовый элемент процедурной отрисовки без спрайтов.",
+   "fields": "circle, hollow (контурная); sides (по умолч. 3); radius / radiusTo; stroke / strokeTo; color, colorTo; x, y, rotation; moveX/moveY/moveRot; rotateSpeed; mirror; progress; layer, layerOffset.",
+   "skeleton": {
+    "type": "ShapePart",
+    "circle": true,
+    "hollow": true,
+    "radius": 6,
+    "stroke": 1.5,
+    "color": "ffffff",
+    "progress": "warmup"
+   }
+  },
+  "HaloPart": {
+   "desc": "Ореол: несколько фигур (полигоны или треугольники) по кольцу вокруг центра; кольцо может вращаться.",
+   "fields": "shapes (число фигур, по умолч. 3); sides; tri (треугольники); hollow; radius/radiusTo, stroke/strokeTo, triLength/triLengthTo; haloRadius / haloRadiusTo; haloRotation, haloRotateSpeed; shapeRotation, shapeMoveRot; rotateSpeed; x, y, moveX/moveY; color, colorTo; mirror; progress.",
+   "skeleton": {
+    "type": "HaloPart",
+    "shapes": 4,
+    "sides": 3,
+    "radius": 2,
+    "haloRadius": 8,
+    "color": "ffffff",
+    "progress": "warmup"
+   }
+  },
+  "HoverPart": {
+   "desc": "Расходящиеся круги «парения»: появляются по очереди, расширяются и затухают — эффект парящих юнитов.",
+   "fields": "circles (число кругов, по умолч. 2); radius; sides (по умолч. 4); phase (период, по умолч. 50); stroke, minStroke; color; x, y, rotation; mirror; layer, layerOffset.",
+   "skeleton": {
+    "type": "HoverPart",
+    "circles": 2,
+    "radius": 5,
+    "phase": 40,
+    "stroke": 2,
+    "color": "ffffff"
+   }
+  },
+  "EffectSpawnerPart": {
+   "desc": "Спаунер эффектов: периодически или с шансом создаёт игровой эффект (искры, дым) в прямоугольной области.",
+   "fields": "effect (имя Fx, по умолч. sparkShoot); effectColor; effectChance (по умолч. 0.1); effectInterval / effectIntervalFrom (тики); effectRot, effectRandRot; x, y, width, height, rotation; useProgress; mirror; progress.",
+   "skeleton": {
+    "type": "EffectSpawnerPart",
+    "effect": "sparkShoot",
+    "effectChance": 0.1,
+    "width": 4,
+    "height": 4
+   }
+  }
+ },
+ "DRAW_BLOCKS": {
+  "DrawDefault": {
+   "desc": "Отрисовка по умолчанию: спрайт блока."
+  },
+  "DrawRegion": {
+   "desc": "Одиночный регион (suffix) с опциональным движением/вращением/цветом."
+  },
+  "DrawTurret": {
+   "desc": "Отрисовка турели: база + стволы (regionSuffix, parts)."
+  },
+  "DrawFlame": {
+   "desc": "Пламя над блоком (плавильня кремния)."
+  },
+  "DrawPlasma": {
+   "desc": "Плазменные сгустки (импульсный реактор)."
+  },
+  "DrawArcSmelt": {
+   "desc": "Дуговое свечение плавки (кинетический тигель)."
+  },
+  "DrawCrucibleFlame": {
+   "desc": "Пламя тигеля (кремниевый тигель)."
+  },
+  "DrawCultivator": {
+   "desc": "Культиватор: вращающиеся сгустки внутри (атмосферный концентратор)."
+  },
+  "DrawLiquidRegion": {
+   "desc": "Регион с жидкостью заданного цвета."
+  },
+  "DrawLiquidTile": {
+   "desc": "Плиточное заполнение жидкостью."
+  },
+  "DrawLiquidOutputs": {
+   "desc": "Индикаторы выходов жидкости."
+  },
+  "DrawPumpLiquid": {
+   "desc": "Жидкость под насосом."
+  },
+  "DrawHeatRegion": {
+   "desc": "Регион теплового свечения."
+  },
+  "DrawHeatInput": {
+   "desc": "Индикатор входа тепла."
+  },
+  "DrawHeatOutput": {
+   "desc": "Индикатор выхода тепла."
+  },
+  "DrawWarmupRegion": {
+   "desc": "Регион свечения прогрева (warmup)."
+  },
+  "DrawGlowRegion": {
+   "desc": "Светящийся регион (additive)."
+  },
+  "DrawPower": {
+   "desc": "Индикатор энергии (зарядка узла/линии)."
+  },
+  "DrawMulti": {
+   "desc": "Композиция нескольких Draw* (поле drawers: [...])."
+  },
+  "DrawFrames": {
+   "desc": "Кадровая анимация (region-N по прогрессу)."
+  },
+  "DrawBlurSpin": {
+   "desc": "Размытое вращение (роторы/вентиляторы)."
+  },
+  "DrawBubbles": {
+   "desc": "Поднимающиеся пузыри."
+  },
+  "DrawCells": {
+   "desc": "«Клетки» (инкубатор/культиватор)."
+  },
+  "DrawCircles": {
+   "desc": "Круги над блоком."
+  },
+  "DrawPistons": {
+   "desc": "Поршни, движущиеся по прогрессу."
+  },
+  "DrawPulseShape": {
+   "desc": "Пульсирующая фигура."
+  },
+  "DrawShape": {
+   "desc": "Простая геометрическая фигура."
+  },
+  "DrawSideRegion": {
+   "desc": "Регионы по четырём сторонам блока."
+  },
+  "DrawSoftParticles": {
+   "desc": "Мягкие частицы (дым/свечение)."
+  },
+  "DrawSpikes": {
+   "desc": "Шипы по периметру (неоплазма)."
+  },
+  "DrawWeave": {
+   "desc": "«Плетение» (ткач)."
+  },
+  "DrawMultiWeave": {
+   "desc": "Несколько плетений."
+  },
+  "DrawFade": {
+   "desc": "Затухающий регион."
+  },
+  "DrawBlock": {
+   "desc": "Базовая отрисовка блока (родительский класс)."
+  },
+  "DrawBlockParts": {
+   "desc": "Блок с частями (parts: [...])."
+  }
+ },
+ "PART_PROGRESS": {
+  "warmup": {
+   "desc": "Прогрев оружия: 0 — не стреляет, 1 — активно стреляет (значение по умолчанию)."
+  },
+  "reload": {
+   "desc": "Перезарядка: 1 сразу после выстрела, 0 — готов к стрельбе."
+  },
+  "smoothReload": {
+   "desc": "Перезарядка со сглаживанием (без резкого скачка 0→1)."
+  },
+  "charge": {
+   "desc": "Зарядка: 0 в начале, 1 в конце заряда."
+  },
+  "recoil": {
+   "desc": "Отдача без кривой сглаживания."
+  },
+  "heat": {
+   "desc": "Нагрев: 1 сразу после выстрела, остывает до 0."
+  },
+  "life": {
+   "desc": "Доля времени жизни 0..1 (ракеты/юниты)."
+  },
+  "time": {
+   "desc": "Абсолютное игровое время — для постоянной анимации."
+  }
+ },
+ "FX": {
+  "absorb": {
+   "category": "Статус"
+  },
+  "airBubble": {
+   "category": "Дым/пар"
+  },
+  "arcShieldBreak": {
+   "category": "Лечение/щиты"
+  },
+  "artilleryTrail": {
+   "category": "Трейлы"
+  },
+  "artilleryTrailSmoke": {
+   "category": "Дым/пар"
+  },
+  "attackCommand": {
+   "category": "Управление"
+  },
+  "ballfire": {
+   "category": "Огонь"
+  },
+  "bigShockwave": {
+   "category": "Прочее"
+  },
+  "blastExplosion": {
+   "category": "Взрыв"
+  },
+  "blastsmoke": {
+   "category": "Взрыв"
+  },
+  "blockCrash": {
+   "category": "Прочее"
+  },
+  "blockExplosionSmoke": {
+   "category": "Взрыв"
+  },
+  "breakBlock": {
+   "category": "Строительство/запуск"
+  },
+  "breakProp": {
+   "category": "Строительство/запуск"
+  },
+  "bubble": {
+   "category": "Дым/пар"
+  },
+  "bulletSparkSmokeTrailSmall": {
+   "category": "Дым/пар"
+  },
+  "burning": {
+   "category": "Статус"
+  },
+  "casing1": {
+   "category": "Прочее"
+  },
+  "casing2": {
+   "category": "Прочее"
+  },
+  "casing2Double": {
+   "category": "Прочее"
+  },
+  "casing3": {
+   "category": "Прочее"
+  },
+  "casing3Double": {
+   "category": "Прочее"
+  },
+  "casing4": {
+   "category": "Прочее"
+  },
+  "chainEmp": {
+   "category": "Электричество"
+  },
+  "chainLightning": {
+   "category": "Электричество"
+  },
+  "circleColorSpark": {
+   "category": "Искры"
+  },
+  "coalSmeltsmoke": {
+   "category": "Дым/пар"
+  },
+  "colorSpark": {
+   "category": "Искры"
+  },
+  "colorSparkBig": {
+   "category": "Искры"
+  },
+  "colorTrail": {
+   "category": "Трейлы"
+  },
+  "commandSend": {
+   "category": "Управление"
+  },
+  "conveyorPoof": {
+   "category": "Прочее"
+  },
+  "coreBuildBlock": {
+   "category": "Строительство/запуск"
+  },
+  "coreBuildShockwave": {
+   "category": "Строительство/запуск"
+  },
+  "coreBurn": {
+   "category": "Строительство/запуск"
+  },
+  "coreExplosion": {
+   "category": "Взрыв"
+  },
+  "coreLandDust": {
+   "category": "Строительство/запуск"
+  },
+  "coreLaunchConstruct": {
+   "category": "Строительство/запуск"
+  },
+  "corrosionVapor": {
+   "category": "Дым/пар"
+  },
+  "crawlDust": {
+   "category": "Юниты"
+  },
+  "debugLine": {
+   "category": "Управление"
+  },
+  "debugRect": {
+   "category": "Управление"
+  },
+  "despawn": {
+   "category": "Юниты"
+  },
+  "disperseTrail": {
+   "category": "Трейлы"
+  },
+  "doorclose": {
+   "category": "Двери"
+  },
+  "doorcloselarge": {
+   "category": "Двери"
+  },
+  "dooropen": {
+   "category": "Двери"
+  },
+  "dooropenlarge": {
+   "category": "Двери"
+  },
+  "drillSteam": {
+   "category": "Дым/пар"
+  },
+  "dropItem": {
+   "category": "Юниты"
+  },
+  "dynamicExplosion": {
+   "category": "Взрыв"
+  },
+  "dynamicSpikes": {
+   "category": "Прочее"
+  },
+  "dynamicWave": {
+   "category": "Прочее"
+  },
+  "electrified": {
+   "category": "Статус"
+  },
+  "explosion": {
+   "category": "Взрыв"
+  },
+  "fallSmoke": {
+   "category": "Дым/пар"
+  },
+  "fire": {
+   "category": "Огонь"
+  },
+  "fireHit": {
+   "category": "Огонь"
+  },
+  "fireRemove": {
+   "category": "Огонь"
+  },
+  "fireSmoke": {
+   "category": "Дым/пар"
+  },
+  "fireballsmoke": {
+   "category": "Дым/пар"
+  },
+  "flakExplosion": {
+   "category": "Взрыв"
+  },
+  "flakExplosionBig": {
+   "category": "Взрыв"
+  },
+  "fluxVapor": {
+   "category": "Дым/пар"
+  },
+  "forceShrink": {
+   "category": "Прочее"
+  },
+  "formsmoke": {
+   "category": "Строительство/запуск"
+  },
+  "freezing": {
+   "category": "Статус"
+  },
+  "fuelburn": {
+   "category": "Прочее"
+  },
+  "generate": {
+   "category": "Прочее"
+  },
+  "generatespark": {
+   "category": "Искры"
+  },
+  "greenBomb": {
+   "category": "Взрыв"
+  },
+  "greenCloud": {
+   "category": "Дым/пар"
+  },
+  "greenLaserCharge": {
+   "category": "Стрельба"
+  },
+  "greenLaserChargeSmall": {
+   "category": "Стрельба"
+  },
+  "heal": {
+   "category": "Лечение/щиты"
+  },
+  "healBlock": {
+   "category": "Лечение/щиты"
+  },
+  "healBlockFull": {
+   "category": "Лечение/щиты"
+  },
+  "healWave": {
+   "category": "Лечение/щиты"
+  },
+  "healWaveDynamic": {
+   "category": "Лечение/щиты"
+  },
+  "healWaveMend": {
+   "category": "Лечение/щиты"
+  },
+  "heatReactorSmoke": {
+   "category": "Дым/пар"
+  },
+  "hitBeam": {
+   "category": "Попадание"
+  },
+  "hitBulletBig": {
+   "category": "Попадание"
+  },
+  "hitBulletColor": {
+   "category": "Попадание"
+  },
+  "hitBulletSmall": {
+   "category": "Попадание"
+  },
+  "hitEmpSpark": {
+   "category": "Попадание"
+  },
+  "hitFlameBeam": {
+   "category": "Попадание"
+  },
+  "hitFlamePlasma": {
+   "category": "Попадание"
+  },
+  "hitFlameSmall": {
+   "category": "Попадание"
+  },
+  "hitFuse": {
+   "category": "Попадание"
+  },
+  "hitLancer": {
+   "category": "Попадание"
+  },
+  "hitLancerLow": {
+   "category": "Попадание"
+  },
+  "hitLaser": {
+   "category": "Попадание"
+  },
+  "hitLaserBlast": {
+   "category": "Попадание"
+  },
+  "hitLaserColor": {
+   "category": "Попадание"
+  },
+  "hitLiquid": {
+   "category": "Попадание"
+  },
+  "hitMeltHeal": {
+   "category": "Попадание"
+  },
+  "hitMeltdown": {
+   "category": "Попадание"
+  },
+  "hitScepterSecondary": {
+   "category": "Попадание"
+  },
+  "hitSquaresColor": {
+   "category": "Попадание"
+  },
+  "impactReactorExplosion": {
+   "category": "Взрыв"
+  },
+  "incendTrail": {
+   "category": "Трейлы"
+  },
+  "incinerateSlag": {
+   "category": "Дым/пар"
+  },
+  "instBomb": {
+   "category": "Попадание"
+  },
+  "instHit": {
+   "category": "Попадание"
+  },
+  "instShoot": {
+   "category": "Стрельба"
+  },
+  "instTrail": {
+   "category": "Трейлы"
+  },
+  "itemTransfer": {
+   "category": "Прочее"
+  },
+  "lancerLaserCharge": {
+   "category": "Стрельба"
+  },
+  "lancerLaserChargeBegin": {
+   "category": "Стрельба"
+  },
+  "lancerLaserShoot": {
+   "category": "Стрельба"
+  },
+  "lancerLaserShootSmoke": {
+   "category": "Стрельба"
+  },
+  "landShock": {
+   "category": "Прочее"
+  },
+  "launch": {
+   "category": "Строительство/запуск"
+  },
+  "launchAccelerator": {
+   "category": "Строительство/запуск"
+  },
+  "launchPod": {
+   "category": "Строительство/запуск"
+  },
+  "lava": {
+   "category": "Дым/пар"
+  },
+  "legDestroy": {
+   "category": "Юниты"
+  },
+  "lightBlock": {
+   "category": "Прочее"
+  },
+  "lightning": {
+   "category": "Электричество"
+  },
+  "lightningCharge": {
+   "category": "Электричество"
+  },
+  "lightningShoot": {
+   "category": "Стрельба"
+  },
+  "magmasmoke": {
+   "category": "Дым/пар"
+  },
+  "massiveExplosion": {
+   "category": "Взрыв"
+  },
+  "melting": {
+   "category": "Статус"
+  },
+  "mine": {
+   "category": "Добыча"
+  },
+  "mineBig": {
+   "category": "Добыча"
+  },
+  "mineHuge": {
+   "category": "Добыча"
+  },
+  "mineImpact": {
+   "category": "Добыча"
+  },
+  "mineImpactWave": {
+   "category": "Добыча"
+  },
+  "mineSmall": {
+   "category": "Добыча"
+  },
+  "mineWallSmall": {
+   "category": "Добыча"
+  },
+  "missileTrail": {
+   "category": "Трейлы"
+  },
+  "missileTrailShort": {
+   "category": "Трейлы"
+  },
+  "missileTrailSmoke": {
+   "category": "Дым/пар"
+  },
+  "missileTrailSmokeSmall": {
+   "category": "Дым/пар"
+  },
+  "moveCommand": {
+   "category": "Управление"
+  },
+  "muddy": {
+   "category": "Статус"
+  },
+  "neoplasiaSmoke": {
+   "category": "Дым/пар"
+  },
+  "neoplasmHeal": {
+   "category": "Лечение/щиты"
+  },
+  "neoplasmSplat": {
+   "category": "Прочее"
+  },
+  "none": {
+   "category": "Статус"
+  },
+  "oily": {
+   "category": "Прочее"
+  },
+  "overclocked": {
+   "category": "Статус"
+  },
+  "overdriveBlockFull": {
+   "category": "Лечение/щиты"
+  },
+  "overdriveWave": {
+   "category": "Лечение/щиты"
+  },
+  "overdriven": {
+   "category": "Статус"
+  },
+  "padlaunch": {
+   "category": "Строительство/запуск"
+  },
+  "payloadDeposit": {
+   "category": "Прочее"
+  },
+  "payloadReceive": {
+   "category": "Прочее"
+  },
+  "pickup": {
+   "category": "Юниты"
+  },
+  "placeBlock": {
+   "category": "Строительство/запуск"
+  },
+  "plasticExplosion": {
+   "category": "Взрыв"
+  },
+  "plasticExplosionFlak": {
+   "category": "Взрыв"
+  },
+  "plasticburn": {
+   "category": "Прочее"
+  },
+  "podLandDust": {
+   "category": "Юниты"
+  },
+  "podLandShockwave": {
+   "category": "Юниты"
+  },
+  "pointBeam": {
+   "category": "Электричество"
+  },
+  "pointHit": {
+   "category": "Попадание"
+  },
+  "pointShockwave": {
+   "category": "Электричество"
+  },
+  "producesmoke": {
+   "category": "Дым/пар"
+  },
+  "pulverize": {
+   "category": "Прочее"
+  },
+  "pulverizeMedium": {
+   "category": "Прочее"
+  },
+  "pulverizeRed": {
+   "category": "Прочее"
+  },
+  "pulverizeSmall": {
+   "category": "Прочее"
+  },
+  "railHit": {
+   "category": "Попадание"
+  },
+  "railShoot": {
+   "category": "Стрельба"
+  },
+  "railTrail": {
+   "category": "Трейлы"
+  },
+  "randLifeSpark": {
+   "category": "Искры"
+  },
+  "reactorExplosion": {
+   "category": "Взрыв"
+  },
+  "reactorsmoke": {
+   "category": "Дым/пар"
+  },
+  "redgeneratespark": {
+   "category": "Искры"
+  },
+  "regenParticle": {
+   "category": "Лечение/щиты"
+  },
+  "regenSuppressParticle": {
+   "category": "Лечение/щиты"
+  },
+  "regenSuppressSeek": {
+   "category": "Лечение/щиты"
+  },
+  "ripple": {
+   "category": "Прочее"
+  },
+  "rocketSmoke": {
+   "category": "Дым/пар"
+  },
+  "rocketSmokeLarge": {
+   "category": "Дым/пар"
+  },
+  "rotateBlock": {
+   "category": "Строительство/запуск"
+  },
+  "sapExplosion": {
+   "category": "Взрыв"
+  },
+  "sapped": {
+   "category": "Статус"
+  },
+  "scatheExplosion": {
+   "category": "Взрыв"
+  },
+  "scatheExplosionSmall": {
+   "category": "Взрыв"
+  },
+  "scatheLight": {
+   "category": "Прочее"
+  },
+  "scatheLightSmall": {
+   "category": "Прочее"
+  },
+  "scatheSlash": {
+   "category": "Прочее"
+  },
+  "select": {
+   "category": "Управление"
+  },
+  "shieldApply": {
+   "category": "Лечение/щиты"
+  },
+  "shieldBreak": {
+   "category": "Лечение/щиты"
+  },
+  "shieldWave": {
+   "category": "Лечение/щиты"
+  },
+  "shockwave": {
+   "category": "Прочее"
+  },
+  "shockwaveSmaller": {
+   "category": "Прочее"
+  },
+  "shootBig": {
+   "category": "Стрельба"
+  },
+  "shootBig2": {
+   "category": "Стрельба"
+  },
+  "shootBigColor": {
+   "category": "Стрельба"
+  },
+  "shootBigSmoke": {
+   "category": "Стрельба"
+  },
+  "shootBigSmoke2": {
+   "category": "Стрельба"
+  },
+  "shootHeal": {
+   "category": "Стрельба"
+  },
+  "shootHealYellow": {
+   "category": "Стрельба"
+  },
+  "shootLiquid": {
+   "category": "Стрельба"
+  },
+  "shootPayloadDriver": {
+   "category": "Стрельба"
+  },
+  "shootPyraFlame": {
+   "category": "Стрельба"
+  },
+  "shootQuellPulse": {
+   "category": "Стрельба"
+  },
+  "shootScepterSecondary": {
+   "category": "Стрельба"
+  },
+  "shootSmall": {
+   "category": "Стрельба"
+  },
+  "shootSmallColor": {
+   "category": "Стрельба"
+  },
+  "shootSmallFlame": {
+   "category": "Стрельба"
+  },
+  "shootSmallSmoke": {
+   "category": "Стрельба"
+  },
+  "shootSmokeDisperse": {
+   "category": "Стрельба"
+  },
+  "shootSmokeMissile": {
+   "category": "Стрельба"
+  },
+  "shootSmokeMissileColor": {
+   "category": "Стрельба"
+  },
+  "shootSmokeSmite": {
+   "category": "Стрельба"
+  },
+  "shootSmokeSquare": {
+   "category": "Стрельба"
+  },
+  "shootSmokeSquareBig": {
+   "category": "Стрельба"
+  },
+  "shootSmokeSquareSparse": {
+   "category": "Стрельба"
+  },
+  "shootSmokeTitan": {
+   "category": "Стрельба"
+  },
+  "shootTitan": {
+   "category": "Стрельба"
+  },
+  "smeltsmoke": {
+   "category": "Дым/пар"
+  },
+  "smoke": {
+   "category": "Дым/пар"
+  },
+  "smokeAoeCloud": {
+   "category": "Дым/пар"
+  },
+  "smokeCloud": {
+   "category": "Дым/пар"
+  },
+  "smokePuff": {
+   "category": "Дым/пар"
+  },
+  "sparkExplosion": {
+   "category": "Взрыв"
+  },
+  "sparkShoot": {
+   "category": "Искры"
+  },
+  "spawn": {
+   "category": "Юниты"
+  },
+  "spawnShockwave": {
+   "category": "Юниты"
+  },
+  "sporeSlowed": {
+   "category": "Статус"
+  },
+  "steam": {
+   "category": "Дым/пар"
+  },
+  "steamCoolSmoke": {
+   "category": "Дым/пар"
+  },
+  "surgeCruciSmoke": {
+   "category": "Дым/пар"
+  },
+  "tapBlock": {
+   "category": "Прочее"
+  },
+  "teleport": {
+   "category": "Строительство/запуск"
+  },
+  "teleportActivate": {
+   "category": "Строительство/запуск"
+  },
+  "teleportOut": {
+   "category": "Строительство/запуск"
+  },
+  "thoriumShoot": {
+   "category": "Стрельба"
+  },
+  "titanExplosion": {
+   "category": "Стрельба"
+  },
+  "titanExplosionFrag": {
+   "category": "Стрельба"
+  },
+  "titanExplosionLarge": {
+   "category": "Стрельба"
+  },
+  "titanExplosionSmall": {
+   "category": "Стрельба"
+  },
+  "titanLightSmall": {
+   "category": "Стрельба"
+  },
+  "titanSmoke": {
+   "category": "Стрельба"
+  },
+  "titanSmokeLarge": {
+   "category": "Стрельба"
+  },
+  "titanSmokeSmall": {
+   "category": "Стрельба"
+  },
+  "trailFade": {
+   "category": "Трейлы"
+  },
+  "turbinegenerate": {
+   "category": "Прочее"
+  },
+  "unitAssemble": {
+   "category": "Юниты"
+  },
+  "unitCapKill": {
+   "category": "Юниты"
+  },
+  "unitControl": {
+   "category": "Юниты"
+  },
+  "unitDespawn": {
+   "category": "Юниты"
+  },
+  "unitDrop": {
+   "category": "Юниты"
+  },
+  "unitDust": {
+   "category": "Юниты"
+  },
+  "unitEnvKill": {
+   "category": "Юниты"
+  },
+  "unitLand": {
+   "category": "Юниты"
+  },
+  "unitLandSmall": {
+   "category": "Юниты"
+  },
+  "unitMine": {
+   "category": "Юниты"
+  },
+  "unitPickup": {
+   "category": "Юниты"
+  },
+  "unitShieldBreak": {
+   "category": "Юниты"
+  },
+  "unitSpawn": {
+   "category": "Юниты"
+  },
+  "unitSpirit": {
+   "category": "Юниты"
+  },
+  "unitWreck": {
+   "category": "Юниты"
+  },
+  "upgradeCore": {
+   "category": "Строительство/запуск"
+  },
+  "upgradeCoreBloom": {
+   "category": "Строительство/запуск"
+  },
+  "vapor": {
+   "category": "Дым/пар"
+  },
+  "vaporSmall": {
+   "category": "Дым/пар"
+  },
+  "ventSteam": {
+   "category": "Дым/пар"
+  },
+  "wet": {
+   "category": "Статус"
+  }
+ },
+ "EFFECT_TYPES": {
+  "ParticleEffect": {
+   "desc": "Г"
+  },
+  "MultiEffect": {
+   "desc": "С"
+  },
+  "SeqEffect": {
+   "desc": "П"
+  },
+  "RadialEffect": {
+   "desc": "Р"
+  },
+  "ExplosionEffect": {
+   "desc": "В"
+  },
+  "WaveEffect": {
+   "desc": "Р"
+  },
+  "NoiseEffect": {
+   "desc": "Ш"
+  },
+  "TriangleEffect": {
+   "desc": "Т"
+  },
+  "WrapEffect": {
+   "desc": "О"
+  },
+  "SoundEffect": {
+   "desc": "Э"
+  },
+  "BasicEffect": {
+   "desc": "("
+  }
+ },
+ "SOUNDS": {
+  "acceleratorCharge": {
+   "desc": "Стандартный звук игры"
+  },
+  "acceleratorConstruct": {
+   "desc": "Стандартный звук игры"
+  },
+  "acceleratorLaunch": {
+   "desc": "Стандартный звук игры"
+  },
+  "acceleratorLightning1": {
+   "desc": "Стандартный звук игры"
+  },
+  "acceleratorLightning2": {
+   "desc": "Стандартный звук игры"
+  },
+  "beamHeal": {
+   "desc": "Стандартный звук игры"
+  },
+  "beamLustre": {
+   "desc": "Стандартный звук игры"
+  },
+  "beamMeltdown": {
+   "desc": "Стандартный звук игры"
+  },
+  "beamParallax": {
+   "desc": "Стандартный звук игры"
+  },
+  "beamPlasma": {
+   "desc": "Стандартный звук игры"
+  },
+  "beamPlasmaSmall": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockBreak1": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockBreak2": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockBreak3": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockExplode1": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockExplode1Alt": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockExplode2": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockExplode2Alt": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockExplode3": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockExplodeElectric": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockExplodeElectricBig": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockExplodeExplosive": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockExplodeExplosiveAlt": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockExplodeFlammable": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockExplodeWall": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockHeal": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockPlace1": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockPlace2": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockPlace3": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockRepair": {
+   "desc": "Стандартный звук игры"
+  },
+  "blockRotate": {
+   "desc": "Стандартный звук игры"
+  },
+  "chargeCorvus": {
+   "desc": "Стандартный звук игры"
+  },
+  "chargeLancer": {
+   "desc": "Стандартный звук игры"
+  },
+  "chargeVela": {
+   "desc": "Стандартный звук игры"
+  },
+  "click": {
+   "desc": "Стандартный звук игры"
+  },
+  "coreLand": {
+   "desc": "Стандартный звук игры"
+  },
+  "coreLaunch": {
+   "desc": "Стандартный звук игры"
+  },
+  "door": {
+   "desc": "Стандартный звук игры"
+  },
+  "drillCharge": {
+   "desc": "Стандартный звук игры"
+  },
+  "drillImpact": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosion": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionAfflict": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionArtillery": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionArtilleryShock": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionArtilleryShockBig": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionCleroi": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionCore": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionCrawler": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionDull": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionMissile": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionNavanax": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionObviate": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionPlasmaSmall": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionQuad": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionReactor": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionReactor2": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionReactorNeoplasm": {
+   "desc": "Стандартный звук игры"
+  },
+  "explosionTitan": {
+   "desc": "Стандартный звук игры"
+  },
+  "healWave": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopBio": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopBuild": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopCircuit": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopCombustion": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopConveyor": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopCultivator": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopCutter": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopDifferential": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopDrill": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopElectricHum": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopExtract": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopFire": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopFlux": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopGlow": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopGrind": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopHover": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopHover2": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopHum": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopMachine": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopMachine2": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopMachineSpin": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopMalign": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopMineBeam": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopMissileTrail": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopPulse": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopRegen": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopShield": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopSmelter": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopSpray": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopSteam": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopTech": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopThoriumReactor": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopThruster": {
+   "desc": "Стандартный звук игры"
+  },
+  "loopUnitBuilding": {
+   "desc": "Стандартный звук игры"
+  },
+  "massdriver": {
+   "desc": "Стандартный звук игры"
+  },
+  "massdriverReceive": {
+   "desc": "Стандартный звук игры"
+  },
+  "mechStep": {
+   "desc": "Стандартный звук игры"
+  },
+  "mechStepHeavy": {
+   "desc": "Стандартный звук игры"
+  },
+  "mechStepSmall": {
+   "desc": "Стандартный звук игры"
+  },
+  "padLand": {
+   "desc": "Стандартный звук игры"
+  },
+  "padLaunch": {
+   "desc": "Стандартный звук игры"
+  },
+  "payloadDrop1": {
+   "desc": "Стандартный звук игры"
+  },
+  "payloadDrop2": {
+   "desc": "Стандартный звук игры"
+  },
+  "payloadDrop3": {
+   "desc": "Стандартный звук игры"
+  },
+  "payloadPickup": {
+   "desc": "Стандартный звук игры"
+  },
+  "plantBreak": {
+   "desc": "Стандартный звук игры"
+  },
+  "rain": {
+   "desc": "Стандартный звук игры"
+  },
+  "rockBreak": {
+   "desc": "Стандартный звук игры"
+  },
+  "shieldBreak": {
+   "desc": "Стандартный звук игры"
+  },
+  "shieldBreakSmall": {
+   "desc": "Стандартный звук игры"
+  },
+  "shieldHit": {
+   "desc": "Стандартный звук игры"
+  },
+  "shieldWave": {
+   "desc": "Стандартный звук игры"
+  },
+  "shipMove": {
+   "desc": "Стандартный звук игры"
+  },
+  "shipMoveBig": {
+   "desc": "Стандартный звук игры"
+  },
+  "shockBullet": {
+   "desc": "Стандартный звук игры"
+  },
+  "shockwaveTower": {
+   "desc": "Стандартный звук игры"
+  },
+  "shoot": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootAfflict": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootAlpha": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootArc": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootArtillery": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootArtillerySap": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootArtillerySapBig": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootArtillerySmall": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootAtrax": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootAvert": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootBeamPlasma": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootBeamPlasmaSmall": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootBreach": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootBreachCarbide": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootCleroi": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootCollaris": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootConquer": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootCorvus": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootCyclone": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootDiffuse": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootDisperse": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootDuo": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootEclipse": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootElude": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootEnergyField": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootFlame": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootFlamePlasma": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootForeshadow": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootFuse": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootHorizon": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootLancer": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootLaser": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootLocus": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootMalign": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootMeltdown": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootMerui": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootMissile": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootMissileLarge": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootMissileLong": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootMissilePlasma": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootMissilePlasmaShort": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootMissileShort": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootMissileSmall": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootNavanax": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootOmura": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootPayload": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootPulsar": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootQuad": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootReign": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootRetusa": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootRipple": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootSalvo": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootSap": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootScathe": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootScatter": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootScepter": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootScepterSecondary": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootSegment": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootSmite": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootSpectre": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootStell": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootSublimate": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootTank": {
+   "desc": "Стандартный звук игры"
+  },
+  "shootToxopidShotgun": {
+   "desc": "Стандартный звук игры"
+  },
+  "stepMud": {
+   "desc": "Стандартный звук игры"
+  },
+  "stepWater": {
+   "desc": "Стандартный звук игры"
+  },
+  "tankMove": {
+   "desc": "Стандартный звук игры"
+  },
+  "tankMoveHeavy": {
+   "desc": "Стандартный звук игры"
+  },
+  "tankMoveSmall": {
+   "desc": "Стандартный звук игры"
+  },
+  "uiBack": {
+   "desc": "Стандартный звук игры"
+  },
+  "uiButton": {
+   "desc": "Стандартный звук игры"
+  },
+  "uiChat": {
+   "desc": "Стандартный звук игры"
+  },
+  "uiFavorite": {
+   "desc": "Стандартный звук игры"
+  },
+  "uiNotify": {
+   "desc": "Стандартный звук игры"
+  },
+  "uiUnlock": {
+   "desc": "Стандартный звук игры"
+  },
+  "unitCreate": {
+   "desc": "Стандартный звук игры"
+  },
+  "unitCreateBig": {
+   "desc": "Стандартный звук игры"
+  },
+  "unitExplode1": {
+   "desc": "Стандартный звук игры"
+  },
+  "unitExplode2": {
+   "desc": "Стандартный звук игры"
+  },
+  "unitExplode3": {
+   "desc": "Стандартный звук игры"
+  },
+  "walkerStep": {
+   "desc": "Стандартный звук игры"
+  },
+  "walkerStepSmall": {
+   "desc": "Стандартный звук игры"
+  },
+  "walkerStepTiny": {
+   "desc": "Стандартный звук игры"
+  },
+  "waveSpawn": {
+   "desc": "Стандартный звук игры"
+  },
+  "wind": {
+   "desc": "Стандартный звук игры"
+  },
+  "wind2": {
+   "desc": "Стандартный звук игры"
+  },
+  "wind3": {
+   "desc": "Стандартный звук игры"
+  },
+  "windHowl": {
+   "desc": "Стандартный звук игры"
+  },
+  "wreckFall": {
+   "desc": "Стандартный звук игры"
+  },
+  "wreckFallBig": {
+   "desc": "Стандартный звук игры"
+  }
+ },
+ "UNIT_SORTS": {
+  "closest": {
+   "desc": "Ближайшая цель"
+  },
+  "farthest": {
+   "desc": "Дальняя цель"
+  },
+  "strongest": {
+   "desc": "Самая живучая"
+  },
+  "weakest": {
+   "desc": "Самая слабая"
+  },
+  "mostArmor": {
+   "desc": "Наибольшая броня"
+  },
+  "leastArmor": {
+   "desc": "Наименьшая броня"
+  },
+  "mostShield": {
+   "desc": "Наибольший щит"
+  },
+  "leastShield": {
+   "desc": "Наименьший щит"
+  },
+  "grouped": {
+   "desc": "Скопление врагов"
+  },
+  "buildingDefault": {
+   "desc": "Постройки по приоритету"
+  },
+  "buildingWater": {
+   "desc": "Постройки, вода важнее"
+  }
+ },
+ "UNIT_STANCES": {
+  "stop": {
+   "desc": "Стоп"
+  },
+  "holdFire": {
+   "desc": "Не стрелять"
+  },
+  "pursueTarget": {
+   "desc": "Преследовать"
+  },
+  "patrol": {
+   "desc": "Патруль"
+  },
+  "ram": {
+   "desc": "Таран"
+  },
+  "boost": {
+   "desc": "Форсаж"
+  },
+  "holdPosition": {
+   "desc": "Держать позицию"
+  },
+  "mineAuto": {
+   "desc": "Автодобыча"
+  }
+ },
+ "UNIT_COMMANDS": {
+  "moveCommand": {
+   "desc": "Движение"
+  },
+  "repairCommand": {
+   "desc": "Ремонт"
+  },
+  "rebuildCommand": {
+   "desc": "Перестройка"
+  },
+  "assistCommand": {
+   "desc": "Помощь строителям"
+  },
+  "mineCommand": {
+   "desc": "Добыча"
+  },
+  "enterPayloadCommand": {
+   "desc": "Войти в грузовой блок"
+  },
+  "loadUnitsCommand": {
+   "desc": "Загрузить юнитов"
+  },
+  "loadBlocksCommand": {
+   "desc": "Загрузить блоки"
+  },
+  "unloadPayloadCommand": {
+   "desc": "Выгрузить"
+  },
+  "loopPayloadCommand": {
+   "desc": "Циклическая доставка"
+  }
+ },
+ "INTERP": {
+  "linear": {
+   "desc": "Линейная"
+  },
+  "reverse": {
+   "desc": "Обратная"
+  },
+  "smooth": {
+   "desc": "Smoothstep"
+  },
+  "smooth2": {
+   "desc": "Smootherstep"
+  },
+  "smoother": {
+   "desc": "Smootherstep"
+  },
+  "fade": {
+   "desc": "Алиас smoother"
+  },
+  "one": {
+   "desc": "Константа 1"
+  },
+  "zero": {
+   "desc": "Константа 0"
+  },
+  "slope": {
+   "desc": "0→1→0"
+  },
+  "pow2InInverse": {
+   "desc": "Обратная квадратичная"
+  },
+  "pow2OutInverse": {
+   "desc": "Обратная квадратичная (выход)"
+  },
+  "pow3InInverse": {
+   "desc": "Обратная кубическая"
+  },
+  "pow3OutInverse": {
+   "desc": "Обратная кубическая (выход)"
+  },
+  "sine": {
+   "desc": "Синусоида"
+  },
+  "sineIn": {
+   "desc": "Синусоида (вход)"
+  },
+  "sineOut": {
+   "desc": "Синусоида (выход)"
+  },
+  "circle": {
+   "desc": "Круговая"
+  },
+  "circleIn": {
+   "desc": "Круговая (вход)"
+  },
+  "circleOut": {
+   "desc": "Круговая (выход)"
+  }
+ },
+ "CACHE_LAYERS": {
+  "water": {
+   "desc": "Вода"
+  },
+  "mud": {
+   "desc": "Грязь"
+  },
+  "tar": {
+   "desc": "Битум"
+  },
+  "slag": {
+   "desc": "Шлак"
+  },
+  "arkycite": {
+   "desc": "Аркцит"
+  },
+  "cryofluid": {
+   "desc": "Криожидкость"
+  },
+  "space": {
+   "desc": "Космос"
+  },
+  "normal": {
+   "desc": "Обычный слой"
+  },
+  "walls": {
+   "desc": "Стены"
+  }
+ },
+ "WEATHER_TYPES": {
+  "Weather": {
+   "desc": "Базовая погода"
+  },
+  "RainWeather": {
+   "desc": "Дождь"
+  },
+  "ParticleWeather": {
+   "desc": "Погода с частицами"
+  }
+ }
 }
